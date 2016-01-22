@@ -1,5 +1,7 @@
 package org.usfirst.frc2175;
 
+import org.usfirst.frc2175.config.RobotConfig;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -10,6 +12,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
+    // TODO like this or make RobotConfig methods static?
+    private final RobotConfig robotConfig = new RobotConfig();
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
