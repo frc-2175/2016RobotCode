@@ -22,4 +22,14 @@ public class OI {
         // TODO Add deadband
         return rightStick.getX();
     }
+
+    public double getLeftValue() {
+        // TODO Add deadband
+        return leftStick.getY();
+    }
+
+    public double getRightValue() {
+        // TODO Add deadband
+        return rightStick.getY();
+    }
 }
