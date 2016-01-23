@@ -1,6 +1,7 @@
 package org.usfirst.frc2175;
 
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
@@ -15,12 +16,17 @@ public class Robot extends IterativeRobot {
     // TODO like this or make RobotConfig methods static?
     private final RobotConfig robotConfig = new RobotConfig();
 
+    public static OI oi;
+    public static DrivetrainSubsystem drivetrainSubsystem;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
     public void robotInit() {
+        oi = new OI();
+        drivetrainSubsystem = new DrivetrainSubsystem();
     }
 
     /**
