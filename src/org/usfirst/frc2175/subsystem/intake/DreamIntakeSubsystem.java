@@ -8,7 +8,11 @@ public class DreamIntakeSubsystem extends Subsystem {
         // TODO setDefaultCommand(new TheCommandToUse());
     }
 
-    public void setSpeed(double speed) {
+    public void setMainBeltSpeed(double speed) {
+        // TODO Fill in
+    }
+
+    public void setSideBeltSpeed(double speed) {
         // TODO Fill in
     }
 
