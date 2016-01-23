@@ -2,6 +2,7 @@ package org.usfirst.frc2175;
 
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
+import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
@@ -18,6 +19,7 @@ public class Robot extends IterativeRobot {
 
     public static OI oi;
     public static DrivetrainSubsystem drivetrainSubsystem;
+    public static DreamIntakeSubsystem intakeSubsystem;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -27,6 +29,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         oi = new OI();
         drivetrainSubsystem = new DrivetrainSubsystem();
+        intakeSubsystem = new DreamIntakeSubsystem();
     }
 
     /**
