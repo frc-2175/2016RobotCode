@@ -7,4 +7,14 @@ public class CatapaultShooterSubsystem extends Subsystem {
     protected void initDefaultCommand() {
         // TODO setDefaultCommand(new TheCommandToUse());
     }
+
+    public void setCatapultPosition(boolean up) {
+        // TODO Fill in
+    }
+
+    public boolean catapultIsDown() {
+        // TODO Fill in
+        return false;
+    }
+
 }

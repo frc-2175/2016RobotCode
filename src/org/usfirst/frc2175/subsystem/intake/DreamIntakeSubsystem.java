@@ -7,4 +7,23 @@ public class DreamIntakeSubsystem extends Subsystem {
     protected void initDefaultCommand() {
         // TODO setDefaultCommand(new TheCommandToUse());
     }
+
+    public void setSpeed(double speed) {
+        // TODO Fill in
+    }
+
+    public void setPosition(boolean out) {
+        // TODO Fill in
+    }
+
+    public boolean isCompletelyOut() {
+        // TODO Fill in
+        return false;
+    }
+
+    public boolean isCompletelyIn() {
+        // TODO Fill in
+        return false;
+    }
+
 }
