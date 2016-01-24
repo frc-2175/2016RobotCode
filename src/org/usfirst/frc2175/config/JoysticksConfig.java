@@ -10,8 +10,7 @@ import java.util.Properties;
  * Do not use values directly in code, use these configuration methods.
  */
 public class JoysticksConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME =
-            "/home/lvuser/joysticks.properties";
+    private static final String PROPERTY_FILE_NAME = "joysticks.properties";
 
     @Override
     public String getPropertyFileName() {

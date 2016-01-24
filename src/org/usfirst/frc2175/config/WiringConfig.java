@@ -10,8 +10,7 @@ import java.util.Properties;
  * Do not use port numbers in code, use these configuration methods.
  */
 public class WiringConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME =
-            "/home/lvuser/wiring.properties";
+    private static final String PROPERTY_FILE_NAME = "wiring.properties";
 
     @Override
     public String getPropertyFileName() {

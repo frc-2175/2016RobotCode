@@ -9,8 +9,12 @@ import java.util.logging.Logger;
 public abstract class BaseConfig {
     private final Logger log = Logger.getLogger(getClass().getName());
 
+    private static final String PROPERTY_FILE_DIR_DEFAULT = "/home/lvuser/";
+
+    private static String propertyFileDir = PROPERTY_FILE_DIR_DEFAULT;
+
     public BaseConfig() {
-        final String propertyFileName = getPropertyFileName();
+        final String propertyFileName = propertyFileDir + getPropertyFileName();
         final Properties properties =
                 new PropertiesLoader().loadProperties(propertyFileName);
         configure(properties);
@@ -49,5 +53,13 @@ public abstract class BaseConfig {
         final String propertyValue =
                 getStringPropertyValue(propertyName, props);
         return Integer.parseInt(propertyValue);
+    }
+
+    public static String getPropertyFileDir() {
+        return propertyFileDir;
+    }
+
+    public static void setPropertyFileDir(String propertyFileDirectory) {
+        propertyFileDir = propertyFileDirectory;
     }
 }
