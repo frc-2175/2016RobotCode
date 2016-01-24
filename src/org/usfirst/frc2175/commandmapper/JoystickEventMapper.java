@@ -1,7 +1,7 @@
 package org.usfirst.frc2175.commandmapper;
 
-import org.usfirst.frc2175.DriverStation;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.Command;

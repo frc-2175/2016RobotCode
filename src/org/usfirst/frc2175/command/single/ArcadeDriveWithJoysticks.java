@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.DriverStation;
+import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 

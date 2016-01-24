@@ -1,4 +1,4 @@
-package org.usfirst.frc2175;
+package org.usfirst.frc2175.driverstation;
 
 import org.usfirst.frc2175.config.JoysticksConfig;
 import org.usfirst.frc2175.config.RobotConfig;
