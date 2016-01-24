@@ -1,8 +1,8 @@
 package org.usfirst.frc2175;
 
+import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
-import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
-import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -15,12 +15,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    // TODO like this or make RobotConfig methods static?
     private final RobotConfig robotConfig = new RobotConfig();
-
-    public static DriverStation driverStation;
-    public static DrivetrainSubsystem drivetrainSubsystem;
-    public static DreamIntakeSubsystem intakeSubsystem;
+    private final DriverStation driverStation = new DriverStation(robotConfig);
+    private final RobotSubsystems robotSubsystems =
+            new RobotSubsystems(robotConfig, driverStation);
+    private final JoystickEventMapper joystickEventMapper =
+            new JoystickEventMapper(robotConfig, driverStation,
+                    robotSubsystems);
+    // TODO SmartDashboardConfig
 
     /**
      * This function is run when the robot is first started up and should be
@@ -28,9 +30,6 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void robotInit() {
-        driverStation = new DriverStation();
-        drivetrainSubsystem = new DrivetrainSubsystem();
-        intakeSubsystem = new DreamIntakeSubsystem();
     }
 
     /**

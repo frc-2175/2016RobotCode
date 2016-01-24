@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.Robot;
+import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -8,9 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunIntakeOut extends Command {
+    private final DreamIntakeSubsystem dreamIntakeSubsystem;
 
-    public RunIntakeOut() {
-        requires(Robot.intakeSubsystem);
+    public RunIntakeOut(RobotSubsystems robotSubsystems) {
+        this.dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
+
+        requires(dreamIntakeSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +25,8 @@ public class RunIntakeOut extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.intakeSubsystem.setMainBeltSpeed(-0.5);
-        Robot.intakeSubsystem.setSideBeltSpeed(0.5);
+        dreamIntakeSubsystem.setMainBeltSpeed(-0.5);
+        dreamIntakeSubsystem.setSideBeltSpeed(0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,8 +38,8 @@ public class RunIntakeOut extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        Robot.intakeSubsystem.setMainBeltSpeed(0);
-        Robot.intakeSubsystem.setSideBeltSpeed(0);
+        dreamIntakeSubsystem.setMainBeltSpeed(0);
+        dreamIntakeSubsystem.setSideBeltSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
