@@ -5,6 +5,7 @@ import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -50,11 +51,15 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        // TODO Move to custom timer
+        Scheduler.getInstance().run();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        // TODO Move to custom timer
+        Scheduler.getInstance().run();
     }
 
     /** This function is called periodically during test mode. */
