@@ -17,7 +17,7 @@ public class DriverStation {
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
         int leftStickPort = joysticksConfig.getLeftStickPort();
         int rightStickPort = joysticksConfig.getRightStickPort();
-        int gamepadPort = joysticksConfig.getGamepadPortPort();
+        int gamepadPort = joysticksConfig.getGamepadPort();
 
         leftStick = new Joystick(leftStickPort);
         rightStick = new Joystick(rightStickPort);

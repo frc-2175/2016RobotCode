@@ -34,7 +34,7 @@ public class JoysticksConfig extends BaseConfig {
         return 0;
     }
 
-    public int getGamepadPortPort() {
+    public int getGamepadPort() {
         // TODO Auto-generated method stub
         return 0;
     }
