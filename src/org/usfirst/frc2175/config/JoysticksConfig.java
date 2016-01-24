@@ -24,4 +24,19 @@ public class JoysticksConfig extends BaseConfig {
         // - add private instance variables for the values
         // - add get() methods for them
     }
+
+    public int getLeftStickPort() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public int getRightStickPort() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public int getGamepadPortPort() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }
