@@ -2,12 +2,12 @@ package org.usfirst.frc2175;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class OI {
+public class DriverStation {
     public Joystick leftStick;
     public Joystick rightStick;
     public Joystick gamepad;
 
-    public OI() {
+    public DriverStation() {
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);
         gamepad = new Joystick(2);

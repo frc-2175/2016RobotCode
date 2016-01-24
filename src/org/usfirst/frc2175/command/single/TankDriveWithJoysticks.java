@@ -21,8 +21,8 @@ public class TankDriveWithJoysticks extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        double leftValue = Robot.oi.getLeftValue();
-        double rightValue = Robot.oi.getRightValue();
+        double leftValue = Robot.driverStation.getLeftValue();
+        double rightValue = Robot.driverStation.getRightValue();
         Robot.drivetrainSubsystem.tankDrive(leftValue, rightValue);
     }
 

@@ -21,8 +21,8 @@ public class ArcadeDriveWithJoysticks extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        double moveValue = Robot.oi.getMoveValue();
-        double turnValue = Robot.oi.getTurnValue();
+        double moveValue = Robot.driverStation.getMoveValue();
+        double turnValue = Robot.driverStation.getTurnValue();
         Robot.drivetrainSubsystem.arcadeDrive(moveValue, turnValue);
     }
 

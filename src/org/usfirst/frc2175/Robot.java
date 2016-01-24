@@ -18,7 +18,7 @@ public class Robot extends IterativeRobot {
     // TODO like this or make RobotConfig methods static?
     private final RobotConfig robotConfig = new RobotConfig();
 
-    public static OI oi;
+    public static DriverStation driverStation;
     public static DrivetrainSubsystem drivetrainSubsystem;
     public static DreamIntakeSubsystem intakeSubsystem;
 
@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void robotInit() {
-        oi = new OI();
+        driverStation = new DriverStation();
         drivetrainSubsystem = new DrivetrainSubsystem();
         intakeSubsystem = new DreamIntakeSubsystem();
     }
