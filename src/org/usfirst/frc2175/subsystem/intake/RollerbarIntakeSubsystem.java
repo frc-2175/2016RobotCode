@@ -1,10 +1,7 @@
 package org.usfirst.frc2175.subsystem.intake;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc2175.subsystem.SubsystemBase;
 
-public class RollerbarIntakeSubsystem extends Subsystem {
-    @Override
-    protected void initDefaultCommand() {
-        // TODO setDefaultCommand(new TheCommandToUse());
-    }
+public class RollerbarIntakeSubsystem extends SubsystemBase {
+
 }

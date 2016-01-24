@@ -1,10 +1,7 @@
 package org.usfirst.frc2175.subsystem.climber;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc2175.subsystem.SubsystemBase;
 
-public class ClimberSubsystem extends Subsystem {
-    @Override
-    protected void initDefaultCommand() {
-        // TODO setDefaultCommand(new TheCommandToUse());
-    }
+public class ClimberSubsystem extends SubsystemBase {
+
 }

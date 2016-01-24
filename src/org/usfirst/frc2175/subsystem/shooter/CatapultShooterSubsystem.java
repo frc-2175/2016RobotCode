@@ -1,12 +1,8 @@
 package org.usfirst.frc2175.subsystem.shooter;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc2175.subsystem.SubsystemBase;
 
-public class CatapultShooterSubsystem extends Subsystem {
-    @Override
-    protected void initDefaultCommand() {
-        // TODO setDefaultCommand(new TheCommandToUse());
-    }
+public class CatapultShooterSubsystem extends SubsystemBase {
 
     public void setCatapultPosition(boolean up) {
         // TODO Fill in

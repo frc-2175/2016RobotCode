@@ -1,12 +1,8 @@
 package org.usfirst.frc2175.subsystem.intake;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc2175.subsystem.SubsystemBase;
 
-public class DreamIntakeSubsystem extends Subsystem {
-    @Override
-    protected void initDefaultCommand() {
-        // TODO setDefaultCommand(new TheCommandToUse());
-    }
+public class DreamIntakeSubsystem extends SubsystemBase {
 
     public void setMainBeltSpeed(double speed) {
         // TODO Fill in

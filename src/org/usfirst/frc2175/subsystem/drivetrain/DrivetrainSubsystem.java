@@ -1,14 +1,8 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
-import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticks;
+import org.usfirst.frc2175.subsystem.SubsystemBase;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-public class DrivetrainSubsystem extends Subsystem {
-    @Override
-    protected void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDriveWithJoysticks());
-    }
+public class DrivetrainSubsystem extends SubsystemBase {
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
         // TODO Fill in
