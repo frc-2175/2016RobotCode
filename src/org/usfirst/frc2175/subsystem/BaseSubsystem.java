@@ -3,7 +3,7 @@ package org.usfirst.frc2175.subsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class SubsystemBase extends Subsystem {
+public class BaseSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {

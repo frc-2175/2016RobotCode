@@ -1,8 +1,8 @@
 package org.usfirst.frc2175.subsystem.shooter;
 
-import org.usfirst.frc2175.subsystem.SubsystemBase;
+import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
-public class CatapultShooterSubsystem extends SubsystemBase {
+public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public void setCatapultPosition(boolean up) {
         // TODO Fill in

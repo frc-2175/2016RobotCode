@@ -1,7 +1,7 @@
 package org.usfirst.frc2175.subsystem.climber;
 
-import org.usfirst.frc2175.subsystem.SubsystemBase;
+import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
-public class ClimberSubsystem extends SubsystemBase {
+public class ClimberSubsystem extends BaseSubsystem {
 
 }

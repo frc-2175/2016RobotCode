@@ -1,8 +1,8 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
-import org.usfirst.frc2175.subsystem.SubsystemBase;
+import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
-public class DrivetrainSubsystem extends SubsystemBase {
+public class DrivetrainSubsystem extends BaseSubsystem {
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
         // TODO Fill in
