@@ -38,4 +38,9 @@ public class JoysticksConfig extends BaseConfig {
         // TODO Auto-generated method stub
         return 0;
     }
+
+    public double getDeadbandSize() {
+        // TODO Load value from robot
+        return 0;
+    }
 }

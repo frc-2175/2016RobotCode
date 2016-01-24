@@ -2,6 +2,7 @@ package org.usfirst.frc2175;
 
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -17,7 +18,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
     private final RobotConfig robotConfig = new RobotConfig();
-    private final DriverStation driverStation = new DriverStation(robotConfig);
+    private final DriverStation driverStation =
+            new DriverStation(robotConfig, new DeadbandCalculator());
     private final RobotSubsystems robotSubsystems =
             new RobotSubsystems(robotConfig, driverStation);
     private final JoystickEventMapper joystickEventMapper =

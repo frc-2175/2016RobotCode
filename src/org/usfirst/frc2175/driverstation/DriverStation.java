@@ -12,8 +12,10 @@ public class DriverStation {
     public Joystick leftStick;
     public Joystick rightStick;
     public Joystick gamepad;
+    public DeadbandCalculator deadbandCalculator;
+    public double deadbandSize;
 
-    public DriverStation(RobotConfig robotConfig) {
+    public DriverStation(RobotConfig robotConfig, DeadbandCalculator deadbandCalculator) {
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
         int leftStickPort = joysticksConfig.getLeftStickPort();
         int rightStickPort = joysticksConfig.getRightStickPort();
@@ -22,25 +24,31 @@ public class DriverStation {
         leftStick = new Joystick(leftStickPort);
         rightStick = new Joystick(rightStickPort);
         gamepad = new Joystick(gamepadPort);
+        this.deadbandCalculator = deadbandCalculator;
+        deadbandSize = joysticksConfig.getDeadbandSize();
     }
 
     public double getMoveValue() {
-        // TODO Add deadband
-        return leftStick.getY();
+        double input = leftStick.getY();
+        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        return deadbandedOutput;
     }
 
     public double getTurnValue() {
-        // TODO Add deadband
-        return rightStick.getX();
+        double input = rightStick.getX();
+        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        return deadbandedOutput;
     }
 
     public double getLeftValue() {
-        // TODO Add deadband
-        return leftStick.getY();
+        double input = leftStick.getY();
+        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        return deadbandedOutput;
     }
 
     public double getRightValue() {
-        // TODO Add deadband
-        return rightStick.getY();
+        double input = rightStick.getY();
+        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        return deadbandedOutput;
     }
 }
