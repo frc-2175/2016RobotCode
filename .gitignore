@@ -3,6 +3,7 @@
 bin
 dist
 build
+buildtest
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
