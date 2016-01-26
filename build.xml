@@ -79,4 +79,6 @@
   </target>
 
   <target name="clean-test" depends="clean-2175, test" description="Clean build, run the tests." />
+  
+  <target name="clean-jar" depends="clean-test, jar" description="Clean build, run the tests, create jar." />
 </project> 
