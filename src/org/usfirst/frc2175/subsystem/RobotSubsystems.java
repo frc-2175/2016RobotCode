@@ -20,8 +20,8 @@ public class RobotSubsystems {
         this.driverStation = driverStation;
 
         // TODO instantiate subsystems w/robotConfig, driverStation as needed
-        dreamIntakeSubsystem = new DreamIntakeSubsystem();
-        drivetrainSubsystem = new DrivetrainSubsystem();
+        dreamIntakeSubsystem = new DreamIntakeSubsystem(robotConfig);
+        drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
 
         setDefaultCommands();
     }

@@ -1,8 +1,16 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
+import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
+    // TODO add instance variables for robot components
+    // (Talons, Solenoids, etc.)
+
+    public DrivetrainSubsystem(RobotConfig robotConfig) {
+        // TODO use values from robotConfig to set instance variables above
+        // Then you can use those variables in the methods below!
+    }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
         // TODO Fill in
