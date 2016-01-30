@@ -4,7 +4,6 @@ import org.usfirst.frc2175.config.JoysticksConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Represents the driver and weapons officer tools, aka "operator interface".
@@ -17,10 +16,8 @@ public class DriverStation {
     private DeadbandCalculator deadbandCalculator;
     private double deadbandSize;
 
-    private JoystickButton extendCatapult;
-    private JoystickButton retractCatapult;
-
-    public DriverStation(RobotConfig robotConfig, DeadbandCalculator deadbandCalculator) {
+    public DriverStation(RobotConfig robotConfig,
+            DeadbandCalculator deadbandCalculator) {
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
 
         leftStick = robotConfig.getJoysticksConfig().getLeftStick();
@@ -29,30 +26,33 @@ public class DriverStation {
 
         this.deadbandCalculator = deadbandCalculator;
         deadbandSize = joysticksConfig.getDeadbandSize();
-
     }
 
     public double getMoveValue() {
         double input = leftStick.getY();
-        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        double deadbandedOutput =
+                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getTurnValue() {
         double input = rightStick.getX();
-        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        double deadbandedOutput =
+                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getLeftValue() {
         double input = leftStick.getY();
-        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        double deadbandedOutput =
+                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getRightValue() {
         double input = rightStick.getY();
-        double deadbandedOutput = deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+        double deadbandedOutput =
+                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 }

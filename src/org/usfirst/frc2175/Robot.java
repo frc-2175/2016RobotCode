@@ -25,7 +25,6 @@ public class Robot extends IterativeRobot {
     private final JoystickEventMapper joystickEventMapper =
             new JoystickEventMapper(robotConfig, driverStation,
                     robotSubsystems);
-    // TODO SmartDashboardConfig
 
     /**
      * This function is run when the robot is first started up and should be

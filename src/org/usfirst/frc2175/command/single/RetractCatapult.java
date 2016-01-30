@@ -10,12 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RetractCatapult extends Command {
+    private CatapultShooterSubsystem catapultSubsystem;
 
-    CatapultShooterSubsystem catapultSubsystem;
-
-    public RetractCatapult(DriverStation driverStation, RobotSubsystems robotSubsystems) {
-        requires(robotSubsystems.getCatapultShooterSubsystem());
+    public RetractCatapult(DriverStation driverStation,
+            RobotSubsystems robotSubsystems) {
         catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
+
+        requires(robotSubsystems.getCatapultShooterSubsystem());
     }
 
     // Called just before this Command runs the first time

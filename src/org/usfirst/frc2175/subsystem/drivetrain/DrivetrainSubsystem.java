@@ -7,9 +7,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
-    // TODO add instance variables for robot components
-    // (Talons, Solenoids, etc.)
-
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
 

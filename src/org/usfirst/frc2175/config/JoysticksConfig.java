@@ -26,10 +26,6 @@ public class JoysticksConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        // TODO implement me
-        // - add private instance variables for the values
-        // - add get() methods for them
-
         int leftStickPort = getIntPropertyValue("leftStick.port", properties);
         leftStick = new Joystick(leftStickPort);
 
@@ -37,7 +33,6 @@ public class JoysticksConfig extends BaseConfig {
         rightStick = new Joystick(rightStickPort);
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
-
     }
 
     public Joystick getLeftStick() {
@@ -52,5 +47,4 @@ public class JoysticksConfig extends BaseConfig {
         // TODO Load value from robot
         return deadbandValue;
     }
-
 }

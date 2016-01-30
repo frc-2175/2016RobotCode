@@ -28,24 +28,29 @@ public class WiringConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        // TODO implement me
-        // - add private instance variables for the values
-        // - add get() methods for them
-
-        int leftDriveTalonPort = getIntPropertyValue("drivetrain.talon.left.port", properties);
+        int leftDriveTalonPort =
+                getIntPropertyValue("drivetrain.talon.left.port", properties);
         leftDriveTalon = new Talon(leftDriveTalonPort);
 
-        int rightDriveTalonPort = getIntPropertyValue("drivetrain.talon.right.port", properties);
+        int rightDriveTalonPort =
+                getIntPropertyValue("drivetrain.talon.right.port", properties);
         rightDriveTalon = new Talon(rightDriveTalonPort);
 
-        int leftCatapultSolenoidForwardPort = getIntPropertyValue("catapult.solenoid.left.forward", properties);
-        int leftCatapultSolenoidReversePort = getIntPropertyValue("catapult.solenoid.left.reverse", properties);
-        leftCatapultSolenoid = new DoubleSolenoid(leftCatapultSolenoidForwardPort, leftCatapultSolenoidReversePort);
+        int leftCatapultSolenoidForwardPort = getIntPropertyValue(
+                "catapult.solenoid.left.forward", properties);
+        int leftCatapultSolenoidReversePort = getIntPropertyValue(
+                "catapult.solenoid.left.reverse", properties);
+        leftCatapultSolenoid =
+                new DoubleSolenoid(leftCatapultSolenoidForwardPort,
+                        leftCatapultSolenoidReversePort);
 
-        int rightCatapultSolenoidForwardPort = getIntPropertyValue("catapult.solenoid.right.forward", properties);
-        int rightCatapultSolenoidReversePort = getIntPropertyValue("catapult.solenoid.right.reverse", properties);
-        rightCatapultSolenoid = new DoubleSolenoid(rightCatapultSolenoidForwardPort, rightCatapultSolenoidReversePort);
-
+        int rightCatapultSolenoidForwardPort = getIntPropertyValue(
+                "catapult.solenoid.right.forward", properties);
+        int rightCatapultSolenoidReversePort = getIntPropertyValue(
+                "catapult.solenoid.right.reverse", properties);
+        rightCatapultSolenoid =
+                new DoubleSolenoid(rightCatapultSolenoidForwardPort,
+                        rightCatapultSolenoidReversePort);
     }
 
     public Talon getLeftDriveTalon() {

@@ -16,11 +16,11 @@ public class RobotSubsystems {
     private final DrivetrainSubsystem drivetrainSubsystem;
     private final CatapultShooterSubsystem catapultShooterSubsystem;
 
-    public RobotSubsystems(RobotConfig robotConfig, DriverStation driverStation) {
+    public RobotSubsystems(RobotConfig robotConfig,
+            DriverStation driverStation) {
         this.robotConfig = robotConfig;
         this.driverStation = driverStation;
 
-        // TODO instantiate subsystems w/robotConfig, driverStation as needed
         dreamIntakeSubsystem = new DreamIntakeSubsystem(robotConfig);
         drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
@@ -29,8 +29,8 @@ public class RobotSubsystems {
     }
 
     protected void setDefaultCommands() {
-        // TODO set default commands for all subsystems
-        drivetrainSubsystem.setDefaultCommand(new ArcadeDriveWithJoysticks(driverStation, this));
+        drivetrainSubsystem.setDefaultCommand(
+                new ArcadeDriveWithJoysticks(driverStation, this));
     }
 
     public DreamIntakeSubsystem getDreamIntakeSubsystem() {

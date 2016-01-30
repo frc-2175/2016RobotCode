@@ -27,15 +27,12 @@ public class GamepadConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        // TODO implement me
-        // - add private instance variables for the values
-        // - add get() methods for them
-
         gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
 
-        extendCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.extend", properties));
-        retractCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.retract", properties));
-
+        extendCatapult = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.extend", properties));
+        retractCatapult = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.retract", properties));
     }
 
     public Joystick getGamepad() {
