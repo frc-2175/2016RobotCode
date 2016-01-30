@@ -3,6 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Gamepad configuration values - "weapons" controls.
@@ -16,6 +17,9 @@ public class GamepadConfig extends BaseConfig {
 
     private Joystick gamepad;
 
+    private JoystickButton extendCatapult;
+    private JoystickButton retractCatapult;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -28,9 +32,21 @@ public class GamepadConfig extends BaseConfig {
         // - add get() methods for them
 
         gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
+
+        extendCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.extend", properties));
+        retractCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.retract", properties));
+
     }
 
     public Joystick getGamepad() {
         return gamepad;
+    }
+
+    public JoystickButton getExtendCatapultButton() {
+        return extendCatapult;
+    }
+
+    public JoystickButton getRetractCatapultButton() {
+        return retractCatapult;
     }
 }

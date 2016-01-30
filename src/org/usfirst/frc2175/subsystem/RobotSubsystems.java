@@ -5,6 +5,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 public class RobotSubsystems {
     private final RobotConfig robotConfig;
@@ -13,23 +14,23 @@ public class RobotSubsystems {
     // TODO add remaining subsystems
     private final DreamIntakeSubsystem dreamIntakeSubsystem;
     private final DrivetrainSubsystem drivetrainSubsystem;
+    private final CatapultShooterSubsystem catapultShooterSubsystem;
 
-    public RobotSubsystems(RobotConfig robotConfig,
-            DriverStation driverStation) {
+    public RobotSubsystems(RobotConfig robotConfig, DriverStation driverStation) {
         this.robotConfig = robotConfig;
         this.driverStation = driverStation;
 
         // TODO instantiate subsystems w/robotConfig, driverStation as needed
         dreamIntakeSubsystem = new DreamIntakeSubsystem(robotConfig);
         drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
+        catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
 
         setDefaultCommands();
     }
 
     protected void setDefaultCommands() {
         // TODO set default commands for all subsystems
-        drivetrainSubsystem.setDefaultCommand(
-                new ArcadeDriveWithJoysticks(driverStation, this));
+        drivetrainSubsystem.setDefaultCommand(new ArcadeDriveWithJoysticks(driverStation, this));
     }
 
     public DreamIntakeSubsystem getDreamIntakeSubsystem() {
@@ -38,5 +39,9 @@ public class RobotSubsystems {
 
     public DrivetrainSubsystem getDrivetrainSubsystem() {
         return drivetrainSubsystem;
+    }
+
+    public CatapultShooterSubsystem getCatapultShooterSubsystem() {
+        return catapultShooterSubsystem;
     }
 }

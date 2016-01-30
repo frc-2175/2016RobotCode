@@ -4,6 +4,7 @@ import org.usfirst.frc2175.config.JoysticksConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Represents the driver and weapons officer tools, aka "operator interface".
@@ -12,8 +13,12 @@ public class DriverStation {
     private Joystick leftStick;
     private Joystick rightStick;
     private Joystick gamepad;
+
     private DeadbandCalculator deadbandCalculator;
     private double deadbandSize;
+
+    private JoystickButton extendCatapult;
+    private JoystickButton retractCatapult;
 
     public DriverStation(RobotConfig robotConfig, DeadbandCalculator deadbandCalculator) {
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
@@ -24,6 +29,7 @@ public class DriverStation {
 
         this.deadbandCalculator = deadbandCalculator;
         deadbandSize = joysticksConfig.getDeadbandSize();
+
     }
 
     public double getMoveValue() {

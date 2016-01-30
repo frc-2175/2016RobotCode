@@ -2,6 +2,7 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -16,6 +17,9 @@ public class WiringConfig extends BaseConfig {
 
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
+
+    private DoubleSolenoid leftCatapultSolenoid;
+    private DoubleSolenoid rightCatapultSolenoid;
 
     @Override
     public String getPropertyFileName() {
@@ -34,6 +38,14 @@ public class WiringConfig extends BaseConfig {
         int rightDriveTalonPort = getIntPropertyValue("drivetrain.right.talon.port", properties);
         rightDriveTalon = new Talon(rightDriveTalonPort);
 
+        int leftCatapultSolenoidForwardPort = getIntPropertyValue("catapult.left.solenoid.forward", properties);
+        int leftCatapultSolenoidReversePort = getIntPropertyValue("catapult.left.solenoid.reverse", properties);
+        leftCatapultSolenoid = new DoubleSolenoid(leftCatapultSolenoidForwardPort, leftCatapultSolenoidReversePort);
+
+        int rightCatapultSolenoidForwardPort = getIntPropertyValue("catapult.right.solenoid.forward", properties);
+        int rightCatapultSolenoidReversePort = getIntPropertyValue("catapult.right.solenoid.reverse", properties);
+        rightCatapultSolenoid = new DoubleSolenoid(rightCatapultSolenoidForwardPort, rightCatapultSolenoidReversePort);
+
     }
 
     public Talon getLeftDriveTalon() {
@@ -42,5 +54,13 @@ public class WiringConfig extends BaseConfig {
 
     public Talon getRightDriveTalon() {
         return rightDriveTalon;
+    }
+
+    public DoubleSolenoid getLeftCatapultSolenoid() {
+        return leftCatapultSolenoid;
+    }
+
+    public DoubleSolenoid getRightCatapultSolenoid() {
+        return rightCatapultSolenoid;
     }
 }
