@@ -36,15 +36,15 @@ public class ControlLoopConfig extends BaseConfig {
     }
 
     public double getVisionTurnPID_kProportional() {
-        return visionTurnPID_kProportional;
+        return -visionTurnPID_kProportional;
     }
 
     public double getVisionTurnPID_kIntegral() {
-        return visionTurnPID_kIntegral;
+        return -visionTurnPID_kIntegral;
     }
 
     public double getVisionTurnPID_kDerivative() {
-        return visionTurnPID_kDerivative;
+        return -visionTurnPID_kDerivative;
     }
 
     public double getVisionTurnPID_absTolerance() {

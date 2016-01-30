@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
@@ -30,20 +29,14 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
         visionProcessingConfig = robotConfig.getVisionProcessingConfig();
-        centerCameraXValue = robotConfig.getControlLoopConfig()
-                .getVisionTurnPID_centerCamera();
+        centerCameraXValue = robotConfig.getControlLoopConfig().getVisionTurnPID_centerCamera();
 
-        VisionTurnControllerHandler visionTurnControllerHandler =
-                new VisionTurnControllerHandler();
-        visionTurnController = new PIDController(
-                robotConfig.getControlLoopConfig()
-                        .getVisionTurnPID_kProportional(),
+        VisionTurnControllerHandler visionTurnControllerHandler = new VisionTurnControllerHandler();
+        visionTurnController = new PIDController(robotConfig.getControlLoopConfig().getVisionTurnPID_kProportional(),
                 robotConfig.getControlLoopConfig().getVisionTurnPID_kIntegral(),
-                robotConfig.getControlLoopConfig()
-                        .getVisionTurnPID_kDerivative(),
-                visionTurnControllerHandler, visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(robotConfig
-                .getControlLoopConfig().getVisionTurnPID_absTolerance());
+                robotConfig.getControlLoopConfig().getVisionTurnPID_kDerivative(), visionTurnControllerHandler,
+                visionTurnControllerHandler);
+        visionTurnController.setAbsoluteTolerance(robotConfig.getControlLoopConfig().getVisionTurnPID_absTolerance());
 
         // TODO make a properties file entry for these
         visionTurnController.setOutputRange(-0.8, 0.8);
@@ -57,21 +50,12 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         @Override
         public double pidGet() {
-            double contourCenterX;
-
-            if (visionProcessingConfig.getContourCenterX().length != 0) {
-                contourCenterX = visionProcessingConfig.getContourCenterX()[0];
-            } else {
-                contourCenterX = 0;
-                // TODO add a log message here
-            }
-            SmartDashboard.putNumber("Contour center X", contourCenterX);
-            return contourCenterX;
+            return getDistanceFromCameraCenter();
         }
 
         @Override
         public void setPIDSourceType(PIDSourceType pidSource) {
-            // TODO Auto-generated method stub
+            // We never need to set this, so it can be empty
         }
 
         @Override
@@ -113,6 +97,21 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     public double getGyroAngle() {
         // TODO Fill in
         return 0;
+    }
+
+    public double getDistanceFromCameraCenter() {
+        double[] contourCenterXArray = visionProcessingConfig.getContourCenterX();
+        double contourCenterX;
+
+        if (contourCenterXArray.length != 0) {
+            contourCenterX = contourCenterXArray[0];
+        } else {
+            contourCenterX = 0;
+            // TODO add a log message here
+        }
+
+        System.out.println("Getting distance from camera center: " + contourCenterX);
+        return contourCenterX;
     }
 
     public double getCenterCameraXValue() {

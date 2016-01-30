@@ -28,6 +28,7 @@ public class TurnToFaceGoal extends Command {
     protected void initialize() {
         drivetrainSubsystem.getVisionTurnController().setSetpoint(setpoint);
         SmartDashboard.putNumber("Setpoint:", setpoint);
+
         drivetrainSubsystem.getVisionTurnController().enable();
 
     }
