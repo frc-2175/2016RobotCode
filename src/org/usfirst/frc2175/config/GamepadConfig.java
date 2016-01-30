@@ -2,6 +2,8 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * Gamepad configuration values - "weapons" controls.
  *
@@ -11,6 +13,8 @@ import java.util.Properties;
  */
 public class GamepadConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "gamepad.properties";
+
+    private Joystick gamepad;
 
     @Override
     public String getPropertyFileName() {
@@ -22,5 +26,11 @@ public class GamepadConfig extends BaseConfig {
         // TODO implement me
         // - add private instance variables for the values
         // - add get() methods for them
+
+        gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
+    }
+
+    public Joystick getGamepad() {
+        return gamepad;
     }
 }

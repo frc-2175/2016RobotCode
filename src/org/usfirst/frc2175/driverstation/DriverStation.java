@@ -9,21 +9,19 @@ import edu.wpi.first.wpilibj.Joystick;
  * Represents the driver and weapons officer tools, aka "operator interface".
  */
 public class DriverStation {
-    public Joystick leftStick;
-    public Joystick rightStick;
-    public Joystick gamepad;
-    public DeadbandCalculator deadbandCalculator;
-    public double deadbandSize;
+    private Joystick leftStick;
+    private Joystick rightStick;
+    private Joystick gamepad;
+    private DeadbandCalculator deadbandCalculator;
+    private double deadbandSize;
 
     public DriverStation(RobotConfig robotConfig, DeadbandCalculator deadbandCalculator) {
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
-        int leftStickPort = joysticksConfig.getLeftStickPort();
-        int rightStickPort = joysticksConfig.getRightStickPort();
-        int gamepadPort = joysticksConfig.getGamepadPort();
 
-        leftStick = new Joystick(leftStickPort);
-        rightStick = new Joystick(rightStickPort);
-        gamepad = new Joystick(gamepadPort);
+        leftStick = robotConfig.getJoysticksConfig().getLeftStick();
+        rightStick = robotConfig.getJoysticksConfig().getRightStick();
+        gamepad = robotConfig.getGamepadConfig().getGamepad();
+
         this.deadbandCalculator = deadbandCalculator;
         deadbandSize = joysticksConfig.getDeadbandSize();
     }

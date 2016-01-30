@@ -17,8 +17,7 @@ public class JoysticksConfig extends BaseConfig {
     private Joystick leftStick;
     private Joystick rightStick;
 
-    private double driveValue;
-    private double turnValue;
+    private double deadbandValue;
 
     @Override
     public String getPropertyFileName() {
@@ -37,33 +36,21 @@ public class JoysticksConfig extends BaseConfig {
         int rightStickPort = getIntPropertyValue("rightStick.port", properties);
         rightStick = new Joystick(rightStickPort);
 
+        deadbandValue = getDoublePropertyValue("deadband.value", properties);
+
     }
 
-    public int getLeftStickPort() {
-        // TODO Auto-generated method stub
-        return 0;
+    public Joystick getLeftStick() {
+        return leftStick;
     }
 
-    public int getRightStickPort() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    public int getGamepadPort() {
-        // TODO Auto-generated method stub
-        return 0;
+    public Joystick getRightStick() {
+        return rightStick;
     }
 
     public double getDeadbandSize() {
         // TODO Load value from robot
-        return 0;
+        return deadbandValue;
     }
 
-    public double getDriveValue() {
-        return leftStick.getY();
-    }
-
-    public double getTurnValue() {
-        return rightStick.getX();
-    }
 }

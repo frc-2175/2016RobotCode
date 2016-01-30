@@ -13,23 +13,17 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
 
-    private double turnValue;
-    private double driveValue;
-
     private RobotDrive robotDrive;
 
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
         rightDriveTalon = robotConfig.getWiringConfig().getRightDriveTalon();
 
-        turnValue = robotConfig.getJoysticksConfig().getTurnValue();
-        driveValue = robotConfig.getJoysticksConfig().getDriveValue();
-
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-        robotDrive.arcadeDrive(driveValue, turnValue);
+        robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
