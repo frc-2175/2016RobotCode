@@ -3,6 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class VisionProcessingConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "vision.properties";
@@ -19,6 +20,7 @@ public class VisionProcessingConfig extends BaseConfig {
     @Override
     protected void configure(Properties properties) {
         String contourReportName = getStringPropertyValue("GRIP.networktable.name", properties);
+        SmartDashboard.putString("Vision table location", contourReportName);
         contourReport = NetworkTable.getTable(contourReportName);
 
         defaultValue = new double[0];

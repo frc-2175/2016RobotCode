@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
@@ -18,7 +20,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     private PIDController visionTurnController;
 
-    private double[] contourXPosition;
+    private double centerCameraXValue;
+    private VisionProcessingConfig visionProcessingConfig;
 
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
@@ -26,7 +29,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
-        contourXPosition = robotConfig.getVisionProcessingConfig().getContourCenterX();
+        visionProcessingConfig = robotConfig.getVisionProcessingConfig();
+        centerCameraXValue = robotConfig.getControlLoopConfig().getVisionTurnPID_centerCamera();
 
         VisionTurnControllerHandler visionTurnControllerHandler = new VisionTurnControllerHandler();
         visionTurnController = new PIDController(robotConfig.getControlLoopConfig().getVisionTurnPID_kProportional(),
@@ -50,7 +54,16 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         @Override
         public double pidGet() {
-            return contourXPosition[0];
+            double contourCenterX;
+
+            if (visionProcessingConfig.getContourCenterX().length != 0) {
+                contourCenterX = visionProcessingConfig.getContourCenterX()[0];
+            } else {
+                contourCenterX = 0;
+                // TODO add a log message here
+            }
+            SmartDashboard.putNumber("Contour center X", contourCenterX);
+            return contourCenterX;
 
         }
 
@@ -62,8 +75,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         @Override
         public PIDSourceType getPIDSourceType() {
-            // TODO Auto-generated method stub
-            return null;
+            return PIDSourceType.kDisplacement;
         }
 
     }
@@ -101,5 +113,13 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     public double getGyroAngle() {
         // TODO Fill in
         return 0;
+    }
+
+    public double getCenterCameraXValue() {
+        return centerCameraXValue;
+    }
+
+    public PIDController getVisionTurnController() {
+        return visionTurnController;
     }
 }

@@ -9,6 +9,7 @@ public class ControlLoopConfig extends BaseConfig {
     private double visionTurnPID_kIntegral;
     private double visionTurnPID_kDerivative;
     private double visionTurnPID_absTolerance;
+    private double visionTurnPID_centerCamera;
 
     @Override
     protected String getPropertyFileName() {
@@ -32,6 +33,8 @@ public class ControlLoopConfig extends BaseConfig {
                 properties);
         visionTurnPID_absTolerance = visionTurnPID_absToleranceValue;
 
+        visionTurnPID_centerCamera = getDoublePropertyValue("drivetrain.visionTurnPID.centerCamera", properties);
+
     }
 
     public double getVisionTurnPID_kProportional() {
@@ -48,6 +51,10 @@ public class ControlLoopConfig extends BaseConfig {
 
     public double getVisionTurnPID_absTolerance() {
         return visionTurnPID_absTolerance;
+    }
+
+    public double getVisionTurnPID_centerCamera() {
+        return visionTurnPID_centerCamera;
     }
 
 }
