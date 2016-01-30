@@ -3,7 +3,8 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 public class ControlLoopConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME = "ControlLoopConstants.properties";
+    private static final String PROPERTY_FILE_NAME =
+            "ControlLoopConstants.properties";
 
     private double visionTurnPID_kProportional;
     private double visionTurnPID_kIntegral;
@@ -18,23 +19,20 @@ public class ControlLoopConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        double visionTurnPID_kProportionalValue = getDoublePropertyValue("drivetrain.visionTurnPID.kProportional",
-                properties);
-        visionTurnPID_kProportional = visionTurnPID_kProportionalValue;
+        visionTurnPID_kProportional = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.kProportional", properties);
 
-        double visionTurnPID_kIntegralValue = getDoublePropertyValue("drivetrain.visionTurnPID.kIntegral", properties);
-        visionTurnPID_kIntegral = visionTurnPID_kIntegralValue;
+        visionTurnPID_kIntegral = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.kIntegral", properties);
 
-        double visionTurnPID_kDerivativeValue = getDoublePropertyValue("drivetrain.visionTurnPID.kDerivative",
-                properties);
-        visionTurnPID_kDerivative = visionTurnPID_kDerivativeValue;
+        visionTurnPID_kDerivative = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.kDerivative", properties);
 
-        double visionTurnPID_absToleranceValue = getDoublePropertyValue("drivetrain.visionTurnPID.absTolerance",
-                properties);
-        visionTurnPID_absTolerance = visionTurnPID_absToleranceValue;
+        visionTurnPID_absTolerance = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.absTolerance", properties);
 
-        visionTurnPID_centerCamera = getDoublePropertyValue("drivetrain.visionTurnPID.centerCamera", properties);
-
+        visionTurnPID_centerCamera = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.centerCamera", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
@@ -56,5 +54,4 @@ public class ControlLoopConfig extends BaseConfig {
     public double getVisionTurnPID_centerCamera() {
         return visionTurnPID_centerCamera;
     }
-
 }

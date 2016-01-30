@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class VisionProcessingConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "vision.properties";
 
-    NetworkTable contourReport;
+    private NetworkTable contourReport;
 
-    double[] defaultValue;
+    private double[] defaultValue;
 
     @Override
     public String getPropertyFileName() {
@@ -19,7 +19,8 @@ public class VisionProcessingConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        String contourReportName = getStringPropertyValue("GRIP.networktable.name", properties);
+        String contourReportName =
+                getStringPropertyValue("GRIP.networktable.name", properties);
         SmartDashboard.putString("Vision table location", contourReportName);
         contourReport = NetworkTable.getTable(contourReportName);
 
@@ -41,5 +42,4 @@ public class VisionProcessingConfig extends BaseConfig {
     public double[] getContourWidth() {
         return contourReport.getNumberArray("width", defaultValue);
     }
-
 }

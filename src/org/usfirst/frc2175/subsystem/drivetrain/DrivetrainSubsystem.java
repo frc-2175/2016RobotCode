@@ -30,26 +30,29 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
         visionProcessingConfig = robotConfig.getVisionProcessingConfig();
-        centerCameraXValue = robotConfig.getControlLoopConfig().getVisionTurnPID_centerCamera();
+        centerCameraXValue = robotConfig.getControlLoopConfig()
+                .getVisionTurnPID_centerCamera();
 
-        VisionTurnControllerHandler visionTurnControllerHandler = new VisionTurnControllerHandler();
-        visionTurnController = new PIDController(robotConfig.getControlLoopConfig().getVisionTurnPID_kProportional(),
+        VisionTurnControllerHandler visionTurnControllerHandler =
+                new VisionTurnControllerHandler();
+        visionTurnController = new PIDController(
+                robotConfig.getControlLoopConfig()
+                        .getVisionTurnPID_kProportional(),
                 robotConfig.getControlLoopConfig().getVisionTurnPID_kIntegral(),
-                robotConfig.getControlLoopConfig().getVisionTurnPID_kDerivative(), visionTurnControllerHandler,
-                visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(robotConfig.getControlLoopConfig().getVisionTurnPID_absTolerance());
-        visionTurnController.setOutputRange(-0.8, 0.8); // TODO make a
-                                                        // properties file entry
-                                                        // for this
+                robotConfig.getControlLoopConfig()
+                        .getVisionTurnPID_kDerivative(),
+                visionTurnControllerHandler, visionTurnControllerHandler);
+        visionTurnController.setAbsoluteTolerance(robotConfig
+                .getControlLoopConfig().getVisionTurnPID_absTolerance());
 
+        // TODO make a properties file entry for these
+        visionTurnController.setOutputRange(-0.8, 0.8);
     }
 
     private class VisionTurnControllerHandler implements PIDSource, PIDOutput {
-
         @Override
         public void pidWrite(double output) {
             arcadeDrive(0, output);
-
         }
 
         @Override
@@ -64,20 +67,17 @@ public class DrivetrainSubsystem extends BaseSubsystem {
             }
             SmartDashboard.putNumber("Contour center X", contourCenterX);
             return contourCenterX;
-
         }
 
         @Override
         public void setPIDSourceType(PIDSourceType pidSource) {
             // TODO Auto-generated method stub
-
         }
 
         @Override
         public PIDSourceType getPIDSourceType() {
             return PIDSourceType.kDisplacement;
         }
-
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
