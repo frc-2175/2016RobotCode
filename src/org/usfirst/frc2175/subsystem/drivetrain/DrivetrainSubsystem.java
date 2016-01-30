@@ -3,17 +3,33 @@ package org.usfirst.frc2175.subsystem.drivetrain;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
+
 public class DrivetrainSubsystem extends BaseSubsystem {
     // TODO add instance variables for robot components
     // (Talons, Solenoids, etc.)
 
+    private Talon leftDriveTalon;
+    private Talon rightDriveTalon;
+
+    private double turnValue;
+    private double driveValue;
+
+    private RobotDrive robotDrive;
+
     public DrivetrainSubsystem(RobotConfig robotConfig) {
-        // TODO use values from robotConfig to set instance variables above
-        // Then you can use those variables in the methods below!
+        leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
+        rightDriveTalon = robotConfig.getWiringConfig().getRightDriveTalon();
+
+        turnValue = robotConfig.getJoysticksConfig().getTurnValue();
+        driveValue = robotConfig.getJoysticksConfig().getDriveValue();
+
+        robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-        // TODO Fill in
+        robotDrive.arcadeDrive(driveValue, turnValue);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {

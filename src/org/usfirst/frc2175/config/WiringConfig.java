@@ -2,6 +2,8 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import edu.wpi.first.wpilibj.Talon;
+
 /**
  * Wiring configuration values - robot sensors and actuators port numbers.
  *
@@ -11,6 +13,9 @@ import java.util.Properties;
  */
 public class WiringConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "wiring.properties";
+
+    private Talon leftDriveTalon;
+    private Talon rightDriveTalon;
 
     @Override
     public String getPropertyFileName() {
@@ -22,5 +27,20 @@ public class WiringConfig extends BaseConfig {
         // TODO implement me
         // - add private instance variables for the values
         // - add get() methods for them
+
+        int leftDriveTalonPort = getIntPropertyValue("drivetrain.left.talon.port", properties);
+        leftDriveTalon = new Talon(leftDriveTalonPort);
+
+        int rightDriveTalonPort = getIntPropertyValue("drivetrain.right.talon.port", properties);
+        rightDriveTalon = new Talon(rightDriveTalonPort);
+
+    }
+
+    public Talon getLeftDriveTalon() {
+        return leftDriveTalon;
+    }
+
+    public Talon getRightDriveTalon() {
+        return rightDriveTalon;
     }
 }

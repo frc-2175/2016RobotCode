@@ -2,6 +2,8 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * Joystick configuration values - "driving" controls.
  *
@@ -11,6 +13,12 @@ import java.util.Properties;
  */
 public class JoysticksConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "joysticks.properties";
+
+    private Joystick leftStick;
+    private Joystick rightStick;
+
+    private double driveValue;
+    private double turnValue;
 
     @Override
     public String getPropertyFileName() {
@@ -22,6 +30,13 @@ public class JoysticksConfig extends BaseConfig {
         // TODO implement me
         // - add private instance variables for the values
         // - add get() methods for them
+
+        int leftStickPort = getIntPropertyValue("leftStick.port", properties);
+        leftStick = new Joystick(leftStickPort);
+
+        int rightStickPort = getIntPropertyValue("rightStick.port", properties);
+        rightStick = new Joystick(rightStickPort);
+
     }
 
     public int getLeftStickPort() {
@@ -42,5 +57,13 @@ public class JoysticksConfig extends BaseConfig {
     public double getDeadbandSize() {
         // TODO Load value from robot
         return 0;
+    }
+
+    public double getDriveValue() {
+        return leftStick.getY();
+    }
+
+    public double getTurnValue() {
+        return rightStick.getX();
     }
 }
