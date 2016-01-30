@@ -7,6 +7,7 @@ public class RobotConfig {
     private final GamepadConfig gamepadConfig = new GamepadConfig();
     private final JoysticksConfig joystickConfig = new JoysticksConfig();
     private final WiringConfig wiringConfig = new WiringConfig();
+    private final VisionProcessingConfig visionProcessingConfig = new VisionProcessingConfig();
 
     public GamepadConfig getGamepadConfig() {
         return gamepadConfig;
@@ -18,5 +19,9 @@ public class RobotConfig {
 
     public WiringConfig getWiringConfig() {
         return wiringConfig;
+    }
+
+    public VisionProcessingConfig getVisionProcessingConfig() {
+        return visionProcessingConfig;
     }
 }
