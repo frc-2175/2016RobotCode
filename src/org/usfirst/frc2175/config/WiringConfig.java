@@ -3,6 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -18,6 +19,7 @@ public class WiringConfig extends BaseConfig {
     // Drivetrain
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
+    private Encoder leftDriveEncoder;
 
     // Dream intake
     private Talon dreamIntakeSideBeltTalon;
@@ -43,6 +45,15 @@ public class WiringConfig extends BaseConfig {
         int rightDriveTalonPort =
                 getIntPropertyValue("drivetrain.talon.right.port", properties);
         rightDriveTalon = new Talon(rightDriveTalonPort);
+
+        boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
+                "drivetrain.encoder.left.isReversed", properties);
+        int leftDriveEncoderPortA = getIntPropertyValue(
+                "drivetrain.encoder.left.port.a", properties);
+        int leftDriveEncoderPortB = getIntPropertyValue(
+                "drivetrain.encoder.left.port.b", properties);
+        leftDriveEncoder =
+                new Encoder(leftDriveEncoderPortA, leftDriveEncoderPortB);
 
         // Catapult
         int leftCatapultSolenoidForwardPort = getIntPropertyValue(
@@ -81,6 +92,10 @@ public class WiringConfig extends BaseConfig {
 
     public Talon getRightDriveTalon() {
         return rightDriveTalon;
+    }
+
+    public Encoder getLeftDriveEncoder() {
+        return leftDriveEncoder;
     }
 
     public DoubleSolenoid getLeftCatapultSolenoid() {
