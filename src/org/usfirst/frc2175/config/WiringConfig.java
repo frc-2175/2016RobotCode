@@ -14,107 +14,101 @@ import edu.wpi.first.wpilibj.Talon;
  * Do not use port numbers in code, use these configuration methods.
  */
 public class WiringConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME = "wiring.properties";
+	private static final String PROPERTY_FILE_NAME = "wiring.properties";
 
-    // Drivetrain
-    private Talon leftDriveTalon;
-    private Talon rightDriveTalon;
-    private Encoder leftDriveEncoder;
+	// Drivetrain
+	private Talon leftDriveTalon;
+	private Talon rightDriveTalon;
+	private Encoder leftDriveEncoder;
+	private Encoder rightDriveEncoder;
 
-    // Dream intake
-    private Talon dreamIntakeSideBeltTalon;
-    private Talon dreamIntakeMainBeltTalon;
-    private Talon dreamIntakeLiftTalon;
+	// Dream intake
+	private Talon dreamIntakeSideBeltTalon;
+	private Talon dreamIntakeMainBeltTalon;
+	private Talon dreamIntakeLiftTalon;
 
-    // Catapult shooter
-    private DoubleSolenoid leftCatapultSolenoid;
-    private DoubleSolenoid rightCatapultSolenoid;
+	// Catapult shooter
+	private DoubleSolenoid leftCatapultSolenoid;
+	private DoubleSolenoid rightCatapultSolenoid;
 
-    @Override
-    public String getPropertyFileName() {
-        return PROPERTY_FILE_NAME;
-    }
+	@Override
+	public String getPropertyFileName() {
+		return PROPERTY_FILE_NAME;
+	}
 
-    @Override
-    protected void configure(Properties properties) {
-        // Drivetrain
-        int leftDriveTalonPort =
-                getIntPropertyValue("drivetrain.talon.left.port", properties);
-        leftDriveTalon = new Talon(leftDriveTalonPort);
+	@Override
+	protected void configure(Properties properties) {
+		// Drivetrain
+		int leftDriveTalonPort = getIntPropertyValue("drivetrain.talon.left.port", properties);
+		leftDriveTalon = new Talon(leftDriveTalonPort);
 
-        int rightDriveTalonPort =
-                getIntPropertyValue("drivetrain.talon.right.port", properties);
-        rightDriveTalon = new Talon(rightDriveTalonPort);
+		int rightDriveTalonPort = getIntPropertyValue("drivetrain.talon.right.port", properties);
+		rightDriveTalon = new Talon(rightDriveTalonPort);
 
-        boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
-                "drivetrain.encoder.left.isReversed", properties);
-        int leftDriveEncoderPortA = getIntPropertyValue(
-                "drivetrain.encoder.left.port.a", properties);
-        int leftDriveEncoderPortB = getIntPropertyValue(
-                "drivetrain.encoder.left.port.b", properties);
-        leftDriveEncoder =
-                new Encoder(leftDriveEncoderPortA, leftDriveEncoderPortB);
+		boolean isLeftDriveEncoderReversed = getBooleanPropertyValue("drivetrain.encoder.left.isReversed", properties);
+		int leftDriveEncoderPortA = getIntPropertyValue("drivetrain.encoder.left.port.a", properties);
+		int leftDriveEncoderPortB = getIntPropertyValue("drivetrain.encoder.left.port.b", properties);
+		leftDriveEncoder = new Encoder(leftDriveEncoderPortA, leftDriveEncoderPortB);
 
-        // Catapult
-        int leftCatapultSolenoidForwardPort = getIntPropertyValue(
-                "catapult.solenoid.left.forward", properties);
-        int leftCatapultSolenoidReversePort = getIntPropertyValue(
-                "catapult.solenoid.left.reverse", properties);
-        leftCatapultSolenoid =
-                new DoubleSolenoid(leftCatapultSolenoidForwardPort,
-                        leftCatapultSolenoidReversePort);
+		boolean isRightDriveEncoderReversed = getBooleanPropertyValue("drivetrain.encoder.right.isReversed",
+				properties);
+		int rightDriveEncoderPortA = getIntPropertyValue("drivetrain.encoder.right.port.a", properties);
+		int rightDriveEncoderPortB = getIntPropertyValue("drivetrain.encoder.right.port.b", properties);
+		rightDriveEncoder = new Encoder(rightDriveEncoderPortA, rightDriveEncoderPortB);
 
-        int rightCatapultSolenoidForwardPort = getIntPropertyValue(
-                "catapult.solenoid.right.forward", properties);
-        int rightCatapultSolenoidReversePort = getIntPropertyValue(
-                "catapult.solenoid.right.reverse", properties);
-        rightCatapultSolenoid =
-                new DoubleSolenoid(rightCatapultSolenoidForwardPort,
-                        rightCatapultSolenoidReversePort);
+		// Catapult
+		int leftCatapultSolenoidForwardPort = getIntPropertyValue("catapult.solenoid.left.forward", properties);
+		int leftCatapultSolenoidReversePort = getIntPropertyValue("catapult.solenoid.left.reverse", properties);
+		leftCatapultSolenoid = new DoubleSolenoid(leftCatapultSolenoidForwardPort, leftCatapultSolenoidReversePort);
 
-        // Dream Intake
-        int dreamIntakeSideBeltTalonPort =
-                getIntPropertyValue("dreamIntake.talon.sideBelt", properties);
-        dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
+		int rightCatapultSolenoidForwardPort = getIntPropertyValue("catapult.solenoid.right.forward", properties);
+		int rightCatapultSolenoidReversePort = getIntPropertyValue("catapult.solenoid.right.reverse", properties);
+		rightCatapultSolenoid = new DoubleSolenoid(rightCatapultSolenoidForwardPort, rightCatapultSolenoidReversePort);
 
-        int dreamIntakeMainBeltTalonPort =
-                getIntPropertyValue("dreamIntake.talon.mainBelt", properties);
-        dreamIntakeMainBeltTalon = new Talon(dreamIntakeMainBeltTalonPort);
+		// Dream Intake
+		int dreamIntakeSideBeltTalonPort = getIntPropertyValue("dreamIntake.talon.sideBelt", properties);
+		dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
 
-        int dreamIntakeLiftTalonPort =
-                getIntPropertyValue("dreamIntake.talon.lift", properties);
-        dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
-    }
+		int dreamIntakeMainBeltTalonPort = getIntPropertyValue("dreamIntake.talon.mainBelt", properties);
+		dreamIntakeMainBeltTalon = new Talon(dreamIntakeMainBeltTalonPort);
 
-    public Talon getLeftDriveTalon() {
-        return leftDriveTalon;
-    }
+		int dreamIntakeLiftTalonPort = getIntPropertyValue("dreamIntake.talon.lift", properties);
+		dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
+	}
 
-    public Talon getRightDriveTalon() {
-        return rightDriveTalon;
-    }
+	public Talon getLeftDriveTalon() {
+		return leftDriveTalon;
+	}
 
-    public Encoder getLeftDriveEncoder() {
-        return leftDriveEncoder;
-    }
+	public Talon getRightDriveTalon() {
+		return rightDriveTalon;
+	}
 
-    public DoubleSolenoid getLeftCatapultSolenoid() {
-        return leftCatapultSolenoid;
-    }
+	public Encoder getLeftDriveEncoder() {
+		return leftDriveEncoder;
+	}
 
-    public DoubleSolenoid getRightCatapultSolenoid() {
-        return rightCatapultSolenoid;
-    }
+	public Encoder getRightDriveEncoder() {
+		return rightDriveEncoder;
+	}
 
-    public Talon getDreamIntakeSideBeltTalon() {
-        return dreamIntakeSideBeltTalon;
-    }
+	public DoubleSolenoid getLeftCatapultSolenoid() {
+		return leftCatapultSolenoid;
+	}
 
-    public Talon getDreamIntakeMainBeltTalon() {
-        return dreamIntakeMainBeltTalon;
-    }
+	public DoubleSolenoid getRightCatapultSolenoid() {
+		return rightCatapultSolenoid;
+	}
 
-    public Talon getDreamIntakeLiftTalon() {
-        return dreamIntakeLiftTalon;
-    }
+	public Talon getDreamIntakeSideBeltTalon() {
+		return dreamIntakeSideBeltTalon;
+	}
+
+	public Talon getDreamIntakeMainBeltTalon() {
+		return dreamIntakeMainBeltTalon;
+	}
+
+	public Talon getDreamIntakeLiftTalon() {
+		return dreamIntakeLiftTalon;
+	}
 }
