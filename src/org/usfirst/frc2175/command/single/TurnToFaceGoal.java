@@ -15,7 +15,8 @@ public class TurnToFaceGoal extends Command {
     private DrivetrainSubsystem drivetrainSubsystem;
     private double setpoint;
 
-    public TurnToFaceGoal(DriverStation driverStation, RobotSubsystems robotSubsystems) {
+    public TurnToFaceGoal(DriverStation driverStation,
+            RobotSubsystems robotSubsystems) {
         drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
         setpoint = drivetrainSubsystem.getCenterCameraXValue();
 
@@ -36,7 +37,8 @@ public class TurnToFaceGoal extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        SmartDashboard.putNumber("Turn value:", drivetrainSubsystem.getVisionTurnController().get());
+        System.out.println("Turning to face goal at turn value: "
+                + drivetrainSubsystem.getVisionTurnController().get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
