@@ -4,6 +4,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.Talon;
 public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
+    private Encoder leftDriveEncoder;
 
     private RobotDrive robotDrive;
 
@@ -25,6 +27,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
         rightDriveTalon = robotConfig.getWiringConfig().getRightDriveTalon();
+        leftDriveEncoder = robotConfig.getWiringConfig().getLeftDriveEncoder();
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
@@ -79,17 +82,18 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void resetEncoders() {
-        // TODO Fill in
+        leftDriveEncoder.reset();
+        rightDriveEncoder.reset();
     }
 
     public double getLeftEncoderDistance() {
-        // TODO Fill in
-        return 0;
+        double leftEncoderDistance = leftDriveEncoder.getDistance();
+        return leftEncoderDistance;
     }
 
     public double getRightEncoderDistance() {
-        // TODO Fill in
-        return 0;
+        double rightEncoderDistance = rightDriveEncoder.getDistance();
+        return rightEncoderDistance;
     }
 
     public double getMeanEncoderDistance() {
