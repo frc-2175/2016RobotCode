@@ -10,9 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RunDreamIntakeSideBeltAtSpeed extends Command {
-
-    double speed;
-    DreamIntakeSubsystem dreamIntakeSubsystem;
+    private double speed;
+    private DreamIntakeSubsystem dreamIntakeSubsystem;
 
     public RunDreamIntakeSideBeltAtSpeed(DriverStation driverStation,
             RobotSubsystems robotSubsystems, double speed) {
