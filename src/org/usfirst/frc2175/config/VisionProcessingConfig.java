@@ -10,7 +10,7 @@ public class VisionProcessingConfig extends BaseConfig {
 
     private NetworkTable contourReport;
 
-    private double[] defaultValue;
+    private double[] defaultValue = { 0 };
 
     @Override
     public String getPropertyFileName() {
@@ -24,8 +24,6 @@ public class VisionProcessingConfig extends BaseConfig {
         SmartDashboard.putString("Vision table location", contourReportName);
 
         contourReport = NetworkTable.getTable(contourReportName);
-
-        defaultValue = new double[0];
     }
 
     public double[] getContourCenterX() {
@@ -45,5 +43,30 @@ public class VisionProcessingConfig extends BaseConfig {
 
     public double[] getContourWidth() {
         return contourReport.getNumberArray("width", defaultValue);
+    }
+
+    public double getLargestContourCenterX() {
+        double[] contourWidths = getContourWidth();
+        double[] contourCenterXs = getContourCenterX();
+
+        int largestContourIndex = determineLargestArrayItemIndex(contourWidths);
+
+        return contourCenterXs[largestContourIndex];
+    }
+
+    public int determineLargestArrayItemIndex(double[] array) {
+        int numberOfItems = array.length;
+
+        double largestIndividualItem = 0;
+        int largestItemIndex = 0;
+
+        for (int i = 0; i < numberOfItems; i++) {
+            if (array[i] > largestIndividualItem) {
+                largestIndividualItem = array[i];
+                largestItemIndex = i;
+            }
+        }
+
+        return largestItemIndex;
     }
 }
