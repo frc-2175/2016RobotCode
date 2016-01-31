@@ -3,8 +3,9 @@ package org.usfirst.frc2175.util;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.usfirst.frc2175.TestBase;
 
-public class HighestArrayIndexFinderTest {
+public class HighestArrayIndexFinderTest extends TestBase {
 
     private HighestArrayIndexFinder sut = new HighestArrayIndexFinder();
 
