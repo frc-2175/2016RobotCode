@@ -55,6 +55,13 @@ public abstract class BaseConfig {
         return Integer.parseInt(propertyValue);
     }
 
+    protected boolean getBooleanPropertyValue(String propertyName,
+            Properties props) {
+        final String propertyValue =
+                getStringPropertyValue(propertyName, props);
+        return Boolean.parseBoolean(propertyValue);
+    }
+
     public static String getPropertyFileDir() {
         return propertyFileDir;
     }
