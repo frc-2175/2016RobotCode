@@ -16,6 +16,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
     private Encoder leftDriveEncoder;
+    private Encoder rightDriveEncoder;
 
     private RobotDrive robotDrive;
 
@@ -28,6 +29,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
         rightDriveTalon = robotConfig.getWiringConfig().getRightDriveTalon();
         leftDriveEncoder = robotConfig.getWiringConfig().getLeftDriveEncoder();
+        rightDriveEncoder =
+                robotConfig.getWiringConfig().getRightDriveEncoder();
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
