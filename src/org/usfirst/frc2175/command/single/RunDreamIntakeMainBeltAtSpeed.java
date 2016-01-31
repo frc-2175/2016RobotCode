@@ -16,7 +16,7 @@ public class RunDreamIntakeMainBeltAtSpeed extends Command {
     public RunDreamIntakeMainBeltAtSpeed(DriverStation driverStation,
             RobotSubsystems robotSubsystems, double speed) {
         dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
-        speed = this.speed;
+        this.speed = speed;
 
         requires(dreamIntakeSubsystem);
     }
