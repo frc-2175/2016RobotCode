@@ -2,6 +2,8 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import org.usfirst.frc2175.util.HighestArrayIndexFinder;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -9,6 +11,7 @@ public class VisionProcessingConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "vision.properties";
 
     private NetworkTable contourReport;
+    private HighestArrayIndexFinder indexFinder;
 
     private double[] defaultValue = { 0 };
 
@@ -19,11 +22,13 @@ public class VisionProcessingConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        String contourReportName = getStringPropertyValue("GRIP.networktable.name", properties);
+        String contourReportName =
+                getStringPropertyValue("GRIP.networktable.name", properties);
 
         SmartDashboard.putString("Vision table location", contourReportName);
 
         contourReport = NetworkTable.getTable(contourReportName);
+        indexFinder = new HighestArrayIndexFinder();
     }
 
     public double[] getContourCenterX() {
@@ -49,24 +54,10 @@ public class VisionProcessingConfig extends BaseConfig {
         double[] contourWidths = getContourWidth();
         double[] contourCenterXs = getContourCenterX();
 
-        int largestContourIndex = determineLargestArrayItemIndex(contourWidths);
+        int largestContourIndex =
+                indexFinder.determineLargestArrayItemIndex(contourWidths);
 
         return contourCenterXs[largestContourIndex];
     }
 
-    public int determineLargestArrayItemIndex(double[] array) {
-        int numberOfItems = array.length;
-
-        double largestIndividualItem = 0;
-        int largestItemIndex = 0;
-
-        for (int i = 0; i < numberOfItems; i++) {
-            if (array[i] > largestIndividualItem) {
-                largestIndividualItem = array[i];
-                largestItemIndex = i;
-            }
-        }
-
-        return largestItemIndex;
-    }
 }
