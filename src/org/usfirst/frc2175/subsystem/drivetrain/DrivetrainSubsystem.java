@@ -29,14 +29,20 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
         visionProcessingConfig = robotConfig.getVisionProcessingConfig();
-        centerCameraXValue = robotConfig.getControlLoopConfig().getVisionTurnPID_centerCamera();
+        centerCameraXValue = robotConfig.getControlLoopConfig()
+                .getVisionTurnPID_centerCamera();
 
-        VisionTurnControllerHandler visionTurnControllerHandler = new VisionTurnControllerHandler();
-        visionTurnController = new PIDController(robotConfig.getControlLoopConfig().getVisionTurnPID_kProportional(),
+        VisionTurnControllerHandler visionTurnControllerHandler =
+                new VisionTurnControllerHandler();
+        visionTurnController = new PIDController(
+                robotConfig.getControlLoopConfig()
+                        .getVisionTurnPID_kProportional(),
                 robotConfig.getControlLoopConfig().getVisionTurnPID_kIntegral(),
-                robotConfig.getControlLoopConfig().getVisionTurnPID_kDerivative(), visionTurnControllerHandler,
-                visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(robotConfig.getControlLoopConfig().getVisionTurnPID_absTolerance());
+                robotConfig.getControlLoopConfig()
+                        .getVisionTurnPID_kDerivative(),
+                visionTurnControllerHandler, visionTurnControllerHandler);
+        visionTurnController.setAbsoluteTolerance(robotConfig
+                .getControlLoopConfig().getVisionTurnPID_absTolerance());
 
         // TODO make a properties file entry for these
         visionTurnController.setOutputRange(-0.8, 0.8);
@@ -100,18 +106,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public double getDistanceFromCameraCenter() {
-        double[] contourCenterXArray = visionProcessingConfig.getContourCenterX();
-        double contourCenterX;
-
-        if (contourCenterXArray.length != 0) {
-            contourCenterX = contourCenterXArray[0];
-        } else {
-            contourCenterX = 0;
-            // TODO add a log message here
-        }
-
-        System.out.println("Getting distance from camera center: " + contourCenterX);
-        return contourCenterX;
+        return visionProcessingConfig.getLargestContourCenterX();
     }
 
     public double getCenterCameraXValue() {
