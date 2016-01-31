@@ -12,7 +12,7 @@ import org.junit.rules.TestName;
  *
  * @author jjensen
  */
-public abstract class BaseTest {
+public abstract class TestBase {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     public static final String PROPERTY_FILE_DIR_SRC_COMPETITION =
