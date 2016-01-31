@@ -19,16 +19,20 @@ public class VisionProcessingConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        String contourReportName =
-                getStringPropertyValue("GRIP.networktable.name", properties);
+        String contourReportName = getStringPropertyValue("GRIP.networktable.name", properties);
+
         SmartDashboard.putString("Vision table location", contourReportName);
+
         contourReport = NetworkTable.getTable(contourReportName);
 
         defaultValue = new double[0];
     }
 
     public double[] getContourCenterX() {
-        return contourReport.getNumberArray("centerX", defaultValue);
+        double[] value = contourReport.getNumberArray("centerX", defaultValue);
+
+        System.out.println("Getting contourCenterX: " + value[0]);
+        return value;
     }
 
     public double[] getContourCenterY() {
