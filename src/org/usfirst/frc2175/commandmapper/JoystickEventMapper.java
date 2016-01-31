@@ -2,6 +2,7 @@ package org.usfirst.frc2175.commandmapper;
 
 import org.usfirst.frc2175.command.single.ExtendCatapult;
 import org.usfirst.frc2175.command.single.RetractCatapult;
+import org.usfirst.frc2175.command.single.TurnToFaceGoal;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
@@ -18,13 +19,12 @@ public class JoystickEventMapper {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
 
         JoystickButton extendCatapult = gamepadConfig.getExtendCatapultButton();
-        extendCatapult.whenPressed(new ExtendCatapult(driverStation, robotSubsystems)); // TODO
-                                                                                        // temp
-                                                                                        // change
-                                                                                        // this
-                                                                                        // back
+        extendCatapult.whenPressed(new ExtendCatapult(driverStation, robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapultButton();
         retractCatapult.whenPressed(new RetractCatapult(driverStation, robotSubsystems));
+
+        JoystickButton testAction = gamepadConfig.getTestActionButton();
+        testAction.whenPressed(new TurnToFaceGoal(driverStation, robotSubsystems));
     }
 }
