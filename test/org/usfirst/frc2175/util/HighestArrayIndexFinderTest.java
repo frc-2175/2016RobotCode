@@ -20,4 +20,15 @@ public class HighestArrayIndexFinderTest extends TestBase {
 
     }
 
+    @Test
+    public void testDetermineLargestArrayItemIndex_NullArray() {
+        double[] array = {};
+        int expectedValue = -1;
+
+        int actualValue = sut.determineLargestArrayItemIndex(array);
+
+        assertEquals("Index does not match!", expectedValue, actualValue);
+
+    }
+
 }
