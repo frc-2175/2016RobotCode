@@ -21,7 +21,7 @@ public class HighestArrayIndexFinderTest extends TestBase {
     @Test
     public void testDetermineLargestArrayItemIndex_EmptyArray() {
         double[] array = {};
-        int expectedValue = -1;
+        int expectedValue = HighestArrayIndexFinder.NO_VALUES;
 
         int actualValue = sut.determineLargestArrayItemIndex(array);
 
