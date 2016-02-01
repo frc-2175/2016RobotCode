@@ -1,7 +1,9 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
+import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -26,29 +28,30 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private VisionProcessingConfig visionProcessingConfig;
 
     public DrivetrainSubsystem(RobotConfig robotConfig) {
-        leftDriveTalon = robotConfig.getWiringConfig().getLeftDriveTalon();
-        rightDriveTalon = robotConfig.getWiringConfig().getRightDriveTalon();
-        leftDriveEncoder = robotConfig.getWiringConfig().getLeftDriveEncoder();
-        rightDriveEncoder =
-                robotConfig.getWiringConfig().getRightDriveEncoder();
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+
+        leftDriveTalon = wiringConfig.getLeftDriveTalon();
+        rightDriveTalon = wiringConfig.getRightDriveTalon();
+        leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
+        rightDriveEncoder = wiringConfig.getRightDriveEncoder();
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
         visionProcessingConfig = robotConfig.getVisionProcessingConfig();
-        centerCameraXValue = robotConfig.getControlLoopConfig()
-                .getVisionTurnPID_centerCamera();
+
+        ControlLoopConfig controlLoopConfig =
+                robotConfig.getControlLoopConfig();
+        centerCameraXValue = controlLoopConfig.getVisionTurnPID_centerCamera();
 
         VisionTurnControllerHandler visionTurnControllerHandler =
                 new VisionTurnControllerHandler();
         visionTurnController = new PIDController(
-                robotConfig.getControlLoopConfig()
-                        .getVisionTurnPID_kProportional(),
-                robotConfig.getControlLoopConfig().getVisionTurnPID_kIntegral(),
-                robotConfig.getControlLoopConfig()
-                        .getVisionTurnPID_kDerivative(),
+                controlLoopConfig.getVisionTurnPID_kProportional(),
+                controlLoopConfig.getVisionTurnPID_kIntegral(),
+                controlLoopConfig.getVisionTurnPID_kDerivative(),
                 visionTurnControllerHandler, visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(robotConfig
-                .getControlLoopConfig().getVisionTurnPID_absTolerance());
+        visionTurnController.setAbsoluteTolerance(
+                controlLoopConfig.getVisionTurnPID_absTolerance());
 
         // TODO make a properties file entry for these
         visionTurnController.setOutputRange(-0.8, 0.8);
