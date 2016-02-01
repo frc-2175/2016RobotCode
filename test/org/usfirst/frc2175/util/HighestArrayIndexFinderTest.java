@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 
 public class HighestArrayIndexFinderTest extends TestBase {
-
     private HighestArrayIndexFinder sut = new HighestArrayIndexFinder();
 
     @Test
@@ -17,18 +16,15 @@ public class HighestArrayIndexFinderTest extends TestBase {
         int actualValue = sut.determineLargestArrayItemIndex(array);
 
         assertEquals("Index does not match!", expectedValue, actualValue);
-
     }
 
     @Test
-    public void testDetermineLargestArrayItemIndex_NullArray() {
+    public void testDetermineLargestArrayItemIndex_EmptyArray() {
         double[] array = {};
         int expectedValue = -1;
 
         int actualValue = sut.determineLargestArrayItemIndex(array);
 
         assertEquals("Index does not match!", expectedValue, actualValue);
-
     }
-
 }
