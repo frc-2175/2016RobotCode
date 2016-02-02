@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunDreamIntakeSideBeltAtSpeed extends Command {
+public class RunDreamIntakeMainBeltAtSpeedCommand extends Command {
     private double speed;
     private DreamIntakeSubsystem dreamIntakeSubsystem;
 
-    public RunDreamIntakeSideBeltAtSpeed(DriverStation driverStation,
+    public RunDreamIntakeMainBeltAtSpeedCommand(DriverStation driverStation,
             RobotSubsystems robotSubsystems, double speed) {
         dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
         this.speed = speed;
@@ -29,7 +29,7 @@ public class RunDreamIntakeSideBeltAtSpeed extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        dreamIntakeSubsystem.setSideBeltSpeed(speed);
+        dreamIntakeSubsystem.setMainBeltSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +41,7 @@ public class RunDreamIntakeSideBeltAtSpeed extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        dreamIntakeSubsystem.setSideBeltSpeed(0);
+        dreamIntakeSubsystem.setMainBeltSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

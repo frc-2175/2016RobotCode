@@ -2,23 +2,23 @@ package org.usfirst.frc2175.command.single;
 
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
-import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunDreamIntakeMainBeltAtSpeed extends Command {
-    private double speed;
-    private DreamIntakeSubsystem dreamIntakeSubsystem;
+public class ArcadeDriveWithJoysticksCommand extends Command {
+    private final DriverStation driverStation;
+    private final DrivetrainSubsystem drivetrainSubsystem;
 
-    public RunDreamIntakeMainBeltAtSpeed(DriverStation driverStation,
-            RobotSubsystems robotSubsystems, double speed) {
-        dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
-        this.speed = speed;
+    public ArcadeDriveWithJoysticksCommand(DriverStation driverStation,
+            RobotSubsystems robotSubsystems) {
+        this.driverStation = driverStation;
+        this.drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
 
-        requires(dreamIntakeSubsystem);
+        requires(drivetrainSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,9 @@ public class RunDreamIntakeMainBeltAtSpeed extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        dreamIntakeSubsystem.setMainBeltSpeed(speed);
+        double moveValue = driverStation.getMoveValue();
+        double turnValue = driverStation.getTurnValue();
+        drivetrainSubsystem.arcadeDrive(moveValue, turnValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +43,7 @@ public class RunDreamIntakeMainBeltAtSpeed extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        dreamIntakeSubsystem.setMainBeltSpeed(0);
+        drivetrainSubsystem.arcadeDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

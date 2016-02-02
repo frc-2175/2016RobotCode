@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.subsystem;
 
-import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticks;
+import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
@@ -30,7 +30,7 @@ public class RobotSubsystems {
 
     protected void setDefaultCommands() {
         drivetrainSubsystem.setDefaultCommand(
-                new ArcadeDriveWithJoysticks(driverStation, this));
+                new ArcadeDriveWithJoysticksCommand(driverStation, this));
     }
 
     public DreamIntakeSubsystem getDreamIntakeSubsystem() {

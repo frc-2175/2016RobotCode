@@ -1,8 +1,8 @@
 package org.usfirst.frc2175.commandmapper;
 
-import org.usfirst.frc2175.command.single.ExtendCatapult;
-import org.usfirst.frc2175.command.single.RetractCatapult;
-import org.usfirst.frc2175.command.single.TurnToFaceGoal;
+import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
+import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
@@ -19,12 +19,12 @@ public class JoystickEventMapper {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
 
         JoystickButton extendCatapult = gamepadConfig.getExtendCatapultButton();
-        extendCatapult.whenPressed(new ExtendCatapult(driverStation, robotSubsystems));
+        extendCatapult.whenPressed(new ExtendCatapultCommand(driverStation, robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapultButton();
-        retractCatapult.whenPressed(new RetractCatapult(driverStation, robotSubsystems));
+        retractCatapult.whenPressed(new RetractCatapultCommand(driverStation, robotSubsystems));
 
         JoystickButton testAction = gamepadConfig.getTestActionButton();
-        testAction.whenPressed(new TurnToFaceGoal(driverStation, robotSubsystems));
+        testAction.whenPressed(new TurnToFaceGoalCommand(driverStation, robotSubsystems));
     }
 }

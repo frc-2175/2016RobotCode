@@ -1,20 +1,24 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
-import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunIntakeIn extends Command {
-    private final DreamIntakeSubsystem dreamIntakeSubsystem;
+public class TankDriveWithJoysticksCommand extends Command {
+    private final DriverStation driverStation;
+    private final DrivetrainSubsystem drivetrainSubsystem;
 
-    public RunIntakeIn(RobotSubsystems robotSubsystems) {
-        this.dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
+    public TankDriveWithJoysticksCommand(DriverStation driverStation,
+            RobotSubsystems robotSubsystems) {
+        this.driverStation = driverStation;
+        this.drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
 
-        requires(dreamIntakeSubsystem);
+        requires(drivetrainSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -25,8 +29,9 @@ public class RunIntakeIn extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        dreamIntakeSubsystem.setMainBeltSpeed(1);
-        dreamIntakeSubsystem.setSideBeltSpeed(1);
+        double leftValue = driverStation.getLeftValue();
+        double rightValue = driverStation.getRightValue();
+        drivetrainSubsystem.tankDrive(leftValue, rightValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,8 +43,7 @@ public class RunIntakeIn extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        dreamIntakeSubsystem.setMainBeltSpeed(0);
-        dreamIntakeSubsystem.setSideBeltSpeed(0);
+        drivetrainSubsystem.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

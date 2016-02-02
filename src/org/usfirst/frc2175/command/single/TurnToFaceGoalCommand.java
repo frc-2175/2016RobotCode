@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TurnToFaceGoal extends Command {
+public class TurnToFaceGoalCommand extends Command {
 
     private DrivetrainSubsystem drivetrainSubsystem;
     private double setpoint;
 
-    public TurnToFaceGoal(DriverStation driverStation,
+    public TurnToFaceGoalCommand(DriverStation driverStation,
             RobotSubsystems robotSubsystems) {
         drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
         setpoint = drivetrainSubsystem.getCenterCameraXValue();

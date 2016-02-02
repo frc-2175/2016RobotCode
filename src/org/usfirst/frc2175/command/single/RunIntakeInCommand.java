@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunIntakeOut extends Command {
+public class RunIntakeInCommand extends Command {
     private final DreamIntakeSubsystem dreamIntakeSubsystem;
 
-    public RunIntakeOut(RobotSubsystems robotSubsystems) {
+    public RunIntakeInCommand(RobotSubsystems robotSubsystems) {
         this.dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
 
         requires(dreamIntakeSubsystem);
@@ -25,8 +25,8 @@ public class RunIntakeOut extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        dreamIntakeSubsystem.setMainBeltSpeed(-0.5);
-        dreamIntakeSubsystem.setSideBeltSpeed(0.5);
+        dreamIntakeSubsystem.setMainBeltSpeed(1);
+        dreamIntakeSubsystem.setSideBeltSpeed(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

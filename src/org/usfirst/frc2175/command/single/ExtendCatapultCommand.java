@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendCatapult extends Command {
+public class ExtendCatapultCommand extends Command {
     private CatapultShooterSubsystem catapultSubsystem;
 
-    public ExtendCatapult(DriverStation driverStation, RobotSubsystems robotSubsystems) {
+    public ExtendCatapultCommand(DriverStation driverStation, RobotSubsystems robotSubsystems) {
         catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
 
         requires(robotSubsystems.getCatapultShooterSubsystem());
