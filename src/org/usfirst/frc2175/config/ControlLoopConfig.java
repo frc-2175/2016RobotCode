@@ -11,6 +11,8 @@ public class ControlLoopConfig extends BaseConfig {
     private double visionTurnPID_kDerivative;
     private double visionTurnPID_absTolerance;
     private double visionTurnPID_centerCamera;
+    private double visionTurnPID_maxRange;
+    private double visionTurnPID_minRange;
 
     @Override
     protected String getPropertyFileName() {
@@ -33,10 +35,23 @@ public class ControlLoopConfig extends BaseConfig {
 
         visionTurnPID_centerCamera = getDoublePropertyValue(
                 "drivetrain.visionTurnPID.centerCamera", properties);
+
+        visionTurnPID_maxRange = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.range.max", properties);
+        visionTurnPID_minRange = getDoublePropertyValue(
+                "drivetrain.visionTurnPID.range.min", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
         return -visionTurnPID_kProportional;
+    }
+
+    public double getVisionTurnPID_maxRange() {
+        return visionTurnPID_maxRange;
+    }
+
+    public double getVisionTurnPID_minRange() {
+        return visionTurnPID_minRange;
     }
 
     public double getVisionTurnPID_kIntegral() {

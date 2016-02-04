@@ -53,8 +53,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         visionTurnController.setAbsoluteTolerance(
                 controlLoopConfig.getVisionTurnPID_absTolerance());
 
-        // TODO make a properties file entry for these
-        visionTurnController.setOutputRange(-0.8, 0.8);
+        visionTurnController.setOutputRange(
+                controlLoopConfig.getVisionTurnPID_minRange(),
+                controlLoopConfig.getVisionTurnPID_maxRange());
     }
 
     private class VisionTurnControllerHandler implements PIDSource, PIDOutput {
