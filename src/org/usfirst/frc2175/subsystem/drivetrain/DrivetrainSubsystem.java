@@ -84,7 +84,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        // TODO Fill in
+        robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     public void resetEncoders() {
