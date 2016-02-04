@@ -44,7 +44,6 @@ public class JoysticksConfig extends BaseConfig {
     }
 
     public double getDeadbandSize() {
-        // TODO Load value from robot
         return deadbandValue;
     }
 }
