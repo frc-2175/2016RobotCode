@@ -20,6 +20,8 @@ public class DreamIntakeSubsystem extends BaseSubsystem {
         dreamIntakeSideBeltTalon = wiringConfig.getDreamIntakeSideBeltTalon();
         dreamIntakeMainBeltTalon = wiringConfig.getDreamIntakeMainBeltTalon();
         dreamIntakeLiftTalon = wiringConfig.getDreamIntakeLiftTalon();
+        this.dreamIntakeUpSwitch = wiringConfig.getDreamIntakeUpSwitch();
+        this.dreamIntakeDownSwitch = wiringConfig.getDreamIntakeDownSwitch();
     }
 
     public void setMainBeltSpeed(double speed) {
