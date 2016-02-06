@@ -30,6 +30,7 @@ public class WiringConfig extends BaseConfig {
     private Talon dreamIntakeSideBeltTalon;
     private Talon dreamIntakeMainBeltTalon;
     private Talon dreamIntakeLiftTalon;
+    private Encoder dreamIntakeLiftEncoder;
 
     // Catapult shooter
     private DoubleSolenoid leftCatapultSolenoid;
@@ -110,6 +111,15 @@ public class WiringConfig extends BaseConfig {
         int dreamIntakeLiftTalonPort =
                 getIntPropertyValue("dreamIntake.talon.lift", properties);
         dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
+
+        int dreamIntakeLiftEncoderA =
+                getIntPropertyValue("dreamIntake.encoder.port.a", properties);
+        int dreamIntakeLiftEncoderB =
+                getIntPropertyValue("dreamIntake.encoder.port.b", properties);
+        boolean isDreamIntakeLiftEncoderReversed = getBooleanPropertyValue(
+                "dreamIntake.encoder.isReversed", properties);
+        dreamIntakeLiftEncoder = new Encoder(dreamIntakeLiftEncoderA,
+                dreamIntakeLiftEncoderB, isDreamIntakeLiftEncoderReversed);
     }
 
     public DigitalInput getCatapultUpSwitch() {
