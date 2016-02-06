@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon leftDriveTalon;
     private Talon rightDriveTalon;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
+    private Gyro gyro;
 
     private RobotDrive robotDrive;
 
@@ -34,6 +36,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         rightDriveTalon = wiringConfig.getRightDriveTalon();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
+        gyro = wiringConfig.getGyro();
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
@@ -45,13 +48,15 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         VisionTurnControllerHandler visionTurnControllerHandler =
                 new VisionTurnControllerHandler();
-        visionTurnController = new PIDController(
-                controlLoopConfig.getVisionTurnPID_kProportional(),
-                controlLoopConfig.getVisionTurnPID_kIntegral(),
-                controlLoopConfig.getVisionTurnPID_kDerivative(),
-                visionTurnControllerHandler, visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(
-                controlLoopConfig.getVisionTurnPID_absTolerance());
+        visionTurnController =
+                new PIDController(
+                        controlLoopConfig.getVisionTurnPID_kProportional(),
+                        controlLoopConfig.getVisionTurnPID_kIntegral(),
+                        controlLoopConfig.getVisionTurnPID_kDerivative(),
+                        visionTurnControllerHandler,
+                        visionTurnControllerHandler);
+        visionTurnController.setAbsoluteTolerance(controlLoopConfig
+                .getVisionTurnPID_absTolerance());
 
         visionTurnController.setOutputRange(
                 controlLoopConfig.getVisionTurnPID_minRange(),
@@ -108,12 +113,11 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void resetGyro() {
-        // TODO Fill in
+        gyro.reset();
     }
 
     public double getGyroAngle() {
-        // TODO Fill in
-        return 0;
+        return gyro.getAngle();
     }
 
     public double getDistanceFromCameraCenter() {
