@@ -3,6 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -33,6 +34,8 @@ public class WiringConfig extends BaseConfig {
     // Catapult shooter
     private DoubleSolenoid leftCatapultSolenoid;
     private DoubleSolenoid rightCatapultSolenoid;
+    private DigitalInput catapultUpSwitch;
+    private DigitalInput catapultDownSwitch;
 
     @Override
     public String getPropertyFileName() {
@@ -88,6 +91,13 @@ public class WiringConfig extends BaseConfig {
                 new DoubleSolenoid(rightCatapultSolenoidForwardPort,
                         rightCatapultSolenoidReversePort);
 
+        int catapultUpSwitchPort =
+                getIntPropertyValue("catapult.switch.up.port", properties);
+        catapultUpSwitch = new DigitalInput(catapultUpSwitchPort);
+        int catapultDownSwitchPort =
+                getIntPropertyValue("catapult.switch.down.port", properties);
+        catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
+
         // Dream Intake
         int dreamIntakeSideBeltTalonPort =
                 getIntPropertyValue("dreamIntake.talon.sideBelt", properties);
@@ -100,6 +110,14 @@ public class WiringConfig extends BaseConfig {
         int dreamIntakeLiftTalonPort =
                 getIntPropertyValue("dreamIntake.talon.lift", properties);
         dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
+    }
+
+    public DigitalInput getCatapultUpSwitch() {
+        return catapultUpSwitch;
+    }
+
+    public DigitalInput getCatapultDownSwitch() {
+        return catapultDownSwitch;
     }
 
     public Talon getLeftDriveTalon() {

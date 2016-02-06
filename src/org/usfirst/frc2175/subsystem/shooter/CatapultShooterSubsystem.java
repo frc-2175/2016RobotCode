@@ -3,16 +3,25 @@ package org.usfirst.frc2175.subsystem.shooter;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
 
     private DoubleSolenoid rightCatapultSolenoid;
     private DoubleSolenoid leftCatapultSolenoid;
+    private DigitalInput catapultUpSwitch;
+    private DigitalInput catapultDownSwitch;
 
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
-        leftCatapultSolenoid = robotConfig.getWiringConfig().getLeftCatapultSolenoid();
-        rightCatapultSolenoid = robotConfig.getWiringConfig().getRightCatapultSolenoid();
+        leftCatapultSolenoid =
+                robotConfig.getWiringConfig().getLeftCatapultSolenoid();
+        rightCatapultSolenoid =
+                robotConfig.getWiringConfig().getRightCatapultSolenoid();
+
+        catapultUpSwitch = robotConfig.getWiringConfig().getCatapultUpSwitch();
+        catapultDownSwitch =
+                robotConfig.getWiringConfig().getCatapultDownSwitch();
 
     }
 
@@ -27,13 +36,11 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     }
 
     public boolean isCatapultDown() {
-        // TODO Fill in
-        return false;
+        return catapultDownSwitch.get();
     }
 
     public boolean isCatapultUp() {
-        // TODO Fill in
-        return false;
+        return catapultUpSwitch.get();
     }
 
 }
