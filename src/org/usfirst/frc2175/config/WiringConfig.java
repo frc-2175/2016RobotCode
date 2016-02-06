@@ -37,6 +37,8 @@ public class WiringConfig extends BaseConfig {
     private DoubleSolenoid rightCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
+    private DigitalInput dreamIntakeUpSwitch;
+    private DigitalInput dreamIntakeDownSwitch;
 
     @Override
     public String getPropertyFileName() {
@@ -120,6 +122,13 @@ public class WiringConfig extends BaseConfig {
                 "dreamIntake.encoder.isReversed", properties);
         dreamIntakeLiftEncoder = new Encoder(dreamIntakeLiftEncoderA,
                 dreamIntakeLiftEncoderB, isDreamIntakeLiftEncoderReversed);
+
+        int dreamIntakeUpSwitchPort =
+                getIntPropertyValue("dreamIntake.switch.up.port", properties);
+        dreamIntakeUpSwitch = new DigitalInput(dreamIntakeUpSwitchPort);
+        int dreamIntakeDownSwitchPort =
+                getIntPropertyValue("dreamIntake.switch.down.port", properties);
+        dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
     }
 
     public DigitalInput getCatapultUpSwitch() {
@@ -128,6 +137,14 @@ public class WiringConfig extends BaseConfig {
 
     public DigitalInput getCatapultDownSwitch() {
         return catapultDownSwitch;
+    }
+
+    public DigitalInput getDreamIntakeUpSwitch() {
+        return dreamIntakeUpSwitch;
+    }
+
+    public DigitalInput getDreamIntakeDownSwitch() {
+        return dreamIntakeDownSwitch;
     }
 
     public Talon getLeftDriveTalon() {
