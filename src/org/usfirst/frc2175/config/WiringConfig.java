@@ -2,9 +2,11 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * Wiring configuration values - robot sensors and actuators port numbers.
@@ -21,6 +23,7 @@ public class WiringConfig extends BaseConfig {
     private Talon rightDriveTalon;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
+    private Gyro gyro;
 
     // Dream intake
     private Talon dreamIntakeSideBeltTalon;
@@ -46,6 +49,9 @@ public class WiringConfig extends BaseConfig {
         int rightDriveTalonPort =
                 getIntPropertyValue("drivetrain.talon.right.port", properties);
         rightDriveTalon = new Talon(rightDriveTalonPort);
+
+        int gyroPort = getIntPropertyValue("drivetrain.gyro.port", properties);
+        gyro = new AnalogGyro(gyroPort);
 
         boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
                 "drivetrain.encoder.left.isReversed", properties);
@@ -110,6 +116,10 @@ public class WiringConfig extends BaseConfig {
 
     public Encoder getRightDriveEncoder() {
         return rightDriveEncoder;
+    }
+
+    public Gyro getGyro() {
+        return gyro;
     }
 
     public DoubleSolenoid getLeftCatapultSolenoid() {
