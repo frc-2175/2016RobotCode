@@ -63,7 +63,7 @@ public class WiringConfig extends BaseConfig {
         int rightDriveEncoderPortB = getIntPropertyValue(
                 "drivetrain.encoder.right.port.b", properties);
         rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
-                rightDriveEncoderPortB, isLeftDriveEncoderReversed);
+                rightDriveEncoderPortB, isRightDriveEncoderReversed);
 
         // Catapult
         int leftCatapultSolenoidForwardPort = getIntPropertyValue(
