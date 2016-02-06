@@ -17,9 +17,11 @@ public class DreamIntakeSubsystem extends BaseSubsystem {
     public DreamIntakeSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
 
-        dreamIntakeSideBeltTalon = wiringConfig.getDreamIntakeSideBeltTalon();
-        dreamIntakeMainBeltTalon = wiringConfig.getDreamIntakeMainBeltTalon();
-        dreamIntakeLiftTalon = wiringConfig.getDreamIntakeLiftTalon();
+        this.dreamIntakeSideBeltTalon =
+                wiringConfig.getDreamIntakeSideBeltTalon();
+        this.dreamIntakeMainBeltTalon =
+                wiringConfig.getDreamIntakeMainBeltTalon();
+        this.dreamIntakeLiftTalon = wiringConfig.getDreamIntakeLiftTalon();
         this.dreamIntakeUpSwitch = wiringConfig.getDreamIntakeUpSwitch();
         this.dreamIntakeDownSwitch = wiringConfig.getDreamIntakeDownSwitch();
     }
