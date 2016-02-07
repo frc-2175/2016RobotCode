@@ -27,7 +27,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private PIDController visionTurnController;
 
     private double centerCameraXValue;
-    private VisionProcessingConfig visionProcessingConfig;
+    private double largestContourCenterXValue;
 
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
@@ -40,7 +40,10 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
 
-        visionProcessingConfig = robotConfig.getVisionProcessingConfig();
+        VisionProcessingConfig visionProcessingConfig =
+                robotConfig.getVisionProcessingConfig();
+        largestContourCenterXValue =
+                visionProcessingConfig.getLargestContourCenterX();
 
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
@@ -121,7 +124,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public double getDistanceFromCameraCenter() {
-        return visionProcessingConfig.getLargestContourCenterX();
+        return largestContourCenterXValue;
     }
 
     public double getCenterCameraXValue() {
