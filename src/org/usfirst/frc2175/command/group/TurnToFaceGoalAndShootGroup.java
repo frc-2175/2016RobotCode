@@ -1,4 +1,4 @@
-package org.usfirst.frc2175.command.autonomous;
+package org.usfirst.frc2175.command.group;
 
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class TurnToFaceGoalAndShootAutonomous extends CommandGroup {
+public class TurnToFaceGoalAndShootGroup extends CommandGroup {
 
-    public TurnToFaceGoalAndShootAutonomous(DriverStation driverStation,
+    public TurnToFaceGoalAndShootGroup(DriverStation driverStation,
             RobotSubsystems robotSubsystems) {
 
         addSequential(new TurnToFaceGoalCommand(driverStation, robotSubsystems), 10);
