@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 
@@ -15,8 +14,7 @@ public class TurnToFaceGoalCommand extends Command {
     private DrivetrainSubsystem drivetrainSubsystem;
     private double setpoint;
 
-    public TurnToFaceGoalCommand(DriverStation driverStation,
-            RobotSubsystems robotSubsystems) {
+    public TurnToFaceGoalCommand(RobotSubsystems robotSubsystems) {
         drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
         setpoint = drivetrainSubsystem.getCenterCameraXValue();
 

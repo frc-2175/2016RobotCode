@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
 
@@ -13,8 +12,8 @@ public class RunDreamIntakeSideBeltAtSpeedCommand extends Command {
     private double speed;
     private DreamIntakeSubsystem dreamIntakeSubsystem;
 
-    public RunDreamIntakeSideBeltAtSpeedCommand(DriverStation driverStation,
-            RobotSubsystems robotSubsystems, double speed) {
+    public RunDreamIntakeSideBeltAtSpeedCommand(RobotSubsystems robotSubsystems,
+            double speed) {
         dreamIntakeSubsystem = robotSubsystems.getDreamIntakeSubsystem();
         this.speed = speed;
 

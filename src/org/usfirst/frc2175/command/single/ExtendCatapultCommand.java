@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
@@ -12,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ExtendCatapultCommand extends Command {
     private CatapultShooterSubsystem catapultSubsystem;
 
-    public ExtendCatapultCommand(DriverStation driverStation, RobotSubsystems robotSubsystems) {
+    public ExtendCatapultCommand(RobotSubsystems robotSubsystems) {
         catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
 
         requires(robotSubsystems.getCatapultShooterSubsystem());
