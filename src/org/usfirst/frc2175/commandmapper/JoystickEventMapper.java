@@ -2,6 +2,8 @@ package org.usfirst.frc2175.commandmapper;
 
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.RunRollerbarIntakeInCommand;
+import org.usfirst.frc2175.command.single.RunRollerbarIntakeOutCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -27,7 +29,16 @@ public class JoystickEventMapper {
         retractCatapult
                 .whenPressed(new RetractCatapultCommand(robotSubsystems));
 
+        JoystickButton runIntakeIn = gamepadConfig.getIntakeInButton();
+        runIntakeIn.whenPressed(
+                new RunRollerbarIntakeInCommand(robotSubsystems, 0));
+
+        JoystickButton runIntakeOut = gamepadConfig.getIntakeOutButton();
+        runIntakeOut.whenPressed(
+                new RunRollerbarIntakeOutCommand(robotSubsystems, 0));
+
         JoystickButton testAction = gamepadConfig.getTestActionButton();
         testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems));
+
     }
 }

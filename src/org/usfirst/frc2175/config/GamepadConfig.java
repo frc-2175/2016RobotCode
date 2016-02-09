@@ -19,6 +19,8 @@ public class GamepadConfig extends BaseConfig {
 
     private JoystickButton extendCatapult;
     private JoystickButton retractCatapult;
+    private JoystickButton runIntakeIn;
+    private JoystickButton runIntakeOut;
     private JoystickButton testAction;
 
     @Override
@@ -30,10 +32,16 @@ public class GamepadConfig extends BaseConfig {
     protected void configure(Properties properties) {
         gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
 
-        extendCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.extend", properties));
-        retractCatapult = new JoystickButton(gamepad, getIntPropertyValue("button.catapult.retract", properties));
-
-        testAction = new JoystickButton(gamepad, getIntPropertyValue("button.action.test", properties));
+        extendCatapult = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.extend", properties));
+        retractCatapult = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.retract", properties));
+        runIntakeIn = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.intake.in", properties));
+        runIntakeOut = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.intake.out", properties));
+        testAction = new JoystickButton(gamepad,
+                getIntPropertyValue("button.action.test", properties));
     }
 
     public Joystick getGamepad() {
@@ -48,7 +56,16 @@ public class GamepadConfig extends BaseConfig {
         return retractCatapult;
     }
 
+    public JoystickButton getIntakeInButton() {
+        return runIntakeIn;
+    }
+
+    public JoystickButton getIntakeOutButton() {
+        return runIntakeOut;
+    }
+
     public JoystickButton getTestActionButton() {
         return testAction;
     }
+
 }
