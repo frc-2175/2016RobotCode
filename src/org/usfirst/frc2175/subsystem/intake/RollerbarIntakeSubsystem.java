@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.Talon;
 public class RollerbarIntakeSubsystem extends BaseSubsystem {
     private Talon rollerbarIntakeTalon;
     private DoubleSolenoid rollerbarIntakeSolenoid;
-    private DigitalInput rollerbarIntakeUpSwitch;
-    private DigitalInput rollerbarIntakeDownSwitch;
+    private DigitalInput rollerbarIntakeInSwitch;
+    private DigitalInput rollerbarIntakeOutSwitch;
 
     public RollerbarIntakeSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
@@ -20,10 +20,10 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
         this.rollerbarIntakeTalon = wiringConfig.getRollerbarIntakeTalon();
         this.rollerbarIntakeSolenoid =
                 wiringConfig.getRollerbarIntakeSolenoid();
-        this.rollerbarIntakeUpSwitch =
-                wiringConfig.getRollerbarIntakeUpSwitch();
-        this.rollerbarIntakeDownSwitch =
-                wiringConfig.getRollerbarIntakeDownSwitch();
+        this.rollerbarIntakeInSwitch =
+                wiringConfig.getRollerbarIntakeInSwitch();
+        this.rollerbarIntakeOutSwitch =
+                wiringConfig.getRollerbarIntakeOutSwitch();
     }
 
     public void setRollerbarSpeed(double speed) {
@@ -32,17 +32,17 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
 
     public void setIntakePosition(boolean isOut) {
         if (isOut) {
-            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-        } else {
             rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kForward);
+        } else {
+            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
         }
     }
 
     public boolean isCompletelyOut() {
-        return rollerbarIntakeDownSwitch.get();
+        return rollerbarIntakeOutSwitch.get();
     }
 
     public boolean isCompletelyIn() {
-        return rollerbarIntakeUpSwitch.get();
+        return rollerbarIntakeInSwitch.get();
     }
 }

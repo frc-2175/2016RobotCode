@@ -35,8 +35,8 @@ public class WiringConfig extends BaseConfig {
     // Rollerbar intake
     private Talon rollerbarIntakeTalon;
     private DoubleSolenoid rollerbarIntakeSolenoid;
-    private DigitalInput rollerbarIntakeUpSwitch;
-    private DigitalInput rollerbarIntakeDownSwitch;
+    private DigitalInput rollerbarIntakeInSwitch;
+    private DigitalInput rollerbarIntakeOutSwitch;
 
     // Catapult shooter
     private DoubleSolenoid leftCatapultSolenoid;
@@ -147,25 +147,25 @@ public class WiringConfig extends BaseConfig {
         rollerbarIntakeSolenoid =
                 new DoubleSolenoid(rollerbarIntakeSolenoidForwardPort,
                         rollerbarIntakeSolenoidReversePort);
-        int rollerbarIntakeUpSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.up.port", properties);
-        rollerbarIntakeUpSwitch = new DigitalInput(rollerbarIntakeUpSwitchPort);
-        int rollerbarIntakeDownSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.down.port", properties);
-        rollerbarIntakeDownSwitch =
-                new DigitalInput(rollerbarIntakeDownSwitchPort);
+        int rollerbarIntakeInSwitchPort = getIntPropertyValue(
+                "rollerbarIntake.switch.in.port", properties);
+        rollerbarIntakeInSwitch = new DigitalInput(rollerbarIntakeInSwitchPort);
+        int rollerbarIntakeOutSwitchPort = getIntPropertyValue(
+                "rollerbarIntake.switch.out.port", properties);
+        rollerbarIntakeOutSwitch =
+                new DigitalInput(rollerbarIntakeOutSwitchPort);
     }
 
     public Talon getRollerbarIntakeTalon() {
         return rollerbarIntakeTalon;
     }
 
-    public DigitalInput getRollerbarIntakeUpSwitch() {
-        return rollerbarIntakeUpSwitch;
+    public DigitalInput getRollerbarIntakeInSwitch() {
+        return rollerbarIntakeInSwitch;
     }
 
-    public DigitalInput getRollerbarIntakeDownSwitch() {
-        return rollerbarIntakeDownSwitch;
+    public DigitalInput getRollerbarIntakeOutSwitch() {
+        return rollerbarIntakeOutSwitch;
     }
 
     public DoubleSolenoid getRollerbarIntakeSolenoid() {

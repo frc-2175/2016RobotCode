@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunRollerbarIntakeInCommand extends Command {
+public class RunRollerbarIntakeAtSpeedCommand extends Command {
 
     private double speed;
     private RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
 
-    public RunRollerbarIntakeInCommand(RobotSubsystems robotSubsystems,
+    public RunRollerbarIntakeAtSpeedCommand(RobotSubsystems robotSubsystems,
             double speed) {
         rollerbarIntakeSubsystem =
                 robotSubsystems.getRollerbarIntakeSubsystem();

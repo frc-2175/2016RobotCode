@@ -8,6 +8,8 @@ public class IntakeConfig extends BaseConfig {
     private double sideBeltSpeedReverse;
     private double mainBeltSpeedForward;
     private double mainBeltSpeedReverse;
+    private double rollerbarSpeedIn;
+    private double rollerbarSpeedOut;
 
     @Override
     public String getPropertyFileName() {
@@ -28,6 +30,20 @@ public class IntakeConfig extends BaseConfig {
         double mainBeltSpeedReverse = getDoublePropertyValue(
                 "dream.intake.sideBelt.reverse", properties);
         this.mainBeltSpeedReverse = mainBeltSpeedReverse;
+        double rollerbarSpeedIn =
+                getDoublePropertyValue("rollerbar.intake.in", properties);
+        this.rollerbarSpeedIn = rollerbarSpeedIn;
+        double rollerbarSpeedOut =
+                getDoublePropertyValue("rollerbar.intake.out", properties);
+        this.rollerbarSpeedOut = rollerbarSpeedOut;
+    }
+
+    public double getRollerbarSpeedIn() {
+        return rollerbarSpeedIn;
+    }
+
+    public double getRollerbarSpeedOut() {
+        return rollerbarSpeedOut;
     }
 
     public double getSideBeltSpeedForward() {

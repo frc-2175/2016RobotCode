@@ -37,9 +37,9 @@ public class GamepadConfig extends BaseConfig {
         retractCatapult = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.retract", properties));
         runIntakeIn = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.intake.in", properties));
+                getIntPropertyValue("button.intake.in", properties));
         runIntakeOut = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.intake.out", properties));
+                getIntPropertyValue("button.intake.out", properties));
         testAction = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
     }
