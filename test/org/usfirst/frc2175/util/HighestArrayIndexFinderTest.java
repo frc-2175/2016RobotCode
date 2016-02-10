@@ -18,13 +18,4 @@ public class HighestArrayIndexFinderTest extends TestBase {
         assertEquals("Index does not match!", expectedValue, actualValue);
     }
 
-    @Test
-    public void testDetermineLargestArrayItemIndex_EmptyArray() {
-        double[] array = {};
-        int expectedValue = HighestArrayIndexFinder.NO_VALUES;
-
-        int actualValue = sut.determineLargestArrayItemIndex(array);
-
-        assertEquals("Index does not match!", expectedValue, actualValue);
-    }
 }
