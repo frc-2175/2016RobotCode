@@ -22,6 +22,7 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton runIntakeIn;
     private JoystickButton runIntakeOut;
     private JoystickButton testAction;
+    private JoystickButton upshift;
 
     @Override
     public String getPropertyFileName() {
@@ -42,6 +43,8 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.intake.out", properties));
         testAction = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
+        upshift = new JoystickButton(gamepad,
+                getIntPropertyValue("button.shift.up", properties));
     }
 
     public Joystick getGamepad() {
@@ -66,6 +69,10 @@ public class GamepadConfig extends BaseConfig {
 
     public JoystickButton getTestActionButton() {
         return testAction;
+    }
+
+    public JoystickButton getUpshiftButton() {
+        return upshift;
     }
 
 }
