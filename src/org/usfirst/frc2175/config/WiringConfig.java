@@ -40,7 +40,7 @@ public class WiringConfig extends BaseConfig {
     private Encoder dreamIntakeLiftEncoder;
 
     // Rollerbar intake
-    private Talon rollerbarIntakeTalon;
+    private Talon rollerbarIntakeRollerTalon;
     private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
@@ -168,7 +168,7 @@ public class WiringConfig extends BaseConfig {
         // Rollerbar intake
         int rollerbarIntakeTalonPort =
                 getIntPropertyValue("rollerbarIntake.talon.port", properties);
-        rollerbarIntakeTalon = new Talon(rollerbarIntakeTalonPort);
+        rollerbarIntakeRollerTalon = new Talon(rollerbarIntakeTalonPort);
         int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
                 "rollerbarIntake.solenoid.forward", properties);
         int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
@@ -190,7 +190,7 @@ public class WiringConfig extends BaseConfig {
     }
 
     public Talon getRollerbarIntakeTalon() {
-        return rollerbarIntakeTalon;
+        return rollerbarIntakeRollerTalon;
     }
 
     public DigitalInput getRollerbarIntakeInSwitch() {

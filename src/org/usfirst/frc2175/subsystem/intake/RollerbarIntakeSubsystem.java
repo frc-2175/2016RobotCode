@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Talon;
 
 public class RollerbarIntakeSubsystem extends BaseSubsystem {
-    private Talon rollerbarIntakeTalon;
+    private Talon rollerbarIntakeRollerTalon;
     private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
@@ -17,7 +17,7 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
     public RollerbarIntakeSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
 
-        this.rollerbarIntakeTalon = wiringConfig.getRollerbarIntakeTalon();
+        this.rollerbarIntakeRollerTalon = wiringConfig.getRollerbarIntakeTalon();
         this.rollerbarIntakeSolenoid =
                 wiringConfig.getRollerbarIntakeSolenoid();
         this.rollerbarIntakeInSwitch =
@@ -27,7 +27,7 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
     }
 
     public void setRollerbarSpeed(double speed) {
-        rollerbarIntakeTalon.set(speed);
+        rollerbarIntakeRollerTalon.set(speed);
     }
 
     public void setIntakePosition(boolean isOut) {
