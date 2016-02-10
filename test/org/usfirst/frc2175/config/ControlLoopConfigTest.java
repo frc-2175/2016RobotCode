@@ -1,4 +1,4 @@
-package org.usfirst.frc2175.util;
+package org.usfirst.frc2175.config;
 
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
