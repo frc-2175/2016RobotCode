@@ -2,7 +2,7 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
-import org.usfirst.frc2175.util.MultipleTalonHandler;
+import org.usfirst.frc2175.util.TalonGroup;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -25,8 +25,8 @@ public class WiringConfig extends BaseConfig {
 
     // Drivetrain
 
-    private MultipleTalonHandler leftDriveTalonHandler;
-    private MultipleTalonHandler rightDriveTalonHandler;
+    private TalonGroup leftDriveTalonGroup;
+    private TalonGroup rightDriveTalonGroup;
 
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
@@ -73,7 +73,7 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("drivetrain.talon.left.3.port", properties);
         CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
 
-        leftDriveTalonHandler = new MultipleTalonHandler(leftDriveTalon1,
+        leftDriveTalonGroup = new TalonGroup(leftDriveTalon1,
                 leftDriveTalon2, leftDriveTalon3);
 
         int rightDriveTalon1Port = getIntPropertyValue(
@@ -88,7 +88,7 @@ public class WiringConfig extends BaseConfig {
                 "drivetrain.talon.right.3.port", properties);
         CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
 
-        rightDriveTalonHandler = new MultipleTalonHandler(rightDriveTalon1,
+        rightDriveTalonGroup = new TalonGroup(rightDriveTalon1,
                 rightDriveTalon2, rightDriveTalon3);
 
         int gyroPort = getIntPropertyValue("drivetrain.gyro.port", properties);
@@ -225,12 +225,12 @@ public class WiringConfig extends BaseConfig {
         return dreamIntakeLiftEncoder;
     }
 
-    public MultipleTalonHandler getLeftDriveTalonHandler() {
-        return leftDriveTalonHandler;
+    public TalonGroup getLeftDriveTalonHandler() {
+        return leftDriveTalonGroup;
     }
 
-    public MultipleTalonHandler getRightDriveTalonHandler() {
-        return rightDriveTalonHandler;
+    public TalonGroup getRightDriveTalonHandler() {
+        return rightDriveTalonGroup;
     }
 
     public Encoder getLeftDriveEncoder() {

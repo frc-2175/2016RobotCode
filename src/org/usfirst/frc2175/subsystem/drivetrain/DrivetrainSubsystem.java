@@ -5,7 +5,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
-import org.usfirst.frc2175.util.MultipleTalonHandler;
+import org.usfirst.frc2175.util.TalonGroup;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
-    private MultipleTalonHandler leftDriveSideTalons;
-    private MultipleTalonHandler rightDriveSideTalons;
+    private TalonGroup leftDriveSideTalonGroup;
+    private TalonGroup rightDriveSideTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private DoubleSolenoid driveShifters;
@@ -34,14 +34,14 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
 
-        leftDriveSideTalons = wiringConfig.getLeftDriveTalonHandler();
-        rightDriveSideTalons = wiringConfig.getRightDriveTalonHandler();
+        leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonHandler();
+        rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
         driveShifters = wiringConfig.getDriveShifters();
         gyro = wiringConfig.getGyro();
 
-        robotDrive = new RobotDrive(leftDriveSideTalons, rightDriveSideTalons);
+        robotDrive = new RobotDrive(leftDriveSideTalonGroup, rightDriveSideTalonGroup);
 
         VisionProcessingConfig visionProcessingConfig =
                 robotConfig.getVisionProcessingConfig();

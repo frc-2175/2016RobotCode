@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 
-public class MultipleTalonHandler implements SpeedController {
+public class TalonGroup implements SpeedController {
 
     private CANTalon talon1;
     private CANTalon talon2;
@@ -24,7 +24,7 @@ public class MultipleTalonHandler implements SpeedController {
 
     private boolean isInverted = false;
 
-    public MultipleTalonHandler(CANTalon talon1, CANTalon talon2,
+    public TalonGroup(CANTalon talon1, CANTalon talon2,
             CANTalon talon3) {
         this.talon1 = talon1;
         this.talon2 = talon2;
