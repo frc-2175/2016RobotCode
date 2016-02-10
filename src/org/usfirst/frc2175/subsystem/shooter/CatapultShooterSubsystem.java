@@ -4,12 +4,12 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
 
-    private DoubleSolenoid rightCatapultSolenoid;
-    private DoubleSolenoid leftCatapultSolenoid;
+    private Solenoid rightCatapultSolenoid;
+    private Solenoid leftCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
 
@@ -27,11 +27,11 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public void setCatapultPosition(boolean isUp) {
         if (isUp) {
-            leftCatapultSolenoid.set(DoubleSolenoid.Value.kForward);
-            rightCatapultSolenoid.set(DoubleSolenoid.Value.kForward);
+            leftCatapultSolenoid.set(true);
+            rightCatapultSolenoid.set(true);
         } else {
-            leftCatapultSolenoid.set(DoubleSolenoid.Value.kReverse);
-            rightCatapultSolenoid.set(DoubleSolenoid.Value.kReverse);
+            leftCatapultSolenoid.set(false);
+            rightCatapultSolenoid.set(false);
         }
     }
 

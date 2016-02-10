@@ -37,8 +37,8 @@ public class JoysticksConfig extends BaseConfig {
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
 
-        int upshiftPort = getIntPropertyValue("upshift.port", properties);
-        upshift = new JoystickButton(leftStick, upshiftPort);
+        int upshiftButton = getIntPropertyValue("upshift.button", properties);
+        upshift = new JoystickButton(leftStick, upshiftButton);
     }
 
     public Joystick getLeftStick() {

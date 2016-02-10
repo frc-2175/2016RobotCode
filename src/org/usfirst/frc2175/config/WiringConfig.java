@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -45,8 +46,8 @@ public class WiringConfig extends BaseConfig {
     private DigitalInput rollerbarIntakeOutSwitch;
 
     // Catapult shooter
-    private DoubleSolenoid leftCatapultSolenoid;
-    private DoubleSolenoid rightCatapultSolenoid;
+    private Solenoid leftCatapultSolenoid;
+    private Solenoid rightCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
     private DigitalInput dreamIntakeUpSwitch;
@@ -119,21 +120,14 @@ public class WiringConfig extends BaseConfig {
                 driveShiftersSolenoidPortB);
 
         // Catapult
-        int leftCatapultSolenoidForwardPort = getIntPropertyValue(
-                "catapult.solenoid.left.forward", properties);
-        int leftCatapultSolenoidReversePort = getIntPropertyValue(
-                "catapult.solenoid.left.reverse", properties);
-        leftCatapultSolenoid =
-                new DoubleSolenoid(leftCatapultSolenoidForwardPort,
-                        leftCatapultSolenoidReversePort);
+        int leftCatapultSolenoidForwardPort =
+                getIntPropertyValue("catapult.solenoid.left", properties);
 
-        int rightCatapultSolenoidForwardPort = getIntPropertyValue(
-                "catapult.solenoid.right.forward", properties);
-        int rightCatapultSolenoidReversePort = getIntPropertyValue(
-                "catapult.solenoid.right.reverse", properties);
-        rightCatapultSolenoid =
-                new DoubleSolenoid(rightCatapultSolenoidForwardPort,
-                        rightCatapultSolenoidReversePort);
+        leftCatapultSolenoid = new Solenoid(leftCatapultSolenoidForwardPort);
+
+        int rightCatapultSolenoidForwardPort =
+                getIntPropertyValue("catapult.solenoid.right", properties);
+        rightCatapultSolenoid = new Solenoid(rightCatapultSolenoidForwardPort);
 
         int catapultUpSwitchPort =
                 getIntPropertyValue("catapult.switch.up.port", properties);
@@ -143,16 +137,16 @@ public class WiringConfig extends BaseConfig {
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
 
         // Dream Intake
-        int dreamIntakeSideBeltTalonPort =
-                getIntPropertyValue("dreamIntake.talon.sideBelt", properties);
+        int dreamIntakeSideBeltTalonPort = getIntPropertyValue(
+                "dreamIntake.talon.sideBelt.port", properties);
         dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
 
-        int dreamIntakeMainBeltTalonPort =
-                getIntPropertyValue("dreamIntake.talon.mainBelt", properties);
+        int dreamIntakeMainBeltTalonPort = getIntPropertyValue(
+                "dreamIntake.talon.mainBelt.port", properties);
         dreamIntakeMainBeltTalon = new Talon(dreamIntakeMainBeltTalonPort);
 
         int dreamIntakeLiftTalonPort =
-                getIntPropertyValue("dreamIntake.talon.lift", properties);
+                getIntPropertyValue("dreamIntake.talon.lift.port", properties);
         dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
 
         int dreamIntakeLiftEncoderA =
@@ -173,7 +167,7 @@ public class WiringConfig extends BaseConfig {
 
         // Rollerbar intake
         int rollerbarIntakeTalonPort =
-                getIntPropertyValue("rollerbarIntake.talon", properties);
+                getIntPropertyValue("rollerbarIntake.talon.port", properties);
         rollerbarIntakeTalon = new Talon(rollerbarIntakeTalonPort);
         int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
                 "rollerbarIntake.solenoid.forward", properties);
@@ -251,11 +245,11 @@ public class WiringConfig extends BaseConfig {
         return gyro;
     }
 
-    public DoubleSolenoid getLeftCatapultSolenoid() {
+    public Solenoid getLeftCatapultSolenoid() {
         return leftCatapultSolenoid;
     }
 
-    public DoubleSolenoid getRightCatapultSolenoid() {
+    public Solenoid getRightCatapultSolenoid() {
         return rightCatapultSolenoid;
     }
 
