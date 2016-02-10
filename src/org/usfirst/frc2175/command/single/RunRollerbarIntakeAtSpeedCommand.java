@@ -15,11 +15,11 @@ public class RunRollerbarIntakeAtSpeedCommand extends Command {
 
     public RunRollerbarIntakeAtSpeedCommand(RobotSubsystems robotSubsystems,
             double speed) {
-        rollerbarIntakeSubsystem =
+        this.rollerbarIntakeSubsystem =
                 robotSubsystems.getRollerbarIntakeSubsystem();
         this.speed = speed;
 
-        requires(rollerbarIntakeSubsystem);
+        requires(this.rollerbarIntakeSubsystem);
     }
 
     @Override

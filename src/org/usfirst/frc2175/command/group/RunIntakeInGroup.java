@@ -14,6 +14,5 @@ public class RunIntakeInGroup extends CommandGroup {
 
         addSequential(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
                 rollerbarSpeed));
-
     }
 }
