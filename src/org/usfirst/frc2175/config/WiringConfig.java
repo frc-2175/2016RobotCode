@@ -25,6 +25,7 @@ public class WiringConfig extends BaseConfig {
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Gyro gyro;
+    private DoubleSolenoid driveShifters;
 
     // Dream intake
     private Talon dreamIntakeSideBeltTalon;
@@ -82,6 +83,13 @@ public class WiringConfig extends BaseConfig {
                 "drivetrain.encoder.right.port.b", properties);
         rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
                 rightDriveEncoderPortB, isRightDriveEncoderReversed);
+
+        int driveShiftersSolenoidPortA = getIntPropertyValue(
+                "solenoid.driveShifters.port.a", properties);
+        int driveShiftersSolenoidPortB = getIntPropertyValue(
+                "solenoid.driveShifters.port.b", properties);
+        driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
+                driveShiftersSolenoidPortB);
 
         // Catapult
         int leftCatapultSolenoidForwardPort = getIntPropertyValue(
@@ -154,6 +162,10 @@ public class WiringConfig extends BaseConfig {
                 "rollerbarIntake.switch.out.port", properties);
         rollerbarIntakeOutSwitch =
                 new DigitalInput(rollerbarIntakeOutSwitchPort);
+    }
+
+    public DoubleSolenoid getDriveShifters() {
+        return driveShifters;
     }
 
     public Talon getRollerbarIntakeTalon() {
