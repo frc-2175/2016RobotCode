@@ -32,8 +32,8 @@ public class JoystickEventMapper {
                 .whenPressed(new RetractCatapultCommand(robotSubsystems));
 
         JoystickButton runIntakeIn = gamepadConfig.getIntakeInButton();
-        runIntakeIn.whenPressed(new RunIntakeInGroup(robotSubsystems,
-                robotConfig.getIntakeConfig()));
+        runIntakeIn.whenPressed(
+                new RunIntakeInGroup(robotSubsystems, intakeConfig));
 
         JoystickButton runIntakeOut = gamepadConfig.getIntakeOutButton();
         runIntakeOut.whenPressed(
