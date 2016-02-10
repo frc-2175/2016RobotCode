@@ -85,9 +85,9 @@ public class WiringConfig extends BaseConfig {
                 rightDriveEncoderPortB, isRightDriveEncoderReversed);
 
         int driveShiftersSolenoidPortA = getIntPropertyValue(
-                "solenoid.driveShifters.port.a", properties);
+                "drivetrain.solenoid.driveShifters.port.a", properties);
         int driveShiftersSolenoidPortB = getIntPropertyValue(
-                "solenoid.driveShifters.port.b", properties);
+                "drivetrain.solenoid.driveShifters.port.b", properties);
         driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
                 driveShiftersSolenoidPortB);
 

@@ -13,7 +13,6 @@ public class ShiftToHighGearCommand extends Command {
 
     public ShiftToHighGearCommand(RobotSubsystems robotSubsystems) {
         this.drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
-        requires(drivetrainSubsystem);
     }
 
     // Called just before this Command runs the first time

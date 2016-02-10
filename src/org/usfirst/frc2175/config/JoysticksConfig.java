@@ -3,6 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Joystick configuration values - "driving" controls.
@@ -16,6 +17,8 @@ public class JoysticksConfig extends BaseConfig {
 
     private Joystick leftStick;
     private Joystick rightStick;
+
+    private JoystickButton upshift;
 
     private double deadbandValue;
 
@@ -33,6 +36,9 @@ public class JoysticksConfig extends BaseConfig {
         rightStick = new Joystick(rightStickPort);
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
+
+        int upshiftPort = getIntPropertyValue("upshift.port", properties);
+        upshift = new JoystickButton(leftStick, upshiftPort);
     }
 
     public Joystick getLeftStick() {
@@ -45,5 +51,9 @@ public class JoysticksConfig extends BaseConfig {
 
     public double getDeadbandSize() {
         return deadbandValue;
+    }
+
+    public JoystickButton getUpshiftButton() {
+        return upshift;
     }
 }
