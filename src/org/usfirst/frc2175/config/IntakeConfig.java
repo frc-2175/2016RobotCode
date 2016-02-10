@@ -31,10 +31,10 @@ public class IntakeConfig extends BaseConfig {
                 "dream.intake.sideBelt.reverse", properties);
         this.mainBeltSpeedReverse = mainBeltSpeedReverse;
         double rollerbarSpeedIn =
-                getDoublePropertyValue("rollerbar.intake.in", properties);
+                getDoublePropertyValue("rollerbar.intakeSpeed.in", properties);
         this.rollerbarSpeedIn = rollerbarSpeedIn;
         double rollerbarSpeedOut =
-                getDoublePropertyValue("rollerbar.intake.out", properties);
+                getDoublePropertyValue("rollerbar.intakeSpeed.out", properties);
         this.rollerbarSpeedOut = rollerbarSpeedOut;
     }
 
