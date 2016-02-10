@@ -2,7 +2,10 @@ package org.usfirst.frc2175.config;
 
 import java.util.Properties;
 
+import org.usfirst.frc2175.util.MultipleTalonHandler;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -20,8 +23,10 @@ public class WiringConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "wiring.properties";
 
     // Drivetrain
-    private Talon leftDriveTalon;
-    private Talon rightDriveTalon;
+
+    private MultipleTalonHandler leftDriveTalonHandler;
+    private MultipleTalonHandler rightDriveTalonHandler;
+
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Gyro gyro;
@@ -55,13 +60,35 @@ public class WiringConfig extends BaseConfig {
     @Override
     protected void configure(Properties properties) {
         // Drivetrain
-        int leftDriveTalonPort =
-                getIntPropertyValue("drivetrain.talon.left.port", properties);
-        leftDriveTalon = new Talon(leftDriveTalonPort);
+        int leftDriveTalon1Port =
+                getIntPropertyValue("drivetrain.talon.left.1.port", properties);
+        CANTalon leftDriveTalon1 = new CANTalon(leftDriveTalon1Port);
 
-        int rightDriveTalonPort =
-                getIntPropertyValue("drivetrain.talon.right.port", properties);
-        rightDriveTalon = new Talon(rightDriveTalonPort);
+        int leftDriveTalon2Port =
+                getIntPropertyValue("drivetrain.talon.left.2.port", properties);
+        CANTalon leftDriveTalon2 = new CANTalon(leftDriveTalon2Port);
+
+        int leftDriveTalon3Port =
+                getIntPropertyValue("drivetrain.talon.left.3.port", properties);
+        CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
+
+        leftDriveTalonHandler = new MultipleTalonHandler(leftDriveTalon1,
+                leftDriveTalon2, leftDriveTalon3);
+
+        int rightDriveTalon1Port = getIntPropertyValue(
+                "drivetrain.talon.right.1.port", properties);
+        CANTalon rightDriveTalon1 = new CANTalon(rightDriveTalon1Port);
+
+        int rightDriveTalon2Port = getIntPropertyValue(
+                "drivetrain.talon.right.2.port", properties);
+        CANTalon rightDriveTalon2 = new CANTalon(rightDriveTalon2Port);
+
+        int rightDriveTalon3Port = getIntPropertyValue(
+                "drivetrain.talon.right.3.port", properties);
+        CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
+
+        rightDriveTalonHandler = new MultipleTalonHandler(rightDriveTalon1,
+                rightDriveTalon2, rightDriveTalon3);
 
         int gyroPort = getIntPropertyValue("drivetrain.gyro.port", properties);
         gyro = new AnalogGyro(gyroPort);
@@ -200,12 +227,16 @@ public class WiringConfig extends BaseConfig {
         return dreamIntakeDownSwitch;
     }
 
-    public Talon getLeftDriveTalon() {
-        return leftDriveTalon;
+    public Encoder getDreamIntakeLiftEncoder() {
+        return dreamIntakeLiftEncoder;
     }
 
-    public Talon getRightDriveTalon() {
-        return rightDriveTalon;
+    public MultipleTalonHandler getLeftDriveTalonHandler() {
+        return leftDriveTalonHandler;
+    }
+
+    public MultipleTalonHandler getRightDriveTalonHandler() {
+        return rightDriveTalonHandler;
     }
 
     public Encoder getLeftDriveEncoder() {
