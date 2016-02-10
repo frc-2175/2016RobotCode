@@ -85,8 +85,9 @@ public class MultipleTalonHandler implements SpeedController {
 
     @Override
     public void disable() {
-        // TODO Auto-generated method stub
-
+        talon1.disable();
+        talon2.disable();
+        talon3.disable();
     }
 
     private class TalonGetsNotMatchingException extends Exception {
