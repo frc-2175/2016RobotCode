@@ -196,6 +196,22 @@ public class WiringConfig extends BaseConfig {
         return driveShifters;
     }
 
+    public TalonGroup getLeftDriveTalonGroup() {
+        return leftDriveTalonGroup;
+    }
+
+    public TalonGroup getRightDriveTalonGroup() {
+        return rightDriveTalonGroup;
+    }
+
+    public CANTalon getRollerbarIntakeRollerTalon() {
+        return rollerbarIntakeRollerTalon;
+    }
+
+    public CANTalon getBootTalon() {
+        return bootTalon;
+    }
+
     public CANTalon getRollerbarIntakeTalon() {
         return rollerbarIntakeRollerTalon;
     }
