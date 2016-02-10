@@ -4,7 +4,7 @@ import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
-import org.usfirst.frc2175.subsystem.intake.DreamIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.intake.RollerbarIntakeSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 public class RobotSubsystems {
@@ -12,7 +12,7 @@ public class RobotSubsystems {
     private final DriverStation driverStation;
 
     // TODO add remaining subsystems
-    private final DreamIntakeSubsystem dreamIntakeSubsystem;
+    private final RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
     private final DrivetrainSubsystem drivetrainSubsystem;
     private final CatapultShooterSubsystem catapultShooterSubsystem;
 
@@ -21,7 +21,7 @@ public class RobotSubsystems {
         this.robotConfig = robotConfig;
         this.driverStation = driverStation;
 
-        dreamIntakeSubsystem = new DreamIntakeSubsystem(robotConfig);
+        rollerbarIntakeSubsystem = new RollerbarIntakeSubsystem(robotConfig);
         drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
 
@@ -33,8 +33,8 @@ public class RobotSubsystems {
                 new ArcadeDriveWithJoysticksCommand(driverStation, this));
     }
 
-    public DreamIntakeSubsystem getDreamIntakeSubsystem() {
-        return dreamIntakeSubsystem;
+    public RollerbarIntakeSubsystem getRollerbarIntakeSubsystem() {
+        return rollerbarIntakeSubsystem;
     }
 
     public DrivetrainSubsystem getDrivetrainSubsystem() {

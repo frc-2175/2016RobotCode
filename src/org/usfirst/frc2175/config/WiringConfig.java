@@ -32,6 +32,12 @@ public class WiringConfig extends BaseConfig {
     private Talon dreamIntakeLiftTalon;
     private Encoder dreamIntakeLiftEncoder;
 
+    // Rollerbar intake
+    private Talon rollerbarIntakeTalon;
+    private DoubleSolenoid rollerbarIntakeSolenoid;
+    private DigitalInput rollerbarIntakeInSwitch;
+    private DigitalInput rollerbarIntakeOutSwitch;
+
     // Catapult shooter
     private DoubleSolenoid leftCatapultSolenoid;
     private DoubleSolenoid rightCatapultSolenoid;
@@ -129,6 +135,41 @@ public class WiringConfig extends BaseConfig {
         int dreamIntakeDownSwitchPort =
                 getIntPropertyValue("dreamIntake.switch.down.port", properties);
         dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
+
+        // Rollerbar intake
+        int rollerbarIntakeTalonPort =
+                getIntPropertyValue("rollerbarIntake.talon", properties);
+        rollerbarIntakeTalon = new Talon(rollerbarIntakeTalonPort);
+        int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
+                "rollerbarIntake.solenoid.forward", properties);
+        int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
+                "rollerbarIntake.solenoid.reverse", properties);
+        rollerbarIntakeSolenoid =
+                new DoubleSolenoid(rollerbarIntakeSolenoidForwardPort,
+                        rollerbarIntakeSolenoidReversePort);
+        int rollerbarIntakeInSwitchPort = getIntPropertyValue(
+                "rollerbarIntake.switch.in.port", properties);
+        rollerbarIntakeInSwitch = new DigitalInput(rollerbarIntakeInSwitchPort);
+        int rollerbarIntakeOutSwitchPort = getIntPropertyValue(
+                "rollerbarIntake.switch.out.port", properties);
+        rollerbarIntakeOutSwitch =
+                new DigitalInput(rollerbarIntakeOutSwitchPort);
+    }
+
+    public Talon getRollerbarIntakeTalon() {
+        return rollerbarIntakeTalon;
+    }
+
+    public DigitalInput getRollerbarIntakeInSwitch() {
+        return rollerbarIntakeInSwitch;
+    }
+
+    public DigitalInput getRollerbarIntakeOutSwitch() {
+        return rollerbarIntakeOutSwitch;
+    }
+
+    public DoubleSolenoid getRollerbarIntakeSolenoid() {
+        return rollerbarIntakeSolenoid;
     }
 
     public DigitalInput getCatapultUpSwitch() {
