@@ -42,7 +42,7 @@ public class MultipleTalonHandler implements SpeedController {
 
         try {
             if ((talon1.get() == talon2.get())
-                    && (talon1.get() == talon2.get())) {
+                    && (talon1.get() == talon3.get())) {
                 value = talon1.get();
             } else {
                 throw new TalonGetsNotMatchingException(
