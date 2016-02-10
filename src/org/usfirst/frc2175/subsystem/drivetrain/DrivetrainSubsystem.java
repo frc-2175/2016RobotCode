@@ -6,6 +6,7 @@ import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -20,6 +21,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private Talon rightDriveTalon;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
+    private DoubleSolenoid driveShifters;
     private Gyro gyro;
 
     private RobotDrive robotDrive;
@@ -36,6 +38,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         rightDriveTalon = wiringConfig.getRightDriveTalon();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
+        driveShifters = wiringConfig.getDriveShifters();
         gyro = wiringConfig.getGyro();
 
         robotDrive = new RobotDrive(leftDriveTalon, rightDriveTalon);
@@ -51,15 +54,13 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         VisionTurnControllerHandler visionTurnControllerHandler =
                 new VisionTurnControllerHandler();
-        visionTurnController =
-                new PIDController(
-                        controlLoopConfig.getVisionTurnPID_kProportional(),
-                        controlLoopConfig.getVisionTurnPID_kIntegral(),
-                        controlLoopConfig.getVisionTurnPID_kDerivative(),
-                        visionTurnControllerHandler,
-                        visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(controlLoopConfig
-                .getVisionTurnPID_absTolerance());
+        visionTurnController = new PIDController(
+                controlLoopConfig.getVisionTurnPID_kProportional(),
+                controlLoopConfig.getVisionTurnPID_kIntegral(),
+                controlLoopConfig.getVisionTurnPID_kDerivative(),
+                visionTurnControllerHandler, visionTurnControllerHandler);
+        visionTurnController.setAbsoluteTolerance(
+                controlLoopConfig.getVisionTurnPID_absTolerance());
 
         visionTurnController.setOutputRange(
                 controlLoopConfig.getVisionTurnPID_minRange(),
@@ -113,6 +114,14 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     public double getMeanEncoderDistance() {
         return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2;
+    }
+
+    public void shiftToHighGear() {
+        driveShifters.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void shiftToLowGear() {
+        driveShifters.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void resetGyro() {

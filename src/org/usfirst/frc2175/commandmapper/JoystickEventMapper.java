@@ -4,6 +4,7 @@ import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.IntakeConfig;
@@ -41,5 +42,9 @@ public class JoystickEventMapper {
 
         JoystickButton testAction = gamepadConfig.getTestActionButton();
         testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems));
+
+        JoystickButton upshift =
+                robotConfig.getJoysticksConfig().getUpshiftButton();
+        upshift.whileHeld(new ShiftToHighGearCommand(robotSubsystems));
     }
 }
