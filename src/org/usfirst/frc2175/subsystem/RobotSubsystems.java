@@ -5,6 +5,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 import org.usfirst.frc2175.subsystem.intake.RollerbarIntakeSubsystem;
+import org.usfirst.frc2175.subsystem.manipulator.ManipulatorSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 public class RobotSubsystems {
@@ -15,6 +16,7 @@ public class RobotSubsystems {
     private final RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
     private final DrivetrainSubsystem drivetrainSubsystem;
     private final CatapultShooterSubsystem catapultShooterSubsystem;
+    private final ManipulatorSubsystem manipulatorSubsystem;
 
     public RobotSubsystems(RobotConfig robotConfig,
             DriverStation driverStation) {
@@ -24,8 +26,13 @@ public class RobotSubsystems {
         rollerbarIntakeSubsystem = new RollerbarIntakeSubsystem(robotConfig);
         drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
+        manipulatorSubsystem = new ManipulatorSubsystem(robotConfig);
 
         setDefaultCommands();
+    }
+
+    public ManipulatorSubsystem getManipulatorSubsystem() {
+        return manipulatorSubsystem;
     }
 
     protected void setDefaultCommands() {

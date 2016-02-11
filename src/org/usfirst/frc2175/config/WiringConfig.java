@@ -122,13 +122,13 @@ public class WiringConfig extends BaseConfig {
                 driveShiftersSolenoidPortB);
 
         // Catapult
-        int leftCatapultSolenoidForwardPort =
-                getIntPropertyValue("catapult.solenoid.left", properties);
+        int leftCatapultSolenoidForwardPort = getIntPropertyValue(
+                "catapult.solenoid.left.forward", properties);
 
         leftCatapultSolenoid = new Solenoid(leftCatapultSolenoidForwardPort);
 
-        int rightCatapultSolenoidForwardPort =
-                getIntPropertyValue("catapult.solenoid.right", properties);
+        int rightCatapultSolenoidForwardPort = getIntPropertyValue(
+                "catapult.solenoid.right.forward", properties);
         rightCatapultSolenoid = new Solenoid(rightCatapultSolenoidForwardPort);
 
         int catapultUpSwitchPort =

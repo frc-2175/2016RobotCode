@@ -4,6 +4,7 @@ import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.RunBootAtSpeed;
 import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
@@ -24,27 +25,41 @@ public class JoystickEventMapper {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
-        JoystickButton extendCatapult = gamepadConfig.getExtendCatapultButton();
+        JoystickButton extendCatapult = gamepadConfig.getExtendCatapult();
         extendCatapult.whenPressed(new ExtendCatapultCommand(robotSubsystems));
 
-        JoystickButton retractCatapult =
-                gamepadConfig.getRetractCatapultButton();
+        JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
         retractCatapult
                 .whenPressed(new RetractCatapultCommand(robotSubsystems));
 
-        JoystickButton runIntakeIn = gamepadConfig.getIntakeInButton();
+        JoystickButton runIntakeIn = gamepadConfig.getRunIntakeIn();
         runIntakeIn.whenPressed(
                 new RunIntakeInGroup(robotSubsystems, intakeConfig));
 
-        JoystickButton runIntakeOut = gamepadConfig.getIntakeOutButton();
+        JoystickButton runIntakeOut = gamepadConfig.getRunIntakeOut();
         runIntakeOut.whenPressed(
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
-        JoystickButton testAction = gamepadConfig.getTestActionButton();
+        JoystickButton testAction = gamepadConfig.getTestAction();
         testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();
         upshift.whileHeld(new ShiftToHighGearCommand(robotSubsystems));
+
+        JoystickButton lowerBoot =
+                robotConfig.getGamepadConfig().getLowerBoot();
+        lowerBoot.whileHeld(new RunBootAtSpeed(robotSubsystems, .2));
+
+        JoystickButton raiseBoot =
+                robotConfig.getGamepadConfig().getRaiseBoot();
+        raiseBoot.whileHeld(new RunBootAtSpeed(robotSubsystems, -.2));
+        // TODO
+        // make a
+        // properties
+        // entry
+        // for
+        // this
+
     }
 }

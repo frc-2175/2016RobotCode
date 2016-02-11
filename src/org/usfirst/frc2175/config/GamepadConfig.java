@@ -22,6 +22,8 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton runIntakeIn;
     private JoystickButton runIntakeOut;
     private JoystickButton testAction;
+    private JoystickButton lowerBoot;
+    private JoystickButton raiseBoot;
 
     @Override
     public String getPropertyFileName() {
@@ -42,30 +44,42 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.intake.out", properties));
         testAction = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
+        lowerBoot = new JoystickButton(gamepad,
+                getIntPropertyValue("button.boot.lower", properties));
+        raiseBoot = new JoystickButton(gamepad,
+                getIntPropertyValue("button.boot.raise", properties));
+    }
+
+    public JoystickButton getExtendCatapult() {
+        return extendCatapult;
+    }
+
+    public JoystickButton getRetractCatapult() {
+        return retractCatapult;
+    }
+
+    public JoystickButton getRunIntakeIn() {
+        return runIntakeIn;
+    }
+
+    public JoystickButton getRunIntakeOut() {
+        return runIntakeOut;
+    }
+
+    public JoystickButton getTestAction() {
+        return testAction;
+    }
+
+    public JoystickButton getLowerBoot() {
+        return lowerBoot;
+    }
+
+    public JoystickButton getRaiseBoot() {
+        return raiseBoot;
     }
 
     public Joystick getGamepad() {
         return gamepad;
-    }
-
-    public JoystickButton getExtendCatapultButton() {
-        return extendCatapult;
-    }
-
-    public JoystickButton getRetractCatapultButton() {
-        return retractCatapult;
-    }
-
-    public JoystickButton getIntakeInButton() {
-        return runIntakeIn;
-    }
-
-    public JoystickButton getIntakeOutButton() {
-        return runIntakeOut;
-    }
-
-    public JoystickButton getTestActionButton() {
-        return testAction;
     }
 
 }
