@@ -4,7 +4,7 @@ import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
-import org.usfirst.frc2175.command.single.RunBootAtSpeed;
+import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
@@ -49,11 +49,11 @@ public class JoystickEventMapper {
 
         JoystickButton lowerBoot =
                 robotConfig.getGamepadConfig().getLowerBoot();
-        lowerBoot.whileHeld(new RunBootAtSpeed(robotSubsystems, .2));
+        lowerBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, .2));
 
         JoystickButton raiseBoot =
                 robotConfig.getGamepadConfig().getRaiseBoot();
-        raiseBoot.whileHeld(new RunBootAtSpeed(robotSubsystems, -.2));
+        raiseBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, -.2));
         // TODO
         // make a
         // properties
