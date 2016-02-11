@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunBootAtSpeed extends Command {
+public class RunBootAtSpeedCommand extends Command {
 
     private double speed;
     private ManipulatorSubsystem manipulatorSubsystem;
 
-    public RunBootAtSpeed(RobotSubsystems robotSubsystems, double speed) {
+    public RunBootAtSpeedCommand(RobotSubsystems robotSubsystems, double speed) {
         this.speed = speed;
         this.manipulatorSubsystem = robotSubsystems.getManipulatorSubsystem();
 
