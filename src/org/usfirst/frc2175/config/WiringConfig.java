@@ -54,6 +54,9 @@ public class WiringConfig extends BaseConfig {
 
     // Manipulator
     private CANTalon bootTalon;
+    private DigitalInput isBootUpSwitch;
+    private DigitalInput isBootDownSwitch;
+    private Encoder bootEncoder;
 
     @Override
     public String getPropertyFileName() {
@@ -190,6 +193,20 @@ public class WiringConfig extends BaseConfig {
         int bootTalonPort =
                 getIntPropertyValue("manipulator.talon.boot.port", properties);
         bootTalon = new CANTalon(bootTalonPort);
+        int isBootUpSwitchPort = getIntPropertyValue(
+                "manipulator.switch.boot.up.port", properties);
+        isBootUpSwitch = new DigitalInput(isBootUpSwitchPort);
+        int isBootDownSwitchPort = getIntPropertyValue(
+                "manipulator.switch.boot.down.port", properties);
+        isBootDownSwitch = new DigitalInput(isBootDownSwitchPort);
+        int bootEncoderA =
+                getIntPropertyValue("manipulator.encoder.port.a", properties);
+        int bootEncoderB =
+                getIntPropertyValue("manipulator.encoder.port.b", properties);
+        boolean isBootEncoderReversed = getBooleanPropertyValue(
+                "manipulator.encoder.isReversed", properties);
+        bootEncoder =
+                new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
     }
 
     public DoubleSolenoid getDriveShifters() {
@@ -198,6 +215,18 @@ public class WiringConfig extends BaseConfig {
 
     public TalonGroup getLeftDriveTalonGroup() {
         return leftDriveTalonGroup;
+    }
+
+    public DigitalInput getIsBootUpSwitch() {
+        return isBootUpSwitch;
+    }
+
+    public DigitalInput getIsBootDownSwitch() {
+        return isBootDownSwitch;
+    }
+
+    public Encoder getBootEncoder() {
+        return bootEncoder;
     }
 
     public TalonGroup getRightDriveTalonGroup() {
