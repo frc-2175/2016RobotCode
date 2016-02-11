@@ -5,12 +5,14 @@ import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.util.TalonGroup;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.hal.CanTalonJNI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import mockit.Mocked;
 
@@ -31,6 +33,10 @@ public class WiringConfigTest extends TestBase {
     private CANTalon cantalon;
     @Mocked
     private DigitalInput digitalinput;
+    @Mocked
+    private CanTalonJNI canTalonJNI;
+    @Mocked
+    private AnalogGyro analogGyro;
 
     @Ignore("Currently broken. Need to mock out more")
     @Test
