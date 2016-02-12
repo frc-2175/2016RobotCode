@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.config;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 
@@ -15,7 +14,6 @@ public class JoysticksConfigTest extends TestBase {
     @Mocked
     private JoystickButton joystickButton;
 
-    @Ignore
     // Additional Mocking? Won't work at the moment.
     @Test
     public void testJoystickConfig_Competition() {

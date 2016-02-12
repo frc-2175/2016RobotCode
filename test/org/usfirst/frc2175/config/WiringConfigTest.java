@@ -38,7 +38,7 @@ public class WiringConfigTest extends TestBase {
     @Mocked
     private AnalogGyro analogGyro;
 
-    @Ignore("Currently broken. Need to mock out more")
+    // @Ignore("Currently broken. Need to mock out more")
     @Test
     public void testWiringConfig_Competition() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
