@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 /**
  *
- * This is a class that takes three CAN talons and wraps them as one
+ * This is a class that takes three CAN Talons and wraps them as one
  * SpeedController. Currently, it just sets them up as a standard
- * Speedcontroller, but it should be changed to set them up as a CAN
+ * SpeedController, but it should be changed to set them up as a CAN
  * SpeedController.
  *
  * TODO Change this to implement CANSpeedController
@@ -37,22 +37,13 @@ public class TalonGroup implements SpeedController {
 
     @Override
     public double get() {
-        double value;
-
-        try {
-            if ((talon1.get() == talon2.get())
-                    && (talon1.get() == talon3.get())) {
-                value = talon1.get();
-            } else {
-                throw new TalonGetsNotMatchingException(
-                        "Talon gets not matching! Something has gone seriously wrong!");
-            }
-        } catch (TalonGetsNotMatchingException e) {
-            e.printStackTrace();
-            value = talon1.get();
+        if (talon1.get() != talon2.get() || talon1.get() != talon3.get()) {
+            // TODO Switch this to proper logging
+            System.out
+            .println("Talon gets not matching! Something has gone seriously wrong!");
         }
 
-        return value;
+        return talon1.get();
     }
 
     @Override
@@ -87,12 +78,6 @@ public class TalonGroup implements SpeedController {
         talon1.disable();
         talon2.disable();
         talon3.disable();
-    }
-
-    private class TalonGetsNotMatchingException extends Exception {
-        public TalonGetsNotMatchingException(String msg) {
-            super(msg);
-        }
     }
 
     @Override
