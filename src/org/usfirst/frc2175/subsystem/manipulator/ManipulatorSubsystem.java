@@ -4,13 +4,19 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ManipulatorSubsystem extends BaseSubsystem {
+
+    private DigitalInput isBootUpSwitch;
+    private DigitalInput isBootDownSwitch;
 
     private CANTalon bootTalon;
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
         bootTalon = robotConfig.getWiringConfig().getBootTalon();
+        isBootUpSwitch = robotConfig.getWiringConfig().getIsBootUpSwitch();
+        isBootDownSwitch = robotConfig.getWiringConfig().getIsBootDownSwitch();
     }
 
     public void setBootSpeed(double speed) {
@@ -18,13 +24,11 @@ public class ManipulatorSubsystem extends BaseSubsystem {
     }
 
     public boolean isBootUp() {
-        // TODO implement this method
-        return false;
+        return isBootUpSwitch.get();
     }
 
     public boolean isBootDown() {
-        // TODO implement this method
-        return false;
+        return isBootDownSwitch.get();
     }
 
 }
