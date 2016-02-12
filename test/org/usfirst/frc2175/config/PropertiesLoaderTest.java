@@ -5,12 +5,14 @@ import org.usfirst.frc2175.TestBase;
 
 public class PropertiesLoaderTest extends TestBase {
     @Test
+    @SuppressWarnings("unused")
     public void testPropertiesLoader_Competition() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         PropertiesLoader sut = new PropertiesLoader();
     }
 
     @Test
+    @SuppressWarnings("unused")
     public void testPropertiesLoader_Practice() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         PropertiesLoader sut = new PropertiesLoader();

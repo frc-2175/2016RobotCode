@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.config;
 
+import mockit.Mocked;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
@@ -14,7 +16,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.hal.CanTalonJNI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import mockit.Mocked;
 
 public class WiringConfigTest extends TestBase {
     @Mocked
@@ -40,6 +41,7 @@ public class WiringConfigTest extends TestBase {
 
     // @Ignore("Currently broken. Need to mock out more")
     @Test
+    @SuppressWarnings("unused")
     public void testWiringConfig_Competition() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         WiringConfig sut = new WiringConfig();
@@ -47,6 +49,7 @@ public class WiringConfigTest extends TestBase {
 
     @Ignore("Currently broken. Need to mock out more")
     @Test
+    @SuppressWarnings("unused")
     public void testWiringConfig_Practice() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         WiringConfig sut = new WiringConfig();
