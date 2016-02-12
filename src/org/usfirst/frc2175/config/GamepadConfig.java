@@ -24,6 +24,8 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton testAction;
     private JoystickButton lowerBoot;
     private JoystickButton raiseBoot;
+    private JoystickButton lowerIntake;
+    private JoystickButton raiseIntake;
 
     @Override
     public String getPropertyFileName() {
@@ -48,6 +50,18 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.boot.lower", properties));
         raiseBoot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.boot.raise", properties));
+        raiseIntake = new JoystickButton(gamepad,
+                getIntPropertyValue("button.intake.raise", properties));
+        lowerIntake = new JoystickButton(gamepad,
+                getIntPropertyValue("button.intake.lower", properties));
+    }
+
+    public JoystickButton getLowerIntake() {
+        return lowerIntake;
+    }
+
+    public JoystickButton getRaiseIntake() {
+        return raiseIntake;
     }
 
     public JoystickButton getExtendCatapult() {
