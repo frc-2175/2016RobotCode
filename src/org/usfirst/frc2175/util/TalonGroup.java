@@ -24,8 +24,7 @@ public class TalonGroup implements SpeedController {
 
     private boolean isInverted = false;
 
-    public TalonGroup(CANTalon talon1, CANTalon talon2,
-            CANTalon talon3) {
+    public TalonGroup(CANTalon talon1, CANTalon talon2, CANTalon talon3) {
         this.talon1 = talon1;
         this.talon2 = talon2;
         this.talon3 = talon3;
@@ -94,6 +93,11 @@ public class TalonGroup implements SpeedController {
         public TalonGetsNotMatchingException(String msg) {
             super(msg);
         }
+    }
+
+    @Override
+    public void stopMotor() {
+        set(0);
     }
 
 }
