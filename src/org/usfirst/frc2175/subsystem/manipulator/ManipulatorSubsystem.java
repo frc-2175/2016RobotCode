@@ -8,13 +8,23 @@ import edu.wpi.first.wpilibj.CANTalon;
 public class ManipulatorSubsystem extends BaseSubsystem {
 
     private CANTalon bootTalon;
+    private double bootSpeed;
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
         bootTalon = robotConfig.getWiringConfig().getBootTalon();
+        bootSpeed = robotConfig.getWiringConfig().getBootSpeed();
     }
 
     public void setBootSpeed(double speed) {
         bootTalon.set(speed);
+    }
+
+    public void moveBootDown() {
+        bootTalon.set(-bootSpeed);
+    }
+
+    public void moveBootUp() {
+        bootTalon.set(bootSpeed);
     }
 
     public boolean isBootUp() {

@@ -55,6 +55,7 @@ public class WiringConfig extends BaseConfig {
 
     // Manipulator
     private CANTalon bootTalon;
+    private double bootSpeed;
 
     @Override
     public String getPropertyFileName() {
@@ -179,6 +180,14 @@ public class WiringConfig extends BaseConfig {
         int bootTalonPort =
                 getIntPropertyValue("manipulator.talon.boot.port", properties);
         bootTalon = new CANTalon(bootTalonPort);
+
+        double bootSpeed =
+                getDoublePropertyValue("manipulator.boot.speed", properties);
+
+    }
+
+    public double getBootSpeed() {
+        return bootSpeed;
     }
 
     public CANTalon getRollerbarIntakeLiftTalon() {

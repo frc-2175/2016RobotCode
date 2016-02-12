@@ -26,7 +26,8 @@ public class LowerBootCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        manipulatorSubsystem.setBootSpeed(-0.2);
+        manipulatorSubsystem.moveBootDown();
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
