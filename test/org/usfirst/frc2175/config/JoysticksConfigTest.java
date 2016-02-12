@@ -23,6 +23,7 @@ public class JoysticksConfigTest extends TestBase {
         JoysticksConfig sut = new JoysticksConfig();
     }
 
+    @Ignore
     @Test
     public void testJoystickConfig_Practice() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
