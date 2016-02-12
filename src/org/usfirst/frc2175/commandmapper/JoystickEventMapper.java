@@ -49,11 +49,11 @@ public class JoystickEventMapper {
 
         JoystickButton lowerBoot =
                 robotConfig.getGamepadConfig().getLowerBoot();
-        lowerBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, .2));
+        lowerBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, .8));
 
         JoystickButton raiseBoot =
                 robotConfig.getGamepadConfig().getRaiseBoot();
-        raiseBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, -.2));
+        raiseBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, -.8));
         // TODO
         // make a
         // properties
