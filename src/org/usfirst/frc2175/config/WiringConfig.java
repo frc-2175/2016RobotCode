@@ -40,6 +40,7 @@ public class WiringConfig extends BaseConfig {
 
     // Rollerbar intake
     private CANTalon rollerbarIntakeRollerTalon;
+    private CANTalon rollerbarIntakeLiftTalon;
     private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
@@ -168,9 +169,13 @@ public class WiringConfig extends BaseConfig {
         dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
 
         // Rollerbar intake
-        int rollerbarIntakeTalonPort =
-                getIntPropertyValue("rollerbarIntake.talon.port", properties);
-        rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeTalonPort);
+        int rollerbarIntakeRollerTalonPort = getIntPropertyValue(
+                "rollerbarIntake.talon.roller.port", properties);
+        rollerbarIntakeRollerTalon =
+                new CANTalon(rollerbarIntakeRollerTalonPort);
+        int rollerbarIntakeLiftTalonPort = getIntPropertyValue(
+                "rollerbarIntake.talon.lift.port", properties);
+        rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeLiftTalonPort);
         int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
                 "rollerbarIntake.solenoid.forward", properties);
         int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
@@ -190,6 +195,10 @@ public class WiringConfig extends BaseConfig {
         int bootTalonPort =
                 getIntPropertyValue("manipulator.talon.boot.port", properties);
         bootTalon = new CANTalon(bootTalonPort);
+    }
+
+    public CANTalon getRollerbarIntakeLiftTalon() {
+        return rollerbarIntakeLiftTalon;
     }
 
     public DoubleSolenoid getDriveShifters() {
