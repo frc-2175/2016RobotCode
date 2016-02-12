@@ -63,37 +63,14 @@ public class WiringConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        // Drivetrain
-        int leftDriveTalon1Port =
-                getIntPropertyValue("drivetrain.talon.left.1.port", properties);
-        CANTalon leftDriveTalon1 = new CANTalon(leftDriveTalon1Port);
+        configureDrivetrain(properties);
+        configureCatapult(properties);
+        configureManipulator(properties);
+        configureDreamIntake(properties);
+        configureRollerbarIntake(properties);
+    }
 
-        int leftDriveTalon2Port =
-                getIntPropertyValue("drivetrain.talon.left.2.port", properties);
-        CANTalon leftDriveTalon2 = new CANTalon(leftDriveTalon2Port);
-
-        int leftDriveTalon3Port =
-                getIntPropertyValue("drivetrain.talon.left.3.port", properties);
-        CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
-
-        leftDriveTalonGroup = new TalonGroup(leftDriveTalon1, leftDriveTalon2,
-                leftDriveTalon3);
-
-        int rightDriveTalon1Port = getIntPropertyValue(
-                "drivetrain.talon.right.1.port", properties);
-        CANTalon rightDriveTalon1 = new CANTalon(rightDriveTalon1Port);
-
-        int rightDriveTalon2Port = getIntPropertyValue(
-                "drivetrain.talon.right.2.port", properties);
-        CANTalon rightDriveTalon2 = new CANTalon(rightDriveTalon2Port);
-
-        int rightDriveTalon3Port = getIntPropertyValue(
-                "drivetrain.talon.right.3.port", properties);
-        CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
-
-        rightDriveTalonGroup = new TalonGroup(rightDriveTalon1,
-                rightDriveTalon2, rightDriveTalon3);
-
+    private void configureDrivetrain(Properties properties) {
         int gyroPort = getIntPropertyValue("drivetrain.gyro.port", properties);
         gyro = new AnalogGyro(gyroPort);
 
@@ -121,8 +98,9 @@ public class WiringConfig extends BaseConfig {
                 "drivetrain.solenoid.driveShifters.port.b", properties);
         driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
                 driveShiftersSolenoidPortB);
+    }
 
-        // Catapult
+    private void configureCatapult(Properties properties) {
         int leftCatapultSolenoidPort =
                 getIntPropertyValue("catapult.solenoid.left", properties);
 
@@ -138,8 +116,9 @@ public class WiringConfig extends BaseConfig {
         int catapultDownSwitchPort =
                 getIntPropertyValue("catapult.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
+    }
 
-        // Dream Intake
+    private void configureDreamIntake(Properties properties) {
         int dreamIntakeSideBeltTalonPort = getIntPropertyValue(
                 "dreamIntake.talon.sideBelt.port", properties);
         dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
@@ -167,8 +146,9 @@ public class WiringConfig extends BaseConfig {
         int dreamIntakeDownSwitchPort =
                 getIntPropertyValue("dreamIntake.switch.down.port", properties);
         dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
+    }
 
-        // Rollerbar intake
+    private void configureRollerbarIntake(Properties properties) {
         int rollerbarIntakeRollerTalonPort = getIntPropertyValue(
                 "rollerbarIntake.talon.roller.port", properties);
         rollerbarIntakeRollerTalon =
@@ -176,6 +156,9 @@ public class WiringConfig extends BaseConfig {
         int rollerbarIntakeLiftTalonPort = getIntPropertyValue(
                 "rollerbarIntake.talon.lift.port", properties);
         rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeLiftTalonPort);
+        int rollerbarIntakeTalonPort =
+                getIntPropertyValue("rollerbarIntake.talon.port", properties);
+        rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeTalonPort);
         int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
                 "rollerbarIntake.solenoid.forward", properties);
         int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
@@ -190,8 +173,9 @@ public class WiringConfig extends BaseConfig {
                 "rollerbarIntake.switch.out.port", properties);
         rollerbarIntakeOutSwitch =
                 new DigitalInput(rollerbarIntakeOutSwitchPort);
+    }
 
-        // Manipulator arms
+    private void configureManipulator(Properties properties) {
         int bootTalonPort =
                 getIntPropertyValue("manipulator.talon.boot.port", properties);
         bootTalon = new CANTalon(bootTalonPort);
