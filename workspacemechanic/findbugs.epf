@@ -11,3 +11,5 @@ file_export_version=3.0
 /instance/edu.umd.cs.findbugs.plugin.eclipse/detectorUselessSubclassMethod=UselessSubclassMethod|true
 /instance/edu.umd.cs.findbugs.plugin.eclipse/effort=max/instance/edu.umd.cs.findbugs.plugin.eclipse/filter_settings=Low|BAD_PRACTICE,CORRECTNESS,EXPERIMENTAL,MT_CORRECTNESS,PERFORMANCE,STYLE|false|15
 /instance/edu.umd.cs.findbugs.plugin.eclipse/filter_settings_neg=MALICIOUS_CODE,NOISE,I18N,SECURITY|
+/project/2016RobotCode/edu.umd.cs.findbugs.plugin.eclipse/disableProjectProps=
+/project/2016RobotCode/edu.umd.cs.findbugs.core/run_at_full_build=true
