@@ -75,30 +75,41 @@ public class WiringConfig extends BaseConfig {
         int gyroPort = getIntPropertyValue("drivetrain.gyro.port", properties);
         gyro = new AnalogGyro(gyroPort);
 
-        boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
-                "drivetrain.encoder.left.isReversed", properties);
-        int leftDriveEncoderPortA = getIntPropertyValue(
-                "drivetrain.encoder.left.port.a", properties);
-        int leftDriveEncoderPortB = getIntPropertyValue(
-                "drivetrain.encoder.left.port.b", properties);
-        leftDriveEncoder = new Encoder(leftDriveEncoderPortA,
-                leftDriveEncoderPortB, isLeftDriveEncoderReversed);
+        boolean isLeftDriveEncoderReversed =
+                getBooleanPropertyValue("drivetrain.encoder.left.isReversed",
+                        properties);
+        int leftDriveEncoderPortA =
+                getIntPropertyValue("drivetrain.encoder.left.port.a",
+                        properties);
+        int leftDriveEncoderPortB =
+                getIntPropertyValue("drivetrain.encoder.left.port.b",
+                        properties);
+        leftDriveEncoder =
+                new Encoder(leftDriveEncoderPortA, leftDriveEncoderPortB,
+                        isLeftDriveEncoderReversed);
 
-        boolean isRightDriveEncoderReversed = getBooleanPropertyValue(
-                "drivetrain.encoder.right.isReversed", properties);
-        int rightDriveEncoderPortA = getIntPropertyValue(
-                "drivetrain.encoder.right.port.a", properties);
-        int rightDriveEncoderPortB = getIntPropertyValue(
-                "drivetrain.encoder.right.port.b", properties);
-        rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
-                rightDriveEncoderPortB, isRightDriveEncoderReversed);
+        boolean isRightDriveEncoderReversed =
+                getBooleanPropertyValue("drivetrain.encoder.right.isReversed",
+                        properties);
+        int rightDriveEncoderPortA =
+                getIntPropertyValue("drivetrain.encoder.right.port.a",
+                        properties);
+        int rightDriveEncoderPortB =
+                getIntPropertyValue("drivetrain.encoder.right.port.b",
+                        properties);
+        rightDriveEncoder =
+                new Encoder(rightDriveEncoderPortA, rightDriveEncoderPortB,
+                        isRightDriveEncoderReversed);
 
-        int driveShiftersSolenoidPortA = getIntPropertyValue(
-                "drivetrain.solenoid.driveShifters.port.a", properties);
-        int driveShiftersSolenoidPortB = getIntPropertyValue(
-                "drivetrain.solenoid.driveShifters.port.b", properties);
-        driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
-                driveShiftersSolenoidPortB);
+        int driveShiftersSolenoidPortA =
+                getIntPropertyValue("drivetrain.solenoid.driveShifters.port.a",
+                        properties);
+        int driveShiftersSolenoidPortB =
+                getIntPropertyValue("drivetrain.solenoid.driveShifters.port.b",
+                        properties);
+        driveShifters =
+                new DoubleSolenoid(driveShiftersSolenoidPortA,
+                        driveShiftersSolenoidPortB);
     }
 
     private void configureCatapult(Properties properties) {
@@ -114,18 +125,21 @@ public class WiringConfig extends BaseConfig {
         int catapultUpSwitchPort =
                 getIntPropertyValue("catapult.switch.up.port", properties);
         catapultUpSwitch = new DigitalInput(catapultUpSwitchPort);
+
         int catapultDownSwitchPort =
                 getIntPropertyValue("catapult.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
     }
 
     private void configureDreamIntake(Properties properties) {
-        int dreamIntakeSideBeltTalonPort = getIntPropertyValue(
-                "dreamIntake.talon.sideBelt.port", properties);
+        int dreamIntakeSideBeltTalonPort =
+                getIntPropertyValue("dreamIntake.talon.sideBelt.port",
+                        properties);
         dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
 
-        int dreamIntakeMainBeltTalonPort = getIntPropertyValue(
-                "dreamIntake.talon.mainBelt.port", properties);
+        int dreamIntakeMainBeltTalonPort =
+                getIntPropertyValue("dreamIntake.talon.mainBelt.port",
+                        properties);
         dreamIntakeMainBeltTalon = new Talon(dreamIntakeMainBeltTalonPort);
 
         int dreamIntakeLiftTalonPort =
@@ -136,42 +150,56 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("dreamIntake.encoder.port.a", properties);
         int dreamIntakeLiftEncoderB =
                 getIntPropertyValue("dreamIntake.encoder.port.b", properties);
-        boolean isDreamIntakeLiftEncoderReversed = getBooleanPropertyValue(
-                "dreamIntake.encoder.isReversed", properties);
-        dreamIntakeLiftEncoder = new Encoder(dreamIntakeLiftEncoderA,
-                dreamIntakeLiftEncoderB, isDreamIntakeLiftEncoderReversed);
+        boolean isDreamIntakeLiftEncoderReversed =
+                getBooleanPropertyValue("dreamIntake.encoder.isReversed",
+                        properties);
+        dreamIntakeLiftEncoder =
+                new Encoder(dreamIntakeLiftEncoderA, dreamIntakeLiftEncoderB,
+                        isDreamIntakeLiftEncoderReversed);
 
         int dreamIntakeUpSwitchPort =
                 getIntPropertyValue("dreamIntake.switch.up.port", properties);
         dreamIntakeUpSwitch = new DigitalInput(dreamIntakeUpSwitchPort);
+
         int dreamIntakeDownSwitchPort =
                 getIntPropertyValue("dreamIntake.switch.down.port", properties);
         dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
     }
 
     private void configureRollerbarIntake(Properties properties) {
-        int rollerbarIntakeRollerTalonPort = getIntPropertyValue(
-                "rollerbarIntake.talon.roller.port", properties);
+        int rollerbarIntakeRollerTalonPort =
+                getIntPropertyValue("rollerbarIntake.talon.roller.port",
+                        properties);
         rollerbarIntakeRollerTalon =
                 new CANTalon(rollerbarIntakeRollerTalonPort);
-        int rollerbarIntakeLiftTalonPort = getIntPropertyValue(
-                "rollerbarIntake.talon.lift.port", properties);
+
+        int rollerbarIntakeLiftTalonPort =
+                getIntPropertyValue("rollerbarIntake.talon.lift.port",
+                        properties);
         rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeLiftTalonPort);
+
         int rollerbarIntakeTalonPort =
                 getIntPropertyValue("rollerbarIntake.talon.port", properties);
         rollerbarIntakeRollerTalon = new CANTalon(rollerbarIntakeTalonPort);
-        int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.forward", properties);
-        int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.reverse", properties);
+
+        int rollerbarIntakeSolenoidForwardPort =
+                getIntPropertyValue("rollerbarIntake.solenoid.forward",
+                        properties);
+        int rollerbarIntakeSolenoidReversePort =
+                getIntPropertyValue("rollerbarIntake.solenoid.reverse",
+                        properties);
         rollerbarIntakeSolenoid =
                 new DoubleSolenoid(rollerbarIntakeSolenoidForwardPort,
                         rollerbarIntakeSolenoidReversePort);
-        int rollerbarIntakeInSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.in.port", properties);
+
+        int rollerbarIntakeInSwitchPort =
+                getIntPropertyValue("rollerbarIntake.switch.in.port",
+                        properties);
         rollerbarIntakeInSwitch = new DigitalInput(rollerbarIntakeInSwitchPort);
-        int rollerbarIntakeOutSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.out.port", properties);
+
+        int rollerbarIntakeOutSwitchPort =
+                getIntPropertyValue("rollerbarIntake.switch.out.port",
+                        properties);
         rollerbarIntakeOutSwitch =
                 new DigitalInput(rollerbarIntakeOutSwitchPort);
     }
@@ -183,7 +211,6 @@ public class WiringConfig extends BaseConfig {
 
         double bootSpeed =
                 getDoublePropertyValue("manipulator.boot.speed", properties);
-
     }
 
     public double getBootSpeed() {
