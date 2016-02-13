@@ -77,36 +77,58 @@ public class WiringConfig extends BaseConfig {
 
         boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
                 "drivetrain.encoder.left.isReversed", properties);
-        
         int leftDriveEncoderPortA = getIntPropertyValue(
                 "drivetrain.encoder.left.port.a", properties);
-        
         int leftDriveEncoderPortB = getIntPropertyValue(
                 "drivetrain.encoder.left.port.b", properties);
-        
         leftDriveEncoder = new Encoder(leftDriveEncoderPortA,
                 leftDriveEncoderPortB, isLeftDriveEncoderReversed);
 
         boolean isRightDriveEncoderReversed = getBooleanPropertyValue(
                 "drivetrain.encoder.right.isReversed", properties);
-        
         int rightDriveEncoderPortA = getIntPropertyValue(
                 "drivetrain.encoder.right.port.a", properties);
-        
         int rightDriveEncoderPortB = getIntPropertyValue(
                 "drivetrain.encoder.right.port.b", properties);
-        
         rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
                 rightDriveEncoderPortB, isRightDriveEncoderReversed);
 
         int driveShiftersSolenoidPortA = getIntPropertyValue(
                 "drivetrain.solenoid.driveShifters.port.a", properties);
-        
         int driveShiftersSolenoidPortB = getIntPropertyValue(
                 "drivetrain.solenoid.driveShifters.port.b", properties);
-        
         driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
                 driveShiftersSolenoidPortB);
+
+        int leftDriveTalon1Port =
+                getIntPropertyValue("drivetrain.talon.left.1.port", properties);
+        CANTalon leftDriveTalon1 = new CANTalon(leftDriveTalon1Port);
+
+        int leftDriveTalon2Port =
+                getIntPropertyValue("drivetrain.talon.left.2.port", properties);
+        CANTalon leftDriveTalon2 = new CANTalon(leftDriveTalon2Port);
+
+        int leftDriveTalon3Port =
+                getIntPropertyValue("drivetrain.talon.left.3.port", properties);
+        CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
+
+        leftDriveTalonGroup = new TalonGroup(leftDriveTalon1, leftDriveTalon2,
+                leftDriveTalon3);
+
+        int rightDriveTalon1Port = getIntPropertyValue(
+                "drivetrain.talon.right.1.port", properties);
+        CANTalon rightDriveTalon1 = new CANTalon(rightDriveTalon1Port);
+
+        int rightDriveTalon2Port = getIntPropertyValue(
+                "drivetrain.talon.right.2.port", properties);
+        CANTalon rightDriveTalon2 = new CANTalon(rightDriveTalon2Port);
+
+        int rightDriveTalon3Port = getIntPropertyValue(
+                "drivetrain.talon.right.3.port", properties);
+        CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
+
+        rightDriveTalonGroup = new TalonGroup(rightDriveTalon1,
+                rightDriveTalon2, rightDriveTalon3);
     }
 
     private void configureCatapult(Properties properties) {
