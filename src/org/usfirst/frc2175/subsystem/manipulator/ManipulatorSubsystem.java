@@ -12,7 +12,8 @@ public class ManipulatorSubsystem extends BaseSubsystem {
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
         bootTalon = robotConfig.getWiringConfig().getBootTalon();
-        bootSpeed = robotConfig.getWiringConfig().getBootSpeed();
+        // FIXME what to do with this? getBootSpeed() commented out
+        // bootSpeed = robotConfig.getWiringConfig().getBootSpeed();
     }
 
     public void setBootSpeed(double speed) {

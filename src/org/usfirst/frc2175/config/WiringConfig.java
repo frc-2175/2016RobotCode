@@ -214,13 +214,13 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("manipulator.talon.boot.port", properties);
         bootTalon = new CANTalon(bootTalonPort);
 
-        double bootSpeed =
-                getDoublePropertyValue("manipulator.boot.speed", properties);
+        // double bootSpeed =
+        // getDoublePropertyValue("manipulator.boot.speed", properties);
     }
 
-    public double getBootSpeed() {
-        return bootSpeed;
-    }
+    // public double getBootSpeed() {
+    // return bootSpeed;
+    // }
 
     public CANTalon getRollerbarIntakeLiftTalon() {
         return rollerbarIntakeLiftTalon;
