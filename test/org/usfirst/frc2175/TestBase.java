@@ -1,5 +1,6 @@
 package org.usfirst.frc2175;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.Field;
@@ -50,6 +51,21 @@ public abstract class TestBase {
                 String assertMessage =
                         "Field " + fields[i].getName() + " was null";
                 assertNotNull(assertMessage, fields[i].get(sut));
+            }
+        }
+    }
+
+    protected void assertDoublesNotZero(Object sut)
+            throws IllegalArgumentException, IllegalAccessException {
+        Field[] fields = sut.getClass().getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+
+            if (fields[i].getType().getName().equals("double")) {
+                System.out.println(fields[i].get(sut));
+                String assertMessage =
+                        "Field " + fields[i].getName() + " was zero";
+                assertNotEquals(assertMessage, 0, fields[i].get(sut));
             }
         }
     }
