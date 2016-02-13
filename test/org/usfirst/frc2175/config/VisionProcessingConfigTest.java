@@ -2,20 +2,21 @@ package org.usfirst.frc2175.config;
 
 import mockit.Mocked;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
+import edu.wpi.first.wpilibj.HLUsageReporting;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class VisionProcessingConfigTest extends TestBase {
+    @Mocked
+    private HLUsageReporting hlUsageReporting;
     @Mocked
     private NetworkTable networkTable;
     @Mocked
     private HighestArrayIndexFinder highestArrayIndexFinder;
 
-    @Ignore("Do not know if it works or not.")
     @Test
     @SuppressWarnings("unused")
     public void testVisionProcessingConfig_Competition() {
@@ -23,7 +24,6 @@ public class VisionProcessingConfigTest extends TestBase {
         VisionProcessingConfig sut = new VisionProcessingConfig();
     }
 
-    @Ignore("Do not know if it works or not.")
     @Test
     @SuppressWarnings("unused")
     public void testVisionProcessingConfig_Practice() {

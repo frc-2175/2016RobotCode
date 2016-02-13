@@ -25,10 +25,15 @@ public abstract class TestBase {
     @Before
     public void processTestStarting() {
         log.fine("Test starting: " + testName.getMethodName());
+        processMockUps();
     }
 
     @After
     public void processTestFinished() {
         log.fine("Test finished: " + testName.getMethodName());
+    }
+
+    protected void processMockUps() {
+        new MockJNIWrapper();
     }
 }

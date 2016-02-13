@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.config;
 
-import org.junit.Ignore;
+import mockit.Mocked;
+
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.util.TalonGroup;
@@ -12,9 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.hal.CanTalonJNI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import mockit.Mocked;
 
 public class WiringConfigTest extends TestBase {
     @Mocked
@@ -34,11 +33,8 @@ public class WiringConfigTest extends TestBase {
     @Mocked
     private DigitalInput digitalinput;
     @Mocked
-    private CanTalonJNI canTalonJNI;
-    @Mocked
     private AnalogGyro analogGyro;
 
-    @Ignore("Currently broken. Need to mock out more")
     @Test
     @SuppressWarnings("unused")
     public void testWiringConfig_Competition() {
@@ -46,7 +42,6 @@ public class WiringConfigTest extends TestBase {
         WiringConfig sut = new WiringConfig();
     }
 
-    @Ignore("Currently broken. Need to mock out more")
     @Test
     @SuppressWarnings("unused")
     public void testWiringConfig_Practice() {

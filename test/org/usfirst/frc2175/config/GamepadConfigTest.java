@@ -2,7 +2,6 @@ package org.usfirst.frc2175.config;
 
 import mockit.Mocked;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 
@@ -16,7 +15,6 @@ public class GamepadConfigTest extends TestBase {
     @Mocked
     private JoystickButton joystickButton;
 
-    @Ignore
     @Test
     @SuppressWarnings("unused")
     public void testGamepadConfig_Competition() {

@@ -2,7 +2,6 @@ package org.usfirst.frc2175.config;
 
 import mockit.Mocked;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 
@@ -16,8 +15,6 @@ public class JoysticksConfigTest extends TestBase {
     @Mocked
     private JoystickButton joystickButton;
 
-    // Additional Mocking? Won't work at the moment.
-    @Ignore
     @Test
     @SuppressWarnings("unused")
     public void testJoystickConfig_Competition() {
@@ -25,7 +22,6 @@ public class JoysticksConfigTest extends TestBase {
         JoysticksConfig sut = new JoysticksConfig();
     }
 
-    @Ignore
     @Test
     @SuppressWarnings("unused")
     public void testJoystickConfig_Practice() {

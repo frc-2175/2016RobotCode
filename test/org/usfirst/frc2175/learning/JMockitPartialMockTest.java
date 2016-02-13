@@ -2,11 +2,10 @@ package org.usfirst.frc2175.learning;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
 import mockit.Mock;
 import mockit.MockUp;
+
+import org.junit.Test;
 
 /**
  * Demonstrating how to partially mock a class instead of a full mock.
