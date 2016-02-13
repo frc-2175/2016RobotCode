@@ -1,5 +1,8 @@
 package org.usfirst.frc2175;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
 import org.junit.After;
@@ -35,5 +38,19 @@ public abstract class TestBase {
 
     protected void processMockUps() {
         new MockJNIWrapper();
+    }
+
+    protected void assertInstanceVariablesNotNull(Object sut)
+            throws IllegalArgumentException, IllegalAccessException {
+        Field[] fields = sut.getClass().getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+
+            if (!fields[i].getType().isPrimitive()) {
+                String assertMessage =
+                        "Field " + fields[i].getName() + " was null";
+                assertNotNull(assertMessage, fields[i].get(sut));
+            }
+        }
     }
 }

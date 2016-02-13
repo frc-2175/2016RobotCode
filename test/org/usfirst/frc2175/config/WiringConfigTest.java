@@ -36,16 +36,18 @@ public class WiringConfigTest extends TestBase {
     private AnalogGyro analogGyro;
 
     @Test
-    @SuppressWarnings("unused")
-    public void testWiringConfig_Competition() {
+    public void testWiringConfig_Competition() throws IllegalArgumentException,
+            IllegalAccessException {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         WiringConfig sut = new WiringConfig();
+        assertInstanceVariablesNotNull(sut);
     }
 
     @Test
-    @SuppressWarnings("unused")
-    public void testWiringConfig_Practice() {
+    public void testWiringConfig_Practice() throws IllegalArgumentException,
+            IllegalAccessException {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         WiringConfig sut = new WiringConfig();
+        assertInstanceVariablesNotNull(sut);
     }
 }
