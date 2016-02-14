@@ -62,7 +62,6 @@ public abstract class TestBase {
             fields[i].setAccessible(true);
 
             if (fields[i].getType().getName().equals("double")) {
-                System.out.println(fields[i].get(sut));
                 String assertMessage =
                         "Field " + fields[i].getName() + " was zero";
                 assertNotEquals(assertMessage, 0, fields[i].get(sut));
