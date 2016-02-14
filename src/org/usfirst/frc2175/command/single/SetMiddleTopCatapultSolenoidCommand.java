@@ -8,19 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExtendCatapultCommand extends Command {
-    private CatapultShooterSubsystem catapultSubsystem;
+public class SetMiddleTopCatapultSolenoidCommand extends Command {
+    private final CatapultShooterSubsystem catapultShooterSubsystem;
+    private boolean isOn;
 
-    public ExtendCatapultCommand(RobotSubsystems robotSubsystems) {
-        catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
+    public SetMiddleTopCatapultSolenoidCommand(RobotSubsystems robotSubsystems,
+            boolean isOn) {
+        this.catapultShooterSubsystem =
+                robotSubsystems.getCatapultShooterSubsystem();
+        this.isOn = isOn;
 
-        requires(robotSubsystems.getCatapultShooterSubsystem());
+        requires(catapultShooterSubsystem);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        catapultSubsystem.setCatapultPosition(true);
+        catapultShooterSubsystem.setMiddleTopSolenoid(isOn);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +35,7 @@ public class ExtendCatapultCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
