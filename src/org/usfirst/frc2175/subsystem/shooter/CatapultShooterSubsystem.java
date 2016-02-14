@@ -10,6 +10,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     private Solenoid rightCatapultSolenoid;
     private Solenoid leftCatapultSolenoid;
+    private Solenoid middleTopCatapultSolenoid;
+    private Solenoid middleBottomCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
 
@@ -18,6 +20,10 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
                 robotConfig.getWiringConfig().getLeftCatapultSolenoid();
         rightCatapultSolenoid =
                 robotConfig.getWiringConfig().getRightCatapultSolenoid();
+        middleTopCatapultSolenoid =
+                robotConfig.getWiringConfig().getMiddleTopCatapultSolenoid();
+        middleBottomCatapultSolenoid =
+                robotConfig.getWiringConfig().getMiddleBottomCatapultSolenoid();
 
         catapultUpSwitch = robotConfig.getWiringConfig().getCatapultUpSwitch();
         catapultDownSwitch =
@@ -25,14 +31,17 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     }
 
-    public void setCatapultPosition(boolean isUp) {
-        if (isUp) {
-            leftCatapultSolenoid.set(true);
-            rightCatapultSolenoid.set(true);
-        } else {
-            leftCatapultSolenoid.set(false);
-            rightCatapultSolenoid.set(false);
-        }
+    public void setLeftRightSolenoids(boolean isExtended) {
+        leftCatapultSolenoid.set(isExtended);
+        rightCatapultSolenoid.set(isExtended);
+    }
+
+    public void setMiddleTopSolenoid(boolean isOn) {
+        middleTopCatapultSolenoid.set(isOn);
+    }
+
+    public void setMiddleBottomSolenoid(boolean isOn) {
+        middleBottomCatapultSolenoid.set(isOn);
     }
 
     public boolean isCatapultDown() {
