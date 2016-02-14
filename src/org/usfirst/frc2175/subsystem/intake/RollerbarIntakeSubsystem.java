@@ -6,12 +6,10 @@ import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class RollerbarIntakeSubsystem extends BaseSubsystem {
     private CANTalon rollerbarIntakeRollerTalon;
     private CANTalon rollerbarIntakeLiftTalon;
-    private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
 
@@ -22,8 +20,6 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
                 wiringConfig.getRollerbarIntakeTalon();
         this.rollerbarIntakeLiftTalon =
                 wiringConfig.getRollerbarIntakeLiftTalon();
-        this.rollerbarIntakeSolenoid =
-                wiringConfig.getRollerbarIntakeSolenoid();
         this.rollerbarIntakeInSwitch =
                 wiringConfig.getRollerbarIntakeInSwitch();
         this.rollerbarIntakeOutSwitch =
@@ -36,14 +32,6 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
 
     public void setRollerbarLiftSpeed(double speed) {
         rollerbarIntakeLiftTalon.set(speed);
-    }
-
-    public void setIntakePosition(boolean isOut) {
-        if (isOut) {
-            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kForward);
-        } else {
-            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-        }
     }
 
     public boolean isCompletelyOut() {

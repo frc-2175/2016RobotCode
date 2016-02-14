@@ -43,7 +43,6 @@ public class WiringConfig extends BaseConfig {
     // Rollerbar intake
     private CANTalon rollerbarIntakeRollerTalon;
     private CANTalon rollerbarIntakeLiftTalon;
-    private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
 
@@ -205,14 +204,6 @@ public class WiringConfig extends BaseConfig {
                 "rollerbarIntake.talon.lift.port", properties);
         rollerbarIntakeLiftTalon = new CANTalon(rollerbarIntakeLiftTalonPort);
 
-        int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.forward", properties);
-        int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.reverse", properties);
-        rollerbarIntakeSolenoid =
-                new DoubleSolenoid(rollerbarIntakeSolenoidForwardPort,
-                        rollerbarIntakeSolenoidReversePort);
-
         int rollerbarIntakeInSwitchPort = getIntPropertyValue(
                 "rollerbarIntake.switch.in.port", properties);
         rollerbarIntakeInSwitch = new DigitalInput(rollerbarIntakeInSwitchPort);
@@ -299,10 +290,6 @@ public class WiringConfig extends BaseConfig {
 
     public DigitalInput getRollerbarIntakeOutSwitch() {
         return rollerbarIntakeOutSwitch;
-    }
-
-    public DoubleSolenoid getRollerbarIntakeSolenoid() {
-        return rollerbarIntakeSolenoid;
     }
 
     public DigitalInput getCatapultUpSwitch() {
