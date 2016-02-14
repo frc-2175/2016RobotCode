@@ -4,6 +4,7 @@ import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
+import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -22,9 +23,10 @@ public class Robot extends IterativeRobot {
             new DriverStation(robotConfig, new DeadbandCalculator());
     private final RobotSubsystems robotSubsystems =
             new RobotSubsystems(robotConfig, driverStation);
-    private final JoystickEventMapper joystickEventMapper =
-            new JoystickEventMapper(robotConfig, driverStation,
-                    robotSubsystems);
+    private final RobotControllers robotControllers = new RobotControllers(
+            robotConfig, robotSubsystems);
+    private final JoystickEventMapper joystickEventMapper = new JoystickEventMapper(
+            robotConfig, driverStation, robotSubsystems, robotControllers);
 
     /**
      * This function is run when the robot is first started up and should be

@@ -13,6 +13,7 @@ import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.IntakeConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
+import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -23,7 +24,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class JoystickEventMapper {
     public JoystickEventMapper(RobotConfig robotConfig,
-            DriverStation driverStation, RobotSubsystems robotSubsystems) {
+            DriverStation driverStation, RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers) {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
@@ -47,7 +49,8 @@ public class JoystickEventMapper {
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
         JoystickButton testAction = gamepadConfig.getTestAction();
-        testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems));
+        testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems,
+                robotControllers));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();

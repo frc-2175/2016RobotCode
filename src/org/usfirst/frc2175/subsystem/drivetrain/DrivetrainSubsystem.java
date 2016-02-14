@@ -9,10 +9,6 @@ import org.usfirst.frc2175.util.TalonGroup;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -25,8 +21,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private Gyro gyro;
 
     private RobotDrive robotDrive;
-
-    private PIDController visionTurnController;
 
     private double centerCameraXValue;
     private double largestContourCenterXValue;
@@ -51,42 +45,6 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
         centerCameraXValue = controlLoopConfig.getVisionTurnPID_centerCamera();
-
-        VisionTurnControllerHandler visionTurnControllerHandler =
-                new VisionTurnControllerHandler();
-        visionTurnController = new PIDController(
-                controlLoopConfig.getVisionTurnPID_kProportional(),
-                controlLoopConfig.getVisionTurnPID_kIntegral(),
-                controlLoopConfig.getVisionTurnPID_kDerivative(),
-                visionTurnControllerHandler, visionTurnControllerHandler);
-        visionTurnController.setAbsoluteTolerance(
-                controlLoopConfig.getVisionTurnPID_absTolerance());
-
-        visionTurnController.setOutputRange(
-                controlLoopConfig.getVisionTurnPID_minRange(),
-                controlLoopConfig.getVisionTurnPID_maxRange());
-    }
-
-    private class VisionTurnControllerHandler implements PIDSource, PIDOutput {
-        @Override
-        public void pidWrite(double output) {
-            arcadeDrive(0, output);
-        }
-
-        @Override
-        public double pidGet() {
-            return getDistanceFromCameraCenter();
-        }
-
-        @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {
-            // We never need to set this, so it can be empty
-        }
-
-        @Override
-        public PIDSourceType getPIDSourceType() {
-            return PIDSourceType.kDisplacement;
-        }
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
@@ -138,9 +96,5 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     public double getCenterCameraXValue() {
         return centerCameraXValue;
-    }
-
-    public PIDController getVisionTurnController() {
-        return visionTurnController;
     }
 }
