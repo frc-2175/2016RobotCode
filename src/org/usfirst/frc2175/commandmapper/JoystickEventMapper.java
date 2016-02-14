@@ -33,8 +33,7 @@ public class JoystickEventMapper {
         extendCatapult.whenPressed(new ExtendCatapultCommand(robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
-        retractCatapult
-                .whenPressed(new RetractCatapultCommand(robotSubsystems));
+        retractCatapult.whenPressed(new RetractCatapultCommand(robotSubsystems));
 
         JoystickButton shortShot = gamepadConfig.getShortShot();
         shortShot.whenPressed(
@@ -45,34 +44,32 @@ public class JoystickEventMapper {
                 .whileHeld(new RunIntakeInGroup(robotSubsystems, intakeConfig));
 
         JoystickButton runIntakeOut = gamepadConfig.getRunIntakeOut();
-        runIntakeOut.whileHeld(
-                new RunIntakeOutGroup(robotSubsystems, intakeConfig));
+        runIntakeOut.whileHeld(new RunIntakeOutGroup(robotSubsystems,
+                intakeConfig));
 
         JoystickButton testAction = gamepadConfig.getTestAction();
         testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems,
                 robotControllers));
 
-        JoystickButton upshift =
-                robotConfig.getJoysticksConfig().getUpshiftButton();
+        JoystickButton upshift = robotConfig.getJoysticksConfig()
+                .getUpshiftButton();
         upshift.whileHeld(new ShiftToHighGearCommand(robotSubsystems));
 
-        JoystickButton lowerBoot =
-                robotConfig.getGamepadConfig().getLowerBoot();
+        JoystickButton lowerBoot = robotConfig.getGamepadConfig().getLowerBoot();
         lowerBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, .8));
 
-        JoystickButton raiseBoot =
-                robotConfig.getGamepadConfig().getRaiseBoot();
+        JoystickButton raiseBoot = robotConfig.getGamepadConfig().getRaiseBoot();
         raiseBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, -.8));
 
-        JoystickButton raiseIntake =
-                robotConfig.getGamepadConfig().getRaiseIntake();
-        raiseIntake.whileHeld(
-                new RunIntakeLiftAtSpeedCommand(robotSubsystems, .5));
+        JoystickButton raiseIntake = robotConfig.getGamepadConfig()
+                .getRaiseIntake();
+        raiseIntake.whileHeld(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                .5));
 
-        JoystickButton lowerIntake =
-                robotConfig.getGamepadConfig().getLowerIntake();
-        lowerIntake.whileHeld(
-                new RunIntakeLiftAtSpeedCommand(robotSubsystems, -.5));
+        JoystickButton lowerIntake = robotConfig.getGamepadConfig()
+                .getLowerIntake();
+        lowerIntake.whileHeld(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                -.5));
 
     }
 }

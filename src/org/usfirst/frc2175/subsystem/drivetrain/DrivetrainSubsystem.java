@@ -35,15 +35,15 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         driveShifters = wiringConfig.getDriveShifters();
         gyro = wiringConfig.getGyro();
 
-        robotDrive = new RobotDrive(leftDriveSideTalonGroup, rightDriveSideTalonGroup);
+        robotDrive = new RobotDrive(leftDriveSideTalonGroup,
+                rightDriveSideTalonGroup);
 
-        VisionProcessingConfig visionProcessingConfig =
-                robotConfig.getVisionProcessingConfig();
-        largestContourCenterXValue =
-                visionProcessingConfig.getLargestContourCenterX();
+        VisionProcessingConfig visionProcessingConfig = robotConfig
+                .getVisionProcessingConfig();
+        largestContourCenterXValue = visionProcessingConfig
+                .getLargestContourCenterX();
 
-        ControlLoopConfig controlLoopConfig =
-                robotConfig.getControlLoopConfig();
+        ControlLoopConfig controlLoopConfig = robotConfig.getControlLoopConfig();
         centerCameraXValue = controlLoopConfig.getVisionTurnPID_centerCamera();
     }
 

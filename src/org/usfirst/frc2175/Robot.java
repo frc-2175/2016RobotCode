@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
     private final RobotConfig robotConfig = new RobotConfig();
-    private final DriverStation driverStation =
-            new DriverStation(robotConfig, new DeadbandCalculator());
-    private final RobotSubsystems robotSubsystems =
-            new RobotSubsystems(robotConfig, driverStation);
+    private final DriverStation driverStation = new DriverStation(robotConfig,
+            new DeadbandCalculator());
+    private final RobotSubsystems robotSubsystems = new RobotSubsystems(
+            robotConfig, driverStation);
     private final RobotControllers robotControllers = new RobotControllers(
             robotConfig, robotSubsystems);
     private final JoystickEventMapper joystickEventMapper = new JoystickEventMapper(
