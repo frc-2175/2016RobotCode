@@ -1,6 +1,8 @@
 package org.usfirst.frc2175.commandmapper;
 
 import org.usfirst.frc2175.command.group.ExtendCatapultFullPowerGroup;
+import org.usfirst.frc2175.command.group.ExtendCatapultMiddleOnGroup;
+import org.usfirst.frc2175.command.group.ExtendCatapultSidesOnlyGroup;
 import org.usfirst.frc2175.command.group.RetractCatapultGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
@@ -26,9 +28,20 @@ public class JoystickEventMapper {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
-        JoystickButton extendCatapult = gamepadConfig.getExtendCatapult();
+        JoystickButton extendCatapult =
+                gamepadConfig.getExtendCatapultFullPower();
         extendCatapult
                 .whenPressed(new ExtendCatapultFullPowerGroup(robotSubsystems));
+
+        JoystickButton extendCatapultMiddleOn =
+                gamepadConfig.getExtendCatapultMiddleOn();
+        extendCatapultMiddleOn
+                .whenPressed(new ExtendCatapultMiddleOnGroup(robotSubsystems));
+
+        JoystickButton extendCatapultSidesOnly =
+                gamepadConfig.getExtendCatapultSidesOnly();
+        extendCatapultSidesOnly
+                .whenPressed(new ExtendCatapultSidesOnlyGroup(robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
         retractCatapult.whenPressed(new RetractCatapultGroup(robotSubsystems));

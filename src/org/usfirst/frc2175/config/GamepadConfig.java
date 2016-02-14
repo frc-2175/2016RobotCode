@@ -17,7 +17,9 @@ public class GamepadConfig extends BaseConfig {
 
     private Joystick gamepad;
 
-    private JoystickButton extendCatapult;
+    private JoystickButton extendCatapultFullPower;
+    private JoystickButton extendCatapultMiddleOn;
+    private JoystickButton extendCatapultSidesOnly;
     private JoystickButton retractCatapult;
     private JoystickButton runIntakeIn;
     private JoystickButton runIntakeOut;
@@ -36,8 +38,14 @@ public class GamepadConfig extends BaseConfig {
     protected void configure(Properties properties) {
         gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
 
-        extendCatapult = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.extend", properties));
+        extendCatapultFullPower = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.extend.full", properties));
+        extendCatapultMiddleOn =
+                new JoystickButton(gamepad, getIntPropertyValue(
+                        "button.catapult.extend.middleOn", properties));
+        extendCatapultSidesOnly =
+                new JoystickButton(gamepad, getIntPropertyValue(
+                        "button.catapult.extend.sidesOnly", properties));
         retractCatapult = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.retract", properties));
         runIntakeIn = new JoystickButton(gamepad,
@@ -62,10 +70,6 @@ public class GamepadConfig extends BaseConfig {
 
     public JoystickButton getRaiseIntake() {
         return raiseIntake;
-    }
-
-    public JoystickButton getExtendCatapult() {
-        return extendCatapult;
     }
 
     public JoystickButton getRetractCatapult() {
@@ -94,6 +98,18 @@ public class GamepadConfig extends BaseConfig {
 
     public Joystick getGamepad() {
         return gamepad;
+    }
+
+    public JoystickButton getExtendCatapultFullPower() {
+        return extendCatapultFullPower;
+    }
+
+    public JoystickButton getExtendCatapultMiddleOn() {
+        return extendCatapultMiddleOn;
+    }
+
+    public JoystickButton getExtendCatapultSidesOnly() {
+        return extendCatapultSidesOnly;
     }
 
 }
