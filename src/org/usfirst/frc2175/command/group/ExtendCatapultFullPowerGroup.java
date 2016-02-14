@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ExtendCatapultFullPowerGroup extends CommandGroup {
 
     public ExtendCatapultFullPowerGroup(RobotSubsystems robotSubsystems) {
-        addParallel(new SetMiddleTopCatapultSolenoidCommand(robotSubsystems,
+        addSequential(new SetMiddleTopCatapultSolenoidCommand(robotSubsystems,
                 false));
-        addParallel(new SetMiddleBottomCatapultSolenoidCommand(robotSubsystems,
-                true));
+        addSequential(new SetMiddleBottomCatapultSolenoidCommand(
+                robotSubsystems, true));
         addSequential(
                 new SetSideCatapultCylindersCommand(robotSubsystems, true));
 

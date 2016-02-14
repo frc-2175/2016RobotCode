@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ExtendCatapultMiddleOnGroup extends CommandGroup {
 
     public ExtendCatapultMiddleOnGroup(RobotSubsystems robotSubsystems) {
-        addParallel(
+        addSequential(
                 new SetMiddleTopCatapultSolenoidCommand(robotSubsystems, true));
-        addParallel(new SetMiddleBottomCatapultSolenoidCommand(robotSubsystems,
-                true));
+        addSequential(new SetMiddleBottomCatapultSolenoidCommand(
+                robotSubsystems, true));
         addSequential(
                 new SetSideCatapultCylindersCommand(robotSubsystems, true));
     }

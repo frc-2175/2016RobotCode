@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RetractCatapultGroup extends CommandGroup {
 
     public RetractCatapultGroup(RobotSubsystems robotSubsystems) {
-        addParallel(
+        addSequential(
                 new SetMiddleTopCatapultSolenoidCommand(robotSubsystems, true));
-        addParallel(new SetMiddleBottomCatapultSolenoidCommand(robotSubsystems,
-                false));
+        addSequential(new SetMiddleBottomCatapultSolenoidCommand(
+                robotSubsystems, false));
         addSequential(
                 new SetSideCatapultCylindersCommand(robotSubsystems, false));
     }
