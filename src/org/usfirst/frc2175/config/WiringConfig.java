@@ -37,6 +37,8 @@ public class WiringConfig extends BaseConfig {
     private Talon dreamIntakeMainBeltTalon;
     private Talon dreamIntakeLiftTalon;
     private Encoder dreamIntakeLiftEncoder;
+    private DigitalInput dreamIntakeUpSwitch;
+    private DigitalInput dreamIntakeDownSwitch;
 
     // Rollerbar intake
     private CANTalon rollerbarIntakeRollerTalon;
@@ -48,10 +50,10 @@ public class WiringConfig extends BaseConfig {
     // Catapult shooter
     private Solenoid leftCatapultSolenoid;
     private Solenoid rightCatapultSolenoid;
+    private Solenoid middleTopCatapultSolenoid;
+    private Solenoid middleBottomCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
-    private DigitalInput dreamIntakeUpSwitch;
-    private DigitalInput dreamIntakeDownSwitch;
 
     // Manipulator
     private CANTalon bootTalon;
@@ -144,6 +146,15 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("catapult.solenoid.right", properties);
         rightCatapultSolenoid = new Solenoid(rightCatapultSolenoidPort);
 
+        int middleTopCatapultSolenoidPort =
+                getIntPropertyValue("catapult.solenoid.middle.top", properties);
+        middleTopCatapultSolenoid = new Solenoid(middleTopCatapultSolenoidPort);
+
+        int middleBottomCatapultSolenoidPort = getIntPropertyValue(
+                "catapult.solenoid.middle.bottom", properties);
+        middleBottomCatapultSolenoid =
+                new Solenoid(middleBottomCatapultSolenoidPort);
+
         int catapultUpSwitchPort =
                 getIntPropertyValue("catapult.switch.up.port", properties);
         catapultUpSwitch = new DigitalInput(catapultUpSwitchPort);
@@ -225,14 +236,14 @@ public class WiringConfig extends BaseConfig {
                 "manipulator.switch.boot.down.port", properties);
         isBootDownSwitch = new DigitalInput(isBootDownSwitchPort);
 
-        int bootEncoderA = getIntPropertyValue("manipulator.encoder.port.a",
-                properties);
-        int bootEncoderB = getIntPropertyValue("manipulator.encoder.port.b",
-                properties);
+        int bootEncoderA =
+                getIntPropertyValue("manipulator.encoder.port.a", properties);
+        int bootEncoderB =
+                getIntPropertyValue("manipulator.encoder.port.b", properties);
         boolean isBootEncoderReversed = getBooleanPropertyValue(
                 "manipulator.encoder.isReversed", properties);
-        bootEncoder = new Encoder(bootEncoderA, bootEncoderB,
-                isBootEncoderReversed);
+        bootEncoder =
+                new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
 
         // double bootSpeed =
         // getDoublePropertyValue("manipulator.boot.speed", properties);
@@ -340,6 +351,14 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid getRightCatapultSolenoid() {
         return rightCatapultSolenoid;
+    }
+
+    public Solenoid getMiddleTopCatapultSolenoid() {
+        return middleTopCatapultSolenoid;
+    }
+
+    public Solenoid getMiddleBottomCatapultSolenoid() {
+        return middleBottomCatapultSolenoid;
     }
 
     public Talon getDreamIntakeSideBeltTalon() {
