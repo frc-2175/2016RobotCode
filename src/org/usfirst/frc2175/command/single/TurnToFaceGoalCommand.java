@@ -18,7 +18,7 @@ public class TurnToFaceGoalCommand extends Command {
         drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
         setpoint = drivetrainSubsystem.getCenterCameraXValue();
 
-        requires(drivetrainSubsystem);
+        // requires(drivetrainSubsystem);
 
     }
 
@@ -28,15 +28,17 @@ public class TurnToFaceGoalCommand extends Command {
         drivetrainSubsystem.getVisionTurnController().setSetpoint(setpoint);
         SmartDashboard.putNumber("Setpoint:", setpoint);
 
-        drivetrainSubsystem.getVisionTurnController().enable();
+        // drivetrainSubsystem.getVisionTurnController().enable();
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        System.out.println("Turning to face goal at turn value: "
-                + drivetrainSubsystem.getVisionTurnController().get());
+        // System.out.println("Turning to face goal at turn value: "
+        // + drivetrainSubsystem.getVisionTurnController().get());
+        System.out.println("Rectangle at: "
+                + drivetrainSubsystem.getLargestContourXValue());
     }
 
     // Make this return true when this Command no longer needs to run execute()
