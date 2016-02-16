@@ -13,6 +13,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
 
+    private double shortShotDelay;
+
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
         leftCatapultSolenoid =
                 robotConfig.getWiringConfig().getLeftCatapultSolenoid();
@@ -23,6 +25,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         catapultDownSwitch =
                 robotConfig.getWiringConfig().getCatapultDownSwitch();
 
+        this.shortShotDelay =
+                robotConfig.getCatapultShooterConfig().getShortShotDelay();
     }
 
     public void setCatapultPosition(boolean isUp) {
@@ -41,6 +45,14 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public boolean isCatapultUp() {
         return catapultUpSwitch.get();
+    }
+
+    public double getShortShotDelay() {
+        return shortShotDelay;
+    }
+
+    public void setShortShotDelay(double shortShotDelay) {
+        this.shortShotDelay = shortShotDelay;
     }
 
 }

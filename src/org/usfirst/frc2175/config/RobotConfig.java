@@ -11,6 +11,8 @@ public class RobotConfig {
             new VisionProcessingConfig();
     private final ControlLoopConfig controlLoopConfig = new ControlLoopConfig();
     private final IntakeConfig intakeConfig = new IntakeConfig();
+    private final CatapultShooterConfig catapultShooterConfig =
+            new CatapultShooterConfig();
 
     public GamepadConfig getGamepadConfig() {
         return gamepadConfig;
@@ -18,6 +20,10 @@ public class RobotConfig {
 
     public JoysticksConfig getJoysticksConfig() {
         return joystickConfig;
+    }
+
+    public CatapultShooterConfig getCatapultShooterConfig() {
+        return catapultShooterConfig;
     }
 
     public WiringConfig getWiringConfig() {
