@@ -15,6 +15,6 @@ public class CatapultShortShotCommandGroup extends CommandGroup {
         addSequential(new ExtendCatapultCommand(robotSubsystems),
                 robotSubsystems.getCatapultShooterSubsystem()
                         .getShortShotDelay());
-        addSequential(new RetractCatapultCommand(robotSubsystems));
+        addSequential(new RetractCatapultCommand(robotSubsystems), .1);
     }
 }

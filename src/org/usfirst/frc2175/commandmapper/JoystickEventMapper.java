@@ -3,6 +3,7 @@ package org.usfirst.frc2175.commandmapper;
 import org.usfirst.frc2175.command.group.CatapultShortShotCommandGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
+import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
@@ -27,12 +28,15 @@ public class JoystickEventMapper {
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
         JoystickButton extendCatapult = gamepadConfig.getExtendCatapult();
-        extendCatapult.whenPressed(
-                new CatapultShortShotCommandGroup(robotSubsystems));
+        extendCatapult.whenPressed(new ExtendCatapultCommand(robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
         retractCatapult
                 .whenPressed(new RetractCatapultCommand(robotSubsystems));
+
+        JoystickButton shortShot = gamepadConfig.getShortShot();
+        shortShot.whenPressed(
+                new CatapultShortShotCommandGroup(robotSubsystems));
 
         JoystickButton runIntakeIn = gamepadConfig.getRunIntakeIn();
         runIntakeIn
