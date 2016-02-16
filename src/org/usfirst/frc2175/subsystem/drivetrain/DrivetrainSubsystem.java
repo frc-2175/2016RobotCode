@@ -41,7 +41,8 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         driveShifters = wiringConfig.getDriveShifters();
         gyro = wiringConfig.getGyro();
 
-        robotDrive = new RobotDrive(leftDriveSideTalonGroup, rightDriveSideTalonGroup);
+        robotDrive = new RobotDrive(leftDriveSideTalonGroup,
+                rightDriveSideTalonGroup);
 
         VisionProcessingConfig visionProcessingConfig =
                 robotConfig.getVisionProcessingConfig();
@@ -75,7 +76,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
         @Override
         public double pidGet() {
-            return getDistanceFromCameraCenter();
+            return getLargestContourXValue();
         }
 
         @Override
@@ -132,7 +133,7 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         return gyro.getAngle();
     }
 
-    public double getDistanceFromCameraCenter() {
+    public double getLargestContourXValue() {
         return largestContourCenterXValue;
     }
 
