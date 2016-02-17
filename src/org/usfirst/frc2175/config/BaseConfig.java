@@ -69,5 +69,4 @@ public abstract class BaseConfig {
     public static void setPropertyFileDir(String propertyFileDirectory) {
         propertyFileDir = propertyFileDirectory;
     }
-
 }
