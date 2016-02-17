@@ -22,6 +22,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * Map {@link Command}s to joystick buttons.
  */
 public class JoystickEventMapper {
+    private double bootSpeed;
+    private double liftIntakeSpeed;
+
     public JoystickEventMapper(RobotConfig robotConfig,
             DriverStation driverStation, RobotSubsystems robotSubsystems) {
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
@@ -53,23 +56,26 @@ public class JoystickEventMapper {
                 robotConfig.getJoysticksConfig().getUpshiftButton();
         upshift.whileHeld(new ShiftToHighGearCommand(robotSubsystems));
 
+        bootSpeed = robotConfig.getManipulatorConfig().getBootSpeed();
         JoystickButton lowerBoot =
                 robotConfig.getGamepadConfig().getLowerBoot();
-        lowerBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, .8));
-
+        lowerBoot.whileHeld(
+                new RunBootAtSpeedCommand(robotSubsystems, bootSpeed));
         JoystickButton raiseBoot =
                 robotConfig.getGamepadConfig().getRaiseBoot();
-        raiseBoot.whileHeld(new RunBootAtSpeedCommand(robotSubsystems, -.8));
+        raiseBoot.whileHeld(
+                new RunBootAtSpeedCommand(robotSubsystems, -bootSpeed));
 
+        liftIntakeSpeed = robotConfig.getIntakeConfig().getLiftIntakeSpeed();
         JoystickButton raiseIntake =
                 robotConfig.getGamepadConfig().getRaiseIntake();
-        raiseIntake.whileHeld(
-                new RunIntakeLiftAtSpeedCommand(robotSubsystems, .5));
+        raiseIntake.whileHeld(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                liftIntakeSpeed));
 
         JoystickButton lowerIntake =
                 robotConfig.getGamepadConfig().getLowerIntake();
-        lowerIntake.whileHeld(
-                new RunIntakeLiftAtSpeedCommand(robotSubsystems, -.5));
+        lowerIntake.whileHeld(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                -liftIntakeSpeed));
 
     }
 }

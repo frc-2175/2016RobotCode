@@ -13,6 +13,7 @@ public class RobotConfig {
     private final IntakeConfig intakeConfig = new IntakeConfig();
     private final CatapultShooterConfig catapultShooterConfig =
             new CatapultShooterConfig();
+    private final ManipulatorConfig manipulatorConfig = new ManipulatorConfig();
 
     public GamepadConfig getGamepadConfig() {
         return gamepadConfig;
@@ -40,5 +41,9 @@ public class RobotConfig {
 
     public IntakeConfig getIntakeConfig() {
         return intakeConfig;
+    }
+
+    public ManipulatorConfig getManipulatorConfig() {
+        return manipulatorConfig;
     }
 }
