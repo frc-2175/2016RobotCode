@@ -10,6 +10,7 @@ public class IntakeConfig extends BaseConfig {
     private double mainBeltSpeedReverse;
     private double rollerbarSpeedIn;
     private double rollerbarSpeedOut;
+    private double liftIntakeSpeed;
 
     @Override
     public String getPropertyFileName() {
@@ -36,6 +37,13 @@ public class IntakeConfig extends BaseConfig {
         double rollerbarSpeedOut =
                 getDoublePropertyValue("rollerbar.intakeSpeed.out", properties);
         this.rollerbarSpeedOut = rollerbarSpeedOut;
+        double liftIntakeSpeed =
+                getDoublePropertyValue("liftIntake.speed", properties);
+        this.liftIntakeSpeed = liftIntakeSpeed;
+    }
+
+    public double getLiftIntakeSpeed() {
+        return liftIntakeSpeed;
     }
 
     public double getRollerbarSpeedIn() {
