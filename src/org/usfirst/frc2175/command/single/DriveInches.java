@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.subsystem.RobotSubsystems;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveInches extends Command {
 
-    public DriveInches(double distance) {
+    public DriveInches(RobotSubsystems robotSubsystems, double distance) {
         // TODO Fill In
     }
 

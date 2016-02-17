@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.subsystem.RobotSubsystems;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnDegrees extends Command {
 
-    public TurnDegrees(double degrees) {
-
+    public TurnDegrees(RobotSubsystems robotSubsystems, double degrees) {
+        // TODO Fill in
     }
 
     @Override
