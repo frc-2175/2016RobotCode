@@ -68,4 +68,20 @@ public abstract class TestBase {
             }
         }
     }
+
+    protected void assertArraysNotZeroLength(Object sut)
+            throws IllegalArgumentException, IllegalAccessException {
+        Field[] fields = sut.getClass().getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+
+            if (fields[i].getClass().isArray()) {
+                String assertMessage =
+                        "Field " + fields[i].getName() + " was length zero";
+                // Some assertThat that checks that the length of the array is
+                // not zero
+            }
+
+        }
+    }
 }
