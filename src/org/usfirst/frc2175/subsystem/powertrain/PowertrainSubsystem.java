@@ -27,6 +27,8 @@ public class PowertrainSubsystem extends BaseSubsystem {
     private Solenoid[] driveShifters;
     private Gyro gyro;
 
+    private ShifterState shifterState;
+
     private RobotDrive robotDrive;
 
     private PIDController visionTurnController;
@@ -96,11 +98,21 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-        robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+        if (shifterState == ShifterState.high
+                || shifterState == ShifterState.low) {
+            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+        } else {
+            robotDrive.stopMotor();
+        }
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        robotDrive.tankDrive(leftSpeed, rightSpeed);
+        if (shifterState == ShifterState.high
+                || shifterState == ShifterState.low) {
+            robotDrive.tankDrive(leftSpeed, rightSpeed);
+        } else {
+            robotDrive.stopMotor();
+        }
     }
 
     private void applyShifterState(int[] state) {
@@ -131,9 +143,13 @@ public class PowertrainSubsystem extends BaseSubsystem {
             pwmValues = powertrainConfig.getStateClimb();
             break;
         }
-
+        shifterState = state;
         applyShifterState(pwmValues);
 
+    }
+
+    public ShifterState getShifterState() {
+        return shifterState;
     }
 
     public void resetEncoders() {
