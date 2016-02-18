@@ -14,6 +14,13 @@ public class ControlLoopConfig extends BaseConfig {
     private double visionTurnPID_maxRange;
     private double visionTurnPID_minRange;
 
+    private double gyroTurnPID_kProportional;
+    private double gyroTurnPID_kIntegral;
+    private double gyroTurnPID_kDerivative;
+    private double gyroTurnPID_absTolerance;
+    private double gyroTurnPID_maxRange;
+    private double gyroTurnPID_minRange;
+
     @Override
     protected String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -21,6 +28,8 @@ public class ControlLoopConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
+
+        // VisionTurn
         visionTurnPID_kProportional = getDoublePropertyValue(
                 "drivetrain.visionTurnPID.kProportional", properties);
 
@@ -38,8 +47,28 @@ public class ControlLoopConfig extends BaseConfig {
 
         visionTurnPID_maxRange = getDoublePropertyValue(
                 "drivetrain.visionTurnPID.range.max", properties);
+
         visionTurnPID_minRange = getDoublePropertyValue(
                 "drivetrain.visionTurnPID.range.min", properties);
+
+        // Gyro
+        gyroTurnPID_kProportional = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.kProportional", properties);
+
+        gyroTurnPID_kIntegral = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.kIntegral", properties);
+
+        gyroTurnPID_kDerivative = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.kDerivative", properties);
+
+        gyroTurnPID_absTolerance = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.absTolerance", properties);
+
+        gyroTurnPID_maxRange = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.range.max", properties);
+
+        gyroTurnPID_minRange = getDoublePropertyValue(
+                "drivetrain.gyroTurnPID.range.min", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
@@ -69,4 +98,29 @@ public class ControlLoopConfig extends BaseConfig {
     public double getVisionTurnPID_centerCamera() {
         return visionTurnPID_centerCamera;
     }
+
+    public double getGyroTurnPID_kProportional() {
+        return gyroTurnPID_kProportional;
+    }
+
+    public double getGyroTurnPID_kIntegral() {
+        return gyroTurnPID_kIntegral;
+    }
+
+    public double getGyroTurnPID_kDerivative() {
+        return gyroTurnPID_kDerivative;
+    }
+
+    public double getGyroTurnPID_absTolerance() {
+        return gyroTurnPID_absTolerance;
+    }
+
+    public double getGyroTurnPID_maxRange() {
+        return gyroTurnPID_maxRange;
+    }
+
+    public double getGyroTurnPID_minRange() {
+        return gyroTurnPID_minRange;
+    }
+
 }
