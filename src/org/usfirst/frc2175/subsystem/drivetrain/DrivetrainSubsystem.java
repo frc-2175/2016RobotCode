@@ -156,9 +156,19 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void shiftToHighGear() {
+        setShifterState(ShifterStates.high);
     }
 
     public void shiftToLowGear() {
+        setShifterState(ShifterStates.low);
+    }
+
+    public void shiftToNeutral() {
+        setShifterState(ShifterStates.neutral);
+    }
+
+    public void shiftToClimb() {
+        setShifterState(ShifterStates.climb);
     }
 
     public void resetGyro() {
