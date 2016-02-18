@@ -115,6 +115,11 @@ public class PowertrainSubsystem extends BaseSubsystem {
         }
     }
 
+    public void winchWithPTO(double speed) {
+        leftDriveSideTalonGroup.set(speed);
+        rightDriveSideTalonGroup.set(speed);
+    }
+
     private void applyShifterState(int[] state) {
         for (int i = 0; i < state.length; i++) {
             if (state[i] == 0) {
