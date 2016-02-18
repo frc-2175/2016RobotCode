@@ -68,7 +68,7 @@ public class WiringConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        configurepowertrain(properties);
+        configurePowertrain(properties);
         configureCatapult(properties);
         configureManipulator(properties);
         configureDreamIntake(properties);
@@ -87,7 +87,7 @@ public class WiringConfig extends BaseConfig {
         }
     }
 
-    private void configurepowertrain(Properties properties) {
+    private void configurePowertrain(Properties properties) {
         int gyroPort = getIntPropertyValue("powertrain.gyro.port", properties);
         gyro = new AnalogGyro(gyroPort);
 
