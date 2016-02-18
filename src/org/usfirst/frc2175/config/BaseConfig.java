@@ -45,7 +45,9 @@ public abstract class BaseConfig {
     protected int[] getIntArrayPropertyValue(String propertyName,
             Properties props) {
 
-        String rawValues = props.getProperty(propertyName);
+        final String propertyValue =
+                getStringPropertyValue(propertyName, props);
+        String rawValues = propertyValue;
 
         rawValues = rawValues.replace("[", "");
         rawValues = rawValues.replace("]", "");
