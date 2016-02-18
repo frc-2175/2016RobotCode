@@ -17,13 +17,22 @@ public class PowertrainConfig extends BaseConfig {
     }
 
     @Override
-    protected void configure(Properties properties) {
-        stateLow = getIntArrayPropertyValue("shifters.state.low", properties);
-        stateHigh = getIntArrayPropertyValue("shifters.state.high", properties);
-        stateClimb =
+    protected void configure(Properties properties)
+            throws IllegalArgumentException {
+        this.stateLow =
+                getIntArrayPropertyValue("shifters.state.low", properties);
+        this.stateHigh =
+                getIntArrayPropertyValue("shifters.state.high", properties);
+        this.stateClimb =
                 getIntArrayPropertyValue("shifters.state.climb", properties);
-        stateNeutral =
+        this.stateNeutral =
                 getIntArrayPropertyValue("shifters.state.neutral", properties);
+        if (stateLow.length != stateHigh.length
+                || stateLow.length != stateNeutral.length
+                || stateLow.length != stateClimb.length) {
+            throw new IllegalStateException(
+                    "Shifter state arrays are different lengths!");
+        }
 
     }
 

@@ -44,7 +44,6 @@ public abstract class BaseConfig {
 
     protected int[] getIntArrayPropertyValue(String propertyName,
             Properties props) {
-        // TODO Really really should have a unit test
 
         String rawValues = props.getProperty(propertyName);
 
