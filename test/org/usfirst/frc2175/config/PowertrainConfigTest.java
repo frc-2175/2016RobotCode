@@ -9,7 +9,7 @@ public class PowertrainConfigTest extends TestBase {
             throws IllegalArgumentException, IllegalAccessException {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         PowertrainConfig sut = new PowertrainConfig();
-        assertDoublesNotZero(sut);
+        assertInstanceVariablesNotNull(sut);
     }
 
     @Test
@@ -17,6 +17,6 @@ public class PowertrainConfigTest extends TestBase {
             throws IllegalArgumentException, IllegalAccessException {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         PowertrainConfig sut = new PowertrainConfig();
-        assertDoublesNotZero(sut);
+        assertInstanceVariablesNotNull(sut);
     }
 }
