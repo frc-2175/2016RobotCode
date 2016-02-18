@@ -47,9 +47,7 @@ public abstract class BaseConfig {
 
         final String propertyValue =
                 getStringPropertyValue(propertyName, props);
-        String rawValues = propertyValue;
-
-        rawValues = rawValues.replace("[", "");
+        String rawValues = propertyValue.replace("[", "");
         rawValues = rawValues.replace("]", "");
         final String[] splitValues = rawValues.split(",");
 
