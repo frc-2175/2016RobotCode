@@ -22,24 +22,24 @@ public class ControlLoopConfig extends BaseConfig {
     @Override
     protected void configure(Properties properties) {
         visionTurnPID_kProportional = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.kProportional", properties);
+                "powertrain.visionTurnPID.kProportional", properties);
 
         visionTurnPID_kIntegral = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.kIntegral", properties);
+                "powertrain.visionTurnPID.kIntegral", properties);
 
         visionTurnPID_kDerivative = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.kDerivative", properties);
+                "powertrain.visionTurnPID.kDerivative", properties);
 
         visionTurnPID_absTolerance = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.absTolerance", properties);
+                "powertrain.visionTurnPID.absTolerance", properties);
 
         visionTurnPID_centerCamera = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.centerCamera", properties);
+                "powertrain.visionTurnPID.centerCamera", properties);
 
         visionTurnPID_maxRange = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.range.max", properties);
+                "powertrain.visionTurnPID.range.max", properties);
         visionTurnPID_minRange = getDoublePropertyValue(
-                "drivetrain.visionTurnPID.range.min", properties);
+                "powertrain.visionTurnPID.range.min", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
