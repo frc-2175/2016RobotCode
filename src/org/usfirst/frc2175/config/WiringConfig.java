@@ -360,4 +360,9 @@ public class WiringConfig extends BaseConfig {
     public Talon getDreamIntakeLiftTalon() {
         return dreamIntakeLiftTalon;
     }
+
+    public Solenoid[] getShifterSolenoids() {
+        return shifterSolenoids;
+    }
+
 }

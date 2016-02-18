@@ -14,6 +14,12 @@ public class RobotConfig {
     private final CatapultShooterConfig catapultShooterConfig =
             new CatapultShooterConfig();
 
+    private final PowertrainConfig powertrainConfig = new PowertrainConfig();
+
+    public PowertrainConfig getPowertrainConfig() {
+        return powertrainConfig;
+    }
+
     public GamepadConfig getGamepadConfig() {
         return gamepadConfig;
     }

@@ -1,27 +1,30 @@
 package org.usfirst.frc2175.subsystem.drivetrain;
 
 import org.usfirst.frc2175.config.ControlLoopConfig;
+import org.usfirst.frc2175.config.PowertrainConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 import org.usfirst.frc2175.util.TalonGroup;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DrivetrainSubsystem extends BaseSubsystem {
+    private PowertrainConfig powertrainConfig;
+
     private TalonGroup leftDriveSideTalonGroup;
     private TalonGroup rightDriveSideTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
-    private DoubleSolenoid driveShifters;
+    private Solenoid[] driveShifters;
     private Gyro gyro;
 
     private RobotDrive robotDrive;
@@ -33,12 +36,15 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     public DrivetrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        powertrainConfig = robotConfig.getPowertrainConfig();
 
         leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonHandler();
         rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
         gyro = wiringConfig.getGyro();
+
+        driveShifters = wiringConfig.getShifterSolenoids();
 
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
                 rightDriveSideTalonGroup);
@@ -97,6 +103,39 @@ public class DrivetrainSubsystem extends BaseSubsystem {
         robotDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
+    private void applyShifterState(int[] state) {
+        for (int i = 0; i < state.length; i++) {
+            if (state[i] == 0) {
+                driveShifters[i].set(false);
+            } else {
+                driveShifters[i].set(true);
+            }
+        }
+    }
+
+    private void setShifterState(ShifterStates state) {
+
+        int[] pwmValues = {};
+
+        switch (state) {
+        case low:
+            pwmValues = powertrainConfig.getStateLow();
+            break;
+        case high:
+            pwmValues = powertrainConfig.getStateHigh();
+            break;
+        case neutral:
+            pwmValues = powertrainConfig.getStateNeutral();
+            break;
+        case climb:
+            pwmValues = powertrainConfig.getStateClimb();
+            break;
+        }
+
+        applyShifterState(pwmValues);
+
+    }
+
     public void resetEncoders() {
         leftDriveEncoder.reset();
         rightDriveEncoder.reset();
@@ -140,5 +179,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     public PIDController getVisionTurnController() {
         return visionTurnController;
+    }
+
+    private enum ShifterStates {
+        low, high, neutral, climb;
     }
 }
