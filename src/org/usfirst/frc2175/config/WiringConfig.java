@@ -79,10 +79,12 @@ public class WiringConfig extends BaseConfig {
     private void configureShifters(Properties properties) {
         int[] solenoidPorts = getIntArrayPropertyValue(
                 "shifter.solenoid.portArray", properties);
+        shifterSolenoids = new Solenoid[solenoidPorts.length];
+
         for (int i = 0; i < solenoidPorts.length; i++) {
-
+            Solenoid solenoid = new Solenoid(solenoidPorts[i]);
+            shifterSolenoids[i] = solenoid;
         }
-
     }
 
     private void configureDrivetrain(Properties properties) {
