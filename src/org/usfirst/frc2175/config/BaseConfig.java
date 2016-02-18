@@ -54,7 +54,7 @@ public abstract class BaseConfig {
 
         int[] returnValues = new int[splitValues.length];
         for (int i = 0; i < splitValues.length; i++) {
-            returnValues[i] = Integer.parseInt(splitValues[i]);
+            returnValues[i] = Integer.parseInt(splitValues[i].trim());
         }
 
         return returnValues;
