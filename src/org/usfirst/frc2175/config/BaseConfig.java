@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.config;
 
-import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -48,26 +47,17 @@ public abstract class BaseConfig {
         // TODO Really really should have a unit test
 
         String rawValues = props.getProperty(propertyName);
-        ArrayList<Integer> values = new ArrayList<Integer>();
 
         rawValues = rawValues.replace("[", "");
         rawValues = rawValues.replace("]", "");
         final String[] splitValues = rawValues.split(",");
 
-        int length = splitValues.length;
-
-        for (int i = 0; i < length; i++) {
-            values.add(Integer.parseInt(splitValues[i]));
-        }
-
-        int[] returnValues = new int[values.size()];
-
-        for (int i = 0; i < values.size(); i++) {
-            returnValues[i] = values.get(i);
+        int[] returnValues = new int[splitValues.length];
+        for (int i = 0; i < splitValues.length; i++) {
+            returnValues[i] = Integer.parseInt(splitValues[i]);
         }
 
         return returnValues;
-
     }
 
     protected double getDoublePropertyValue(String propertyName,
