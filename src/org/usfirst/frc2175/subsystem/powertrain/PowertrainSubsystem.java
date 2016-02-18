@@ -98,26 +98,30 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-        if (shifterState == ShifterState.high
-                || shifterState == ShifterState.low) {
+        // If the shifters are in a state where we can drive, drive. Otherwise,
+        // do nothing
+        if (isDriveEngaged()) {
             robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
         } else {
-            robotDrive.stopMotor();
         }
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        if (shifterState == ShifterState.high
-                || shifterState == ShifterState.low) {
+        // If the shifters are in a state where we can drive, drive. Otherwise,
+        // do nothing
+        if (isDriveEngaged()) {
             robotDrive.tankDrive(leftSpeed, rightSpeed);
         } else {
-            robotDrive.stopMotor();
         }
     }
 
     public void winchWithPTO(double speed) {
-        leftDriveSideTalonGroup.set(speed);
-        rightDriveSideTalonGroup.set(speed);
+        // If shifted to climb, set motors, else do nothing
+        if (isClimberEngaged()) {
+            leftDriveSideTalonGroup.set(speed);
+            rightDriveSideTalonGroup.set(speed);
+        } else {
+        }
     }
 
     private void applyShifterState(int[] state) {
@@ -135,16 +139,16 @@ public class PowertrainSubsystem extends BaseSubsystem {
         int[] pwmValues = {};
 
         switch (state) {
-        case low:
+        case LOW:
             pwmValues = powertrainConfig.getStateLow();
             break;
-        case high:
+        case HIGH:
             pwmValues = powertrainConfig.getStateHigh();
             break;
-        case neutral:
+        case NEUTRAL:
             pwmValues = powertrainConfig.getStateNeutral();
             break;
-        case climb:
+        case CLIMB:
             pwmValues = powertrainConfig.getStateClimb();
             break;
         }
@@ -177,19 +181,28 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public void shiftToHighGear() {
-        setShifterState(ShifterState.high);
+        setShifterState(ShifterState.HIGH);
     }
 
     public void shiftToLowGear() {
-        setShifterState(ShifterState.low);
+        setShifterState(ShifterState.LOW);
     }
 
     public void shiftToNeutral() {
-        setShifterState(ShifterState.neutral);
+        setShifterState(ShifterState.NEUTRAL);
     }
 
     public void shiftToClimb() {
-        setShifterState(ShifterState.climb);
+        setShifterState(ShifterState.CLIMB);
+    }
+
+    public boolean isDriveEngaged() {
+        return shifterState == ShifterState.HIGH
+                || shifterState == ShifterState.LOW;
+    }
+
+    public boolean isClimberEngaged() {
+        return shifterState == ShifterState.CLIMB;
     }
 
     public void resetGyro() {
@@ -213,6 +226,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     private enum ShifterState {
-        low, high, neutral, climb;
+        LOW, HIGH, NEUTRAL, CLIMB;
     }
 }
