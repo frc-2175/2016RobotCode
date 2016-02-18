@@ -10,6 +10,7 @@ public class PowertrainConfigTest extends TestBase {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         PowertrainConfig sut = new PowertrainConfig();
         assertInstanceVariablesNotNull(sut);
+        assertArraysNotZeroLength(sut);
     }
 
     @Test
@@ -18,5 +19,6 @@ public class PowertrainConfigTest extends TestBase {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         PowertrainConfig sut = new PowertrainConfig();
         assertInstanceVariablesNotNull(sut);
+        assertArraysNotZeroLength(sut);
     }
 }

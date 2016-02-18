@@ -3,6 +3,7 @@ package org.usfirst.frc2175;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
@@ -72,16 +73,18 @@ public abstract class TestBase {
     protected void assertArraysNotZeroLength(Object sut)
             throws IllegalArgumentException, IllegalAccessException {
         Field[] fields = sut.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
+        for (Field field : fields) {
+            field.setAccessible(true);
 
-            if (fields[i].getClass().isArray()) {
+            Class<?> type = field.getType();
+            if (type.isArray()) {
+                Object array = field.get(sut);
+                int length = Array.getLength(array);
+
                 String assertMessage =
-                        "Field " + fields[i].getName() + " was length zero";
-                // Some assertThat that checks that the length of the array is
-                // not zero
+                        "Array field " + field.getName() + " was length zero.";
+                assertNotEquals(assertMessage, 0, length);
             }
-
         }
     }
 }
