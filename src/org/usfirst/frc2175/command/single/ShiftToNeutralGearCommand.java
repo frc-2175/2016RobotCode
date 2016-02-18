@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftToNeutralGearCommand2 extends Command {
+public class ShiftToNeutralGearCommand extends Command {
     private final PowertrainSubsystem powertrainSubsystem;
 
-    public ShiftToNeutralGearCommand2(RobotSubsystems robotSubsystems) {
+    public ShiftToNeutralGearCommand(RobotSubsystems robotSubsystems) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }
 
