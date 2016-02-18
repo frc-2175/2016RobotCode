@@ -77,6 +77,11 @@ public class WiringConfig extends BaseConfig {
     }
 
     private void configureShifters(Properties properties) {
+        int[] solenoidPorts = getIntArrayPropertyValue(
+                "shifter.solenoid.portArray", properties);
+        for (int i = 0; i < solenoidPorts.length; i++) {
+
+        }
 
     }
 
