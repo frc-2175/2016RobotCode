@@ -26,11 +26,12 @@ public class WiringConfig extends BaseConfig {
     // Drivetrain
     private TalonGroup leftDriveTalonGroup;
     private TalonGroup rightDriveTalonGroup;
-
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Gyro gyro;
-    private DoubleSolenoid driveShifters;
+
+    // Shifters
+    private Solenoid[] shifterSolenoids;
 
     // Dream intake
     private Talon dreamIntakeSideBeltTalon;
@@ -72,6 +73,11 @@ public class WiringConfig extends BaseConfig {
         configureManipulator(properties);
         configureDreamIntake(properties);
         configureRollerbarIntake(properties);
+        configureShifters(properties);
+    }
+
+    private void configureShifters(Properties properties) {
+
     }
 
     private void configureDrivetrain(Properties properties) {
@@ -100,8 +106,6 @@ public class WiringConfig extends BaseConfig {
                 "drivetrain.solenoid.driveShifters.port.a", properties);
         int driveShiftersSolenoidPortB = getIntPropertyValue(
                 "drivetrain.solenoid.driveShifters.port.b", properties);
-        driveShifters = new DoubleSolenoid(driveShiftersSolenoidPortA,
-                driveShiftersSolenoidPortB);
 
         int leftDriveTalon1Port =
                 getIntPropertyValue("drivetrain.talon.left.1.port", properties);
@@ -225,14 +229,14 @@ public class WiringConfig extends BaseConfig {
                 "manipulator.switch.boot.down.port", properties);
         isBootDownSwitch = new DigitalInput(isBootDownSwitchPort);
 
-        int bootEncoderA = getIntPropertyValue("manipulator.encoder.port.a",
-                properties);
-        int bootEncoderB = getIntPropertyValue("manipulator.encoder.port.b",
-                properties);
+        int bootEncoderA =
+                getIntPropertyValue("manipulator.encoder.port.a", properties);
+        int bootEncoderB =
+                getIntPropertyValue("manipulator.encoder.port.b", properties);
         boolean isBootEncoderReversed = getBooleanPropertyValue(
                 "manipulator.encoder.isReversed", properties);
-        bootEncoder = new Encoder(bootEncoderA, bootEncoderB,
-                isBootEncoderReversed);
+        bootEncoder =
+                new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
 
         // double bootSpeed =
         // getDoublePropertyValue("manipulator.boot.speed", properties);
@@ -244,10 +248,6 @@ public class WiringConfig extends BaseConfig {
 
     public CANTalon getRollerbarIntakeLiftTalon() {
         return rollerbarIntakeLiftTalon;
-    }
-
-    public DoubleSolenoid getDriveShifters() {
-        return driveShifters;
     }
 
     public TalonGroup getLeftDriveTalonGroup() {
