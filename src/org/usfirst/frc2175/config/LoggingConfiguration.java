@@ -16,15 +16,15 @@ import java.util.logging.XMLFormatter;
 
 public class LoggingConfiguration extends BaseConfig {
     /** Use ROBOT_LOCATION for deployment running. */
-    public static final String LOGGING_PROPERTIES_FILE_ROBOT_NAME =
-            "logging.properties";
+    public static final String LOGGING_PROPERTIES_FILE_ROBOT_LOCATION =
+            "/home/lvuser/logging.properties";
 
     /** Use ACTUAL_LOCATION for tests. */
-    public static final String LOGGING_PROPERTIES_FILE__LOCATION =
-            "src/logging.properties";
+    public static final String LOGGING_PROPERTIES_FILE_ACTUAL_LOCATION =
+            "src/properties/competitionbot/logging.properties";
 
     private String loggingPropertiesFileToUse =
-            LOGGING_PROPERTIES_FILE_ROBOT_NAME;
+            LOGGING_PROPERTIES_FILE_ROBOT_LOCATION;
 
     public void initializeLogging() {
         initializeFileLog();
