@@ -15,33 +15,31 @@ import java.util.logging.SocketHandler;
 import java.util.logging.XMLFormatter;
 
 public class LoggingConfiguration extends BaseConfig {
-    /** Use ROBOT_LOCATION for deployment running. */
-    public static final String LOGGING_PROPERTIES_FILE_ROBOT_LOCATION =
-            "/home/lvuser/logging.properties";
+    private static final String PROPERTY_FILE_NAME = "logging.properties";
 
-    /** Use ACTUAL_LOCATION for tests. */
-    public static final String LOGGING_PROPERTIES_FILE_ACTUAL_LOCATION =
-            "src/properties/competitionbot/logging.properties";
-
-    private String loggingPropertiesFileToUse =
-            LOGGING_PROPERTIES_FILE_ROBOT_LOCATION;
-
-    public void initializeLogging() {
-        initializeFileLog();
-        initializeSocketLog();
+    @Override
+    protected String getPropertyFileName() {
+        return PROPERTY_FILE_NAME;
     }
 
-    protected void initializeFileLog() {
+    @Override
+    protected void configure(final Properties properties) {
+        final String propertyFile = getFullyQualifiedPropertyFileName();
+        initializeFileLog(propertyFile);
+        initializeSocketLog(propertyFile);
+    }
+
+    protected void initializeFileLog(final String propertyFile) {
         final LogManager logManager = LogManager.getLogManager();
 
-        try (InputStream in =
-                new FileInputStream(loggingPropertiesFileToUse);) {
+        // regretfully the icky java.util.logging won't allow adding an existing
+        // property file to it so we have to reload the properties file again
+        try (final InputStream in = new FileInputStream(propertyFile)) {
             logManager.readConfiguration(in);
         } catch (FileNotFoundException e) {
             throw new IllegalStateException(
-                    "Did not find logging properties file="
-                            + loggingPropertiesFileToUse + ", msg="
-                            + e.getMessage(),
+                    "Did not find logging properties file=" + propertyFile
+                            + ", msg=" + e.getMessage(),
                     e);
         } catch (SecurityException | IOException e) {
             throw new IllegalStateException("Unable to read logging properties",
@@ -57,19 +55,19 @@ public class LoggingConfiguration extends BaseConfig {
                 + ", configured level=" + levelProperty);
     }
 
-    protected void initializeSocketLog() {
-        final Handler handler = makeSocketHandler();
+    protected void initializeSocketLog(final String propertyFile) {
+        final Handler handler = makeSocketHandler(propertyFile);
 
         if (handler != null) {
             configureSocketHandler(handler);
         }
     }
 
-    protected Handler makeSocketHandler() {
+    protected Handler makeSocketHandler(final String propertyFile) {
         final Logger log = Logger.getLogger(getClass().getName());
 
-        final Properties props = new PropertiesLoader()
-                .loadProperties(loggingPropertiesFileToUse);
+        final Properties props =
+                new PropertiesLoader().loadProperties(propertyFile);
 
         final String socketHandlerHostname =
                 getStringPropertyValue("socket.handler.hostname", props);
@@ -108,26 +106,4 @@ public class LoggingConfiguration extends BaseConfig {
         final Logger rootLogger = Logger.getLogger("");
         rootLogger.addHandler(handler);
     }
-
-    public String getLoggingPropertiesFileToUse() {
-        return loggingPropertiesFileToUse;
-    }
-
-    public void setLoggingPropertiesFileToUse(
-            String loggingPropertiesFileToUse) {
-        this.loggingPropertiesFileToUse = loggingPropertiesFileToUse;
-    }
-
-    @Override
-    protected String getPropertyFileName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    protected void configure(Properties properties) {
-        // TODO Auto-generated method stub
-
-    }
-
 }

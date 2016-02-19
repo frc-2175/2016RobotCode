@@ -14,7 +14,7 @@ public abstract class BaseConfig {
     private static String propertyFileDir = PROPERTY_FILE_DIR_DEFAULT;
 
     public BaseConfig() {
-        final String propertyFileName = propertyFileDir + getPropertyFileName();
+        final String propertyFileName = getFullyQualifiedPropertyFileName();
         final Properties properties =
                 new PropertiesLoader().loadProperties(propertyFileName);
         configure(properties);
@@ -60,6 +60,10 @@ public abstract class BaseConfig {
         final String propertyValue =
                 getStringPropertyValue(propertyName, props);
         return Boolean.parseBoolean(propertyValue);
+    }
+
+    public String getFullyQualifiedPropertyFileName() {
+        return propertyFileDir + getPropertyFileName();
     }
 
     public static String getPropertyFileDir() {

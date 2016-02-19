@@ -4,6 +4,11 @@ package org.usfirst.frc2175.config;
  * Robot configuration values.
  */
 public class RobotConfig {
+    // WARNING: must place LoggingConfiguration first!
+    // so that logging configured ASAP to capture and other problems
+    private final LoggingConfiguration loggingConfiguration =
+            new LoggingConfiguration();
+
     private final GamepadConfig gamepadConfig = new GamepadConfig();
     private final JoysticksConfig joystickConfig = new JoysticksConfig();
     private final WiringConfig wiringConfig = new WiringConfig();
@@ -13,6 +18,10 @@ public class RobotConfig {
     private final IntakeConfig intakeConfig = new IntakeConfig();
     private final CatapultShooterConfig catapultShooterConfig =
             new CatapultShooterConfig();
+
+    public LoggingConfiguration getLoggingConfiguration() {
+        return loggingConfiguration;
+    }
 
     public GamepadConfig getGamepadConfig() {
         return gamepadConfig;
