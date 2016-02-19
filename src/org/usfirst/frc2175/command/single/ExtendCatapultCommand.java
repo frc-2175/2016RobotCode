@@ -1,5 +1,8 @@
 package org.usfirst.frc2175.command.single;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
@@ -10,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ExtendCatapultCommand extends Command {
     private CatapultShooterSubsystem catapultSubsystem;
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     public ExtendCatapultCommand(RobotSubsystems robotSubsystems) {
         catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
@@ -21,6 +25,8 @@ public class ExtendCatapultCommand extends Command {
     @Override
     protected void initialize() {
         catapultSubsystem.setCatapultPosition(true);
+        log.log(Level.FINE, "Raising catapult!");
+
     }
 
     // Called repeatedly when this Command is scheduled to run

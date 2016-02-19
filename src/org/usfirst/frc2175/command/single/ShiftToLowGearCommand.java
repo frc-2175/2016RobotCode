@@ -1,5 +1,8 @@
 package org.usfirst.frc2175.command.single;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
@@ -10,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShiftToLowGearCommand extends Command {
     private final PowertrainSubsystem powertrainSubsystem;
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     public ShiftToLowGearCommand(RobotSubsystems robotSubsystems) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
@@ -18,6 +22,7 @@ public class ShiftToLowGearCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        log.log(Level.FINE, "Shifting to high gear");
         powertrainSubsystem.shiftToLowGear();
     }
 
