@@ -15,7 +15,7 @@ public class LoggingConfigTest {
     @Test
     public void testInitializeFileLog() {
         sut.setLoggingPropertiesFileToUse(
-                LoggingConfiguration.LOGGING_PROPERTIES_FILE__LOCATION);
+                LoggingConfiguration.LOGGING_PROPERTIES_FILE_ACTUAL_LOCATION);
         sut.initializeFileLog();
 
         Logger log = Logger.getLogger(getClass().getName());
@@ -33,7 +33,7 @@ public class LoggingConfigTest {
     @Test
     public void testInitializeSocketLog() {
         sut.setLoggingPropertiesFileToUse(
-                LoggingConfiguration.LOGGING_PROPERTIES_FILE__LOCATION);
+                LoggingConfiguration.LOGGING_PROPERTIES_FILE_ACTUAL_LOCATION);
         sut.initializeSocketLog();
         Logger log = Logger.getLogger(getClass().getName());
         log.info("log a test msg");
@@ -42,7 +42,7 @@ public class LoggingConfigTest {
     @Test
     public void testInitializeLogging() {
         sut.setLoggingPropertiesFileToUse(
-                LoggingConfiguration.LOGGING_PROPERTIES_FILE__LOCATION);
+                LoggingConfiguration.LOGGING_PROPERTIES_FILE_ACTUAL_LOCATION);
         sut.initializeLogging();
 
         Logger log = Logger.getLogger(getClass().getName());
