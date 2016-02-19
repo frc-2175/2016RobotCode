@@ -9,7 +9,6 @@ public class PowertrainConfig extends BaseConfig {
     private int[] stateLow;
     private int[] stateHigh;
     private int[] stateClimb;
-    private int[] stateNeutral;
 
     @Override
     protected String getPropertyFileName() {
@@ -25,10 +24,8 @@ public class PowertrainConfig extends BaseConfig {
                 getIntArrayPropertyValue("shifters.state.high", properties);
         this.stateClimb =
                 getIntArrayPropertyValue("shifters.state.climb", properties);
-        this.stateNeutral =
-                getIntArrayPropertyValue("shifters.state.neutral", properties);
+
         if (stateLow.length != stateHigh.length
-                || stateLow.length != stateNeutral.length
                 || stateLow.length != stateClimb.length) {
             throw new IllegalStateException(
                     "Shifter state arrays are different lengths!");
@@ -46,10 +43,6 @@ public class PowertrainConfig extends BaseConfig {
 
     public int[] getStateClimb() {
         return stateClimb;
-    }
-
-    public int[] getStateNeutral() {
-        return stateNeutral;
     }
 
 }
