@@ -145,9 +145,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         case HIGH:
             pwmValues = powertrainConfig.getStateHigh();
             break;
-        case NEUTRAL:
-            pwmValues = powertrainConfig.getStateNeutral();
-            break;
         case CLIMB:
             pwmValues = powertrainConfig.getStateClimb();
             break;
@@ -188,10 +185,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         setShifterState(ShifterState.LOW);
     }
 
-    public void shiftToNeutral() {
-        setShifterState(ShifterState.NEUTRAL);
-    }
-
     public void shiftToClimb() {
         setShifterState(ShifterState.CLIMB);
     }
@@ -226,6 +219,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     private enum ShifterState {
-        LOW, HIGH, NEUTRAL, CLIMB;
+        LOW, HIGH, CLIMB;
     }
 }
