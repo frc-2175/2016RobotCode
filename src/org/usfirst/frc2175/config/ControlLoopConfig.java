@@ -1,7 +1,6 @@
 package org.usfirst.frc2175.config;
 
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ControlLoopConfig extends BaseConfig {
@@ -44,10 +43,6 @@ public class ControlLoopConfig extends BaseConfig {
         visionTurnPID_minRange = getDoublePropertyValue(
                 "powertrain.visionTurnPID.range.min", properties);
 
-        log.log(Level.CONFIG,
-                "Setting vision turn PID: kP =" + visionTurnPID_kProportional
-                        + "; kI=" + visionTurnPID_kIntegral + "; kD="
-                        + visionTurnPID_kDerivative);
     }
 
     public double getVisionTurnPID_kProportional() {
