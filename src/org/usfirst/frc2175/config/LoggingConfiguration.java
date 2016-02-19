@@ -34,19 +34,15 @@ public class LoggingConfiguration extends BaseConfig {
     protected void initializeFileLog() {
         final LogManager logManager = LogManager.getLogManager();
 
-        InputStream in;
-        try {
-            in = new FileInputStream(loggingPropertiesFileToUse);
+        try (InputStream in =
+                new FileInputStream(loggingPropertiesFileToUse);) {
+            logManager.readConfiguration(in);
         } catch (FileNotFoundException e) {
             throw new IllegalStateException(
                     "Did not find logging properties file="
                             + loggingPropertiesFileToUse + ", msg="
                             + e.getMessage(),
                     e);
-        }
-
-        try {
-            logManager.readConfiguration(in);
         } catch (SecurityException | IOException e) {
             throw new IllegalStateException("Unable to read logging properties",
                     e);
