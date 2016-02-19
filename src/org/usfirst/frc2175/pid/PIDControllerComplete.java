@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public abstract class PIDControllerComplete extends PIDController implements
-        PIDSource, PIDOutput {
+public abstract class PIDControllerComplete extends PIDController
+        implements PIDSource, PIDOutput {
     /**
      * How often, in ms, the PID controller will update when enabled. Hardcoded
      * because there's no reason to run it any slower.
@@ -16,11 +16,12 @@ public abstract class PIDControllerComplete extends PIDController implements
     private PIDSourceType pidSource;
 
     public PIDControllerComplete() {
-        this(1, 1, 1);
+        this(0, 0, 0);
     }
 
     public PIDControllerComplete(double p, double i, double d) {
-        super(p, i, d, new DummyPIDHandler(), new DummyPIDHandler(), PID_PERIOD);
+        super(p, i, d, new DummyPIDHandler(), new DummyPIDHandler(),
+                PID_PERIOD);
         this.m_pidInput = this;
         this.m_pidOutput = this;
     }
