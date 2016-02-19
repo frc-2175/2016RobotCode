@@ -1,28 +1,33 @@
-package org.usfirst.frc2175.subsystem.drivetrain;
+package org.usfirst.frc2175.subsystem.powertrain;
 
 import org.usfirst.frc2175.config.ControlLoopConfig;
+import org.usfirst.frc2175.config.PowertrainConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 import org.usfirst.frc2175.util.TalonGroup;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-public class DrivetrainSubsystem extends BaseSubsystem {
+public class PowertrainSubsystem extends BaseSubsystem {
+    private PowertrainConfig powertrainConfig;
+
     private TalonGroup leftDriveSideTalonGroup;
     private TalonGroup rightDriveSideTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
-    private DoubleSolenoid driveShifters;
+    private Solenoid[] driveShifters;
     private Gyro gyro;
+
+    private ShifterState shifterState;
 
     private RobotDrive robotDrive;
 
@@ -31,15 +36,17 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     private double centerCameraXValue;
     private double largestContourCenterXValue;
 
-    public DrivetrainSubsystem(RobotConfig robotConfig) {
+    public PowertrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        powertrainConfig = robotConfig.getPowertrainConfig();
 
         leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonHandler();
         rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
-        driveShifters = wiringConfig.getDriveShifters();
         gyro = wiringConfig.getGyro();
+
+        driveShifters = wiringConfig.getShifterSolenoids();
 
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
                 rightDriveSideTalonGroup);
@@ -91,11 +98,64 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-        robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+        // If the shifters are in a state where we can drive, drive. Otherwise,
+        // do nothing
+        if (isDriveEngaged()) {
+            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+        } else {
+        }
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        robotDrive.tankDrive(leftSpeed, rightSpeed);
+        // If the shifters are in a state where we can drive, drive. Otherwise,
+        // do nothing
+        if (isDriveEngaged()) {
+            robotDrive.tankDrive(leftSpeed, rightSpeed);
+        } else {
+        }
+    }
+
+    public void winchWithPTO(double speed) {
+        // If shifted to climb, set motors, else do nothing
+        if (isClimberEngaged()) {
+            leftDriveSideTalonGroup.set(speed);
+            rightDriveSideTalonGroup.set(speed);
+        } else {
+        }
+    }
+
+    private void applyShifterState(int[] state) {
+        for (int i = 0; i < state.length; i++) {
+            if (state[i] == 0) {
+                driveShifters[i].set(false);
+            } else {
+                driveShifters[i].set(true);
+            }
+        }
+    }
+
+    private void setShifterState(ShifterState state) {
+
+        int[] pwmValues = {};
+
+        switch (state) {
+        case LOW:
+            pwmValues = powertrainConfig.getStateLow();
+            break;
+        case HIGH:
+            pwmValues = powertrainConfig.getStateHigh();
+            break;
+        case CLIMB:
+            pwmValues = powertrainConfig.getStateClimb();
+            break;
+        }
+        shifterState = state;
+        applyShifterState(pwmValues);
+
+    }
+
+    public ShifterState getShifterState() {
+        return shifterState;
     }
 
     public void resetEncoders() {
@@ -118,11 +178,24 @@ public class DrivetrainSubsystem extends BaseSubsystem {
     }
 
     public void shiftToHighGear() {
-        driveShifters.set(DoubleSolenoid.Value.kForward);
+        setShifterState(ShifterState.HIGH);
     }
 
     public void shiftToLowGear() {
-        driveShifters.set(DoubleSolenoid.Value.kReverse);
+        setShifterState(ShifterState.LOW);
+    }
+
+    public void shiftToClimb() {
+        setShifterState(ShifterState.CLIMB);
+    }
+
+    public boolean isDriveEngaged() {
+        return shifterState == ShifterState.HIGH
+                || shifterState == ShifterState.LOW;
+    }
+
+    public boolean isClimberEngaged() {
+        return shifterState == ShifterState.CLIMB;
     }
 
     public void resetGyro() {
@@ -143,5 +216,9 @@ public class DrivetrainSubsystem extends BaseSubsystem {
 
     public PIDController getVisionTurnController() {
         return visionTurnController;
+    }
+
+    private enum ShifterState {
+        LOW, HIGH, CLIMB;
     }
 }

@@ -1,7 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
-import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
+import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,16 +9,16 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShiftToHighGearCommand extends Command {
-    private final DrivetrainSubsystem drivetrainSubsystem;
+    private final PowertrainSubsystem powertrainSubsystem;
 
     public ShiftToHighGearCommand(RobotSubsystems robotSubsystems) {
-        this.drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
+        this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        drivetrainSubsystem.shiftToHighGear();
+        powertrainSubsystem.shiftToHighGear();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,7 +35,7 @@ public class ShiftToHighGearCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        drivetrainSubsystem.shiftToLowGear();
+        powertrainSubsystem.shiftToLowGear();
     }
 
     // Called when another command which requires one or more of the same

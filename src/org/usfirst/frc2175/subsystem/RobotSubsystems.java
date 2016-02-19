@@ -3,9 +3,9 @@ package org.usfirst.frc2175.subsystem;
 import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
-import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
 import org.usfirst.frc2175.subsystem.intake.RollerbarIntakeSubsystem;
 import org.usfirst.frc2175.subsystem.manipulator.ManipulatorSubsystem;
+import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 public class RobotSubsystems {
@@ -14,7 +14,7 @@ public class RobotSubsystems {
 
     // TODO add remaining subsystems
     private final RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
-    private final DrivetrainSubsystem drivetrainSubsystem;
+    private final PowertrainSubsystem powertrainSubsystem;
     private final CatapultShooterSubsystem catapultShooterSubsystem;
     private final ManipulatorSubsystem manipulatorSubsystem;
 
@@ -24,7 +24,7 @@ public class RobotSubsystems {
         this.driverStation = driverStation;
 
         rollerbarIntakeSubsystem = new RollerbarIntakeSubsystem(robotConfig);
-        drivetrainSubsystem = new DrivetrainSubsystem(robotConfig);
+        powertrainSubsystem = new PowertrainSubsystem(robotConfig);
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
         manipulatorSubsystem = new ManipulatorSubsystem(robotConfig);
 
@@ -36,7 +36,7 @@ public class RobotSubsystems {
     }
 
     protected void setDefaultCommands() {
-        drivetrainSubsystem.setDefaultCommand(
+        powertrainSubsystem.setDefaultCommand(
                 new ArcadeDriveWithJoysticksCommand(driverStation, this));
     }
 
@@ -44,8 +44,8 @@ public class RobotSubsystems {
         return rollerbarIntakeSubsystem;
     }
 
-    public DrivetrainSubsystem getDrivetrainSubsystem() {
-        return drivetrainSubsystem;
+    public PowertrainSubsystem getPowertrainSubsystem() {
+        return powertrainSubsystem;
     }
 
     public CatapultShooterSubsystem getCatapultShooterSubsystem() {

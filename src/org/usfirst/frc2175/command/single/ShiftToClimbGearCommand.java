@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.command.single;
 
-import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
@@ -9,29 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArcadeDriveWithJoysticksCommand extends Command {
-    private final DriverStation driverStation;
+public class ShiftToClimbGearCommand extends Command {
     private final PowertrainSubsystem powertrainSubsystem;
 
-    public ArcadeDriveWithJoysticksCommand(DriverStation driverStation,
-            RobotSubsystems robotSubsystems) {
-        this.driverStation = driverStation;
+    public ShiftToClimbGearCommand(RobotSubsystems robotSubsystems) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-
-        requires(powertrainSubsystem);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        powertrainSubsystem.shiftToClimb();
+        ;
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        double moveValue = driverStation.getMoveValue();
-        double turnValue = driverStation.getTurnValue();
-        powertrainSubsystem.arcadeDrive(moveValue, turnValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +36,7 @@ public class ArcadeDriveWithJoysticksCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        powertrainSubsystem.arcadeDrive(0, 0);
+        powertrainSubsystem.shiftToLowGear();
     }
 
     // Called when another command which requires one or more of the same

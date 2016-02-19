@@ -3,6 +3,7 @@ package org.usfirst.frc2175;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
@@ -44,13 +45,14 @@ public abstract class TestBase {
     protected void assertInstanceVariablesNotNull(Object sut)
             throws IllegalArgumentException, IllegalAccessException {
         Field[] fields = sut.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
+        for (Field field : fields) {
+            field.setAccessible(true);
 
-            if (!fields[i].getType().isPrimitive()) {
+            Class<?> type = field.getType();
+            if (!type.isPrimitive()) {
                 String assertMessage =
-                        "Field " + fields[i].getName() + " was null";
-                assertNotNull(assertMessage, fields[i].get(sut));
+                        "Field " + field.getName() + " was null.";
+                assertNotNull(assertMessage, field.get(sut));
             }
         }
     }
@@ -58,13 +60,32 @@ public abstract class TestBase {
     protected void assertDoublesNotZero(Object sut)
             throws IllegalArgumentException, IllegalAccessException {
         Field[] fields = sut.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
+        for (Field field : fields) {
+            field.setAccessible(true);
 
-            if (fields[i].getType().getName().equals("double")) {
+            Class<?> type = field.getType();
+            if (type.getName().equals("double")) {
                 String assertMessage =
-                        "Field " + fields[i].getName() + " was zero";
-                assertNotEquals(assertMessage, 0, fields[i].get(sut));
+                        "Field " + field.getName() + " was zero.";
+                assertNotEquals(assertMessage, 0, field.get(sut));
+            }
+        }
+    }
+
+    protected void assertArraysNotZeroLength(Object sut)
+            throws IllegalArgumentException, IllegalAccessException {
+        Field[] fields = sut.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            Class<?> type = field.getType();
+            if (type.isArray()) {
+                Object array = field.get(sut);
+                int length = Array.getLength(array);
+
+                String assertMessage =
+                        "Array field " + field.getName() + " was length zero.";
+                assertNotEquals(assertMessage, 0, length);
             }
         }
     }

@@ -42,6 +42,23 @@ public abstract class BaseConfig {
         return value;
     }
 
+    protected int[] getIntArrayPropertyValue(String propertyName,
+            Properties props) {
+
+        final String propertyValue =
+                getStringPropertyValue(propertyName, props);
+        String rawValues = propertyValue.replace("[", "");
+        rawValues = rawValues.replace("]", "");
+        final String[] splitValues = rawValues.split(",");
+
+        int[] returnValues = new int[splitValues.length];
+        for (int i = 0; i < splitValues.length; i++) {
+            returnValues[i] = Integer.parseInt(splitValues[i].trim());
+        }
+
+        return returnValues;
+    }
+
     protected double getDoublePropertyValue(String propertyName,
             Properties props) {
         final String propertyValue =

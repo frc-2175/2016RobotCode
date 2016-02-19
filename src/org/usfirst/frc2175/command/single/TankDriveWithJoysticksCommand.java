@@ -2,7 +2,7 @@ package org.usfirst.frc2175.command.single;
 
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
-import org.usfirst.frc2175.subsystem.drivetrain.DrivetrainSubsystem;
+import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveWithJoysticksCommand extends Command {
     private final DriverStation driverStation;
-    private final DrivetrainSubsystem drivetrainSubsystem;
+    private final PowertrainSubsystem powertrainSubsystem;
 
     public TankDriveWithJoysticksCommand(DriverStation driverStation,
             RobotSubsystems robotSubsystems) {
         this.driverStation = driverStation;
-        this.drivetrainSubsystem = robotSubsystems.getDrivetrainSubsystem();
+        this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
 
-        requires(drivetrainSubsystem);
+        requires(powertrainSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -31,7 +31,7 @@ public class TankDriveWithJoysticksCommand extends Command {
     protected void execute() {
         double leftValue = driverStation.getLeftValue();
         double rightValue = driverStation.getRightValue();
-        drivetrainSubsystem.tankDrive(leftValue, rightValue);
+        powertrainSubsystem.tankDrive(leftValue, rightValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ public class TankDriveWithJoysticksCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        drivetrainSubsystem.tankDrive(0, 0);
+        powertrainSubsystem.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

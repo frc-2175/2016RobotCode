@@ -1,6 +1,7 @@
 #!/bin/bash
-# First transfer over the files
-scp src/properties/practicebot/manipulator.properties src/properties/practicebot/catapultShooter.properties src/properties/practicebot/gamepad.properties src/properties/practicebot/intake.properties src/properties/practicebot/joysticks.properties src/properties/practicebot/vision.properties src/properties/practicebot/wiring.properties src/properties/practicebot/ControlLoopConstants.properties admin@roborio-2175-frc.local:/home/lvuser
-
-# Then restart robot code
+FILES=src/properties/practicebot/*
+for f in $FILES
+do
+	scp $f admin@roborio-2175-frc.local:/home/lvuser
+done
 ssh admin@roborio-2175-frc.local "killall -q netconsole-host || :"
