@@ -1,5 +1,6 @@
 package org.usfirst.frc2175;
 
+import org.usfirst.frc2175.command.single.ShiftToLowGearCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
@@ -58,7 +59,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-
+        Scheduler.getInstance().add(new ShiftToLowGearCommand(robotSubsystems));
     }
 
     /** This function is called periodically during operator control. */
