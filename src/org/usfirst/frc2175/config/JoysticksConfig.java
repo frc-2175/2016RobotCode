@@ -19,6 +19,7 @@ public class JoysticksConfig extends BaseConfig {
     private Joystick rightStick;
 
     private JoystickButton upshift;
+    private JoystickButton climbshift;
 
     private double deadbandValue;
 
@@ -39,6 +40,14 @@ public class JoysticksConfig extends BaseConfig {
 
         int upshiftButton = getIntPropertyValue("upshift.button", properties);
         upshift = new JoystickButton(leftStick, upshiftButton);
+
+        int climbshiftButton =
+                getIntPropertyValue("climbshift.button", properties);
+        climbshift = new JoystickButton(rightStick, climbshiftButton);
+    }
+
+    public JoystickButton getClimbshiftButton() {
+        return climbshift;
     }
 
     public Joystick getLeftStick() {
