@@ -30,7 +30,7 @@ public class JoysticksConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        int leftStickPort = getIntPropertyValue("leftStick.port", properties);
+        int leftStickPort = getIntPropertyValue("joystick.left.port", properties);
         leftStick = new Joystick(leftStickPort);
 
         int rightStickPort = getIntPropertyValue("rightStick.port", properties);
