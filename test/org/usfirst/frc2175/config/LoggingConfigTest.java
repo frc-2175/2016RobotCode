@@ -14,7 +14,7 @@ public class LoggingConfigTest extends TestBase {
     // @Test
     public void testInitializeFileLog() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
-        final LoggingConfiguration sut = new LoggingConfiguration();
+        final LoggingConfig sut = new LoggingConfig();
         final String propertyFile = sut.getFullyQualifiedPropertyFileName();
 
         sut.initializeFileLog(propertyFile);
@@ -34,7 +34,7 @@ public class LoggingConfigTest extends TestBase {
     // @Test
     public void testInitializeSocketLog() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
-        final LoggingConfiguration sut = new LoggingConfiguration();
+        final LoggingConfig sut = new LoggingConfig();
         final String propertyFile = sut.getFullyQualifiedPropertyFileName();
 
         sut.initializeFileLog(propertyFile);

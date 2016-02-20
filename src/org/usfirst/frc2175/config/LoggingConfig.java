@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import java.util.logging.SocketHandler;
 import java.util.logging.XMLFormatter;
 
-public class LoggingConfiguration extends BaseConfig {
+public class LoggingConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "logging.properties";
 
     @Override
