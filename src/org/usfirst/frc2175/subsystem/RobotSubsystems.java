@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.subsystem;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
@@ -9,6 +11,8 @@ import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 public class RobotSubsystems {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private final RobotConfig robotConfig;
     private final DriverStation driverStation;
 
@@ -20,6 +24,8 @@ public class RobotSubsystems {
 
     public RobotSubsystems(RobotConfig robotConfig,
             DriverStation driverStation) {
+        log.info("Configuring class=" + getClass());
+
         this.robotConfig = robotConfig;
         this.driverStation = driverStation;
 

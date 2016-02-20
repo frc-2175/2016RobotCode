@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.commandmapper;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.command.group.CatapultShortShotCommandGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
@@ -24,12 +26,16 @@ import edu.wpi.first.wpilibj.command.Command;
  * Map {@link Command}s to joystick buttons.
  */
 public class JoystickEventMapper {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private double bootSpeed;
     private double liftIntakeSpeed;
 
     public JoystickEventMapper(RobotConfig robotConfig,
             DriverStation driverStation, RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
+        log.info("Configuring class=" + getClass());
+
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
