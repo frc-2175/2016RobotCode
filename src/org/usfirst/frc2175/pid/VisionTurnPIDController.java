@@ -29,7 +29,8 @@ public class VisionTurnPIDController extends PIDControllerComplete {
 
     @Override
     public double pidGet() {
-        return powertrainSubsystem.getCenterCameraXValue();
+        // FIXME Grab a correct value from somewhere
+        return 0;
     }
 
     @Override
