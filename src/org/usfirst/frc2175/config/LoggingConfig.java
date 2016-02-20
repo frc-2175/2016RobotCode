@@ -25,11 +25,15 @@ public class LoggingConfig extends BaseConfig {
     @Override
     protected void configure(final Properties properties) {
         final String propertyFile = getFullyQualifiedPropertyFileName();
+        System.out.println("Using logging property file=" + propertyFile);
+
         initializeFileLog(propertyFile);
         initializeSocketLog(propertyFile);
     }
 
     protected void initializeFileLog(final String propertyFile) {
+        System.out.println("Initializing file logging");
+
         final LogManager logManager = LogManager.getLogManager();
 
         // regretfully the icky java.util.logging won't allow adding an existing
@@ -56,6 +60,8 @@ public class LoggingConfig extends BaseConfig {
     }
 
     protected void initializeSocketLog(final String propertyFile) {
+        System.out.println("Initializing socket logging");
+
         final Handler handler = makeSocketHandler(propertyFile);
 
         if (handler != null) {
