@@ -11,4 +11,12 @@ public class ManipulatorConfigTest extends TestBase {
         ManipulatorConfig sut = new ManipulatorConfig();
         assertDoublesNotZero(sut);
     }
+
+    @Test
+    public void testJoystickConfig_Practice()
+            throws IllegalArgumentException, IllegalAccessException {
+        BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
+        ManipulatorConfig sut = new ManipulatorConfig();
+        assertDoublesNotZero(sut);
+    }
 }

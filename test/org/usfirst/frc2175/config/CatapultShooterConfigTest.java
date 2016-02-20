@@ -11,4 +11,12 @@ public class CatapultShooterConfigTest extends TestBase {
         CatapultShooterConfig sut = new CatapultShooterConfig();
         assertDoublesNotZero(sut);
     }
+
+    @Test
+    public void testJoystickConfig_Practice()
+            throws IllegalArgumentException, IllegalAccessException {
+        BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
+        CatapultShooterConfig sut = new CatapultShooterConfig();
+        assertDoublesNotZero(sut);
+    }
 }
