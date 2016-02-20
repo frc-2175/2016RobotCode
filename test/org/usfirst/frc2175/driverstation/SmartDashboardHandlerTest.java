@@ -10,6 +10,7 @@ import mockit.Mocked;
 public class SmartDashboardHandlerTest extends TestBase {
     @Mocked
     private RobotSubsystems robotSubsystems;
+
     @Mocked
     private RobotControllers robotControllers;
 
