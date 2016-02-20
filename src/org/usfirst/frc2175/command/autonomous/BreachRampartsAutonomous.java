@@ -7,15 +7,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BreachRampartsAutonomous extends CommandGroup {
     public BreachRampartsAutonomous(RobotSubsystems robotSubsystems) {
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 24));
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, -24));
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 12));
+        // TODO Fix number of inches as needed
+        addSequential(new DriveInches(robotSubsystems, 24));
+        // TODO Fix number of inches as needed
+        addSequential(new DriveInches(robotSubsystems, -24));
+        // TODO Fix number of inches as needed
+        addSequential(new DriveInches(robotSubsystems, 12));
     }
 
 }
