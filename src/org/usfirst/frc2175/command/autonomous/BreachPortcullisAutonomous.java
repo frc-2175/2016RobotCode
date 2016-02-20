@@ -14,31 +14,31 @@ public class BreachPortcullisAutonomous extends CommandGroup {
             RobotControllers robotControllers) {
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 12));
+                new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 24));
+                new DriveInches(robotSubsystems, robotControllers, 24));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 12));
+                new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 24));
+                new DriveInches(robotSubsystems, robotControllers, 24));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 12));
+                new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 6));
+                new DriveInches(robotSubsystems, robotControllers, 6));
         addSequential(new RaiseBootCommand(robotSubsystems));
     }
 

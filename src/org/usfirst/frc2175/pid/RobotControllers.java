@@ -12,6 +12,7 @@ public class RobotControllers {
 
     private final VisionTurnPIDController visionTurnPIDController;
     private final GyroTurnPIDController gyroTurnPIDController;
+    private final DriveInchesPIDController driveInchesPIDController;
 
     public RobotControllers(RobotConfig robotConfig,
             RobotSubsystems robotSubsystems) {
@@ -22,6 +23,8 @@ public class RobotControllers {
                 new VisionTurnPIDController(robotSubsystems, robotConfig);
         this.gyroTurnPIDController =
                 new GyroTurnPIDController(robotSubsystems, robotConfig);
+        this.driveInchesPIDController =
+                new DriveInchesPIDController(robotSubsystems, robotConfig);
     }
 
     public VisionTurnPIDController getVisionTurnPIDController() {
@@ -30,6 +33,10 @@ public class RobotControllers {
 
     public GyroTurnPIDController getGyroTurnPIDController() {
         return gyroTurnPIDController;
+    }
+
+    public DriveInchesPIDController getDriveInchesPIDController() {
+        return driveInchesPIDController;
     }
 
 }

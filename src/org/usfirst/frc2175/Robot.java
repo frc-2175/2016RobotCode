@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
                     robotControllers);
     private final SmartDashboardHandler smartDashboardHandler =
-            new SmartDashboardHandler(robotSubsystems);
+            new SmartDashboardHandler(robotSubsystems, robotControllers);
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());

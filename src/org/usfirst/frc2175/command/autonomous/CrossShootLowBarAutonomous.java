@@ -15,7 +15,7 @@ public class CrossShootLowBarAutonomous extends CommandGroup {
     public CrossShootLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TO-DO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, 24));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 24));
         addSequential(new TurnToFaceGoalAndShootGroup(robotSubsystems,
                 robotControllers));
     }

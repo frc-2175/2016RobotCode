@@ -11,7 +11,7 @@ public class CrossShootRockWallAutonomous extends CommandGroup {
     public CrossShootRockWallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, 36));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 36));
         addSequential(new TurnToFaceGoalAndShootGroup(robotSubsystems,
                 robotControllers));
     }

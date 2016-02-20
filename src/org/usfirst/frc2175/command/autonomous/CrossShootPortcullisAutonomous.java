@@ -14,24 +14,24 @@ public class CrossShootPortcullisAutonomous extends CommandGroup {
     public CrossShootPortcullisAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, 12));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
         // TODO Fix number of inches as needed
-        addParallel(new DriveInches(robotSubsystems, 24));
+        addParallel(new DriveInches(robotSubsystems, robotControllers, 24));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, 12));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
         // TODO Fix number of inches as needed
-        addParallel(new DriveInches(robotSubsystems, 24));
+        addParallel(new DriveInches(robotSubsystems, robotControllers, 24));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, 12));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
         addSequential(new RaiseBootCommand(robotSubsystems));
 
     }

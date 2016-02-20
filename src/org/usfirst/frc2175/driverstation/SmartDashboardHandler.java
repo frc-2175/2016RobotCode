@@ -10,6 +10,7 @@ import org.usfirst.frc2175.command.autonomous.CrossRampartsAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossRockwallAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
+import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -21,11 +22,14 @@ public class SmartDashboardHandler {
 
     private SendableChooser autonChooser;
     private RobotSubsystems robotSubsystems;
+    private RobotControllers robotControllers;
 
-    public SmartDashboardHandler(RobotSubsystems robotSubsystems) {
+    public SmartDashboardHandler(RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers) {
         log.info("Configuring class=" + getClass());
 
         this.robotSubsystems = robotSubsystems;
+        this.robotControllers = robotControllers;
 
         makeAutonChooser();
     }
@@ -36,19 +40,22 @@ public class SmartDashboardHandler {
         // TODO add all of the auto routines as they are made
         autonChooser.addDefault("Do nothing", new DoNothingAutonomous());
         autonChooser.addObject("Cross low bar",
-                new CrossLowBarAutonomous(robotSubsystems));
+                new CrossLowBarAutonomous(robotSubsystems, robotControllers));
         autonChooser.addObject("Cross cheval de frise",
-                new CrossChevalDeFriseAutonomous(robotSubsystems));
+                new CrossChevalDeFriseAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Cross rough terrain",
-                new CrossRoughTerrainAutonomous(robotSubsystems));
+                new CrossRoughTerrainAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Cross moat",
-                new CrossMoatAutonomous(robotSubsystems));
+                new CrossMoatAutonomous(robotSubsystems, robotControllers));
         autonChooser.addObject("Cross ramparts",
-                new CrossRampartsAutonomous(robotSubsystems));
+                new CrossRampartsAutonomous(robotSubsystems, robotControllers));
         autonChooser.addObject("Cross portcullis",
-                new CrossPortcullisAutonomous(robotSubsystems));
+                new CrossPortcullisAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Cross rock wall",
-                new CrossRockwallAutonomous(robotSubsystems));
+                new CrossRockwallAutonomous(robotSubsystems, robotControllers));
 
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }
