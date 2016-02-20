@@ -10,10 +10,10 @@ public class DamageMoatAutonomous extends CommandGroup {
     public DamageMoatAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 36));
+                new DriveInches(robotSubsystems, robotControllers, 85));
         addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, -36));
+                new DriveInches(robotSubsystems, robotControllers, -90));
         addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 30));
+                new DriveInches(robotSubsystems, robotControllers, 80));
     }
 }

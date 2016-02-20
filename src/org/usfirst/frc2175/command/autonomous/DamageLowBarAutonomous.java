@@ -9,13 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DamageLowBarAutonomous extends CommandGroup {
     public DamageLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 36));
-        addSequential(// TO-DO Fix inches as needed
-                new DriveInches(robotSubsystems, robotControllers, -36));
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 30));
+        // TO-DO Fix numbers as needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, -90));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
     }
 }

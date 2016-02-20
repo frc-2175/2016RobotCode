@@ -11,7 +11,7 @@ public class WeakenShootRockWallAutonomous extends CommandGroup {
     public WeakenShootRockWallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 36));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
         addSequential(new TurnToFaceGoalAndShootGroup(robotSubsystems,
                 robotControllers));
     }

@@ -14,11 +14,11 @@ public class DamageLowBarTwiceAutonomous {
                 RobotControllers robotControllers) {
             // TO-DO Fix number of inches as needed
             addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, 24));
+                    new DriveInches(robotSubsystems, robotControllers, 85));
             addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, -24));
+                    new DriveInches(robotSubsystems, robotControllers, -90));
             addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, 24));
+                    new DriveInches(robotSubsystems, robotControllers, 80));
         }
     }
 }

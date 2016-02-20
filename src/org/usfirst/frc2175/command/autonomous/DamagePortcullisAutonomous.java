@@ -14,31 +14,31 @@ public class DamagePortcullisAutonomous extends CommandGroup {
             RobotControllers robotControllers) {
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 12));
+                new DriveInches(robotSubsystems, robotControllers, 20));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 24));
+                new DriveInches(robotSubsystems, robotControllers, 65));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 12));
+                new DriveInches(robotSubsystems, robotControllers, 20));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 24));
+                new DriveInches(robotSubsystems, robotControllers, 70));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
         addSequential(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 12));
+                new DriveInches(robotSubsystems, robotControllers, 25));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addParallel(
                 // TODO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 6));
+                new DriveInches(robotSubsystems, robotControllers, 55));
         addSequential(new RaiseBootCommand(robotSubsystems));
     }
 

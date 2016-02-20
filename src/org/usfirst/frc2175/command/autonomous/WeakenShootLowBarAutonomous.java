@@ -15,7 +15,7 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
     public WeakenShootLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TO-DO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 24));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
         addSequential(new TurnToFaceGoalAndShootGroup(robotSubsystems,
                 robotControllers));
     }

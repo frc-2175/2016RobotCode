@@ -11,6 +11,6 @@ public class WeakenMoatAutonomous extends CommandGroup {
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Refine numbers
-                new DriveInches(robotSubsystems, robotControllers, 36));
+                new DriveInches(robotSubsystems, robotControllers, 85));
     }
 }

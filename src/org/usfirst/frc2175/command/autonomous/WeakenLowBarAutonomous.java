@@ -10,7 +10,7 @@ public class WeakenLowBarAutonomous extends CommandGroup {
     public WeakenLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
-                // TO-DO Refine numbers
-                new DriveInches(robotSubsystems, robotControllers, 36));
+                // TO-DO Fix numbers if needed
+                new DriveInches(robotSubsystems, robotControllers, 85));
     }
 }

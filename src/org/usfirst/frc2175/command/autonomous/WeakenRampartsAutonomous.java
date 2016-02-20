@@ -11,6 +11,6 @@ public class WeakenRampartsAutonomous extends CommandGroup {
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 24));
+                new DriveInches(robotSubsystems, robotControllers, 85));
     }
 }

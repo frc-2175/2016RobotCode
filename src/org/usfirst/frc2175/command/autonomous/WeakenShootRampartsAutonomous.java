@@ -11,7 +11,7 @@ public class WeakenShootRampartsAutonomous extends CommandGroup {
     public WeakenShootRampartsAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 48));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
     }
 

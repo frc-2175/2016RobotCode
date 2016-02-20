@@ -9,11 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DamageRoughTerrainAutonomous extends CommandGroup {
     public DamageRoughTerrainAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 36));
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, -36));
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 30));
+        // TO-DO Refine Numbers
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, -90));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
     }
 }

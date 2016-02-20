@@ -10,8 +10,8 @@ public class DamageRockWallAutonomous extends CommandGroup {
     public DamageRockWallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 36));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, -36));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 24));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, -90));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
     }
 }

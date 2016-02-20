@@ -10,11 +10,11 @@ public class DamageRampartsAutonomous extends CommandGroup {
     public DamageRampartsAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 24));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, -24));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, -90));
         // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
+        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
     }
 
 }

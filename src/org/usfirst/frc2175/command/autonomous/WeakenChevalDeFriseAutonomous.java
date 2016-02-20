@@ -16,7 +16,7 @@ public class WeakenChevalDeFriseAutonomous extends CommandGroup {
         // TODO Fix Boot commands if necessary
         addSequential(new LowerBootCommand(robotSubsystems));
         // TODO Fix inches as needed
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 24));
+        addParallel(new DriveInches(robotSubsystems, robotControllers, 73));
         addSequential(new RaiseBootCommand(robotSubsystems));
 
     }

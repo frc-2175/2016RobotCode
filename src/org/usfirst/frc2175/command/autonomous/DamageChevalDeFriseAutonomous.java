@@ -19,10 +19,10 @@ public class DamageChevalDeFriseAutonomous extends CommandGroup {
                 // TO-DO Fix Boot commands if necessary
                 new LowerBootCommand(robotSubsystems));
         addParallel(// TO-DO Fix inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 24));
+                new DriveInches(robotSubsystems, robotControllers, 73));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addSequential(new TurnToHeadingCommand(robotSubsystems, robotControllers, 180,
-                true));
+        addSequential(new TurnToHeadingCommand(robotSubsystems,
+                robotControllers, 180, true));
         addSequential(
                 // TO-DO Fix number of inches as needed
                 new DriveInches(robotSubsystems, robotControllers, 12));
@@ -30,10 +30,10 @@ public class DamageChevalDeFriseAutonomous extends CommandGroup {
                 // TO-DO Fix Boot commands if necessary
                 new LowerBootCommand(robotSubsystems));
         addParallel(// TO-DO Fix inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 24));
+                new DriveInches(robotSubsystems, robotControllers, 76));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addSequential(new TurnToHeadingCommand(robotSubsystems, robotControllers, 180,
-                true));
+        addSequential(new TurnToHeadingCommand(robotSubsystems,
+                robotControllers, 180, true));
         addSequential(
                 // TO-DO Fix number of inches as needed
                 new DriveInches(robotSubsystems, robotControllers, 12));
@@ -41,7 +41,7 @@ public class DamageChevalDeFriseAutonomous extends CommandGroup {
                 // TO-DO Fix Boot commands if necessary
                 new LowerBootCommand(robotSubsystems));
         addParallel(// TO-DO Fix inches as needed
-                new DriveInches(robotSubsystems, robotControllers, 18));
+                new DriveInches(robotSubsystems, robotControllers, 60));
         addSequential(new RaiseBootCommand(robotSubsystems));
 
     }
