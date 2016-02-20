@@ -9,8 +9,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BreachPortcullisAutonomous extends CommandGroup {
-    public BreachPortcullisAutonomous(RobotSubsystems robotSubsystems,
+public class DamagePortcullisAutonomous extends CommandGroup {
+    public DamagePortcullisAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
                 // TODO Fix number of inches as needed

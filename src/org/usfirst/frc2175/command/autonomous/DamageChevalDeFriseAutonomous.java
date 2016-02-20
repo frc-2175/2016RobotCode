@@ -9,8 +9,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BreachChevalDeFriseAutonomous extends CommandGroup {
-    public BreachChevalDeFriseAutonomous(RobotSubsystems robotSubsystems,
+public class DamageChevalDeFriseAutonomous extends CommandGroup {
+    public DamageChevalDeFriseAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Fix number of inches as needed

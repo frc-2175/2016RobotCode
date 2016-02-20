@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CrossShootLowBarAutonomous extends CommandGroup {
+public class WeakenShootLowBarAutonomous extends CommandGroup {
 
-    public CrossShootLowBarAutonomous(RobotSubsystems robotSubsystems,
+    public WeakenShootLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TO-DO Refine numbers
         addSequential(new DriveInches(robotSubsystems, robotControllers, 24));

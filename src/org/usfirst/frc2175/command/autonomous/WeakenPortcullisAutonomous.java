@@ -9,9 +9,9 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CrossPortcullisAutonomous extends CommandGroup {
+public class WeakenPortcullisAutonomous extends CommandGroup {
 
-    public CrossPortcullisAutonomous(RobotSubsystems robotSubsystems,
+    public WeakenPortcullisAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Fix number of inches as needed
         addSequential(new DriveInches(robotSubsystems, robotControllers, 12));

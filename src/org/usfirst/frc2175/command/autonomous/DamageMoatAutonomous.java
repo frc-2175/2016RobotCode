@@ -6,8 +6,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BreachRoughTerrainAutonomous extends CommandGroup {
-    public BreachRoughTerrainAutonomous(RobotSubsystems robotSubsystems,
+public class DamageMoatAutonomous extends CommandGroup {
+    public DamageMoatAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(// TO-DO Refine Numbers
                 new DriveInches(robotSubsystems, robotControllers, 36));

@@ -6,10 +6,11 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BreachLowBarAndShootAutonomous extends CommandGroup {
-    public BreachLowBarAndShootAutonomous(RobotSubsystems robotSubsystems,
+public class WeakenMoatAutonomous extends CommandGroup {
+    public WeakenMoatAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Refine Numbers
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 36));
+        addSequential(
+                // TO-DO Refine numbers
+                new DriveInches(robotSubsystems, robotControllers, 36));
     }
 }

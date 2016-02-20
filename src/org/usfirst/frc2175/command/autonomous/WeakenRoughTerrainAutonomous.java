@@ -6,11 +6,12 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CrossLowBarAutonomous extends CommandGroup {
-    public CrossLowBarAutonomous(RobotSubsystems robotSubsystems,
+public class WeakenRoughTerrainAutonomous extends CommandGroup {
+    public WeakenRoughTerrainAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Refine numbers
                 new DriveInches(robotSubsystems, robotControllers, 36));
     }
+
 }

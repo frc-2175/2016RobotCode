@@ -6,8 +6,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CrossRockwallAutonomous extends CommandGroup {
-    public CrossRockwallAutonomous(RobotSubsystems robotSubsystems,
+public class WeakenRockwallAutonomous extends CommandGroup {
+    public WeakenRockwallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Fix number of inches as needed

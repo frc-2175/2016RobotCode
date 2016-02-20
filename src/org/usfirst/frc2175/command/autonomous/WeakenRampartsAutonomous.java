@@ -6,8 +6,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CrossRampartsAutonomous extends CommandGroup {
-    public CrossRampartsAutonomous(RobotSubsystems robotSubsystems,
+public class WeakenRampartsAutonomous extends CommandGroup {
+    public WeakenRampartsAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
                 // TO-DO Fix number of inches as needed
