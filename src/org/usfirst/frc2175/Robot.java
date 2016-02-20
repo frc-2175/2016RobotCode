@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
@@ -12,7 +13,6 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +35,9 @@ public class Robot extends IterativeRobot {
     private final SmartDashboardHandler smartDashboardHandler =
             new SmartDashboardHandler(robotSubsystems, robotControllers);
 
+    private final CommandSchedulerLoop commandSchedulerLoop =
+            new CommandSchedulerLoop();
+
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -44,6 +47,7 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void robotInit() {
+        commandSchedulerLoop.start();
     }
 
     /**
@@ -69,8 +73,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        // TODO Move to custom timer
-        Scheduler.getInstance().run();
     }
 
     @Override
@@ -81,8 +83,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        // TODO Move to custom timer
-        Scheduler.getInstance().run();
     }
 
     /** This function is called periodically during test mode. */
