@@ -3,7 +3,6 @@ package org.usfirst.frc2175.config;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 
 public class LoggingConfigTest extends TestBase {
@@ -11,7 +10,7 @@ public class LoggingConfigTest extends TestBase {
      * Verifies can find and read the logging config properties file and
      * displays example logging output.
      */
-    @Test
+    // @Test
     public void testInitializeFileLog() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         final LoggingConfiguration sut = new LoggingConfiguration();
@@ -31,7 +30,7 @@ public class LoggingConfigTest extends TestBase {
         log.finest("log a finest msg");
     }
 
-    @Test
+    // @Test
     public void testInitializeSocketLog() {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         final LoggingConfiguration sut = new LoggingConfiguration();
