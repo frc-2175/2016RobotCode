@@ -14,6 +14,8 @@ public abstract class BaseConfig {
     private static String propertyFileDir = PROPERTY_FILE_DIR_DEFAULT;
 
     public BaseConfig() {
+        log.info("Configuring class=" + getClass());
+
         final String propertyFileName = getFullyQualifiedPropertyFileName();
         final Properties properties =
                 new PropertiesLoader().loadProperties(propertyFileName);

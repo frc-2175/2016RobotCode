@@ -1,5 +1,7 @@
 package org.usfirst.frc2175;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.command.single.ShiftToLowGearCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -30,6 +32,9 @@ public class Robot extends IterativeRobot {
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
                     robotControllers);
 
+    // This must come after RobotConfig
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -51,6 +56,7 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
+        log.info("Entered autonomousInit()");
     }
 
     /** This function is called periodically during autonomous. */
@@ -62,6 +68,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+        log.info("Entered teleopInit()");
+
         Scheduler.getInstance().add(new ShiftToLowGearCommand(robotSubsystems));
     }
 
@@ -79,6 +87,6 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
-
+        log.info("Entered disabledInit()");
     }
 }
