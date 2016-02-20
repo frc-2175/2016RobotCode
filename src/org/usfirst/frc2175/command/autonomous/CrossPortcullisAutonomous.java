@@ -11,17 +11,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossPortcullisAutonomous extends CommandGroup {
 
     public CrossPortcullisAutonomous(RobotSubsystems robotSubsystems) {
-        addSequential(
-                // TO-DO Fix number of inches as needed
-                new DriveInches(robotSubsystems, 12));
-        addSequential(
-                // TO-DO Fix Boot commands if necessary
-                new RaiseBootCommand(robotSubsystems));
-        // TO-DO Refine speed
-        new RunBootAtSpeedCommand(robotSubsystems, 20);
-        // TO-DO Fix inches as needed
-        new DriveInches(robotSubsystems, 24);
-        new LowerBootCommand(robotSubsystems);
-
+        // TODO Fix number of inches as needed
+        addSequential(new DriveInches(robotSubsystems, 12));
+        addSequential(new RaiseBootCommand(robotSubsystems));
+        // TODO Refine speed
+        addSequential(new RunBootAtSpeedCommand(robotSubsystems, 20));
+        // TODO Fix inches as needed
+        addSequential(new DriveInches(robotSubsystems, 24));
+        addSequential(new LowerBootCommand(robotSubsystems));
     }
 }
