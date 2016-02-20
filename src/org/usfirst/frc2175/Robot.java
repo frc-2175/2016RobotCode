@@ -7,6 +7,7 @@ import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
+import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -31,6 +32,8 @@ public class Robot extends IterativeRobot {
     private final JoystickEventMapper joystickEventMapper =
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
                     robotControllers);
+    private final SmartDashboardHandler smartDashboardHandler =
+            new SmartDashboardHandler(robotSubsystems);
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
