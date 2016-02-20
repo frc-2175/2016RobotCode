@@ -36,7 +36,7 @@ public class DriverStation {
     }
 
     public double getMoveValue() {
-        double input = leftStick.getY();
+        double input = -leftStick.getY();
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
@@ -50,14 +50,14 @@ public class DriverStation {
     }
 
     public double getLeftValue() {
-        double input = leftStick.getY();
+        double input = -leftStick.getY();
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getRightValue() {
-        double input = rightStick.getY();
+        double input = -rightStick.getY();
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
