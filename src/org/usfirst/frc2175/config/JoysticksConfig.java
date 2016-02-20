@@ -33,7 +33,7 @@ public class JoysticksConfig extends BaseConfig {
         int leftStickPort = getIntPropertyValue("joystick.left.port", properties);
         leftStick = new Joystick(leftStickPort);
 
-        int rightStickPort = getIntPropertyValue("rightStick.port", properties);
+        int rightStickPort = getIntPropertyValue("joystick.right.port", properties);
         rightStick = new Joystick(rightStickPort);
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
