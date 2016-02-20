@@ -3,8 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 public class ControlLoopConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME =
-            "ControlLoopConstants.properties";
+    private static final String PROPERTY_FILE_NAME = "controlLoopConstants.properties";
 
     private double visionTurnPID_kProportional;
     private double visionTurnPID_kIntegral;
