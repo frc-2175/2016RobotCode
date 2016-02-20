@@ -40,6 +40,7 @@ public abstract class TestBase {
 
     protected void processMockUps() {
         new MockJNIWrapper();
+        new MockSmartDashboard();
     }
 
     protected void assertInstanceVariablesNotNull(Object sut)
