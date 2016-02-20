@@ -51,4 +51,8 @@ public class SmartDashboardHandler {
 
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }
+
+    public SendableChooser getAutonChooser() {
+        return autonChooser;
+    }
 }

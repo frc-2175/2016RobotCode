@@ -12,6 +12,7 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
@@ -60,6 +61,10 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         log.info("Entered autonomousInit()");
+        CommandGroup selectedAuton = (CommandGroup) smartDashboardHandler
+                .getAutonChooser().getSelected();
+
+        selectedAuton.start();
     }
 
     /** This function is called periodically during autonomous. */
