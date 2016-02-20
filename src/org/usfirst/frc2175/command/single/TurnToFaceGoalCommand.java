@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.pid.RobotControllers;
+import org.usfirst.frc2175.pid.VisionTurnPIDController;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
@@ -10,26 +12,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class TurnToFaceGoalCommand extends Command {
-
     private PowertrainSubsystem powertrainSubsystem;
+    private VisionTurnPIDController pidController;
     private double setpoint;
 
-    public TurnToFaceGoalCommand(RobotSubsystems robotSubsystems) {
-        powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-        setpoint = powertrainSubsystem.getCenterCameraXValue();
+    public TurnToFaceGoalCommand(RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers) {
+        this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
+        this.setpoint = powertrainSubsystem.getCenterCameraXValue();
+
+        this.pidController = robotControllers.getVisionTurnPIDController();
 
         requires(powertrainSubsystem);
-
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        powertrainSubsystem.getVisionTurnController().setSetpoint(setpoint);
+        pidController.setSetpoint(setpoint);
         SmartDashboard.putNumber("Setpoint:", setpoint);
 
-        powertrainSubsystem.getVisionTurnController().enable();
-
+        pidController.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,19 +41,19 @@ public class TurnToFaceGoalCommand extends Command {
         System.out.println("Rectangle at: "
                 + powertrainSubsystem.getLargestContourXValue());
         System.out.println("Turning to face goal at turn value: "
-                + powertrainSubsystem.getVisionTurnController().get());
+                + pidController.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return powertrainSubsystem.getVisionTurnController().onTarget();
+        return pidController.onTarget();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        powertrainSubsystem.getVisionTurnController().disable();
+        pidController.disable();
     }
 
     // Called when another command which requires one or more of the same

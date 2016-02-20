@@ -4,8 +4,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 public class ControlLoopConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME =
-            "ControlLoopConstants.properties";
+    private static final String PROPERTY_FILE_NAME = "controlLoopConstants.properties";
     private final Logger log = Logger.getLogger(getClass().getName());
 
     private double visionTurnPID_kProportional;
@@ -16,6 +15,13 @@ public class ControlLoopConfig extends BaseConfig {
     private double visionTurnPID_maxRange;
     private double visionTurnPID_minRange;
 
+    private double gyroTurnPID_kProportional;
+    private double gyroTurnPID_kIntegral;
+    private double gyroTurnPID_kDerivative;
+    private double gyroTurnPID_absTolerance;
+    private double gyroTurnPID_maxRange;
+    private double gyroTurnPID_minRange;
+
     @Override
     protected String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -23,6 +29,8 @@ public class ControlLoopConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
+
+        // VisionTurn
         visionTurnPID_kProportional = getDoublePropertyValue(
                 "powertrain.visionTurnPID.kProportional", properties);
 
@@ -43,6 +51,24 @@ public class ControlLoopConfig extends BaseConfig {
         visionTurnPID_minRange = getDoublePropertyValue(
                 "powertrain.visionTurnPID.range.min", properties);
 
+        // Gyro
+        gyroTurnPID_kProportional = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.kProportional", properties);
+
+        gyroTurnPID_kIntegral = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.kIntegral", properties);
+
+        gyroTurnPID_kDerivative = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.kDerivative", properties);
+
+        gyroTurnPID_absTolerance = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.absTolerance", properties);
+
+        gyroTurnPID_maxRange = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.range.max", properties);
+
+        gyroTurnPID_minRange = getDoublePropertyValue(
+                "powertrain.gyroTurnPID.range.min", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
@@ -72,4 +98,29 @@ public class ControlLoopConfig extends BaseConfig {
     public double getVisionTurnPID_centerCamera() {
         return visionTurnPID_centerCamera;
     }
+
+    public double getGyroTurnPID_kProportional() {
+        return gyroTurnPID_kProportional;
+    }
+
+    public double getGyroTurnPID_kIntegral() {
+        return gyroTurnPID_kIntegral;
+    }
+
+    public double getGyroTurnPID_kDerivative() {
+        return gyroTurnPID_kDerivative;
+    }
+
+    public double getGyroTurnPID_absTolerance() {
+        return gyroTurnPID_absTolerance;
+    }
+
+    public double getGyroTurnPID_maxRange() {
+        return gyroTurnPID_maxRange;
+    }
+
+    public double getGyroTurnPID_minRange() {
+        return gyroTurnPID_minRange;
+    }
+
 }
