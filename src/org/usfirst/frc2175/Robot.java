@@ -61,9 +61,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         log.info("Entered autonomousInit()");
-        CommandGroup selectedAuton = (CommandGroup) smartDashboardHandler
-                .getAutonChooser().getSelected();
 
+        CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
+        log.info("Starting auto command: " + selectedAuton.getName());
         selectedAuton.start();
     }
 

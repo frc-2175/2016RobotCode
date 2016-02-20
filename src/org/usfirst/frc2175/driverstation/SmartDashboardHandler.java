@@ -12,6 +12,7 @@ import org.usfirst.frc2175.command.autonomous.CrossRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -52,7 +53,7 @@ public class SmartDashboardHandler {
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }
 
-    public SendableChooser getAutonChooser() {
-        return autonChooser;
+    public CommandGroup getAutonCommand() {
+        return (CommandGroup) autonChooser.getSelected();
     }
 }
