@@ -51,6 +51,8 @@ public class PowertrainSubsystem extends BaseSubsystem {
 
         ControlLoopConfig controlLoopConfig = robotConfig.getControlLoopConfig();
         centerCameraXValue = controlLoopConfig.getVisionTurnPID_centerCamera();
+
+        setShifterState(ShifterState.LOW);
     }
 
     public void arcadeDrive(double moveSpeed, double rotateSpeed) {
