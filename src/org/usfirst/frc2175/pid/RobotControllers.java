@@ -12,10 +12,10 @@ public class RobotControllers {
     public RobotControllers(RobotConfig robotConfig,
             RobotSubsystems robotSubsystems) {
         this.robotConfig = robotConfig;
-        this.visionTurnPIDController = new VisionTurnPIDController(
-                robotSubsystems, robotConfig);
-        this.gyroTurnPIDController = new GyroTurnPIDController(robotSubsystems,
-                robotConfig);
+        this.visionTurnPIDController =
+                new VisionTurnPIDController(robotSubsystems, robotConfig);
+        this.gyroTurnPIDController =
+                new GyroTurnPIDController(robotSubsystems, robotConfig);
     }
 
     public VisionTurnPIDController getVisionTurnPIDController() {
