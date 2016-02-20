@@ -59,8 +59,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
-            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-        } else {
+            robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
         }
     }
 
@@ -68,8 +67,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
-            robotDrive.tankDrive(leftSpeed, rightSpeed);
-        } else {
+            robotDrive.tankDrive(-leftSpeed, -rightSpeed);
         }
     }
 
@@ -78,7 +76,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         if (isClimberEngaged()) {
             leftDriveSideTalonGroup.set(speed);
             rightDriveSideTalonGroup.set(speed);
-        } else {
         }
     }
 
