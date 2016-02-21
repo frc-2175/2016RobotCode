@@ -4,46 +4,47 @@ import org.usfirst.frc2175.command.single.DriveInches;
 import org.usfirst.frc2175.command.single.LowerBootCommand;
 import org.usfirst.frc2175.command.single.RaiseBootCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
+import org.usfirst.frc2175.config.AutonomousConfig;
+import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DamageChevalDeFriseAutonomous extends CommandGroup {
-    private double travelLength;
-    private int caution;
-    private int platformBeforeCheval;
 
     public DamageChevalDeFriseAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
-                .getTravelLength();
-        caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
-                .getCaution();
-        platformBeforeCheval = robotSubsystems.getRobotConfig()
-                .getAutonomousConfig().getPlatformBeforeCheval();
+        RobotConfig robotConfig = robotSubsystems.getRobotConfig();
+        AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
+        double travelLength = autonomousConfig.getTravelLength();
+        int caution = autonomousConfig.getCaution();
+        int platformBeforeCheval = autonomousConfig.getPlatformBeforeCheval();
+        int turnAround = autonomousConfig.getTurnAround();
+        double distanceAfterCheval = travelLength - platformBeforeCheval;
+        double distanceAfterChevalWithCaution = distanceAfterCheval - caution;
 
         addSequential(new DriveInches(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new DriveInches(robotSubsystems, robotControllers,
-                travelLength - platformBeforeCheval));
+                distanceAfterCheval));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, 180, true));
+                robotControllers, turnAround, true));
         addSequential(new DriveInches(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new DriveInches(robotSubsystems, robotControllers,
-                travelLength - platformBeforeCheval));
+                distanceAfterCheval));
         addSequential(new RaiseBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, 180, true));
+                robotControllers, turnAround, true));
         addSequential(new DriveInches(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new DriveInches(robotSubsystems, robotControllers,
-                travelLength - platformBeforeCheval - caution));
+                distanceAfterChevalWithCaution));
         addSequential(new RaiseBootCommand(robotSubsystems));
 
     }

@@ -12,6 +12,7 @@ public class AutonomousConfig extends BaseConfig {
     private int extraShootLength;
     private int platformBeforeCheval;
     private int platformBeforePortcullis;
+    private int turnAround;
 
     @Override
     protected String getPropertyFileName() {
@@ -39,6 +40,8 @@ public class AutonomousConfig extends BaseConfig {
         int platformBeforePortcullis =
                 getIntPropertyValue("platformBeforePortcullis", properties);
         this.platformBeforePortcullis = platformBeforePortcullis;
+        int turnAround = getIntPropertyValue("turnAround", properties);
+        this.turnAround = turnAround;
         travelLength =
                 this.platformLength + this.sidePlateLength + this.marginOfError;
     }
@@ -61,5 +64,9 @@ public class AutonomousConfig extends BaseConfig {
 
     public int getPlatformBeforePortcullis() {
         return platformBeforePortcullis;
+    }
+
+    public int getTurnAround() {
+        return turnAround;
     }
 }
