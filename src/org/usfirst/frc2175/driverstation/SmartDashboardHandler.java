@@ -3,12 +3,7 @@ package org.usfirst.frc2175.driverstation;
 import java.util.logging.Logger;
 
 import org.usfirst.frc2175.command.autonomous.DamageChevalDeFriseAutonomous;
-import org.usfirst.frc2175.command.autonomous.DamageLowBarAutonomous;
-import org.usfirst.frc2175.command.autonomous.DamageMoatAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamagePortcullisAutonomous;
-import org.usfirst.frc2175.command.autonomous.DamageRampartsAutonomous;
-import org.usfirst.frc2175.command.autonomous.DamageRockWallAutonomous;
-import org.usfirst.frc2175.command.autonomous.DamageRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootLowBarAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootMoatAutonomous;
@@ -16,14 +11,10 @@ import org.usfirst.frc2175.command.autonomous.DamageShootPortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootRampartsAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootRockWallAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootRoughTerrainAutonomous;
+import org.usfirst.frc2175.command.autonomous.DamageSimpleDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenChevalDeFriseAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenLowBarAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenMoatAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenPortcullisAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenRampartsAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenRockwallAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootMoatAutonomous;
@@ -31,6 +22,7 @@ import org.usfirst.frc2175.command.autonomous.WeakenShootPortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootRampartsAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootRockWallAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootRoughTerrainAutonomous;
+import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAutonomous;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -60,40 +52,24 @@ public class SmartDashboardHandler {
 
         // TODO add all of the auto routines as they are made
         autonChooser.addDefault("Do nothing", new DoNothingAutonomous());
-        autonChooser.addObject("Weaken low bar",
-                new WeakenLowBarAutonomous(robotSubsystems, robotControllers));
+        autonChooser.addObject("Weaken simple defense",
+                new WeakenSimpleDefenseAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Weaken cheval de frise",
                 new WeakenChevalDeFriseAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Weaken rough terrain",
-                new WeakenRoughTerrainAutonomous(robotSubsystems,
-                        robotControllers));
-        autonChooser.addObject("Weaken moat",
-                new WeakenMoatAutonomous(robotSubsystems, robotControllers));
-        autonChooser.addObject("Weaken ramparts", new WeakenRampartsAutonomous(
-                robotSubsystems, robotControllers));
         autonChooser.addObject("Weaken portcullis",
                 new WeakenPortcullisAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Weaken rock wall", new WeakenRockwallAutonomous(
-                robotSubsystems, robotControllers));
-        autonChooser.addObject("Damage low bar",
-                new DamageLowBarAutonomous(robotSubsystems, robotControllers));
+        autonChooser.addObject("Damage simple defense",
+                new DamageSimpleDefenseAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Damage cheval de frise",
                 new DamageChevalDeFriseAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Damage rough terrain",
-                new DamageRoughTerrainAutonomous(robotSubsystems,
-                        robotControllers));
-        autonChooser.addObject("Damage moat",
-                new DamageMoatAutonomous(robotSubsystems, robotControllers));
-        autonChooser.addObject("Damage ramparts", new DamageRampartsAutonomous(
-                robotSubsystems, robotControllers));
         autonChooser.addObject("Damage portcullis",
                 new DamagePortcullisAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Damage rock wall", new DamageRockWallAutonomous(
-                robotSubsystems, robotControllers));
         autonChooser.addObject("Weaken shoot low bar",
                 new WeakenShootLowBarAutonomous(robotSubsystems,
                         robotControllers));
