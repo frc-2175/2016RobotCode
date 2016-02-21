@@ -1,0 +1,64 @@
+package org.usfirst.frc2175.config;
+
+import java.util.Properties;
+
+public class AutonomousConfig extends BaseConfig {
+    private static final String PROPERTY_FILE_NAME = "manipulator.properties";
+    private double platformLength;
+    private int sidePlateLength;
+    private int marginOfError;
+    private double travelLength =
+            platformLength + sidePlateLength + marginOfError;
+    private int caution;
+    private int extraShootLength;
+    private int platformBeforeCheval;
+    private int platformBeforePortcullis;
+
+    @Override
+    protected String getPropertyFileName() {
+        return PROPERTY_FILE_NAME;
+    }
+
+    @Override
+    protected void configure(Properties properties) {
+        double platformLength =
+                getDoublePropertyValue("platform.length", properties);
+        this.platformLength = platformLength;
+        int sidePlateLength =
+                getIntPropertyValue("side.plate.length", properties);
+        this.sidePlateLength = sidePlateLength;
+        int marginOfError = getIntPropertyValue("marginOfError", properties);
+        this.marginOfError = marginOfError;
+        int caution = getIntPropertyValue("caution", properties);
+        this.caution = caution;
+        int extraShootLength =
+                getIntPropertyValue("extraShootLength", properties);
+        this.extraShootLength = extraShootLength;
+        int platformBeforeCheval =
+                getIntPropertyValue("platformBeforeCheval", properties);
+        this.platformBeforeCheval = platformBeforeCheval;
+        int platformBeforePortcullis =
+                getIntPropertyValue("platformBeforePortcullis", properties);
+        this.platformBeforePortcullis = platformBeforePortcullis;
+    }
+
+    public double getTravelLength() {
+        return travelLength;
+    }
+
+    public int getCaution() {
+        return caution;
+    }
+
+    public int getExtraShootLength() {
+        return extraShootLength;
+    }
+
+    public int getPlatformBeforeCheval() {
+        return platformBeforeCheval;
+    }
+
+    public int getPlatformBeforePortcullis() {
+        return platformBeforePortcullis;
+    }
+}

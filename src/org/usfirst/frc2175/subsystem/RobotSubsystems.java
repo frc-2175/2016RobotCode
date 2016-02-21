@@ -57,4 +57,8 @@ public class RobotSubsystems {
     public CatapultShooterSubsystem getCatapultShooterSubsystem() {
         return catapultShooterSubsystem;
     }
+
+    public RobotConfig getRobotConfig() {
+        return robotConfig;
+    }
 }
