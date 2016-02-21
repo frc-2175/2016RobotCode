@@ -1,16 +1,21 @@
 package org.usfirst.frc2175;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.usfirst.frc2175.config.BaseConfig;
 
 /**
  * Base test class for use by all tests.
@@ -89,5 +94,22 @@ public abstract class TestBase {
                 assertNotEquals(assertMessage, 0, length);
             }
         }
+    }
+
+    protected void assertNoDuplicatePropertyValues(String propertyPrefix,
+            BaseConfig config) {
+        final Properties properties = config.getProperties();
+        final Set<String> propertyNames = properties.stringPropertyNames();
+
+        long propertiesCount = propertyNames.stream()
+                .filter(key -> key.startsWith(propertyPrefix)).count();
+        long distinctValuesCount = propertyNames.stream()
+                .filter(key -> key.startsWith(propertyPrefix))
+                .map(key -> properties.getProperty(key)).distinct().count();
+
+        assertThat(
+                "Probable duplicate value in property prefix sequence='"
+                        + propertyPrefix + "'",
+                distinctValuesCount, is(propertiesCount));
     }
 }

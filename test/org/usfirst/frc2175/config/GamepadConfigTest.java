@@ -34,5 +34,28 @@ public class GamepadConfigTest extends TestBase {
         BaseConfig baseConfig = new GamepadConfig();
         assertInstanceVariablesNotNull(baseConfig);
     }
+
+    @Test
+    public void testGamepadConfig_UniquePropertiesSequence_Competition() {
+        String propertyPrefix = "button.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testGamepadConfig_UniquePropertiesSequence_Practice() {
+        String propertyPrefix = "button.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    private void commonTestUniqueProperties(String propertyFileDirectory,
+            String propertyPrefix) {
+        BaseConfig.setPropertyFileDir(propertyFileDirectory);
+        BaseConfig baseConfig = new GamepadConfig();
+
+        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
     }
 }

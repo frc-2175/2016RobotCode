@@ -13,12 +13,13 @@ public abstract class BaseConfig {
 
     private static String propertyFileDir = PROPERTY_FILE_DIR_DEFAULT;
 
+    private final Properties properties;
+
     public BaseConfig() {
         log.info("Configuring class=" + getClass());
 
         final String propertyFileName = getFullyQualifiedPropertyFileName();
-        final Properties properties =
-                new PropertiesLoader().loadProperties(propertyFileName);
+        properties = new PropertiesLoader().loadProperties(propertyFileName);
         configure(properties);
     }
 
@@ -91,5 +92,9 @@ public abstract class BaseConfig {
 
     public static void setPropertyFileDir(String propertyFileDirectory) {
         propertyFileDir = propertyFileDirectory;
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 }
