@@ -7,8 +7,7 @@ public class AutonomousConfig extends BaseConfig {
     private double platformLength;
     private int sidePlateLength;
     private int marginOfError;
-    private double travelLength =
-            platformLength + sidePlateLength + marginOfError;
+    private double travelLength;
     private int caution;
     private int extraShootLength;
     private int platformBeforeCheval;
@@ -40,6 +39,8 @@ public class AutonomousConfig extends BaseConfig {
         int platformBeforePortcullis =
                 getIntPropertyValue("platformBeforePortcullis", properties);
         this.platformBeforePortcullis = platformBeforePortcullis;
+        travelLength =
+                this.platformLength + this.sidePlateLength + this.marginOfError;
     }
 
     public double getTravelLength() {
