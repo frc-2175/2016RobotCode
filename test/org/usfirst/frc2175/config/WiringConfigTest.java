@@ -51,4 +51,44 @@ public class WiringConfigTest extends TestBase {
         assertInstanceVariablesNotNull(sut);
         assertArraysNotZeroLength(sut);
     }
+
+    @Test
+    public void testWiringConfig_UniquePropertiesSequence_MotorCompetition() {
+        String propertyPrefix = "*.talon.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testWiringConfig_UniquePropertiesSequence_MotorPractice() {
+        String propertyPrefix = "*.talon.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testWiringConfig_UniquePropertiesSequence_DigitalCompetition() {
+        String propertyPrefix = "*.talon.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testWiringConfig_UniquePropertiesSequence_DigitalPractice() {
+        String propertyPrefix = "*.digital.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    private void commonTestUniqueProperties(String propertyFileDirectory,
+            String propertyPrefix) {
+        BaseConfig.setPropertyFileDir(propertyFileDirectory);
+        BaseConfig baseConfig = new WiringConfig();
+
+        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
+    }
 }
