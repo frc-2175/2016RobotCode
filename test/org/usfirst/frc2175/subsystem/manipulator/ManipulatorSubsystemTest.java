@@ -23,8 +23,7 @@ public class ManipulatorSubsystemTest extends TestBase {
     @Mocked
     private HLUsageReporting hlUsageReporting;
 
-    @Ignore
-    // WiringConfig needs valid bootSpeed from MockWiringConfig
+    @Ignore("WiringConfig needs valid bootSpeed from MockWiringConfig")
     @Test
     public void testManipulatorSubsystem()
             throws IllegalArgumentException, IllegalAccessException {
