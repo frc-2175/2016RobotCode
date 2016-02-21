@@ -1,6 +1,7 @@
 package org.usfirst.frc2175;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -104,15 +105,21 @@ public abstract class TestBase {
         final Properties properties = config.getProperties();
         final Set<String> propertyNames = properties.stringPropertyNames();
 
-        long propertiesCount = propertyNames.stream()
+        long propertiesCount = propertyNames.size();
+        assertFalse("No properties in config.", propertiesCount == 0);
+
+        long matchedPropertiesCount = propertyNames.stream()
                 .filter(key -> key.matches(propertyRegex)).count();
         long distinctValuesCount = propertyNames.stream()
                 .filter(key -> key.matches(propertyRegex))
                 .map(key -> properties.getProperty(key)).distinct().count();
 
+        assertFalse("Zero property keys matched regex=" + propertyRegex,
+                matchedPropertiesCount == 0);
+
         assertThat(
                 "Probable duplicate value in property sequence with regex ='"
                         + propertyRegex + "'",
-                distinctValuesCount, is(propertiesCount));
+                distinctValuesCount, is(matchedPropertiesCount));
     }
 }

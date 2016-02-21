@@ -32,7 +32,7 @@ public class JoysticksConfigTest extends TestBase {
 
     @Test
     public void testJoysticksConfig_UniquePropertiesSequence_Competition() {
-        String propertyPrefix = "joysticks.";
+        String propertyPrefix = "joystick[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
@@ -40,7 +40,7 @@ public class JoysticksConfigTest extends TestBase {
 
     @Test
     public void testJoysticksConfig_UniquePropertiesSequence_Practice() {
-        String propertyPrefix = "joysticks.";
+        String propertyPrefix = "joystick[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);

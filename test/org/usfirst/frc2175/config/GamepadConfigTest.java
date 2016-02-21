@@ -37,7 +37,7 @@ public class GamepadConfigTest extends TestBase {
 
     @Test
     public void testGamepadConfig_UniquePropertiesSequence_Competition() {
-        String propertyPrefix = "button.";
+        String propertyPrefix = "button[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
@@ -45,7 +45,7 @@ public class GamepadConfigTest extends TestBase {
 
     @Test
     public void testGamepadConfig_UniquePropertiesSequence_Practice() {
-        String propertyPrefix = "button.";
+        String propertyPrefix = "button[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);

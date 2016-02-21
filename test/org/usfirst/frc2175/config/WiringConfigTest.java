@@ -54,83 +54,73 @@ public class WiringConfigTest extends TestBase {
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Motor_Competition() {
-
-        String propertyPrefix = ".talon.";
+        String propertyRegex = ".*[.]talon[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
-
     public void testWiringConfig_UniquePropertiesSequence_Motor_Practice() {
-
-        String propertyPrefix = ".talon.";
+        String propertyRegex = ".*[.]talon[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
-
     public void testWiringConfig_UniquePropertiesSequence_Digital_Competition() {
-        String propertyPrefix = ".digital.";
+        String propertyRegex = ".*[.]digital[.].*port";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Digital_Practice() {
-        String propertyPrefix = ".digital.";
+        String propertyRegex = ".*[.]digital[.].*port";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
-
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Analog_Competition() {
-        String propertyPrefix = ".analog.";
+        String propertyRegex = ".*[.]analog[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Analog_Practice() {
-        String propertyPrefix = ".analog.";
+        String propertyRegex = ".*[.]analog[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
-
     public void testWiringConfig_UniquePropertiesSequence_Solenoid_Competition() {
-
-        String propertyPrefix = ".solenoid.";
+        String propertyRegex = ".*[.]solenoid[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     @Test
-
     public void testWiringConfig_UniquePropertiesSequence_Solenoid_Practice() {
-
-        String propertyPrefix = ".solenoid.";
+        String propertyRegex = ".*[.]solenoid[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
-        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+        commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
     }
 
     private void commonTestUniqueProperties(String propertyFileDirectory,
-            String propertyPrefix) {
+            String propertyRegex) {
         BaseConfig.setPropertyFileDir(propertyFileDirectory);
         BaseConfig baseConfig = new WiringConfig();
 
-        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
+        assertNoDuplicatePropertyValues(propertyRegex, baseConfig);
     }
-
 }
