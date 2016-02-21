@@ -9,11 +9,19 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenShootMoatAutonomous extends CommandGroup {
+    private double travelLength;
+    private int extraShootLength;
+
     public WeakenShootMoatAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Refine Numbers
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        extraShootLength = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getExtraShootLength();
+        // TODO Refine Numbers if needed
         // TODO Change angle of turn
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 95));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength + extraShootLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
         addSequential(new ExtendCatapultCommand(robotSubsystems));

@@ -7,11 +7,21 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DamageRockWallAutonomous extends CommandGroup {
+    private double travelLength;
+    private int caution;
+
     public DamageRockWallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Refine numbers
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 85));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, -90));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getCaution();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                -travelLength));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - caution));
     }
 }

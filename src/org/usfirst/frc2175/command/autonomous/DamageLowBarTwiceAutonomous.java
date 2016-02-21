@@ -9,16 +9,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DamageLowBarTwiceAutonomous {
 
     public class DamagePortcullisAutonomous extends CommandGroup {
+        private double travelLength;
+        private int caution;
 
         public DamagePortcullisAutonomous(RobotSubsystems robotSubsystems,
                 RobotControllers robotControllers) {
+            travelLength = robotSubsystems.getRobotConfig()
+                    .getAutonomousConfig().getTravelLength();
+            caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                    .getCaution();
             // TO-DO Fix number of inches as needed
-            addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, 85));
-            addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, -90));
-            addSequential(
-                    new DriveInches(robotSubsystems, robotControllers, 80));
+            addSequential(new DriveInches(robotSubsystems, robotControllers,
+                    travelLength));
+            addSequential(new DriveInches(robotSubsystems, robotControllers,
+                    -travelLength));
+            addSequential(new DriveInches(robotSubsystems, robotControllers,
+                    travelLength - caution));
         }
     }
 }

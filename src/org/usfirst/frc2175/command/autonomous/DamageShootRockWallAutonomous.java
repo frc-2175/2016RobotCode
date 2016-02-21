@@ -10,18 +10,31 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DamageShootRockWallAutonomous extends CommandGroup {
+    private double travelLength;
+    private int caution;
+    private int extraShootLength;
+
     public DamageShootRockWallAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Refine Numbers
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getCaution();
+        extraShootLength = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getExtraShootLength();
+        // TODO Refine Numbers if needed
         // TODO Change angle of turn
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 95));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength + extraShootLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
         addParallel(new RetractCatapultCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, -100));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 80));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                -(travelLength + extraShootLength)));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - caution));
     }
 }

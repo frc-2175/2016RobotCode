@@ -10,13 +10,21 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenShootPortcullisAutonomous extends CommandGroup {
+    private double travelLength;
+    private int platformBeforePortcullis;
+
     public WeakenShootPortcullisAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 20));
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        platformBeforePortcullis = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getExtraShootLength();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        // TODO Fix number of inches as needed
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 65));
+        addParallel(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforePortcullis));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
     }

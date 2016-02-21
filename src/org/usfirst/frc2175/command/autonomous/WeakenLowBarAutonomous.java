@@ -7,10 +7,14 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenLowBarAutonomous extends CommandGroup {
+    private double travelLength;
+
     public WeakenLowBarAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        addSequential(
-                // TO-DO Fix numbers if needed
-                new DriveInches(robotSubsystems, robotControllers, 85));
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength));
     }
 }

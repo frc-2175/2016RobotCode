@@ -7,13 +7,21 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DamageMoatAutonomous extends CommandGroup {
+    private double travelLength;
+    private int caution;
+
     public DamageMoatAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 85));
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, -90));
-        addSequential(// TO-DO Refine Numbers
-                new DriveInches(robotSubsystems, robotControllers, 80));
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getCaution();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                -travelLength));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - caution));
     }
 }

@@ -9,14 +9,21 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenChevalDeFriseAutonomous extends CommandGroup {
+    private double travelLength;
+    private int platformBeforeCheval;
+
     public WeakenChevalDeFriseAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
-        // TODO Fix Boot commands if necessary
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        platformBeforeCheval = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getPlatformBeforeCheval();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
-        // TODO Fix inches as needed
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 73));
+        addParallel(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforeCheval));
         addSequential(new RaiseBootCommand(robotSubsystems));
 
     }

@@ -12,26 +12,42 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DamageShootPortcullisAutonomous extends CommandGroup {
+    private double travelLength;
+    private int caution;
+    private int platformBeforePortcullis;
+
     public DamageShootPortcullisAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Fix number of inches as needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 20));
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        caution = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getCaution();
+        platformBeforePortcullis = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getPlatformBeforePortcullis();
+        // TODO Refine numbers if needed
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 65));
+        addParallel(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforePortcullis));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
         addSequential(new RetractCatapultCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 20));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 70));
+        addParallel(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforePortcullis));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 180, true));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 25));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInches(robotSubsystems, robotControllers, 55));
+        addParallel(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforePortcullis - caution));
         addSequential(new RaiseBootCommand(robotSubsystems));
     }
 }

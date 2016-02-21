@@ -11,14 +11,26 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenShootChevalDeFriseAutonomous extends CommandGroup {
+    private double travelLength;
+    private int extraShootLength;
+    private int platformBeforeCheval;
+
     public WeakenShootChevalDeFriseAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // TODO Refine Numbers
+        travelLength = robotSubsystems.getRobotConfig().getAutonomousConfig()
+                .getTravelLength();
+        extraShootLength = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getExtraShootLength();
+        platformBeforeCheval = robotSubsystems.getRobotConfig()
+                .getAutonomousConfig().getPlatformBeforeCheval();
+        // TODO Refine Numbers if needed
         // TODO Refine Angle
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 12));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new RaiseBootCommand(robotSubsystems));
-        addSequential(new DriveInches(robotSubsystems, robotControllers, 83));
+        addSequential(new DriveInches(robotSubsystems, robotControllers,
+                travelLength - platformBeforeCheval + extraShootLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
