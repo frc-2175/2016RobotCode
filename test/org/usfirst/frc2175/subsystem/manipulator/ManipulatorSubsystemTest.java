@@ -1,5 +1,6 @@
 package org.usfirst.frc2175.subsystem.manipulator;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -7,7 +8,6 @@ import org.usfirst.frc2175.config.RobotConfig;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.HLUsageReporting;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import mockit.Mocked;
 
 public class ManipulatorSubsystemTest extends TestBase {
