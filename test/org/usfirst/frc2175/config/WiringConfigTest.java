@@ -53,7 +53,8 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_MotorCompetition() {
+    public void testWiringConfig_UniquePropertiesSequence_Motor_Competition() {
+
         String propertyPrefix = ".talon.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
@@ -61,7 +62,9 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_MotorPractice() {
+
+    public void testWiringConfig_UniquePropertiesSequence_Motor_Practice() {
+
         String propertyPrefix = ".talon.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
@@ -69,7 +72,8 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_DigitalCompetition() {
+
+    public void testWiringConfig_UniquePropertiesSequence_Digital_Competition() {
         String propertyPrefix = ".digital.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
@@ -77,15 +81,16 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_DigitalPractice() {
+    public void testWiringConfig_UniquePropertiesSequence_Digital_Practice() {
         String propertyPrefix = ".digital.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_AnalogCompetition() {
+    public void testWiringConfig_UniquePropertiesSequence_Analog_Competition() {
         String propertyPrefix = ".analog.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
@@ -93,7 +98,7 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_AnalogPractice() {
+    public void testWiringConfig_UniquePropertiesSequence_Analog_Practice() {
         String propertyPrefix = ".analog.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
@@ -101,7 +106,9 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_SolenoidCompetition() {
+
+    public void testWiringConfig_UniquePropertiesSequence_Solenoid_Competition() {
+
         String propertyPrefix = ".solenoid.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
@@ -109,7 +116,9 @@ public class WiringConfigTest extends TestBase {
     }
 
     @Test
-    public void testWiringConfig_UniquePropertiesSequence_SolenoidPractice() {
+
+    public void testWiringConfig_UniquePropertiesSequence_Solenoid_Practice() {
+
         String propertyPrefix = ".solenoid.";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
@@ -120,7 +129,5 @@ public class WiringConfigTest extends TestBase {
             String propertyPrefix) {
         BaseConfig.setPropertyFileDir(propertyFileDirectory);
         BaseConfig baseConfig = new WiringConfig();
-
-        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
     }
 }
