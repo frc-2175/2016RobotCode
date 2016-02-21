@@ -88,24 +88,25 @@ public class WiringConfig extends BaseConfig {
     }
 
     private void configurePowertrain(Properties properties) {
-        int gyroPort = getIntPropertyValue("powertrain.gyro.port", properties);
+        int gyroPort =
+                getIntPropertyValue("powertrain.analog.gyro.port", properties);
         gyro = new AnalogGyro(gyroPort);
 
         boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
-                "powertrain.encoder.left.isReversed", properties);
+                "powertrain.digital.encoder.left.isReversed", properties);
         int leftDriveEncoderPortA = getIntPropertyValue(
-                "powertrain.encoder.left.port.a", properties);
+                "powertrain.digital.encoder.left.port.a", properties);
         int leftDriveEncoderPortB = getIntPropertyValue(
-                "powertrain.encoder.left.port.b", properties);
+                "powertrain.digital.encoder.left.port.b", properties);
         leftDriveEncoder = new Encoder(leftDriveEncoderPortA,
                 leftDriveEncoderPortB, isLeftDriveEncoderReversed);
 
         boolean isRightDriveEncoderReversed = getBooleanPropertyValue(
-                "powertrain.encoder.right.isReversed", properties);
+                "powertrain.digital.encoder.right.isReversed", properties);
         int rightDriveEncoderPortA = getIntPropertyValue(
-                "powertrain.encoder.right.port.a", properties);
+                "powertrain.digital.encoder.right.port.a", properties);
         int rightDriveEncoderPortB = getIntPropertyValue(
-                "powertrain.encoder.right.port.b", properties);
+                "powertrain.digital.encoder.right.port.b", properties);
         rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
                 rightDriveEncoderPortB, isRightDriveEncoderReversed);
 
@@ -150,12 +151,12 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("catapult.solenoid.right", properties);
         rightCatapultSolenoid = new Solenoid(rightCatapultSolenoidPort);
 
-        int catapultUpSwitchPort =
-                getIntPropertyValue("catapult.switch.up.port", properties);
+        int catapultUpSwitchPort = getIntPropertyValue(
+                "catapult.digital.switch.up.port", properties);
         catapultUpSwitch = new DigitalInput(catapultUpSwitchPort);
 
-        int catapultDownSwitchPort =
-                getIntPropertyValue("catapult.switch.down.port", properties);
+        int catapultDownSwitchPort = getIntPropertyValue(
+                "catapult.digital.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
     }
 
@@ -172,21 +173,21 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("dreamIntake.talon.lift.port", properties);
         dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
 
-        int dreamIntakeLiftEncoderA =
-                getIntPropertyValue("dreamIntake.encoder.port.a", properties);
-        int dreamIntakeLiftEncoderB =
-                getIntPropertyValue("dreamIntake.encoder.port.b", properties);
+        int dreamIntakeLiftEncoderA = getIntPropertyValue(
+                "dreamIntake.digital.encoder.port.a", properties);
+        int dreamIntakeLiftEncoderB = getIntPropertyValue(
+                "dreamIntake.digital.encoder.port.b", properties);
         boolean isDreamIntakeLiftEncoderReversed = getBooleanPropertyValue(
-                "dreamIntake.encoder.isReversed", properties);
+                "dreamIntake.digital.encoder.isReversed", properties);
         dreamIntakeLiftEncoder = new Encoder(dreamIntakeLiftEncoderA,
                 dreamIntakeLiftEncoderB, isDreamIntakeLiftEncoderReversed);
 
-        int dreamIntakeUpSwitchPort =
-                getIntPropertyValue("dreamIntake.switch.up.port", properties);
+        int dreamIntakeUpSwitchPort = getIntPropertyValue(
+                "dreamIntake.digital.switch.up.port", properties);
         dreamIntakeUpSwitch = new DigitalInput(dreamIntakeUpSwitchPort);
 
-        int dreamIntakeDownSwitchPort =
-                getIntPropertyValue("dreamIntake.switch.down.port", properties);
+        int dreamIntakeDownSwitchPort = getIntPropertyValue(
+                "dreamIntake.digital.switch.down.port", properties);
         dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
     }
 
@@ -209,11 +210,11 @@ public class WiringConfig extends BaseConfig {
                         rollerbarIntakeSolenoidReversePort);
 
         int rollerbarIntakeInSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.in.port", properties);
+                "rollerbarIntake.digital.switch.in.port", properties);
         rollerbarIntakeInSwitch = new DigitalInput(rollerbarIntakeInSwitchPort);
 
         int rollerbarIntakeOutSwitchPort = getIntPropertyValue(
-                "rollerbarIntake.switch.out.port", properties);
+                "rollerbarIntake.digital.switch.out.port", properties);
         rollerbarIntakeOutSwitch =
                 new DigitalInput(rollerbarIntakeOutSwitchPort);
     }
@@ -224,19 +225,19 @@ public class WiringConfig extends BaseConfig {
         bootTalon = new CANTalon(bootTalonPort);
 
         int isBootUpSwitchPort = getIntPropertyValue(
-                "manipulator.switch.boot.up.port", properties);
+                "manipulator.digital.switch.boot.up.port", properties);
         isBootUpSwitch = new DigitalInput(isBootUpSwitchPort);
 
         int isBootDownSwitchPort = getIntPropertyValue(
-                "manipulator.switch.boot.down.port", properties);
+                "manipulator.digital.switch.boot.down.port", properties);
         isBootDownSwitch = new DigitalInput(isBootDownSwitchPort);
 
-        int bootEncoderA =
-                getIntPropertyValue("manipulator.encoder.port.a", properties);
-        int bootEncoderB =
-                getIntPropertyValue("manipulator.encoder.port.b", properties);
+        int bootEncoderA = getIntPropertyValue(
+                "manipulator.digital.encoder.port.a", properties);
+        int bootEncoderB = getIntPropertyValue(
+                "manipulator.digital.encoder.port.b", properties);
         boolean isBootEncoderReversed = getBooleanPropertyValue(
-                "manipulator.encoder.isReversed", properties);
+                "manipulator.digital.encoder.isReversed", properties);
         bootEncoder =
                 new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
     }
