@@ -17,16 +17,22 @@ public class GamepadConfigTest extends TestBase {
     @Test
     public void testGamepadConfig_Competition()
             throws IllegalArgumentException, IllegalAccessException {
-        BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
-        GamepadConfig sut = new GamepadConfig();
-        assertInstanceVariablesNotNull(sut);
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+        commonTestConfig(propertyFileDirectory);
     }
 
     @Test
     public void testGamepadConfig_Practice()
             throws IllegalArgumentException, IllegalAccessException {
-        BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
-        GamepadConfig sut = new GamepadConfig();
-        assertInstanceVariablesNotNull(sut);
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+        commonTestConfig(propertyFileDirectory);
+    }
+
+    private void commonTestConfig(String propertyFileDirectory)
+            throws IllegalArgumentException, IllegalAccessException {
+        BaseConfig.setPropertyFileDir(propertyFileDirectory);
+        BaseConfig baseConfig = new GamepadConfig();
+        assertInstanceVariablesNotNull(baseConfig);
+    }
     }
 }
