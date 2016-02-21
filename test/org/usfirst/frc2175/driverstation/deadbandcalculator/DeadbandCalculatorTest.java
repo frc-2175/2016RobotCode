@@ -1,94 +1,80 @@
 package org.usfirst.frc2175.driverstation.deadbandcalculator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 
-public class DeadbandCalculatorTest {
-    private static final double ALLOWED_DOUBLE_DELTA = 0.01;
+public class DeadbandCalculatorTest extends TestBase {
+    private DeadbandCalculator sut;
 
-    private DeadbandCalculator sut = new DeadbandCalculator();
+    @Before
+    public void setUp() {
+        sut = new DeadbandCalculator();
+    }
 
-    @Test
-    public void testCalcLinearControlCurveSlope() throws Exception {
-        double testShiftSize = .1;
-
-        double expectedValue = 1.1111111;
-
-        double actual = sut.calcLinearControlCurveSlope(testShiftSize);
-
-        assertEquals("Incorrect value calculated.", expectedValue, actual, ALLOWED_DOUBLE_DELTA);
-
+    private void assertCorrectDeadbandOutput(double expected, double actual,
+            double deadbandSize) {
+        String msg = "Incorrect deadbanded output.";
+        assertEquals(msg, expected,
+                sut.calcDeadbandedOutput(actual, deadbandSize),
+                ALLOWED_DOUBLE_DELTA);
     }
 
     @Test
-    public void testCalcSignOfValue_PositiveValue() throws Exception {
-        double value = 4.4;
-        double expectedValue = 1.0;
+    public void testCalcDeadbandedOutput() {
+        for (double deadbandSize = 0; deadbandSize <= 0.8; deadbandSize += 0.2) {
+            assertCorrectDeadbandOutput(0, 0, deadbandSize);
+            assertCorrectDeadbandOutput(0, deadbandSize, deadbandSize);
+            assertCorrectDeadbandOutput(0, -deadbandSize, deadbandSize);
+            assertCorrectDeadbandOutput(1, 1, deadbandSize);
+            assertCorrectDeadbandOutput(-1, -1, deadbandSize);
 
-        double actual = sut.calcSignOfValue(value);
+            double halfwayInput = deadbandSize + ((1 - deadbandSize) / 2);
+            assertCorrectDeadbandOutput(0.5, halfwayInput, deadbandSize);
+            assertCorrectDeadbandOutput(-0.5, -halfwayInput, deadbandSize);
+        }
+    }
 
-        assertEquals("Incorrect value calculated.", expectedValue, actual, ALLOWED_DOUBLE_DELTA);
+    private void assertCorrectLineSlope(double shiftSize, double expected) {
+        double actual = sut.calcLinearOutputSlope(shiftSize);
+
+        String msg = "Incorrect slope for shift size " + shiftSize + ".";
+        assertEquals(msg, expected, actual, ALLOWED_DOUBLE_DELTA);
     }
 
     @Test
-    public void testCalcSignOfValue_NegativeValue() throws Exception {
-        double value = -2.8;
-        double expectedValue = -1.0;
-
-        double actual = sut.calcSignOfValue(value);
-
-        assertEquals("Incorrect value calculated.", expectedValue, actual, ALLOWED_DOUBLE_DELTA);
-
+    public void testCalcLinearOutputSlope() throws Exception {
+        assertCorrectLineSlope(0, 1);
+        assertCorrectLineSlope(0.5, 2);
     }
 
     @Test
     public void testIsAboveThreshold_Above() throws Exception {
-        double value = 2.8;
-        double threshold = 3;
-        boolean expectedValue = false;
+        double value = 0.5;
+        double threshold = 0.2;
 
         boolean actual = sut.isAboveThreshold(value, threshold);
 
-        assertEquals("Incorrect value calculated.", expectedValue, actual);
+        String msg =
+                "Incorrectly returned that " + value + " was below " + threshold;
+        assertTrue(msg, actual);
     }
 
     @Test
     public void testIsAboveThreshold_Below() throws Exception {
-        double value = 2.8;
-        double threshold = 3;
-        boolean expectedValue = false;
+        double value = 0.18;
+        double threshold = 0.2;
 
         boolean actual = sut.isAboveThreshold(value, threshold);
 
-        assertEquals("Incorrect value calculated.", expectedValue, actual);
-    }
-
-    @Test
-    public void testCalcLinearControlCurveIntercept_Postitive() throws Exception {
-        double inputSign = 1;
-        double shiftSize = 0.1;
-        double expectedValue = -0.1;
-
-        double actual = sut.calcLinearControlCurveIntercept(inputSign, shiftSize);
-
-        assertEquals("Incorrect value calculated.", expectedValue, actual, ALLOWED_DOUBLE_DELTA);
-    }
-
-    public void testCalcLinearControlCurveIntercept_Negative() throws Exception {
-        double inputSign = -1; // i.e. 1 or -1
-        double shiftSize = 0.1;
-        double expectedValue = 0.1;
-
-        double actual = sut.calcLinearControlCurveIntercept(inputSign, shiftSize);
-
-        assertEquals("Incorrect value calculated.", expectedValue, actual, ALLOWED_DOUBLE_DELTA);
-    }
-
-    @Test
-    public void testCalcLinearControlCurve() throws Exception {
-
+        String msg =
+                "Incorrectly returned that " + value + " was above " + threshold;
+        assertFalse(msg, actual);
     }
 
 }

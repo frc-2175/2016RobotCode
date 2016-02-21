@@ -29,6 +29,9 @@ public abstract class TestBase {
             "src/properties/competitionbot/";
     public static final String PROPERTY_FILE_DIR_SRC_PRACTICE =
             "src/properties/practicebot/";
+
+    public final double ALLOWED_DOUBLE_DELTA = 0.01;
+
     @Rule
     public TestName testName = new TestName();
 
