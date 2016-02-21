@@ -99,20 +99,20 @@ public abstract class TestBase {
         }
     }
 
-    protected void assertNoDuplicatePropertyValues(String propertyPrefix,
+    protected void assertNoDuplicatePropertyValues(String propertyRegex,
             BaseConfig config) {
         final Properties properties = config.getProperties();
         final Set<String> propertyNames = properties.stringPropertyNames();
 
         long propertiesCount = propertyNames.stream()
-                .filter(key -> key.contains(propertyPrefix)).count();
+                .filter(key -> key.matches(propertyRegex)).count();
         long distinctValuesCount = propertyNames.stream()
-                .filter(key -> key.contains(propertyPrefix))
+                .filter(key -> key.matches(propertyRegex))
                 .map(key -> properties.getProperty(key)).distinct().count();
 
         assertThat(
-                "Probable duplicate value in property prefix sequence='"
-                        + propertyPrefix + "'",
+                "Probable duplicate value in property sequence with regex ='"
+                        + propertyRegex + "'",
                 distinctValuesCount, is(propertiesCount));
     }
 }
