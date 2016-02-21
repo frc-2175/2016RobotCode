@@ -20,7 +20,13 @@ public abstract class BaseConfig {
 
         final String propertyFileName = getFullyQualifiedPropertyFileName();
         properties = new PropertiesLoader().loadProperties(propertyFileName);
-        configure(properties);
+
+        try {
+            configure(properties);
+        } catch (Exception e) {
+            log.severe(e.toString());
+            throw e;
+        }
     }
 
     /** @return The property file name to load for this config. */
@@ -39,7 +45,6 @@ public abstract class BaseConfig {
         if (value == null) {
             String msg = "Property '" + propertyName
                     + "' not found in property file";
-            log.severe(msg);
             throw new IllegalStateException(msg);
         }
         return value;
