@@ -1,4 +1,4 @@
-package org.usfirst.frc2175.driverstation.deadbandcalculator;
+package org.usfirst.frc2175.driverstation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
