@@ -105,9 +105,9 @@ public abstract class TestBase {
         final Set<String> propertyNames = properties.stringPropertyNames();
 
         long propertiesCount = propertyNames.stream()
-                .filter(key -> key.startsWith(propertyPrefix)).count();
+                .filter(key -> key.contains(propertyPrefix)).count();
         long distinctValuesCount = propertyNames.stream()
-                .filter(key -> key.startsWith(propertyPrefix))
+                .filter(key -> key.contains(propertyPrefix))
                 .map(key -> properties.getProperty(key)).distinct().count();
 
         assertThat(
