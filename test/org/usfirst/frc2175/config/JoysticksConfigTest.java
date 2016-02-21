@@ -29,4 +29,28 @@ public class JoysticksConfigTest extends TestBase {
         JoysticksConfig sut = new JoysticksConfig();
         assertInstanceVariablesNotNull(sut);
     }
+
+    @Test
+    public void testJoysticksConfig_UniquePropertiesSequence_Competition() {
+        String propertyPrefix = "joysticks.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testJoysticksConfig_UniquePropertiesSequence_Practice() {
+        String propertyPrefix = "joysticks.";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    private void commonTestUniqueProperties(String propertyFileDirectory,
+            String propertyPrefix) {
+        BaseConfig.setPropertyFileDir(propertyFileDirectory);
+        BaseConfig baseConfig = new JoysticksConfig();
+
+        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
+    }
 }
