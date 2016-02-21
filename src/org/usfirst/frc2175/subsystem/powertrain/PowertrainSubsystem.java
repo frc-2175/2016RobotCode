@@ -101,8 +101,11 @@ public class PowertrainSubsystem extends BaseSubsystem {
         case HIGH:
             pwmValues = powertrainConfig.getStateHigh();
             break;
-        case CLIMB:
-            pwmValues = powertrainConfig.getStateClimb();
+        case CLIMB_NEUTRAL:
+            pwmValues = powertrainConfig.getStateClimb_Neutral();
+            break;
+        case CLIMB_LOW:
+            pwmValues = powertrainConfig.getStateClimb_Low();
             break;
         }
         shifterState = state;
@@ -142,7 +145,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public void shiftToClimb() {
-        setShifterState(ShifterState.CLIMB);
+        setShifterState(ShifterState.CLIMB_NEUTRAL);
     }
 
     public boolean isDriveEngaged() {
@@ -151,7 +154,8 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public boolean isClimberEngaged() {
-        return shifterState == ShifterState.CLIMB;
+        return shifterState == ShifterState.CLIMB_NEUTRAL
+                || shifterState == ShifterState.CLIMB_LOW;
     }
 
     public void resetGyro() {
@@ -171,6 +175,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     private enum ShifterState {
-        LOW, HIGH, CLIMB;
+        LOW, HIGH, CLIMB_NEUTRAL, CLIMB_LOW;
     }
 }
