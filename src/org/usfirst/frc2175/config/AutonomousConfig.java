@@ -3,7 +3,7 @@ package org.usfirst.frc2175.config;
 import java.util.Properties;
 
 public class AutonomousConfig extends BaseConfig {
-    private static final String PROPERTY_FILE_NAME = "manipulator.properties";
+    private static final String PROPERTY_FILE_NAME = "autonomous.properties";
     private double platformLength;
     private int sidePlateLength;
     private int marginOfError;
