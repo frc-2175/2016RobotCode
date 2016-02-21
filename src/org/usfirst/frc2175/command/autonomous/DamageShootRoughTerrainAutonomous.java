@@ -9,8 +9,8 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class DamageLowBarAndShootAutonomous extends CommandGroup {
-    public DamageLowBarAndShootAutonomous(RobotSubsystems robotSubsystems,
+public class DamageShootRoughTerrainAutonomous extends CommandGroup {
+    public DamageShootRoughTerrainAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         // TODO Refine Numbers
         // TODO Change angle of turn
