@@ -129,5 +129,8 @@ public class WiringConfigTest extends TestBase {
             String propertyPrefix) {
         BaseConfig.setPropertyFileDir(propertyFileDirectory);
         BaseConfig baseConfig = new WiringConfig();
+
+        assertNoDuplicatePropertyValues(propertyPrefix, baseConfig);
     }
+
 }
