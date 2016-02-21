@@ -76,7 +76,7 @@ public abstract class TestBase {
             if (type.getName().equals("double")) {
                 String assertMessage =
                         "Field " + field.getName() + " was zero.";
-                assertNotEquals(assertMessage, 0, field.get(sut));
+                assertNotEquals(assertMessage, 0.0, field.get(sut));
             }
         }
     }
