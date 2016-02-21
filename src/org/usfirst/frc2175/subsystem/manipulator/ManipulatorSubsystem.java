@@ -1,13 +1,14 @@
 package org.usfirst.frc2175.subsystem.manipulator;
 
+import org.usfirst.frc2175.config.ManipulatorConfig;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ManipulatorSubsystem extends BaseSubsystem {
-
     private DigitalInput isBootUpSwitch;
     private DigitalInput isBootDownSwitch;
 
@@ -15,12 +16,15 @@ public class ManipulatorSubsystem extends BaseSubsystem {
     private double bootSpeed;
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
-        bootTalon = robotConfig.getWiringConfig().getBootTalon();
-        isBootUpSwitch = robotConfig.getWiringConfig().getIsBootUpSwitch();
-        isBootDownSwitch = robotConfig.getWiringConfig().getIsBootDownSwitch();
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        ManipulatorConfig manipulatorConfig =
+                robotConfig.getManipulatorConfig();
 
-        // FIXME what to do with this? getBootSpeed() commented out
-        // bootSpeed = robotConfig.getWiringConfig().getBootSpeed();
+        bootTalon = wiringConfig.getBootTalon();
+        bootSpeed = manipulatorConfig.getBootSpeed();
+        isBootUpSwitch = wiringConfig.getIsBootUpSwitch();
+        isBootDownSwitch = wiringConfig.getIsBootDownSwitch();
+
     }
 
     public void setBootSpeed(double speed) {
@@ -42,5 +46,4 @@ public class ManipulatorSubsystem extends BaseSubsystem {
     public boolean isBootDown() {
         return isBootDownSwitch.get();
     }
-
 }

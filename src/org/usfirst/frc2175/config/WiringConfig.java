@@ -239,14 +239,7 @@ public class WiringConfig extends BaseConfig {
                 "manipulator.encoder.isReversed", properties);
         bootEncoder =
                 new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
-
-        // double bootSpeed =
-        // getDoublePropertyValue("manipulator.boot.speed", properties);
     }
-
-    // public double getBootSpeed() {
-    // return bootSpeed;
-    // }
 
     public CANTalon getRollerbarIntakeLiftTalon() {
         return rollerbarIntakeLiftTalon;
