@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
     private final RobotSubsystems robotSubsystems =
             new RobotSubsystems(robotConfig, driverStation);
     private final RobotControllers robotControllers =
-            new RobotControllers(robotConfig, robotSubsystems);
+            new RobotControllers(robotSubsystems, robotConfig);
     private final JoystickEventMapper joystickEventMapper =
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
                     robotControllers);
