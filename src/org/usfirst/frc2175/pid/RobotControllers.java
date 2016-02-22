@@ -1,5 +1,6 @@
 package org.usfirst.frc2175.pid;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.usfirst.frc2175.config.RobotConfig;
@@ -27,7 +28,9 @@ public class RobotControllers {
             this.driveInchesPIDController =
                     new DriveInchesPIDController(robotSubsystems, robotConfig);
         } catch (Exception e) {
-            log.severe(e.toString());
+            final String msg =
+                    "Error instantiating a PIDController in RobotControllers:";
+            log.log(Level.SEVERE, msg, e);
             throw e;
         }
     }
@@ -43,5 +46,4 @@ public class RobotControllers {
     public DriveInchesPIDController getDriveInchesPIDController() {
         return driveInchesPIDController;
     }
-
 }
