@@ -17,6 +17,9 @@ public class VisionProcessingConfig extends BaseConfig {
 
     private double[] defaultValue = { 0 };
 
+    private int webCamQuality;
+    private String webCamName;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -33,6 +36,12 @@ public class VisionProcessingConfig extends BaseConfig {
 
         indexFinder = new HighestArrayIndexFinder();
 
+        int webCamQuality =
+                getIntPropertyValue("webcam.usb.quality", properties);
+        this.webCamQuality = webCamQuality;
+        String webCamName =
+                getStringPropertyValue("webcam.usb.name", properties);
+        this.webCamName = webCamName;
     }
 
     private void updateTable() {
@@ -45,6 +54,14 @@ public class VisionProcessingConfig extends BaseConfig {
 
         System.out.println("Getting contourCenterX: " + value[0]);
         return value;
+    }
+
+    public int getWebCamQuality() {
+        return webCamQuality;
+    }
+
+    public String getWebCamName() {
+        return webCamName;
     }
 
     public double[] getContourCenterY() {

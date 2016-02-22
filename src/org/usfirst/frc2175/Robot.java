@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
@@ -56,9 +57,12 @@ public class Robot extends IterativeRobot {
 
     protected void configureCamera() {
         CameraServer server = CameraServer.getInstance();
-        server.setQuality(50);
-        // TODO add properties entry for this - put it in VisionConfig
-        server.startAutomaticCapture("cam0");
+        VisionProcessingConfig visionProcessingConfig =
+                robotConfig.getVisionProcessingConfig();
+        int webCamQuality = visionProcessingConfig.getWebCamQuality();
+        String webCamName = visionProcessingConfig.getWebCamName();
+        server.setQuality(webCamQuality);
+        server.startAutomaticCapture(webCamName);
     }
 
     /**
