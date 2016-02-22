@@ -144,8 +144,12 @@ public class PowertrainSubsystem extends BaseSubsystem {
         setShifterState(ShifterState.LOW);
     }
 
-    public void shiftToClimb() {
+    public void shiftToClimb_Neutral() {
         setShifterState(ShifterState.CLIMB_NEUTRAL);
+    }
+
+    public void shiftToClimb_Low() {
+        setShifterState(ShifterState.CLIMB_LOW);
     }
 
     public boolean isDriveEngaged() {

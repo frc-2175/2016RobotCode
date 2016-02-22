@@ -11,19 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftToClimbGearCommand extends Command {
+public class ShiftToClimbGearCommand_Neutral extends Command {
     private final PowertrainSubsystem powertrainSubsystem;
     private final Logger log = Logger.getLogger(getClass().getName());
 
-    public ShiftToClimbGearCommand(RobotSubsystems robotSubsystems) {
+    public ShiftToClimbGearCommand_Neutral(RobotSubsystems robotSubsystems) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        powertrainSubsystem.shiftToClimb();
-        log.log(Level.FINE, "Shifting to climbing gear");
+        powertrainSubsystem.shiftToClimb_Neutral();
+        log.log(Level.FINE, "Shifting to climbing gear with drive disengaged");
     }
 
     // Called repeatedly when this Command is scheduled to run

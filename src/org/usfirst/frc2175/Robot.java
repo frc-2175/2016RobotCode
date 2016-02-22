@@ -57,7 +57,8 @@ public class Robot extends IterativeRobot {
     protected void configureCamera() {
         CameraServer server = CameraServer.getInstance();
         server.setQuality(50);
-        server.startAutomaticCapture("cam2");
+        // TODO add properties entry for this - put it in VisionConfig
+        server.startAutomaticCapture("cam0");
     }
 
     /**
