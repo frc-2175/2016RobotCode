@@ -85,8 +85,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        System.out.println(
-                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
     }
 
     /** This function is called periodically during test mode. */
