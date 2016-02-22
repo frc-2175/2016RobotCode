@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.driverstation;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.usfirst.frc2175.command.autonomous.DamageChevalDeFriseAutonomous;
@@ -33,7 +35,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SmartDashboardHandler {
     private final Logger log = Logger.getLogger(getClass().getName());
 
+    private static final String KEY_CHECK_CONNECTION = "Check Connection";
+
     private SendableChooser autonChooser;
+
     private RobotSubsystems robotSubsystems;
     private RobotControllers robotControllers;
 
@@ -44,7 +49,28 @@ public class SmartDashboardHandler {
         this.robotSubsystems = robotSubsystems;
         this.robotControllers = robotControllers;
 
+        init();
+    }
+
+    public void init() {
+        SmartDashboard.putBoolean(KEY_CHECK_CONNECTION, false);
         makeAutonChooser();
+    }
+
+    public void update() {
+        CommandGroup selectedAuton = getAutonCommand();
+        SmartDashboard.putString("Selected Autonomous", selectedAuton.getName());
+
+        boolean shouldCheck = SmartDashboard.getBoolean(KEY_CHECK_CONNECTION);
+        if (shouldCheck) {
+            SmartDashboard.putString("Connection Last Verified",
+                    getCurrentTimeStamp());
+            SmartDashboard.putBoolean(KEY_CHECK_CONNECTION, false);
+        }
+    }
+
+    public CommandGroup getAutonCommand() {
+        return (CommandGroup) autonChooser.getSelected();
     }
 
     private void makeAutonChooser() {
@@ -115,7 +141,8 @@ public class SmartDashboardHandler {
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }
 
-    public CommandGroup getAutonCommand() {
-        return (CommandGroup) autonChooser.getSelected();
+    private String getCurrentTimeStamp() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                .format(new Date());
     }
 }
