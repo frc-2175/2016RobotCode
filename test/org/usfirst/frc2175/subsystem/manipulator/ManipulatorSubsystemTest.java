@@ -12,13 +12,13 @@ import mockit.Mocked;
 
 public class ManipulatorSubsystemTest extends TestBase {
     @Mocked
+    private RobotConfig robotConfig;
+
+    @Mocked
     private CANTalon canTalon;
 
     @Mocked
     private DigitalInput digitalInput;
-
-    @Mocked
-    private RobotConfig robotConfig;
 
     @Mocked
     private HLUsageReporting hlUsageReporting;

@@ -41,8 +41,6 @@ public class Robot extends IterativeRobot {
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
 
-    private static CameraServer cameraServer;
-
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -53,6 +51,10 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        configureCamera();
+    }
+
+    protected void configureCamera() {
         CameraServer server = CameraServer.getInstance();
         server.setQuality(50);
         server.startAutomaticCapture("cam2");

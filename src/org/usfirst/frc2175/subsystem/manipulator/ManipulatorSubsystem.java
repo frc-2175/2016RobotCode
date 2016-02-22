@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ManipulatorSubsystem extends BaseSubsystem {
-    private DigitalInput isBootUpSwitch;
-    private DigitalInput isBootDownSwitch;
+    private final DigitalInput isBootUpSwitch;
+    private final DigitalInput isBootDownSwitch;
 
-    private CANTalon bootTalon;
+    private final CANTalon bootTalon;
     private double bootSpeed;
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
@@ -21,10 +21,10 @@ public class ManipulatorSubsystem extends BaseSubsystem {
                 robotConfig.getManipulatorConfig();
 
         bootTalon = wiringConfig.getBootTalon();
-        bootSpeed = manipulatorConfig.getBootSpeed();
         isBootUpSwitch = wiringConfig.getIsBootUpSwitch();
         isBootDownSwitch = wiringConfig.getIsBootDownSwitch();
 
+        bootSpeed = manipulatorConfig.getBootSpeed();
     }
 
     public void setBootSpeed(double speed) {
