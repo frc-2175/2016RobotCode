@@ -64,7 +64,7 @@ public abstract class PIDControllerComplete extends PIDController {
         public double pidGet() {
             double value = getPIDInput();
             log.info("Got value of " + value + " for pidGet()");
-            return getPIDInput();
+            return value;
         }
 
         @Override
