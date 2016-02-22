@@ -1,11 +1,15 @@
 package org.usfirst.frc2175.pid;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
 public class GyroTurnPIDController extends PIDControllerComplete {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private PowertrainSubsystem powertrainSubsystem;
 
     public GyroTurnPIDController(RobotSubsystems robotSubsystems,
@@ -28,12 +32,12 @@ public class GyroTurnPIDController extends PIDControllerComplete {
     }
 
     @Override
-    public double pidGet() {
+    public double getPIDInput() {
         return powertrainSubsystem.getGyroAngle();
     }
 
     @Override
-    public void pidWrite(double output) {
+    public void writePIDOutput(double output) {
         powertrainSubsystem.arcadeDrive(0, output);
     }
 

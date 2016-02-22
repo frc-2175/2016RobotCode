@@ -28,13 +28,13 @@ public class VisionTurnPIDController extends PIDControllerComplete {
     }
 
     @Override
-    public double pidGet() {
+    public double getPIDInput() {
         // FIXME Grab a correct value from somewhere
         return 0;
     }
 
     @Override
-    public void pidWrite(double output) {
+    public void writePIDOutput(double output) {
         powertrainSubsystem.arcadeDrive(0, output);
     }
 }

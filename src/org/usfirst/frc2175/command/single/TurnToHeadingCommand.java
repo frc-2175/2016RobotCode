@@ -42,8 +42,6 @@ public class TurnToHeadingCommand extends Command {
 
     @Override
     protected void execute() {
-        System.out.println(
-                "Turning to heading at turn value: " + pidController.get());
     }
 
     @Override
