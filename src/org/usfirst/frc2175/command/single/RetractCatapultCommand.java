@@ -18,6 +18,8 @@ public class RetractCatapultCommand extends Command {
     public RetractCatapultCommand(RobotSubsystems robotSubsystems) {
         catapultSubsystem = robotSubsystems.getCatapultShooterSubsystem();
 
+        setRunWhenDisabled(true);
+
         requires(robotSubsystems.getCatapultShooterSubsystem());
     }
 

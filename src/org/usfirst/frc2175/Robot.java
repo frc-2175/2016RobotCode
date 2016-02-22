@@ -2,6 +2,7 @@ package org.usfirst.frc2175;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
@@ -12,6 +13,7 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -93,5 +95,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledInit() {
         log.info("Entered disabledInit()");
+        Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
+        retractCatapult.start();
+
     }
 }
