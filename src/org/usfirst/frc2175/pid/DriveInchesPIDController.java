@@ -28,12 +28,12 @@ public class DriveInchesPIDController extends PIDControllerComplete {
     }
 
     @Override
-    public double getPIDInput() {
+    public double pidGet() {
         return powertrainSubsystem.getMeanEncoderDistance();
     }
 
     @Override
-    public void writePIDOutput(double output) {
+    public void pidWrite(double output) {
         powertrainSubsystem.arcadeDrive(output, 0);
     }
 

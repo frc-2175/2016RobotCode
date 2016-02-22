@@ -32,12 +32,12 @@ public class GyroTurnPIDController extends PIDControllerComplete {
     }
 
     @Override
-    public double getPIDInput() {
+    public double pidGet() {
         return powertrainSubsystem.getGyroAngle();
     }
 
     @Override
-    public void writePIDOutput(double output) {
+    public void pidWrite(double output) {
         powertrainSubsystem.arcadeDrive(0, output);
     }
 

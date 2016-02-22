@@ -21,17 +21,34 @@ public abstract class PIDControllerComplete extends PIDController {
     }
 
     public PIDControllerComplete(double p, double i, double d) {
-        super(p, i, d, new DummyPIDHandler(), new DummyPIDHandler(),
-                PID_PERIOD);
+        super(p, i, d, new PIDSource() {
+            @Override
+            public double pidGet() {
+                return 0;
+            }
+
+            @Override
+            public void setPIDSourceType(PIDSourceType pidSource) {
+            }
+
+            @Override
+            public PIDSourceType getPIDSourceType() {
+                return PIDSourceType.kDisplacement;
+            }
+        }, new PIDOutput() {
+            @Override
+            public void pidWrite(double output) {
+            }
+        }, PID_PERIOD);
 
         PIDHandler handler = new PIDHandler();
         this.m_pidInput = handler;
         this.m_pidOutput = handler;
     }
 
-    public abstract double getPIDInput();
+    public abstract double pidGet();
 
-    public abstract void writePIDOutput(double output);
+    public abstract void pidWrite(double output);
 
     @Override
     public void enable() {
@@ -62,7 +79,7 @@ public abstract class PIDControllerComplete extends PIDController {
 
         @Override
         public double pidGet() {
-            double value = getPIDInput();
+            double value = PIDControllerComplete.this.pidGet();
             log.info("Got value of " + value + " for pidGet()");
             return value;
         }
@@ -70,7 +87,7 @@ public abstract class PIDControllerComplete extends PIDController {
         @Override
         public void pidWrite(double output) {
             log.info("Wrote value of " + output + " for pidWrite()");
-            writePIDOutput(output);
+            PIDControllerComplete.this.pidWrite(output);
         }
     }
 }

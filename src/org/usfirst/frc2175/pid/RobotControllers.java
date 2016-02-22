@@ -14,17 +14,22 @@ public class RobotControllers {
     private final GyroTurnPIDController gyroTurnPIDController;
     private final DriveInchesPIDController driveInchesPIDController;
 
-    public RobotControllers(RobotConfig robotConfig,
-            RobotSubsystems robotSubsystems) {
+    public RobotControllers(RobotSubsystems robotSubsystems,
+            RobotConfig robotConfig) {
         log.info("Configuring class=" + getClass());
 
-        this.robotConfig = robotConfig;
-        this.visionTurnPIDController =
-                new VisionTurnPIDController(robotSubsystems, robotConfig);
-        this.gyroTurnPIDController =
-                new GyroTurnPIDController(robotSubsystems, robotConfig);
-        this.driveInchesPIDController =
-                new DriveInchesPIDController(robotSubsystems, robotConfig);
+        try {
+            this.robotConfig = robotConfig;
+            this.visionTurnPIDController =
+                    new VisionTurnPIDController(robotSubsystems, robotConfig);
+            this.gyroTurnPIDController =
+                    new GyroTurnPIDController(robotSubsystems, robotConfig);
+            this.driveInchesPIDController =
+                    new DriveInchesPIDController(robotSubsystems, robotConfig);
+        } catch (Exception e) {
+            log.severe(e.toString());
+            throw e;
+        }
     }
 
     public VisionTurnPIDController getVisionTurnPIDController() {
