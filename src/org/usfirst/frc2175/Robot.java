@@ -12,6 +12,7 @@ import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -40,6 +41,8 @@ public class Robot extends IterativeRobot {
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
 
+    private static CameraServer cameraServer;
+
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -50,6 +53,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        CameraServer server = CameraServer.getInstance();
+        server.setQuality(50);
+        server.startAutomaticCapture("cam2");
     }
 
     /**
@@ -99,4 +105,5 @@ public class Robot extends IterativeRobot {
         retractCatapult.start();
 
     }
+
 }
