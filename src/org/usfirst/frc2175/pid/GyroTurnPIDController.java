@@ -7,6 +7,8 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
+
 public class GyroTurnPIDController extends PIDControllerComplete {
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -27,6 +29,7 @@ public class GyroTurnPIDController extends PIDControllerComplete {
 
         double absTolerance = controlConfig.getGyroTurnPID_absTolerance();
         setAbsoluteTolerance(absTolerance);
+        setPIDSourceType(PIDSourceType.kDisplacement);
 
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }

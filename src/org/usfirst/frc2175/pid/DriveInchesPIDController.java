@@ -5,6 +5,8 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
+
 public class DriveInchesPIDController extends PIDControllerComplete {
     private PowertrainSubsystem powertrainSubsystem;
 
@@ -23,6 +25,7 @@ public class DriveInchesPIDController extends PIDControllerComplete {
 
         double absTolerance = controlConfig.getDriveInchesPID_absTolerance();
         setAbsoluteTolerance(absTolerance);
+        setPIDSourceType(PIDSourceType.kDisplacement);
 
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }
