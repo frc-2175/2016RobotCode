@@ -45,6 +45,8 @@ public class VisionTurnPIDController extends PIDControllerComplete {
             log.info("Goal not visible; disabled vision turn PID controller");
         } else {
             value = goalLocation;
+            System.out.println("Goal center at "
+                    + visionConfig.getLargestContourCenterX());
         }
         return value;
     }
