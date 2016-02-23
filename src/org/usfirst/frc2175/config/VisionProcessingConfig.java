@@ -51,8 +51,6 @@ public class VisionProcessingConfig extends BaseConfig {
     public double[] getContourCenterX() {
         updateTable();
         double[] value = contourReport.getNumberArray("centerX", defaultValue);
-
-        System.out.println("Getting contourCenterX: " + value[0]);
         return value;
     }
 
