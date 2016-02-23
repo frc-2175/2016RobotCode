@@ -1,12 +1,19 @@
 package org.usfirst.frc2175.pid;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
+import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
 public class VisionTurnPIDController extends PIDControllerComplete {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private PowertrainSubsystem powertrainSubsystem;
+    private VisionProcessingConfig visionConfig;
 
     public VisionTurnPIDController(RobotSubsystems robotSubsystems,
             RobotConfig robotConfig) {
@@ -25,12 +32,21 @@ public class VisionTurnPIDController extends PIDControllerComplete {
         setAbsoluteTolerance(absTolerance);
 
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
+        this.visionConfig = robotConfig.getVisionProcessingConfig();
     }
 
     @Override
     public double pidGet() {
-        // FIXME Grab a correct value from somewhere
-        return 0;
+        double goalLocation = visionConfig.getLargestContourCenterX();
+        double value;
+        if (goalLocation == HighestArrayIndexFinder.NO_VALUES) {
+            value = getSetpoint();
+            log.info(
+                    "Goal not visible; turning off vision turn PID controller");
+        } else {
+            value = goalLocation;
+        }
+        return value;
     }
 
     @Override
