@@ -78,8 +78,13 @@ public class VisionProcessingConfig extends BaseConfig {
     }
 
     public double getLargestContourCenterX() {
-        double[] contourWidths = getContourWidth();
-        double[] contourCenterXs = getContourCenterX();
+        double[] contourWidths;
+        double[] contourCenterXs;
+        synchronized (this) {
+            contourWidths = getContourWidth();
+            contourCenterXs = getContourCenterX();
+        }
+
         double value;
 
         int largestContourIndex =
@@ -88,6 +93,11 @@ public class VisionProcessingConfig extends BaseConfig {
         if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
             value = HighestArrayIndexFinder.NO_VALUES;
         } else {
+            if (contourCenterXs.length != contourWidths.length) {
+                System.out.println("contourCenterXs.length="
+                        + contourCenterXs.length + "; contourWidths.length="
+                        + contourWidths.length);
+            }
             value = contourCenterXs[largestContourIndex];
         }
         return value;
