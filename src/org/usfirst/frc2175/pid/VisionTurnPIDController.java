@@ -41,8 +41,8 @@ public class VisionTurnPIDController extends PIDControllerComplete {
         double value;
         if (goalLocation == HighestArrayIndexFinder.NO_VALUES) {
             value = getSetpoint();
-            log.info(
-                    "Goal not visible; turning off vision turn PID controller");
+            disable();
+            log.info("Goal not visible; disabled vision turn PID controller");
         } else {
             value = goalLocation;
         }

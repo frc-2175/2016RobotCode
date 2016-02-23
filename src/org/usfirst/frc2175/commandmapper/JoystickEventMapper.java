@@ -59,8 +59,8 @@ public class JoystickEventMapper {
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
         JoystickButton testAction = gamepadConfig.getTestAction();
-        testAction.whenPressed(
-                new TurnToFaceGoalCommand(robotSubsystems, robotControllers));
+        testAction.whenPressed(new TurnToFaceGoalCommand(robotSubsystems,
+                robotConfig, robotControllers));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();

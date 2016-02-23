@@ -1,9 +1,7 @@
 package org.usfirst.frc2175.subsystem.powertrain;
 
-import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.PowertrainConfig;
 import org.usfirst.frc2175.config.RobotConfig;
-import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 import org.usfirst.frc2175.util.TalonGroup;
@@ -27,9 +25,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
 
     private RobotDrive robotDrive;
 
-    private double centerCameraXValue;
-    private double largestContourCenterXValue;
-
     public PowertrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         powertrainConfig = robotConfig.getPowertrainConfig();
@@ -44,15 +39,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
                 rightDriveSideTalonGroup);
 
-        VisionProcessingConfig visionProcessingConfig =
-                robotConfig.getVisionProcessingConfig();
-        largestContourCenterXValue =
-                visionProcessingConfig.getLargestContourCenterX();
-
-        ControlLoopConfig controlLoopConfig =
-                robotConfig.getControlLoopConfig();
-        centerCameraXValue = controlLoopConfig.getVisionTurnPID_centerCamera();
-
         setShifterState(ShifterState.LOW);
     }
 
@@ -60,6 +46,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
+            // TODO get direction from a property file
             robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
         }
     }
@@ -68,6 +55,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
+            // TODO get direction from a property file
             robotDrive.tankDrive(-leftSpeed, -rightSpeed);
         }
     }
@@ -168,14 +156,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
 
     public double getGyroAngle() {
         return gyro.getAngle();
-    }
-
-    public double getLargestContourXValue() {
-        return largestContourCenterXValue;
-    }
-
-    public double getCenterCameraXValue() {
-        return centerCameraXValue;
     }
 
     private enum ShifterState {

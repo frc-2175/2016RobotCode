@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.config.ControlLoopConfig;
+import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.pid.VisionTurnPIDController;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
@@ -14,12 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnToFaceGoalCommand extends Command {
     private PowertrainSubsystem powertrainSubsystem;
     private VisionTurnPIDController pidController;
+    private ControlLoopConfig controlLoopConfig;
+
     private double setpoint;
 
     public TurnToFaceGoalCommand(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotConfig robotConfig, RobotControllers robotControllers) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-        this.setpoint = powertrainSubsystem.getCenterCameraXValue();
+        this.controlLoopConfig = robotConfig.getControlLoopConfig();
 
         this.pidController = robotControllers.getVisionTurnPIDController();
 
@@ -29,8 +33,9 @@ public class TurnToFaceGoalCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        this.setpoint = controlLoopConfig.getVisionTurnPID_centerCamera();
         pidController.setSetpoint(setpoint);
-        SmartDashboard.putNumber("Setpoint:", setpoint);
+        SmartDashboard.putNumber("Vision turn PID setpoint:", setpoint);
 
         pidController.enable();
     }
@@ -38,10 +43,7 @@ public class TurnToFaceGoalCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        System.out.println("Rectangle at: "
-                + powertrainSubsystem.getLargestContourXValue());
-        System.out.println("Turning to face goal at turn value: "
-                + pidController.get());
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
