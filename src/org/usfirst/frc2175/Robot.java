@@ -98,8 +98,7 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        System.out.println("Goal center at " + robotConfig
-                .getVisionProcessingConfig().getLargestContourCenterX());
+
     }
 
     /** This function is called periodically during test mode. */
