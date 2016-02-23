@@ -23,6 +23,6 @@ public class AnalogPressureSensor extends AnalogInput {
 
     private void calculateVoltageConversionFactor() {
         voltageConversionFactor =
-                (K_VOLTAGE_AT_120_PSI - K_VOLTAGE_AT_10_PSI) / 110;
+                110 / (K_VOLTAGE_AT_120_PSI - K_VOLTAGE_AT_10_PSI);
     }
 }
