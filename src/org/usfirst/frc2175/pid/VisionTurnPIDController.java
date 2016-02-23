@@ -51,6 +51,6 @@ public class VisionTurnPIDController extends PIDControllerComplete {
 
     @Override
     public void pidWrite(double output) {
-        powertrainSubsystem.arcadeDrive(0, -output);
+        powertrainSubsystem.arcadeDrive(0, output);
     }
 }
