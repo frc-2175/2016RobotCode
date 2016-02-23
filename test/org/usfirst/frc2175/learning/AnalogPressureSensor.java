@@ -1,17 +1,16 @@
 package org.usfirst.frc2175.learning;
 
-import org.usfirst.frc2175.config.RobotConfig;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 
 public class AnalogPressureSensor extends AnalogInput {
 
-    private double kVoltageAt10PSI = 0;
-    private double kVoltageAt120PSI = 0;
+    // TODO refine constant values
+    private static final double K_VOLTAGE_AT_10_PSI = 1;
+    private static final double K_VOLTAGE_AT_120_PSI = 4;
 
     private double voltageConversionFactor;
 
-    public AnalogPressureSensor(int channel, RobotConfig robotConfig) {
+    public AnalogPressureSensor(int channel) {
         super(channel);
         // TODO set voltage constants from properties
         calculateVoltageConversionFactor();
@@ -23,6 +22,7 @@ public class AnalogPressureSensor extends AnalogInput {
     }
 
     private void calculateVoltageConversionFactor() {
-        voltageConversionFactor = (kVoltageAt120PSI - kVoltageAt10PSI) / 110;
+        voltageConversionFactor =
+                (K_VOLTAGE_AT_120_PSI - K_VOLTAGE_AT_10_PSI) / 110;
     }
 }
