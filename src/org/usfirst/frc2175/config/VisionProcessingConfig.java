@@ -82,11 +82,14 @@ public class VisionProcessingConfig extends BaseConfig {
     public double getLargestContourCenterX() {
         double[] contourWidths = getContourWidth();
         double[] contourCenterXs = getContourCenterX();
+        double value;
 
         int largestContourIndex =
                 indexFinder.determineLargestArrayItemIndex(contourWidths);
 
-        return contourCenterXs[largestContourIndex];
+        value = contourCenterXs[largestContourIndex];
+
+        return value;
     }
 
 }
