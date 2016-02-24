@@ -41,14 +41,6 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
         rollerbarIntakeLiftTalon.set(safeSpeed);
     }
 
-    public void setIntakePosition(boolean isOut) {
-        if (isOut) {
-            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kForward);
-        } else {
-            rollerbarIntakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-        }
-    }
-
     public boolean isIntakeCompletelyOut() {
         return rollerbarIntakeOutSwitch.get();
     }
