@@ -70,7 +70,7 @@ public class WiringConfigTest extends TestBase {
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Digital_Competition() {
-        String propertyRegex = ".*[.]digital[.].*port";
+        String propertyRegex = ".*[.]digital[.].*port.*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
@@ -78,7 +78,7 @@ public class WiringConfigTest extends TestBase {
 
     @Test
     public void testWiringConfig_UniquePropertiesSequence_Digital_Practice() {
-        String propertyRegex = ".*[.]digital[.].*port";
+        String propertyRegex = ".*[.]digital[.].*port.*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyRegex);
