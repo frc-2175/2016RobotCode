@@ -37,20 +37,19 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
     }
 
     public void setRollerbarLiftSpeed(double speed) {
-        rollerbarIntakeLiftTalon.set(checkRollerbarLiftSpeedLegality(speed));
+        rollerbarIntakeLiftTalon
+                .set(determineSafetyCheckedRollerbarLiftSpeed(speed));
     }
 
-    public double checkRollerbarLiftSpeedLegality(double speed) {
+    protected double determineSafetyCheckedRollerbarLiftSpeed(double speed) {
         double setSpeed;
-        // TODO check direction
-        if ((!isCompletelyIn() || speed > 0)
-                && (isCompletelyIn() || isCatapultDown())
-                && (!isCompletelyOut() || speed <= 0)) {
+        if (canMoveIntakeIn(speed) && doesIntakeClearCatapult()
+                && canMoveIntakeOut(speed)) {
             setSpeed = speed;
         } else {
             setSpeed = 0;
         }
-
+        // TODO check direction on physical robot
         return setSpeed;
     }
 
@@ -62,15 +61,27 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
         }
     }
 
-    public boolean isCompletelyOut() {
+    public boolean isIntakeCompletelyOut() {
         return rollerbarIntakeOutSwitch.get();
     }
 
-    public boolean isCompletelyIn() {
+    public boolean isIntakeCompletelyIn() {
         return rollerbarIntakeInSwitch.get();
     }
 
     public boolean isCatapultDown() {
         return catapultDownSwitch.get();
+    }
+
+    private boolean doesIntakeClearCatapult() {
+        return isIntakeCompletelyIn() || isCatapultDown();
+    }
+
+    private boolean canMoveIntakeIn(double speed) {
+        return !isIntakeCompletelyIn() || speed > 0;
+    }
+
+    private boolean canMoveIntakeOut(double speed) {
+        return !isIntakeCompletelyOut() || speed <= 0;
     }
 }

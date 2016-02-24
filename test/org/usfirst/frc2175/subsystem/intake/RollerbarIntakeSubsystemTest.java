@@ -83,7 +83,7 @@ public class RollerbarIntakeSubsystemTest {
 
         RollerbarIntakeSubsystem sut =
                 mockedRollerbarIntakeSubsystem.getMockInstance();
-        double speedSet = sut.checkRollerbarLiftSpeedLegality(speedCommanded);
+        double speedSet = sut.determineSafetyCheckedRollerbarLiftSpeed(speedCommanded);
 
         assertThat("Speed set incorrectly! Intake destroyed!",
                 speedSet == expectedSpeedSet);
@@ -105,12 +105,12 @@ public class RollerbarIntakeSubsystemTest {
         }
 
         @Mock
-        public boolean isCompletelyIn() {
+        public boolean isIntakeCompletelyIn() {
             return isIntakeIn;
         }
 
         @Mock
-        public boolean isCompletelyOut() {
+        public boolean isIntakeCompletelyOut() {
             return isIntakeOut;
         }
 
