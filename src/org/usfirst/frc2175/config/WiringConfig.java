@@ -61,6 +61,12 @@ public class WiringConfig extends BaseConfig {
     private Encoder bootEncoder;
     private double bootSpeed;
 
+    // Climber
+    private Solenoid climberSolenoid;
+    private TalonGroup climberTalonGroup;
+    private DigitalInput climberUpSwitch;
+    private DigitalInput climberExtendedSwitch;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -74,6 +80,7 @@ public class WiringConfig extends BaseConfig {
         configureDreamIntake(properties);
         configureRollerbarIntake(properties);
         configureShifters(properties);
+        configureClimber(properties);
     }
 
     private void configureShifters(Properties properties) {
@@ -239,7 +246,30 @@ public class WiringConfig extends BaseConfig {
         boolean isBootEncoderReversed = getBooleanPropertyValue(
                 "manipulator.digital.encoder.isReversed", properties);
         bootEncoder =
+
                 new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
+    }
+
+    private void configureClimber(Properties properties) {
+        int climberSolenoidPort =
+                getIntPropertyValue("climber.solenoid", properties);
+        climberSolenoid = new Solenoid(climberSolenoidPort);
+
+        int leftClimberTalonPort =
+                getIntPropertyValue("climber.talon.left.port", properties);
+        CANTalon leftClimberTalon = new CANTalon(leftClimberTalonPort);
+        int rightClimberTalonPort =
+                getIntPropertyValue("climber.talon.right.port", properties);
+        CANTalon rightClimberTalon = new CANTalon(rightClimberTalonPort);
+
+        climberTalonGroup =
+                new TalonGroup(leftClimberTalon, rightClimberTalon, null);
+        int climberUpSwitchPort =
+                getIntPropertyValue("climber.digital.switch.up", properties);
+        climberUpSwitch = new DigitalInput(climberUpSwitchPort);
+        int climberExtendedSwitchPort = getIntPropertyValue(
+                "climber.digital.switch.extended", properties);
+        climberExtendedSwitch = new DigitalInput(climberExtendedSwitchPort);
     }
 
     public CANTalon getRollerbarIntakeLiftTalon() {
@@ -352,6 +382,22 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid[] getShifterSolenoids() {
         return shifterSolenoids;
+    }
+
+    public Solenoid getClimberSolenoid() {
+        return climberSolenoid;
+    }
+
+    public TalonGroup getClimberTalonHandler() {
+        return climberTalonGroup;
+    }
+
+    public DigitalInput getClimberUpSwitch() {
+        return climberUpSwitch;
+    }
+
+    public DigitalInput getClimberExtendedSwitch() {
+        return climberExtendedSwitch;
     }
 
 }
