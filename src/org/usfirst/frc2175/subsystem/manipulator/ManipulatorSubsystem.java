@@ -13,7 +13,8 @@ public class ManipulatorSubsystem extends BaseSubsystem {
     private final DigitalInput isBootDownSwitch;
 
     private final CANTalon bootTalon;
-    private double bootSpeed;
+
+    private final double bootSpeed;
 
     public ManipulatorSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
