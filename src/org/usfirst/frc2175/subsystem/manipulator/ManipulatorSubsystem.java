@@ -28,8 +28,31 @@ public class ManipulatorSubsystem extends BaseSubsystem {
         bootSpeed = manipulatorConfig.getBootSpeed();
     }
 
+    protected double determineSafetyCheckedBootSpeed(double speed) {
+        double setSpeed;
+        if (willBootNotSmashDown() || willBootNotSmashUp()
+                || isBootInMiddle()) {
+            setSpeed = speed;
+        } else {
+            setSpeed = 0;
+        }
+        return setSpeed;
+    }
+
+    private boolean willBootNotSmashUp() {
+        return (isBootUp() && bootSpeed < 0);
+    }
+
+    private boolean willBootNotSmashDown() {
+        return (isBootDown() && bootSpeed > 0);
+    }
+
+    private boolean isBootInMiddle() {
+        return (!isBootDown() && !isBootUp());
+    }
+
     public void setBootSpeed(double speed) {
-        bootTalon.set(speed);
+        bootTalon.set(determineSafetyCheckedBootSpeed(speed));
     }
 
     public void moveBootDown() {
