@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
@@ -25,7 +25,7 @@ public class DamageShootLowBarAutonomous extends CommandGroup {
 
         // TODO Refine numbers if needed
         // TODO Change angle of turn
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
@@ -33,9 +33,9 @@ public class DamageShootLowBarAutonomous extends CommandGroup {
         addParallel(new RetractCatapultCommand(robotSubsystems));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 -(distanceWithShoot)));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithCaution));
     }
 }

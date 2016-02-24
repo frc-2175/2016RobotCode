@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
@@ -20,11 +20,11 @@ public class DriveTurnShootAutonomous extends CommandGroup {
         int specifiedDegrees = 0;
 
         robotSubsystems.getPowertrainSubsystem().resetGyro();
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, true));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterTurn));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, specifiedDegrees, true));

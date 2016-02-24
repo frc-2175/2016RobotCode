@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -20,7 +20,7 @@ public class WeakenSimpleDefenseAutonomous extends CommandGroup {
         double travelLength = autonomousConfig.getTravelLength();
 
         // TODO Refine numbers if needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
     }
 }

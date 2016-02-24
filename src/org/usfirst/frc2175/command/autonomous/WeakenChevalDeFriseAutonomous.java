@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.LowerBootCommand;
 import org.usfirst.frc2175.command.single.RaiseBootCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
@@ -22,10 +22,10 @@ public class WeakenChevalDeFriseAutonomous extends CommandGroup {
         double distanceAfterCheval = travelLength - platformBeforeCheval;
 
         // TODO Refine numbers if needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
-        addParallel(new DriveInches(robotSubsystems, robotControllers,
+        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterCheval));
         addSequential(new RaiseBootCommand(robotSubsystems));
 

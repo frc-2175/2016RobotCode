@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveInches extends Command {
+public class DriveInchesCommand extends Command {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     private final PowertrainSubsystem powertrainSubsystem;
     private final DriveInchesPIDController pidController;
     private final double distance;
 
-    public DriveInches(RobotSubsystems robotSubsystems,
+    public DriveInchesCommand(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, double distance) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
         requires(powertrainSubsystem);
@@ -28,7 +28,7 @@ public class DriveInches extends Command {
 
         this.pidController = robotControllers.getDriveInchesPIDController();
 
-        log.finer("DriveInches distance=" + distance);
+        log.finer("DriveInchesCommand distance=" + distance);
     }
 
     @Override

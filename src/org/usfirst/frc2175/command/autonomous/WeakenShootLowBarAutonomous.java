@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
@@ -25,7 +25,7 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
 
         // TODO Refine numbers if needed
         // TODO Refine angle
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 45, true));

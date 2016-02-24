@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.LowerBootCommand;
 import org.usfirst.frc2175.command.single.RaiseBootCommand;
@@ -32,11 +32,11 @@ public class DamageShootChevalDeFriseAutonomous extends CommandGroup {
 
         // TODO Refine Numbers if needed
         // TODO Refine Angle
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new RaiseBootCommand(robotSubsystems));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterChevalWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
@@ -46,15 +46,15 @@ public class DamageShootChevalDeFriseAutonomous extends CommandGroup {
                 robotControllers, 0, false));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, turnAround, true));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 -distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, turnAround, false));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));
         addParallel(new RaiseBootCommand(robotSubsystems));
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterChevalWithCaution));
     }
 }

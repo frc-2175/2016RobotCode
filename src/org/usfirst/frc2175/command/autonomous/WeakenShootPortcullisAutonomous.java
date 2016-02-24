@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInches;
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.LowerBootCommand;
 import org.usfirst.frc2175.command.single.RaiseBootCommand;
@@ -24,10 +24,10 @@ public class WeakenShootPortcullisAutonomous extends CommandGroup {
                 travelLength - platformBeforePortcullis;
 
         // TODO Refine numbers if needed
-        addSequential(new DriveInches(robotSubsystems, robotControllers,
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInches(robotSubsystems, robotControllers,
+        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterPortcullis));
         addSequential(new LowerBootCommand(robotSubsystems));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
