@@ -17,7 +17,6 @@ public class RobotSubsystems {
     private final RobotConfig robotConfig;
     private final DriverStation driverStation;
 
-    // TODO add remaining subsystems
     private final RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
     private final PowertrainSubsystem powertrainSubsystem;
     private final CatapultShooterSubsystem catapultShooterSubsystem;
