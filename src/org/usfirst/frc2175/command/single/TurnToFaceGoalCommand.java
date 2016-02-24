@@ -2,6 +2,7 @@ package org.usfirst.frc2175.command.single;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -9,13 +10,12 @@ import org.usfirst.frc2175.pid.VisionTurnPIDController;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class TurnToFaceGoalCommand extends Command {
+public class TurnToFaceGoalCommand extends BaseCommand {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     private PowertrainSubsystem powertrainSubsystem;
@@ -37,6 +37,7 @@ public class TurnToFaceGoalCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        super.initialize();
         this.setpoint = controlLoopConfig.getVisionTurnPID_centerCamera();
         pidController.setSetpoint(setpoint);
         SmartDashboard.putNumber("Vision turn PID setpoint:", setpoint);
@@ -59,6 +60,7 @@ public class TurnToFaceGoalCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        super.end();
         pidController.disable();
         log.info("Reached setpoint; disabled controller");
 

@@ -1,14 +1,13 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.intake.RollerbarIntakeSubsystem;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunRollerbarIntakeAtSpeedCommand extends Command {
+public class RunRollerbarIntakeAtSpeedCommand extends BaseCommand {
 
     private double speed;
     private RollerbarIntakeSubsystem rollerbarIntakeSubsystem;
@@ -24,6 +23,7 @@ public class RunRollerbarIntakeAtSpeedCommand extends Command {
 
     @Override
     protected void initialize() {
+        super.initialize();
     }
 
     @Override
@@ -38,6 +38,7 @@ public class RunRollerbarIntakeAtSpeedCommand extends Command {
 
     @Override
     protected void end() {
+        super.end();
         rollerbarIntakeSubsystem.setRollerbarSpeed(0);
     }
 

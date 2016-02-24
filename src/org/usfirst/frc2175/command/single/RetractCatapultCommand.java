@@ -3,15 +3,14 @@ package org.usfirst.frc2175.command.single;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RetractCatapultCommand extends Command {
+public class RetractCatapultCommand extends BaseCommand {
     private CatapultShooterSubsystem catapultSubsystem;
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -26,6 +25,7 @@ public class RetractCatapultCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        super.initialize();
         catapultSubsystem.setCatapultPosition(false);
         log.log(Level.FINE, "Retracting catapult");
     }
@@ -44,6 +44,7 @@ public class RetractCatapultCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        super.end();
     }
 
     // Called when another command which requires one or more of the same

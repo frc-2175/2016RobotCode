@@ -1,14 +1,13 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ArcadeDriveWithInputsCommand extends Command {
+public class ArcadeDriveWithInputsCommand extends BaseCommand {
     private double moveValue;
     private double turnValue;
     private final PowertrainSubsystem powertrainSubsystem;
@@ -24,6 +23,7 @@ public class ArcadeDriveWithInputsCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        super.initialize();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,6 +41,7 @@ public class ArcadeDriveWithInputsCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        super.end();
         powertrainSubsystem.arcadeDrive(0, 0);
     }
 

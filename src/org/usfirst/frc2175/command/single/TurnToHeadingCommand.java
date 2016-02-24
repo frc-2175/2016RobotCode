@@ -1,17 +1,17 @@
 package org.usfirst.frc2175.command.single;
 
+import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.pid.GyroTurnPIDController;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class TurnToHeadingCommand extends Command {
+public class TurnToHeadingCommand extends BaseCommand {
     private PowertrainSubsystem powertrainSubsystem;
     private GyroTurnPIDController pidController;
     private double setpoint;
@@ -31,6 +31,7 @@ public class TurnToHeadingCommand extends Command {
 
     @Override
     protected void initialize() {
+        super.initialize();
         pidController.setSetpoint(setpoint);
         if (resetGyro) {
             powertrainSubsystem.resetGyro();
@@ -51,6 +52,7 @@ public class TurnToHeadingCommand extends Command {
 
     @Override
     protected void end() {
+        super.end();
         pidController.disable();
     }
 
