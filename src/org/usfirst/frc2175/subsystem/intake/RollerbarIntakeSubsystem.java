@@ -43,8 +43,8 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
 
     protected double determineSafetyCheckedRollerbarLiftSpeed(double speed) {
         double setSpeed;
-        if (willIntakeNotSmashInwards(speed) && doesIntakeClearCatapult()
-                && willIntakeNotSmashOutwards(speed)) {
+        if (isIntakeInMiddle() || isIntakeNotOutAndCommandedOut(speed)
+                || willIntakeClearCatapultAndNotSmashInwards(speed)) {
             setSpeed = speed;
         } else {
             setSpeed = 0;
@@ -73,15 +73,15 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
         return catapultDownSwitch.get();
     }
 
-    private boolean doesIntakeClearCatapult() {
-        return isIntakeCompletelyIn() || isCatapultDown();
+    private boolean isIntakeInMiddle() {
+        return !isIntakeCompletelyIn() && !isIntakeCompletelyOut();
     }
 
-    private boolean willIntakeNotSmashInwards(double speed) {
-        return !isIntakeCompletelyIn() || speed > 0;
+    private boolean isIntakeNotOutAndCommandedOut(double speed) {
+        return !isIntakeCompletelyOut() && speed > 0;
     }
 
-    private boolean willIntakeNotSmashOutwards(double speed) {
-        return !isIntakeCompletelyOut() || speed <= 0;
+    private boolean willIntakeClearCatapultAndNotSmashInwards(double speed) {
+        return !isIntakeCompletelyIn() && isCatapultDown() && speed < 0;
     }
 }

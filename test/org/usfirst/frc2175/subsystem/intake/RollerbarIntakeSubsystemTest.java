@@ -29,8 +29,8 @@ public class RollerbarIntakeSubsystemTest {
                 { false, true, false, false, false },
                 { false, false, true, true, true },
                 { false, false, true, false, true },
-                { false, false, false, true, false },
-                { false, false, false, false, false } });
+                { false, false, false, true, true },
+                { false, false, false, false, true } });
         // This array represents the states the intake-catapult system can be in
         // and how it should behave under those circumstances. It was determined
         // by writing truth tables on a whiteboard (something that should be
