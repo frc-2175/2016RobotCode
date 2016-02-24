@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShiftToClimbGearCommand_Neutral extends Command {
+public class ShiftToClimbGearNeutralCommand extends Command {
     private final PowertrainSubsystem powertrainSubsystem;
     private final Logger log = Logger.getLogger(getClass().getName());
 
-    public ShiftToClimbGearCommand_Neutral(RobotSubsystems robotSubsystems) {
+    public ShiftToClimbGearNeutralCommand(RobotSubsystems robotSubsystems) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
     }
 
