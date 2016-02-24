@@ -11,6 +11,7 @@ import org.usfirst.frc2175.command.autonomous.DamageShootRockWallAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageShootRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.DamageSimpleDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
+import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenPortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootChevalDeFriseAutonomous;
@@ -44,6 +45,10 @@ public class AutonomousChooserFactory {
         // list weaken ones first as probably most common
         addWeakenAutons(autonChooser, robotSubsystems, robotControllers);
         addDamageAutons(autonChooser, robotSubsystems, robotControllers);
+
+        autonChooser.addObject("Careful: Test all robot features",
+                new TestAllFeaturesAutonomous(robotSubsystems,
+                        robotControllers));
     }
 
     // WARNING: keep these same order as Damage ones for driver clarity

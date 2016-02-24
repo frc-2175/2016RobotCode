@@ -16,6 +16,9 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * An easy way to run all robot actions.
+ */
 public class TestAllFeaturesAutonomous extends CommandGroup {
     public TestAllFeaturesAutonomous(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
@@ -38,6 +41,5 @@ public class TestAllFeaturesAutonomous extends CommandGroup {
         addSequential(new ExtendClimberCommand(robotSubsystems));
         addSequential(new RetractClimberCommand(robotSubsystems));
         addSequential(new LowerClimberCommand(robotSubsystems));
-
     }
 }
