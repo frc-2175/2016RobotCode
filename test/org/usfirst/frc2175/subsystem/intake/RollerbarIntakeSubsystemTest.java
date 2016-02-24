@@ -84,7 +84,7 @@ public class RollerbarIntakeSubsystemTest {
         RollerbarIntakeSubsystem sut =
                 mockedRollerbarIntakeSubsystem.getMockInstance();
         double speedSet =
-                sut.determineSafetyCheckedRollerbarLiftSpeed(speedCommanded);
+                sut.determineSafeRollerbarLiftSpeed(speedCommanded);
 
         assertThat("Speed set incorrectly! Intake destroyed!",
                 speedSet == expectedSpeedSet);
