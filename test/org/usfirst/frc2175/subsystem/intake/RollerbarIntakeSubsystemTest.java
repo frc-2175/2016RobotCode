@@ -34,7 +34,10 @@ public class RollerbarIntakeSubsystemTest {
         // This array represents the states the intake-catapult system can be in
         // and how it should behave under those circumstances. It was determined
         // by writing truth tables on a whiteboard (something that should be
-        // done for any similar system)
+        // done for any similar system).
+        //
+        // These are listed in the order {isIntakeIn, isIntakeOut,
+        // isCatapultDown,isSpeedCommandedGreaterThan0,isSpeedExpectedToBeSame}
     }
 
     @Parameter
@@ -83,8 +86,7 @@ public class RollerbarIntakeSubsystemTest {
 
         RollerbarIntakeSubsystem sut =
                 mockedRollerbarIntakeSubsystem.getMockInstance();
-        double speedSet =
-                sut.determineSafeRollerbarLiftSpeed(speedCommanded);
+        double speedSet = sut.determineSafeRollerbarLiftSpeed(speedCommanded);
 
         assertThat("Speed set incorrectly! Intake destroyed!",
                 speedSet == expectedSpeedSet);
