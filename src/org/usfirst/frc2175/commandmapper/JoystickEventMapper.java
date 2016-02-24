@@ -9,7 +9,7 @@ import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
-import org.usfirst.frc2175.command.single.ShiftToClimbGearCommand_Low;
+import org.usfirst.frc2175.command.single.ShiftToClimbGearLowCommand;
 import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
@@ -71,7 +71,7 @@ public class JoystickEventMapper {
         JoystickButton climbshift =
                 robotConfig.getJoysticksConfig().getClimbshiftButton();
         climbshift.toggleWhenPressed(
-                new ShiftToClimbGearCommand_Low(robotSubsystems));
+                new ShiftToClimbGearLowCommand(robotSubsystems));
 
         JoystickButton lowerBoot =
                 robotConfig.getGamepadConfig().getLowerBoot();
