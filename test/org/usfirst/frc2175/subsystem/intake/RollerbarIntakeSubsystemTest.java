@@ -10,16 +10,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.usfirst.frc2175.config.RobotConfig;
 
 import mockit.Mock;
 import mockit.MockUp;
-import mockit.Mocked;
 
 @RunWith(Parameterized.class)
 public class RollerbarIntakeSubsystemTest {
-    @Mocked
-    private RobotConfig robotConfig;
 
     @Parameters
     public static Collection<Object[]> input() {
@@ -35,6 +31,10 @@ public class RollerbarIntakeSubsystemTest {
                 { false, false, true, false, true },
                 { false, false, false, true, false },
                 { false, false, false, false, false } });
+        // This array represents the states the intake-catapult system can be in
+        // and how it should behave under those circumstances. It was determined
+        // by writing truth tables on a whiteboard (something that should be
+        // done for any similar system)
     }
 
     @Parameter
@@ -83,7 +83,8 @@ public class RollerbarIntakeSubsystemTest {
 
         RollerbarIntakeSubsystem sut =
                 mockedRollerbarIntakeSubsystem.getMockInstance();
-        double speedSet = sut.determineSafetyCheckedRollerbarLiftSpeed(speedCommanded);
+        double speedSet =
+                sut.determineSafetyCheckedRollerbarLiftSpeed(speedCommanded);
 
         assertThat("Speed set incorrectly! Intake destroyed!",
                 speedSet == expectedSpeedSet);
