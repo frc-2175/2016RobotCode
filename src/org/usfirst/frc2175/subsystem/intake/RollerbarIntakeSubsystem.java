@@ -14,6 +14,7 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
     private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
+    private DigitalInput catapultDownSwitch;
 
     public RollerbarIntakeSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
@@ -28,6 +29,7 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
                 wiringConfig.getRollerbarIntakeInSwitch();
         this.rollerbarIntakeOutSwitch =
                 wiringConfig.getRollerbarIntakeOutSwitch();
+        this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
     }
 
     public void setRollerbarSpeed(double speed) {
@@ -35,7 +37,21 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
     }
 
     public void setRollerbarLiftSpeed(double speed) {
-        rollerbarIntakeLiftTalon.set(speed);
+        rollerbarIntakeLiftTalon.set(checkRollerbarLiftSpeedLegality(speed));
+    }
+
+    public double checkRollerbarLiftSpeedLegality(double speed) {
+        double setSpeed;
+        // TODO check direction
+        if ((!isCompletelyIn() || speed > 0)
+                && (isCompletelyIn() || isCatapultDown())
+                && (!isCompletelyOut() || speed <= 0)) {
+            setSpeed = speed;
+        } else {
+            setSpeed = 0;
+        }
+
+        return setSpeed;
     }
 
     public void setIntakePosition(boolean isOut) {
@@ -52,5 +68,9 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
 
     public boolean isCompletelyIn() {
         return rollerbarIntakeInSwitch.get();
+    }
+
+    public boolean isCatapultDown() {
+        return catapultDownSwitch.get();
     }
 }
