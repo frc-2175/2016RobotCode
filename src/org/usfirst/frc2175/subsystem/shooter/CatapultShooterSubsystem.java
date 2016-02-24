@@ -1,42 +1,38 @@
 package org.usfirst.frc2175.subsystem.shooter;
 
+import org.usfirst.frc2175.config.CatapultShooterConfig;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
-
-    private Solenoid rightCatapultSolenoid;
-    private Solenoid leftCatapultSolenoid;
-    private DigitalInput catapultUpSwitch;
-    private DigitalInput catapultDownSwitch;
+    private final Solenoid rightCatapultSolenoid;
+    private final Solenoid leftCatapultSolenoid;
+    private final DigitalInput catapultUpSwitch;
+    private final DigitalInput catapultDownSwitch;
 
     private double shortShotDelay;
 
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
-        leftCatapultSolenoid =
-                robotConfig.getWiringConfig().getLeftCatapultSolenoid();
-        rightCatapultSolenoid =
-                robotConfig.getWiringConfig().getRightCatapultSolenoid();
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        CatapultShooterConfig catapultShooterConfig =
+                robotConfig.getCatapultShooterConfig();
 
-        catapultUpSwitch = robotConfig.getWiringConfig().getCatapultUpSwitch();
-        catapultDownSwitch =
-                robotConfig.getWiringConfig().getCatapultDownSwitch();
+        this.leftCatapultSolenoid = wiringConfig.getLeftCatapultSolenoid();
+        this.rightCatapultSolenoid = wiringConfig.getRightCatapultSolenoid();
 
-        this.shortShotDelay =
-                robotConfig.getCatapultShooterConfig().getShortShotDelay();
+        this.catapultUpSwitch = wiringConfig.getCatapultUpSwitch();
+        this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
+
+        this.shortShotDelay = catapultShooterConfig.getShortShotDelay();
     }
 
     public void setCatapultPosition(boolean isUp) {
-        if (isUp) {
-            leftCatapultSolenoid.set(true);
-            rightCatapultSolenoid.set(true);
-        } else {
-            leftCatapultSolenoid.set(false);
-            rightCatapultSolenoid.set(false);
-        }
+        leftCatapultSolenoid.set(isUp);
+        rightCatapultSolenoid.set(isUp);
     }
 
     public boolean isCatapultDown() {
@@ -54,5 +50,4 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     public void setShortShotDelay(double shortShotDelay) {
         this.shortShotDelay = shortShotDelay;
     }
-
 }
