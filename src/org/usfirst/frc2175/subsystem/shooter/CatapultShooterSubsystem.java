@@ -13,6 +13,7 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private final Solenoid leftCatapultSolenoid;
     private final DigitalInput catapultUpSwitch;
     private final DigitalInput catapultDownSwitch;
+    private final DigitalInput rollerbarIntakeOutSwitch;
 
     private double shortShotDelay;
 
@@ -28,11 +29,32 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
 
         this.shortShotDelay = catapultShooterConfig.getShortShotDelay();
+        this.rollerbarIntakeOutSwitch =
+                wiringConfig.getRollerbarIntakeOutSwitch();
     }
 
     public void setCatapultPosition(boolean isUp) {
         leftCatapultSolenoid.set(isUp);
         rightCatapultSolenoid.set(isUp);
+    }
+
+    protected double determineSafeCatapultShooterSpeed(double speed) {
+        double setSpeed;
+        if (!isIntakeOut()) {
+            setSpeed = 0;
+        } else if (isCatapultUp() && speed > 0) {
+            setSpeed = 0;
+        } else if (isCatapultDown() && speed < 0) {
+            setSpeed = 0;
+        } else {
+            setSpeed = speed;
+        }
+        return setSpeed;
+
+    }
+
+    private boolean isIntakeOut() {
+        return rollerbarIntakeOutSwitch.get();
     }
 
     public boolean isCatapultDown() {
@@ -50,4 +72,5 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     public void setShortShotDelay(double shortShotDelay) {
         this.shortShotDelay = shortShotDelay;
     }
+
 }
