@@ -10,14 +10,16 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class ClimberSubsystem extends BaseSubsystem {
     private Solenoid climberSolenoid;
-    private TalonGroup climberTalonGroup;
+    private TalonGroup leftDriveSideTalonGroup;
+    private TalonGroup rightDriveSideTalonGroup;
     private DigitalInput climberExtendedSwitch;
     private DigitalInput climberUpSwitch;
 
     public ClimberSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         climberSolenoid = wiringConfig.getClimberSolenoid();
-        climberTalonGroup = wiringConfig.getClimberTalonHandler();
+        leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonGroup();
+        rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonGroup();
         climberExtendedSwitch = wiringConfig.getClimberExtendedSwitch();
         climberUpSwitch = wiringConfig.getClimberUpSwitch();
     }
@@ -44,7 +46,10 @@ public class ClimberSubsystem extends BaseSubsystem {
     }
 
     public void setClimberSpeed(double speed) {
-        climberTalonGroup.set(determineSafetyCheckedClimberExtendSpeed(speed));
+        leftDriveSideTalonGroup
+                .set(determineSafetyCheckedClimberExtendSpeed(speed));
+        rightDriveSideTalonGroup
+                .set(determineSafetyCheckedClimberExtendSpeed(speed));
 
     }
 

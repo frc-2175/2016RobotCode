@@ -63,7 +63,6 @@ public class WiringConfig extends BaseConfig {
 
     // Climber
     private Solenoid climberSolenoid;
-    private TalonGroup climberTalonGroup;
     private DigitalInput climberUpSwitch;
     private DigitalInput climberExtendedSwitch;
 
@@ -255,15 +254,6 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("climber.solenoid", properties);
         climberSolenoid = new Solenoid(climberSolenoidPort);
 
-        int leftClimberTalonPort =
-                getIntPropertyValue("climber.talon.left.port", properties);
-        CANTalon leftClimberTalon = new CANTalon(leftClimberTalonPort);
-        int rightClimberTalonPort =
-                getIntPropertyValue("climber.talon.right.port", properties);
-        CANTalon rightClimberTalon = new CANTalon(rightClimberTalonPort);
-
-        climberTalonGroup =
-                new TalonGroup(leftClimberTalon, rightClimberTalon, null);
         int climberUpSwitchPort =
                 getIntPropertyValue("climber.digital.switch.up", properties);
         climberUpSwitch = new DigitalInput(climberUpSwitchPort);
@@ -386,10 +376,6 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid getClimberSolenoid() {
         return climberSolenoid;
-    }
-
-    public TalonGroup getClimberTalonHandler() {
-        return climberTalonGroup;
     }
 
     public DigitalInput getClimberUpSwitch() {
