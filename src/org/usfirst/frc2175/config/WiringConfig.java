@@ -66,6 +66,10 @@ public class WiringConfig extends BaseConfig {
     private DigitalInput climberUpSwitch;
     private DigitalInput climberExtendedSwitch;
 
+    // cameras
+    private static String camera1IP;
+    private static String camera2IP;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -80,6 +84,7 @@ public class WiringConfig extends BaseConfig {
         configureRollerbarIntake(properties);
         configureShifters(properties);
         configureClimber(properties);
+        configureCameras(properties);
     }
 
     private void configureShifters(Properties properties) {
@@ -262,6 +267,11 @@ public class WiringConfig extends BaseConfig {
         climberExtendedSwitch = new DigitalInput(climberExtendedSwitchPort);
     }
 
+    private void configureCameras(Properties properties) {
+        camera1IP = getStringPropertyValue("camera.axis1.IP", properties);
+        camera2IP = getStringPropertyValue("camera.axis2.IP", properties);
+    }
+
     public CANTalon getRollerbarIntakeLiftTalon() {
         return rollerbarIntakeLiftTalon;
     }
@@ -386,4 +396,11 @@ public class WiringConfig extends BaseConfig {
         return climberExtendedSwitch;
     }
 
+    public static String getCamera1IP() {
+        return camera1IP;
+    }
+
+    public static String getCamera2IP() {
+        return camera2IP;
+    }
 }
