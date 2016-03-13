@@ -1,14 +1,26 @@
 <xml version="1.0">
 <dashboard>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
-		<location x="605" y="16"/>
-		<width>565</width>
-		<height>405</height>
-		<property name="Camera IP Address or mDNS name" value="10.21.75.11"/>
+		<location x="807" y="-1"/>
+		<width>791</width>
+		<height>604</height>
+		<property name="Camera IP Address or mDNS name" value="axis-accc8e271b1a"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="1887" y="1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
+		<location x="0" y="605"/>
+		<width>404</width>
 	</static-widget>
 	<widget field="Auto choices" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
 		<location x="0" y="0"/>
 	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
+		<location x="0" y="-1"/>
+		<width>807</width>
+		<height>605</height>
+	</static-widget>
 </dashboard>
 <live-window>
 </live-window>
