@@ -86,6 +86,7 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
 
     private boolean isCatapultDown() {
         return catapultDownSwitch.get();
+        // TODO fix sensors and reenable
     }
 
     /**

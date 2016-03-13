@@ -3,6 +3,7 @@ package org.usfirst.frc2175;
 import java.util.logging.Logger;
 
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.WiringConfig;
@@ -107,6 +108,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
+    }
+
+    @Override
+    public void testInit() {
+        new ShiftToClimbGearNeutralCommand(robotSubsystems);
     }
 
     /** This function is called periodically during test mode. */
