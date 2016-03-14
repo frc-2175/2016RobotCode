@@ -156,7 +156,7 @@ public class WiringConfig extends BaseConfig {
         int ultrasonicSensorPingPort = getIntPropertyValue(
                 "powertrain.digital.ultrasonic.port.ping", properties);
         int ultrasonicSensorEchoPort = getIntPropertyValue(
-                "powertrain.digital.ultrasonic.echo.ping", properties);
+                "powertrain.digital.ultrasonic.port.echo", properties);
         ultrasonicSensor = new Ultrasonic(ultrasonicSensorPingPort,
                 ultrasonicSensorEchoPort);
     }
