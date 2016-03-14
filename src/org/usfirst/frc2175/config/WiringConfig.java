@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
@@ -29,6 +30,7 @@ public class WiringConfig extends BaseConfig {
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Gyro gyro;
+    private Ultrasonic ultrasonicSensor;
 
     // Shifters
     private Solenoid[] shifterSolenoids;
@@ -150,6 +152,13 @@ public class WiringConfig extends BaseConfig {
 
         rightDriveTalonGroup = new TalonGroup(rightDriveTalon1,
                 rightDriveTalon2, rightDriveTalon3);
+
+        int ultrasonicSensorPingPort = getIntPropertyValue(
+                "powertrain.digital.ultrasonic.port.ping", properties);
+        int ultrasonicSensorEchoPort = getIntPropertyValue(
+                "powertrain.digital.ultrasonic.echo.ping", properties);
+        ultrasonicSensor = new Ultrasonic(ultrasonicSensorPingPort,
+                ultrasonicSensorEchoPort);
     }
 
     private void configureCatapult(Properties properties) {
@@ -403,4 +412,9 @@ public class WiringConfig extends BaseConfig {
     public static String getCamera2IP() {
         return camera2IP;
     }
+
+    public Ultrasonic getUltrasonicSensor() {
+        return ultrasonicSensor;
+    }
+
 }
