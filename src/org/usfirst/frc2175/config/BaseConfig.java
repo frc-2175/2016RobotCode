@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.config;
 
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -23,8 +24,9 @@ public abstract class BaseConfig {
 
         try {
             configure(properties);
-        } catch (Exception e) {
-            log.severe(e.toString());
+        } catch (Throwable e) {
+            String msg = "ERROR during configuration of class=" + getClass();
+            log.log(Level.SEVERE, msg, e);
             throw e;
         }
     }
