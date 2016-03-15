@@ -7,16 +7,19 @@ import com.ni.vision.NIVision;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 public class ImageHandler implements Runnable {
-    static NIVision.Image image1;
-    static NIVision.Image image2;
-    static NIVision.Image imageProcessor;
+    private NIVision.Image image1;
+    private NIVision.Image image2;
+    private NIVision.Image imageProcessor;
 
-    static AxisCamera axis1;
-    static AxisCamera axis2;
+    private AxisCamera axis1;
+    private AxisCamera axis2;
 
-    public ImageHandler() {
-        AxisCamera axis1 = new AxisCamera(WiringConfig.getCamera1IP());
-        AxisCamera axis2 = new AxisCamera(WiringConfig.getCamera2IP());
+    public ImageHandler(WiringConfig wiringConfig) {
+        String camera1ip = wiringConfig.getCamera1IP();
+        String camera2ip = wiringConfig.getCamera2IP();
+
+        axis1 = new AxisCamera(camera1ip);
+        axis2 = new AxisCamera(camera2ip);
     }
 
     @Override
@@ -24,5 +27,4 @@ public class ImageHandler implements Runnable {
         // TODO Somehow add images(image1,image2,imageProcessed);
 
     }
-
 }

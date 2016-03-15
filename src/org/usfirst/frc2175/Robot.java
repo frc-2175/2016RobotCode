@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
@@ -64,7 +65,8 @@ public class Robot extends IterativeRobot {
         // String webCamName = visionProcessingConfig.getWebCamName();
         // server.setQuality(webCamQuality);
         // server.startAutomaticCapture(webCamName);
-        ImageHandler imageHandler = new ImageHandler();
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        imageHandler = new ImageHandler(wiringConfig);
     }
 
     protected void startCamera() {
@@ -117,7 +119,5 @@ public class Robot extends IterativeRobot {
         log.info("Entered disabledInit()");
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
-
     }
-
 }

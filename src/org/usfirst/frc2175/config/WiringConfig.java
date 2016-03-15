@@ -69,8 +69,8 @@ public class WiringConfig extends BaseConfig {
     private DigitalInput climberExtendedSwitch;
 
     // cameras
-    private static String camera1IP;
-    private static String camera2IP;
+    private String camera1IP;
+    private String camera2IP;
 
     @Override
     public String getPropertyFileName() {
@@ -405,11 +405,11 @@ public class WiringConfig extends BaseConfig {
         return climberExtendedSwitch;
     }
 
-    public static String getCamera1IP() {
+    public String getCamera1IP() {
         return camera1IP;
     }
 
-    public static String getCamera2IP() {
+    public String getCamera2IP() {
         return camera2IP;
     }
 
