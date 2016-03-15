@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import mockit.Mocked;
 
@@ -33,6 +34,8 @@ public class WiringConfigTest extends TestBase {
     private DigitalInput digitalinput;
     @Mocked
     private AnalogGyro analogGyro;
+    @Mocked
+    private Ultrasonic ultrasonic;
 
     @Test
     public void testWiringConfig_Competition()
