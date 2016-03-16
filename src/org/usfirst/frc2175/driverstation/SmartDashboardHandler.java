@@ -25,6 +25,9 @@ public class SmartDashboardHandler {
     }
 
     public CommandGroup getAutonCommand() {
-        return (CommandGroup) autonChooser.getSelected();
+        CommandGroup selectedAuton = (CommandGroup) autonChooser.getSelected();
+        log.info("Selected auton='" + selectedAuton + "'");
+
+        return selectedAuton;
     }
 }
