@@ -72,13 +72,15 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
      */
     protected double determineSafeRollerbarLiftSpeed(double speed) {
         double setSpeed;
-        if (isIntakeInMiddle() || isIntakeNotOutAndCommandedOut(speed)
-                || willIntakeClearCatapultAndNotSmashInwards(speed)) {
-            setSpeed = speed;
-        } else {
-            setSpeed = 0;
-        }
-
+        // if (isIntakeInMiddle() || isIntakeNotOutAndCommandedOut(speed)
+        // || willIntakeClearCatapultAndNotSmashInwards(speed)) {
+        // setSpeed = speed;
+        // } else {
+        // setSpeed = 0;
+        // }
+        // TODO Super Super temporary fix until the build people get us good
+        // sensors
+        setSpeed = speed;
         return setSpeed;
     }
 
