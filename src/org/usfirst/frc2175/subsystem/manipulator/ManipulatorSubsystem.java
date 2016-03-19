@@ -30,25 +30,20 @@ public class ManipulatorSubsystem extends BaseSubsystem {
 
     protected double determineSafetyCheckedBootSpeed(double speed) {
         double setSpeed;
-        if (willBootNotSmashDown() || willBootNotSmashUp()
-                || isBootInMiddle()) {
-            setSpeed = speed;
+        if (!willBootSmashDown(speed) && !willBootSmashUp(speed)) {
+            setSpeed = -speed;
         } else {
             setSpeed = 0;
         }
         return setSpeed;
     }
 
-    private boolean willBootNotSmashUp() {
-        return (isBootUp() && bootSpeed < 0);
+    private boolean willBootSmashUp(double speed) {
+        return (isBootUp() && speed < 0);
     }
 
-    private boolean willBootNotSmashDown() {
-        return (isBootDown() && bootSpeed > 0);
-    }
-
-    private boolean isBootInMiddle() {
-        return (!isBootDown() && !isBootUp());
+    private boolean willBootSmashDown(double speed) {
+        return (isBootDown() && speed > 0);
     }
 
     public void setBootSpeed(double speed) {
@@ -56,18 +51,18 @@ public class ManipulatorSubsystem extends BaseSubsystem {
     }
 
     public void moveBootDown() {
-        bootTalon.set(-bootSpeed);
+        setBootSpeed(-bootSpeed);
     }
 
     public void moveBootUp() {
-        bootTalon.set(bootSpeed);
+        setBootSpeed(bootSpeed);
     }
 
     public boolean isBootUp() {
-        return isBootUpSwitch.get();
+        return !isBootUpSwitch.get();
     }
 
     public boolean isBootDown() {
-        return isBootDownSwitch.get();
+        return !isBootDownSwitch.get();
     }
 }
