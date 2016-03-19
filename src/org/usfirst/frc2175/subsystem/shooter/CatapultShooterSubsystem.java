@@ -44,10 +44,10 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     }
 
     public void setCatapultPosition(boolean isUp) {
-        if (isSafeToFireCatapult()) {
-            leftCatapultSolenoid.set(isUp);
-            rightCatapultSolenoid.set(isUp);
-        }
+        // if (isSafeToFireCatapult()) {
+        leftCatapultSolenoid.set(isUp);
+        rightCatapultSolenoid.set(isUp);
+        // }
     }
 
     protected boolean isSafeToFireCatapult() {
@@ -93,14 +93,16 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     }
 
     public void cycleShotType() {
-        if (this.currentShot == ShotType.BATTER) {
-            this.currentShot = ShotType.MIDDLE;
-        }
-        if (this.currentShot == ShotType.MIDDLE) {
-            this.currentShot = ShotType.RAMP;
-        }
-        if (this.currentShot == ShotType.RAMP) {
-            this.currentShot = ShotType.BATTER;
+        switch (this.currentShot) {
+        case BATTER:
+            setShotType(ShotType.MIDDLE);
+            break;
+        case MIDDLE:
+            setShotType(ShotType.RAMP);
+            break;
+        case RAMP:
+            setShotType(ShotType.BATTER);
+            break;
         }
         updateSmartDashboardShotDisplay();
     }
@@ -108,17 +110,17 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private void updateSmartDashboardShotDisplay() {
         if (this.currentShot == ShotType.MIDDLE) {
             SmartDashboard.putBoolean("MIDDLE", true);
-            SmartDashboard.getBoolean("RAMP", false);
+            SmartDashboard.putBoolean("RAMP", false);
             SmartDashboard.putBoolean("BATTER", false);
         }
         if (this.currentShot == ShotType.RAMP) {
             SmartDashboard.putBoolean("MIDDLE", false);
-            SmartDashboard.getBoolean("RAMP", true);
+            SmartDashboard.putBoolean("RAMP", true);
             SmartDashboard.putBoolean("BATTER", false);
         }
         if (this.currentShot == ShotType.BATTER) {
             SmartDashboard.putBoolean("MIDDLE", false);
-            SmartDashboard.getBoolean("RAMP", false);
+            SmartDashboard.putBoolean("RAMP", false);
             SmartDashboard.putBoolean("BATTER", true);
         }
     }
