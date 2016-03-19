@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class CatapultShooterSubsystem extends BaseSubsystem {
     private final Solenoid rightCatapultSolenoid;
     private final Solenoid leftCatapultSolenoid;
-    private final DigitalInput catapultUpSwitch;
     private final DigitalInput catapultDownSwitch;
     private final DigitalInput rollerbarIntakeOutSwitch;
 
@@ -25,7 +24,6 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         this.leftCatapultSolenoid = wiringConfig.getLeftCatapultSolenoid();
         this.rightCatapultSolenoid = wiringConfig.getRightCatapultSolenoid();
 
-        this.catapultUpSwitch = wiringConfig.getCatapultUpSwitch();
         this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
 
         this.shortShotDelay = catapultShooterConfig.getShortShotDelay();
@@ -34,23 +32,15 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     }
 
     public void setCatapultPosition(boolean isUp) {
-        leftCatapultSolenoid.set(isUp);
-        rightCatapultSolenoid.set(isUp);
+        if (isSafeToFireCatapult()) {
+            leftCatapultSolenoid.set(isUp);
+            rightCatapultSolenoid.set(isUp);
+        }
     }
 
-    protected double determineSafeCatapultShooterSpeed(double speed) {
-        double setSpeed;
-        if (!isIntakeOut()) {
-            setSpeed = 0;
-        } else if (isCatapultUp() && speed > 0) {
-            setSpeed = 0;
-        } else if (isCatapultDown() && speed < 0) {
-            setSpeed = 0;
-        } else {
-            setSpeed = speed;
-        }
-        return setSpeed;
-
+    protected boolean isSafeToFireCatapult() {
+        boolean isSafe = isIntakeOut();
+        return isSafe;
     }
 
     private boolean isIntakeOut() {
@@ -59,10 +49,6 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public boolean isCatapultDown() {
         return catapultDownSwitch.get();
-    }
-
-    public boolean isCatapultUp() {
-        return catapultUpSwitch.get();
     }
 
     public double getShortShotDelay() {

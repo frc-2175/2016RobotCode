@@ -7,7 +7,6 @@ import org.usfirst.frc2175.util.TalonGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -37,22 +36,18 @@ public class WiringConfig extends BaseConfig {
     // Rollerbar intake
     private CANTalon rollerbarIntakeRollerTalon;
     private CANTalon rollerbarIntakeLiftTalon;
-    private DoubleSolenoid rollerbarIntakeSolenoid;
     private DigitalInput rollerbarIntakeInSwitch;
     private DigitalInput rollerbarIntakeOutSwitch;
 
     // Catapult shooter
     private Solenoid leftCatapultSolenoid;
     private Solenoid rightCatapultSolenoid;
-    private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
 
     // Manipulator
     private CANTalon bootTalon;
     private DigitalInput isBootUpSwitch;
     private DigitalInput isBootDownSwitch;
-    private Encoder bootEncoder;
-    private double bootSpeed;
 
     // Climber
     private Solenoid climberSolenoid;
@@ -161,10 +156,6 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("catapult.solenoid.right", properties);
         rightCatapultSolenoid = new Solenoid(rightCatapultSolenoidPort);
 
-        int catapultUpSwitchPort = getIntPropertyValue(
-                "catapult.digital.switch.up.port", properties);
-        catapultUpSwitch = new DigitalInput(catapultUpSwitchPort);
-
         int catapultDownSwitchPort = getIntPropertyValue(
                 "catapult.digital.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
@@ -179,14 +170,6 @@ public class WiringConfig extends BaseConfig {
         int rollerbarIntakeLiftTalonPort = getIntPropertyValue(
                 "rollerbarIntake.talon.lift.port", properties);
         rollerbarIntakeLiftTalon = new CANTalon(rollerbarIntakeLiftTalonPort);
-
-        int rollerbarIntakeSolenoidForwardPort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.forward", properties);
-        int rollerbarIntakeSolenoidReversePort = getIntPropertyValue(
-                "rollerbarIntake.solenoid.reverse", properties);
-        rollerbarIntakeSolenoid =
-                new DoubleSolenoid(rollerbarIntakeSolenoidForwardPort,
-                        rollerbarIntakeSolenoidReversePort);
 
         int rollerbarIntakeInSwitchPort = getIntPropertyValue(
                 "rollerbarIntake.digital.switch.in.port", properties);
@@ -210,16 +193,6 @@ public class WiringConfig extends BaseConfig {
         int isBootDownSwitchPort = getIntPropertyValue(
                 "manipulator.digital.switch.boot.down.port", properties);
         isBootDownSwitch = new DigitalInput(isBootDownSwitchPort);
-
-        int bootEncoderA = getIntPropertyValue(
-                "manipulator.digital.encoder.port.a", properties);
-        int bootEncoderB = getIntPropertyValue(
-                "manipulator.digital.encoder.port.b", properties);
-        boolean isBootEncoderReversed = getBooleanPropertyValue(
-                "manipulator.digital.encoder.isReversed", properties);
-        bootEncoder =
-
-                new Encoder(bootEncoderA, bootEncoderB, isBootEncoderReversed);
     }
 
     private void configureClimber(Properties properties) {
@@ -256,10 +229,6 @@ public class WiringConfig extends BaseConfig {
         return isBootDownSwitch;
     }
 
-    public Encoder getBootEncoder() {
-        return bootEncoder;
-    }
-
     public TalonGroup getRightDriveTalonGroup() {
         return rightDriveTalonGroup;
     }
@@ -282,14 +251,6 @@ public class WiringConfig extends BaseConfig {
 
     public DigitalInput getRollerbarIntakeOutSwitch() {
         return rollerbarIntakeOutSwitch;
-    }
-
-    public DoubleSolenoid getRollerbarIntakeSolenoid() {
-        return rollerbarIntakeSolenoid;
-    }
-
-    public DigitalInput getCatapultUpSwitch() {
-        return catapultUpSwitch;
     }
 
     public DigitalInput getCatapultDownSwitch() {
