@@ -7,6 +7,7 @@ import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
     private final Solenoid rightCatapultSolenoid;
@@ -88,6 +89,7 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public void setShotType(ShotType shotType) {
         this.currentShot = shotType;
+        updateSmartDashboardShotDisplay();
     }
 
     public void cycleShotType() {
@@ -99,6 +101,25 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         }
         if (this.currentShot == ShotType.RAMP) {
             this.currentShot = ShotType.BATTER;
+        }
+        updateSmartDashboardShotDisplay();
+    }
+
+    private void updateSmartDashboardShotDisplay() {
+        if (this.currentShot == ShotType.MIDDLE) {
+            SmartDashboard.putBoolean("MIDDLE", true);
+            SmartDashboard.getBoolean("RAMP", false);
+            SmartDashboard.putBoolean("BATTER", false);
+        }
+        if (this.currentShot == ShotType.RAMP) {
+            SmartDashboard.putBoolean("MIDDLE", false);
+            SmartDashboard.getBoolean("RAMP", true);
+            SmartDashboard.putBoolean("BATTER", false);
+        }
+        if (this.currentShot == ShotType.BATTER) {
+            SmartDashboard.putBoolean("MIDDLE", false);
+            SmartDashboard.getBoolean("RAMP", false);
+            SmartDashboard.putBoolean("BATTER", true);
         }
     }
 
