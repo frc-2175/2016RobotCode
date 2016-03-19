@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CatapultShortShotCommandGroup extends CommandGroup {
+public class CatapultMiddleShotCommandGroup extends CommandGroup {
 
-    public CatapultShortShotCommandGroup(RobotSubsystems robotSubsystems) {
+    public CatapultMiddleShotCommandGroup(RobotSubsystems robotSubsystems) {
         addSequential(new ExtendCatapultCommand(robotSubsystems),
                 robotSubsystems.getCatapultShooterSubsystem()
-                        .getShortShotDelay());
+                        .getMiddleShotDelay());
         addSequential(new RetractCatapultCommand(robotSubsystems), .1);
     }
 }

@@ -6,7 +6,9 @@ public class CatapultShooterConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME =
             "catapultShooter.properties";
 
-    private double shortShotDelay;
+    private double rampShotDelay;
+    private double batterShotDelay;
+    private double middleShotDelay;
 
     @Override
     public String getPropertyFileName() {
@@ -15,17 +17,29 @@ public class CatapultShooterConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        double shortShotDelay =
-                getDoublePropertyValue("shooter.shortShot.delay", properties);
-        this.shortShotDelay = shortShotDelay;
+        double rampShotDelay =
+                getDoublePropertyValue("shooter.rampShot.delay", properties);
+        this.rampShotDelay = rampShotDelay;
+
+        double batterShotDelay =
+                getDoublePropertyValue("shooter.batterShot.delay", properties);
+        this.batterShotDelay = batterShotDelay;
+
+        double middleShotDelay =
+                getDoublePropertyValue("shooter.middleShot.delay", properties);
+        this.middleShotDelay = middleShotDelay;
     }
 
-    public double getShortShotDelay() {
-        return shortShotDelay;
+    public double getMiddleShotDelay() {
+        return middleShotDelay;
     }
 
-    public void setShortShotDelay(double shortShotDelay) {
-        this.shortShotDelay = shortShotDelay;
+    public double getRampShotDelay() {
+        return rampShotDelay;
+    }
+
+    public double getBatterShotDelay() {
+        return batterShotDelay;
     }
 
 }

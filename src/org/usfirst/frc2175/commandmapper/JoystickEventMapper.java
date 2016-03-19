@@ -2,7 +2,7 @@ package org.usfirst.frc2175.commandmapper;
 
 import java.util.logging.Logger;
 
-import org.usfirst.frc2175.command.group.CatapultShortShotCommandGroup;
+import org.usfirst.frc2175.command.group.CatapultBatterShotCommandGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
@@ -48,7 +48,7 @@ public class JoystickEventMapper {
 
         JoystickButton shortShot = gamepadConfig.getShortShot();
         shortShot.whenPressed(
-                new CatapultShortShotCommandGroup(robotSubsystems));
+                new CatapultBatterShotCommandGroup(robotSubsystems));
 
         JoystickButton runIntakeIn = gamepadConfig.getRunIntakeIn();
         runIntakeIn

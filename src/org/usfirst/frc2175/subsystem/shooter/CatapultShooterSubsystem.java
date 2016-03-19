@@ -14,7 +14,11 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private final DigitalInput catapultDownSwitch;
     private final DigitalInput rollerbarIntakeOutSwitch;
 
-    private double shortShotDelay;
+    private double rampShotDelay;
+    private double batterShotDelay;
+    private double middleShotDelay;
+
+    private ShotType currentShot = ShotType.BATTER;
 
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
@@ -26,9 +30,16 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
         this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
 
-        this.shortShotDelay = catapultShooterConfig.getShortShotDelay();
+        this.rampShotDelay = catapultShooterConfig.getRampShotDelay();
+        this.batterShotDelay = catapultShooterConfig.getBatterShotDelay();
+        this.middleShotDelay = catapultShooterConfig.getMiddleShotDelay();
+
         this.rollerbarIntakeOutSwitch =
                 wiringConfig.getRollerbarIntakeOutSwitch();
+    }
+
+    public double getMiddleShotDelay() {
+        return middleShotDelay;
     }
 
     public void setCatapultPosition(boolean isUp) {
@@ -51,12 +62,48 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         return catapultDownSwitch.get();
     }
 
-    public double getShortShotDelay() {
-        return shortShotDelay;
+    public double getRampShotDelay() {
+        return rampShotDelay;
     }
 
-    public void setShortShotDelay(double shortShotDelay) {
-        this.shortShotDelay = shortShotDelay;
+    public double getBatterShotDelay() {
+        return batterShotDelay;
+    }
+
+    public double getWantedShotDelay() {
+        double shotDelay = 1;
+        switch (this.currentShot) {
+        case BATTER:
+            shotDelay = getBatterShotDelay();
+            break;
+        case MIDDLE:
+            shotDelay = getMiddleShotDelay();
+            break;
+        case RAMP:
+            shotDelay = getRampShotDelay();
+            break;
+        }
+        return shotDelay;
+    }
+
+    public void setShotType(ShotType shotType) {
+        this.currentShot = shotType;
+    }
+
+    public void cycleShotType() {
+        if (this.currentShot == ShotType.BATTER) {
+            this.currentShot = ShotType.MIDDLE;
+        }
+        if (this.currentShot == ShotType.MIDDLE) {
+            this.currentShot = ShotType.RAMP;
+        }
+        if (this.currentShot == ShotType.RAMP) {
+            this.currentShot = ShotType.BATTER;
+        }
+    }
+
+    private enum ShotType {
+        BATTER, MIDDLE, RAMP;
     }
 
 }
