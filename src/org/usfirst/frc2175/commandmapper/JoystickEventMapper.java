@@ -2,10 +2,10 @@ package org.usfirst.frc2175.commandmapper;
 
 import java.util.logging.Logger;
 
-import org.usfirst.frc2175.command.group.CatapultBatterShotCommandGroup;
+import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
-import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
+import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
@@ -40,15 +40,14 @@ public class JoystickEventMapper {
         IntakeConfig intakeConfig = robotConfig.getIntakeConfig();
 
         JoystickButton extendCatapult = gamepadConfig.getExtendCatapult();
-        extendCatapult.whenPressed(new ExtendCatapultCommand(robotSubsystems));
+        extendCatapult.whenPressed(new CatapultShootGroup(robotSubsystems));
 
         JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
         retractCatapult
                 .whenPressed(new RetractCatapultCommand(robotSubsystems));
 
-        JoystickButton shortShot = gamepadConfig.getShortShot();
-        shortShot.whenPressed(
-                new CatapultBatterShotCommandGroup(robotSubsystems));
+        JoystickButton cycleShot = gamepadConfig.getCycleShot();
+        cycleShot.whenPressed(new CycleDesiredShotCommand(robotSubsystems));
 
         JoystickButton runIntakeIn = gamepadConfig.getRunIntakeIn();
         runIntakeIn

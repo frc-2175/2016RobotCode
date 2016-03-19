@@ -19,7 +19,7 @@ public class GamepadConfig extends BaseConfig {
 
     private JoystickButton extendCatapult;
     private JoystickButton retractCatapult;
-    private JoystickButton shortShot;
+    private JoystickButton cycleShot;
     private JoystickButton runIntakeIn;
     private JoystickButton runIntakeOut;
     private JoystickButton testAction;
@@ -55,16 +55,16 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.intake.raise", properties));
         lowerIntake = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.lower", properties));
-        shortShot = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.shortShot", properties));
+        cycleShot = new JoystickButton(gamepad,
+                getIntPropertyValue("button.catapult.cycleShot", properties));
     }
 
-    public JoystickButton getShortShot() {
-        return shortShot;
+    public JoystickButton getCycleShot() {
+        return cycleShot;
     }
 
     public void setShortShot(JoystickButton shortShot) {
-        this.shortShot = shortShot;
+        this.cycleShot = shortShot;
     }
 
     public JoystickButton getLowerIntake() {
