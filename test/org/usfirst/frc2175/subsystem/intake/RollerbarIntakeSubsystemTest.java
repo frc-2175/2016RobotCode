@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -55,6 +56,7 @@ public class RollerbarIntakeSubsystemTest {
     @Parameter(4)
     public boolean isSpeedExpectedToBeSame;
 
+    @Ignore
     @Test
     public void testIntakeMovementLogic() {
         testGenericIntakeMovementLogic(isIntakeIn, isIntakeOut, isCatapultDown,
