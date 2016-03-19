@@ -42,20 +42,26 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
      * unsafe condition, it is set to stop instead.
      *
      * @param speed
-     *            Desired speed to lift rollerbar at. Positives represent moving
-     *            it inwards.
+     *            Desired speed to lift rollerbar at. Positive values represent
+     *            moving it inwards.
      */
     public void setRollerbarLiftSpeed(double speed) {
         double safeSpeed = determineSafeRollerbarLiftSpeed(speed);
         rollerbarIntakeLiftTalon.set(safeSpeed);
     }
 
+    private boolean isCatapultDown() {
+        return catapultDownSwitch.get();
+    }
+
+    // Because these are Hall effect sensors, they return true by default and
+    // they must be negated.
     public boolean isIntakeCompletelyOut() {
-        return rollerbarIntakeOutSwitch.get();
+        return !rollerbarIntakeOutSwitch.get();
     }
 
     public boolean isIntakeCompletelyIn() {
-        return rollerbarIntakeInSwitch.get();
+        return !rollerbarIntakeInSwitch.get();
     }
 
     /**
@@ -78,19 +84,15 @@ public class RollerbarIntakeSubsystem extends BaseSubsystem {
         // } else {
         // setSpeed = 0;
         // }
+
         // TODO Super Super temporary fix until the build people get us good
         // sensors
         setSpeed = speed;
         return setSpeed;
     }
 
-    private boolean isCatapultDown() {
-        return catapultDownSwitch.get();
-        // TODO fix sensors and reenable
-    }
-
     /**
-     * Determines whether the intake is inbetween extremes
+     * Determines whether the intake is in between extremes
      *
      * @return True if not at either extreme
      */
