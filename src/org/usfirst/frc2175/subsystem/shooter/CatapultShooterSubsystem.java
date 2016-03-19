@@ -102,8 +102,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         }
     }
 
-    private enum ShotType {
-        BATTER, MIDDLE, RAMP;
+    public ShotType getCurrentShot() {
+        return currentShot;
     }
 
 }
