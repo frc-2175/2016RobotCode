@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -35,12 +34,6 @@ public class WiringConfig extends BaseConfig {
     // Shifters
     private Solenoid[] shifterSolenoids;
 
-    // Dream intake
-    private Talon dreamIntakeSideBeltTalon;
-    private Talon dreamIntakeMainBeltTalon;
-    private Talon dreamIntakeLiftTalon;
-    private Encoder dreamIntakeLiftEncoder;
-
     // Rollerbar intake
     private CANTalon rollerbarIntakeRollerTalon;
     private CANTalon rollerbarIntakeLiftTalon;
@@ -53,8 +46,6 @@ public class WiringConfig extends BaseConfig {
     private Solenoid rightCatapultSolenoid;
     private DigitalInput catapultUpSwitch;
     private DigitalInput catapultDownSwitch;
-    private DigitalInput dreamIntakeUpSwitch;
-    private DigitalInput dreamIntakeDownSwitch;
 
     // Manipulator
     private CANTalon bootTalon;
@@ -82,7 +73,6 @@ public class WiringConfig extends BaseConfig {
         configurePowertrain(properties);
         configureCatapult(properties);
         configureManipulator(properties);
-        configureDreamIntake(properties);
         configureRollerbarIntake(properties);
         configureShifters(properties);
         configureClimber(properties);
@@ -178,37 +168,6 @@ public class WiringConfig extends BaseConfig {
         int catapultDownSwitchPort = getIntPropertyValue(
                 "catapult.digital.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
-    }
-
-    private void configureDreamIntake(Properties properties) {
-        int dreamIntakeSideBeltTalonPort = getIntPropertyValue(
-                "dreamIntake.talon.sideBelt.port", properties);
-        dreamIntakeSideBeltTalon = new Talon(dreamIntakeSideBeltTalonPort);
-
-        int dreamIntakeMainBeltTalonPort = getIntPropertyValue(
-                "dreamIntake.talon.mainBelt.port", properties);
-        dreamIntakeMainBeltTalon = new Talon(dreamIntakeMainBeltTalonPort);
-
-        int dreamIntakeLiftTalonPort =
-                getIntPropertyValue("dreamIntake.talon.lift.port", properties);
-        dreamIntakeLiftTalon = new Talon(dreamIntakeLiftTalonPort);
-
-        int dreamIntakeLiftEncoderA = getIntPropertyValue(
-                "dreamIntake.digital.encoder.port.a", properties);
-        int dreamIntakeLiftEncoderB = getIntPropertyValue(
-                "dreamIntake.digital.encoder.port.b", properties);
-        boolean isDreamIntakeLiftEncoderReversed = getBooleanPropertyValue(
-                "dreamIntake.digital.encoder.isReversed", properties);
-        dreamIntakeLiftEncoder = new Encoder(dreamIntakeLiftEncoderA,
-                dreamIntakeLiftEncoderB, isDreamIntakeLiftEncoderReversed);
-
-        int dreamIntakeUpSwitchPort = getIntPropertyValue(
-                "dreamIntake.digital.switch.up.port", properties);
-        dreamIntakeUpSwitch = new DigitalInput(dreamIntakeUpSwitchPort);
-
-        int dreamIntakeDownSwitchPort = getIntPropertyValue(
-                "dreamIntake.digital.switch.down.port", properties);
-        dreamIntakeDownSwitch = new DigitalInput(dreamIntakeDownSwitchPort);
     }
 
     private void configureRollerbarIntake(Properties properties) {
@@ -337,18 +296,6 @@ public class WiringConfig extends BaseConfig {
         return catapultDownSwitch;
     }
 
-    public DigitalInput getDreamIntakeUpSwitch() {
-        return dreamIntakeUpSwitch;
-    }
-
-    public DigitalInput getDreamIntakeDownSwitch() {
-        return dreamIntakeDownSwitch;
-    }
-
-    public Encoder getDreamIntakeLiftEncoder() {
-        return dreamIntakeLiftEncoder;
-    }
-
     public TalonGroup getLeftDriveTalonHandler() {
         return leftDriveTalonGroup;
     }
@@ -375,18 +322,6 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid getRightCatapultSolenoid() {
         return rightCatapultSolenoid;
-    }
-
-    public Talon getDreamIntakeSideBeltTalon() {
-        return dreamIntakeSideBeltTalon;
-    }
-
-    public Talon getDreamIntakeMainBeltTalon() {
-        return dreamIntakeMainBeltTalon;
-    }
-
-    public Talon getDreamIntakeLiftTalon() {
-        return dreamIntakeLiftTalon;
     }
 
     public Solenoid[] getShifterSolenoids() {
