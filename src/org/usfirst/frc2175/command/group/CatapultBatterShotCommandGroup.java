@@ -18,7 +18,7 @@ public class CatapultBatterShotCommandGroup extends CommandGroup {
 
     public CatapultBatterShotCommandGroup(RobotSubsystems robotSubsystems) {
         double delay = robotSubsystems.getCatapultShooterSubsystem()
-                .getShotDelay(ShotType.MIDDLE);
+                .getShotDelay(ShotType.BATTER);
         log.log(Level.FINE, "Firing catapult with delay=" + delay);
 
         addSequential(new ExtendCatapultCommand(robotSubsystems), delay);

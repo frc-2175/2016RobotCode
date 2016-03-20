@@ -71,4 +71,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     public double getShotDelay(ShotType shotType) {
         return shotTypeSelector.getShotDelay(shotType);
     }
+
+    public ShotTypeSelector getShotTypeSelector() {
+        return shotTypeSelector;
+    }
 }

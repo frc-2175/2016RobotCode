@@ -100,4 +100,8 @@ public class ShotTypeSelector {
                     + currentShot + "' not coded for!");
         }
     }
+
+    public ShotType getCurrentShot() {
+        return currentShot;
+    }
 }
