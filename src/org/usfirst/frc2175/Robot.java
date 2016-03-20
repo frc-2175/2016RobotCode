@@ -89,6 +89,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         log.info("Entered autonomousInit()");
 
+        robotSubsystems.getPowertrainSubsystem().resetEncoders();
+
         CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());
         selectedAuton.start();
@@ -102,11 +104,14 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         log.info("Entered teleopInit()");
+        robotSubsystems.getPowertrainSubsystem().resetEncoders();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        System.out.println("Total distance: " + robotSubsystems
+                .getPowertrainSubsystem().getLeftEncoderDistance());
     }
 
     @Override
