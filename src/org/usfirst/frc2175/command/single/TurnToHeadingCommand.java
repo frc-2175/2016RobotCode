@@ -15,14 +15,27 @@ public class TurnToHeadingCommand extends BaseCommand {
     private PowertrainSubsystem powertrainSubsystem;
     private GyroTurnPIDController pidController;
     private double setpoint;
-    private boolean resetGyro;
+    private double currentHeading;
+    private boolean isRelative = false;
 
     public TurnToHeadingCommand(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, double degrees,
-            boolean resetGyro) {
+            boolean isRelative) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
+        this.currentHeading = powertrainSubsystem.getGyroAngle();
         this.setpoint = degrees;
-        this.resetGyro = resetGyro;
+        this.isRelative = isRelative;
+
+        this.pidController = robotControllers.getGyroTurnPIDController();
+
+        requires(powertrainSubsystem);
+    }
+
+    public TurnToHeadingCommand(RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers, double degrees) {
+        this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
+        this.currentHeading = powertrainSubsystem.getGyroAngle();
+        this.setpoint = degrees;
 
         this.pidController = robotControllers.getGyroTurnPIDController();
 
@@ -32,10 +45,10 @@ public class TurnToHeadingCommand extends BaseCommand {
     @Override
     protected void initialize() {
         super.initialize();
-        pidController.setSetpoint(setpoint);
-        if (resetGyro) {
-            powertrainSubsystem.resetGyro();
+        if (isRelative) {
+            setpoint = currentHeading + setpoint;
         }
+        pidController.setSetpoint(setpoint);
         SmartDashboard.putNumber("Setpoint:", setpoint);
 
         pidController.enable();
