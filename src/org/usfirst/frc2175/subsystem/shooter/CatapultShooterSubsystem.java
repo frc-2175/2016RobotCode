@@ -1,5 +1,7 @@
 package org.usfirst.frc2175.subsystem.shooter;
 
+import java.util.logging.Logger;
+
 import org.usfirst.frc2175.config.CatapultShooterConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.WiringConfig;
@@ -10,6 +12,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private final Solenoid rightCatapultSolenoid;
     private final Solenoid leftCatapultSolenoid;
     private final DigitalInput catapultDownSwitch;
@@ -71,6 +75,9 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         case RAMP:
             shotDelay = getRampShotDelay();
             break;
+        default:
+            log.severe("getWantedShotDelay: ShotType='" + currentShot
+                    + "' not coded for!");
         }
         return shotDelay;
     }
@@ -91,25 +98,32 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         case RAMP:
             setShotType(ShotType.BATTER);
             break;
+        default:
+            setShotType(ShotType.BATTER);
+            log.severe("cycleShotType: ShotType='" + currentShot
+                    + "' not coded for!");
         }
         updateSmartDashboardShotDisplay();
     }
 
     private void updateSmartDashboardShotDisplay() {
-        if (this.currentShot == ShotType.MIDDLE) {
-            SmartDashboard.putBoolean("MIDDLE", true);
-            SmartDashboard.putBoolean("RAMP", false);
-            SmartDashboard.putBoolean("BATTER", false);
-        }
-        if (this.currentShot == ShotType.RAMP) {
-            SmartDashboard.putBoolean("MIDDLE", false);
-            SmartDashboard.putBoolean("RAMP", true);
-            SmartDashboard.putBoolean("BATTER", false);
-        }
-        if (this.currentShot == ShotType.BATTER) {
-            SmartDashboard.putBoolean("MIDDLE", false);
-            SmartDashboard.putBoolean("RAMP", false);
+        SmartDashboard.putBoolean("MIDDLE", false);
+        SmartDashboard.putBoolean("RAMP", false);
+        SmartDashboard.putBoolean("BATTER", false);
+
+        switch (this.currentShot) {
+        case BATTER:
             SmartDashboard.putBoolean("BATTER", true);
+            break;
+        case MIDDLE:
+            SmartDashboard.putBoolean("MIDDLE", true);
+            break;
+        case RAMP:
+            SmartDashboard.putBoolean("RAMP", true);
+            break;
+        default:
+            log.severe("updateSmartDashboardShotDisplay: ShotType='"
+                    + currentShot + "' not coded for!");
         }
     }
 
