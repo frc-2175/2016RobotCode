@@ -39,10 +39,6 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
                 wiringConfig.getRollerbarIntakeOutSwitch();
     }
 
-    public double getMiddleShotDelay() {
-        return middleShotDelay;
-    }
-
     public void setCatapultPosition(boolean isUp) {
         // if (isSafeToFireCatapult()) {
         leftCatapultSolenoid.set(isUp);
@@ -61,14 +57,6 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
     public boolean isCatapultDown() {
         return catapultDownSwitch.get();
-    }
-
-    public double getRampShotDelay() {
-        return rampShotDelay;
-    }
-
-    public double getBatterShotDelay() {
-        return batterShotDelay;
     }
 
     public double getWantedShotDelay() {
@@ -129,4 +117,15 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         return currentShot;
     }
 
+    public double getMiddleShotDelay() {
+        return middleShotDelay;
+    }
+
+    public double getRampShotDelay() {
+        return rampShotDelay;
+    }
+
+    public double getBatterShotDelay() {
+        return batterShotDelay;
+    }
 }
