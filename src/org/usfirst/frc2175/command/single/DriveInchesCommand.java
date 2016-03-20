@@ -40,6 +40,7 @@ public class DriveInchesCommand extends BaseCommand {
 
     @Override
     protected void execute() {
+        System.out.println(powertrainSubsystem.getMeanEncoderDistance());
     }
 
     @Override

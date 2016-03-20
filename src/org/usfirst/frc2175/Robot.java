@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
-        configureCamera();
+        // configureCamera();
     }
 
     protected void configureCamera() {
@@ -107,7 +107,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-
     }
 
     @Override
