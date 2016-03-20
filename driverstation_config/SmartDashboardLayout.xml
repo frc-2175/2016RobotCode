@@ -1,38 +1,41 @@
 <xml version="1.0">
 <dashboard>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1832" y="3"/>
-		<property name="Text" value="Connection"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
-		<location x="1887" y="1"/>
-		<width>17</width>
-		<height>18</height>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
-		<location x="0" y="605"/>
-		<width>404</width>
-	</static-widget>
-	<widget field="Auto choices" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
-		<location x="0" y="0"/>
-	</widget>
-	<widget field="Autonomous Routine" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
-		<location x="1599" y="-1"/>
-	</widget>
-	<widget field="Vision table location" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="404" y="605"/>
-	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
-		<location x="0" y="-1"/>
-		<width>807</width>
-		<height>605</height>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
-		<location x="807" y="-1"/>
-		<width>791</width>
-		<height>604</height>
+		<location x="777" y="3"/>
+		<width>666</width>
+		<height>580</height>
 		<property name="Camera IP Address or mDNS name" value="axis-accc8e271b1a"/>
 	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
+		<location x="0" y="0"/>
+		<width>775</width>
+		<height>587</height>
+		<property name="Camera IP Address or mDNS name" value="axis-camera"/>
+	</static-widget>
+	<widget field="Setpoint:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1641" y="609"/>
+	</widget>
+	<widget field="MIDDLE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1457" y="122"/>
+		<width>154</width>
+		<height>109</height>
+	</widget>
+	<widget field="RAMP" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1457" y="237"/>
+		<width>143</width>
+		<height>102</height>
+	</widget>
+	<widget field="BATTER" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1457" y="10"/>
+		<width>157</width>
+		<height>108</height>
+	</widget>
+	<widget field="Autonomous Routine" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="1630" y="0"/>
+	</widget>
+	<widget field="Vision table location" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1643" y="587"/>
+	</widget>
 </dashboard>
 <live-window>
 </live-window>
