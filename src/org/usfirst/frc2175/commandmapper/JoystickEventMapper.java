@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
+import org.usfirst.frc2175.command.group.TurnToFaceGoalAndShootGroup;
 import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
-import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
@@ -58,8 +58,8 @@ public class JoystickEventMapper {
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
         JoystickButton testAction = gamepadConfig.getTestAction();
-        testAction.whenPressed(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 90));
+        testAction.whenPressed(new TurnToFaceGoalAndShootGroup(robotSubsystems,
+                robotConfig, robotControllers));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();
