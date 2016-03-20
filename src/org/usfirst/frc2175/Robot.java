@@ -110,8 +110,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        System.out.println("Total distance: " + robotSubsystems
-                .getPowertrainSubsystem().getLeftEncoderDistance());
     }
 
     @Override
