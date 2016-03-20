@@ -25,7 +25,7 @@ public class WiringConfig extends BaseConfig {
     private static final double WHEEL_DIAMETER = 12.5;
     private static final int LARGE_GEAR_TEETH_COUNT = 120;
     private static final int ENCODER_GEAR_TEETH_COUNT = 20;
-    private static final int ENCODER_TICKS_PER_REVOLUTION = 120;
+    private static final int ENCODER_TICKS_PER_REVOLUTION = 360;
 
     private static final double ENCODER_DISTANCE_CONVERSION_FACTOR =
             calcEncoderDistanceConversion();
