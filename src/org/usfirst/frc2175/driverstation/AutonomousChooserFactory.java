@@ -22,6 +22,7 @@ import org.usfirst.frc2175.command.autonomous.WeakenShootRampartsAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootRockWallAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootRoughTerrainAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAutonomous;
+import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseNoEncoderAutonomous;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -55,6 +56,9 @@ public class AutonomousChooserFactory {
     protected void addWeakenAutons(SendableChooser autonChooser,
             RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
+        autonChooser.addObject("Weaken simple defense - no encoders",
+                new WeakenSimpleDefenseNoEncoderAutonomous(robotSubsystems,
+                        robotControllers));
         autonChooser.addObject("Weaken simple defense",
                 new WeakenSimpleDefenseAutonomous(robotSubsystems,
                         robotControllers));
