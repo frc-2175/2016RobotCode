@@ -16,11 +16,11 @@ public class CatapultShootGroup extends CommandGroup {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     public CatapultShootGroup(RobotSubsystems robotSubsystems) {
-        addSequential(new ExtendCatapultCommand(robotSubsystems),
-                robotSubsystems.getCatapultShooterSubsystem()
-                        .getWantedShotDelay());
-        log.log(Level.FINE, "Firing catapult with delay " + robotSubsystems
-                .getCatapultShooterSubsystem().getWantedShotDelay());
+        double delay = robotSubsystems.getCatapultShooterSubsystem()
+                .getCurrentShotDelay();
+        log.log(Level.FINE, "Firing catapult with delay=" + delay);
+
+        addSequential(new ExtendCatapultCommand(robotSubsystems), delay);
         addSequential(new RetractCatapultCommand(robotSubsystems), .1);
     }
 }

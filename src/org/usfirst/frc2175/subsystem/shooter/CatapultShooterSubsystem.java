@@ -9,7 +9,6 @@ import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CatapultShooterSubsystem extends BaseSubsystem {
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -19,11 +18,7 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private final DigitalInput catapultDownSwitch;
     private final DigitalInput rollerbarIntakeOutSwitch;
 
-    private double rampShotDelay;
-    private double batterShotDelay;
-    private double middleShotDelay;
-
-    private ShotType currentShot = ShotType.BATTER;
+    private final ShotTypeSelector shotTypeSelector;
 
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
@@ -35,12 +30,10 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
 
         this.catapultDownSwitch = wiringConfig.getCatapultDownSwitch();
 
-        this.rampShotDelay = catapultShooterConfig.getRampShotDelay();
-        this.batterShotDelay = catapultShooterConfig.getBatterShotDelay();
-        this.middleShotDelay = catapultShooterConfig.getMiddleShotDelay();
-
         this.rollerbarIntakeOutSwitch =
                 wiringConfig.getRollerbarIntakeOutSwitch();
+
+        this.shotTypeSelector = new ShotTypeSelector(catapultShooterConfig);
     }
 
     public void setCatapultPosition(boolean isUp) {
@@ -63,83 +56,19 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         return catapultDownSwitch.get();
     }
 
-    public double getWantedShotDelay() {
-        double shotDelay = 1;
-        switch (this.currentShot) {
-        case BATTER:
-            shotDelay = getBatterShotDelay();
-            break;
-        case MIDDLE:
-            shotDelay = getMiddleShotDelay();
-            break;
-        case RAMP:
-            shotDelay = getRampShotDelay();
-            break;
-        default:
-            log.severe("getWantedShotDelay: ShotType='" + currentShot
-                    + "' not coded for!");
-        }
-        return shotDelay;
-    }
-
     public void setShotType(ShotType shotType) {
-        this.currentShot = shotType;
-        updateSmartDashboardShotDisplay();
+        shotTypeSelector.setShotType(shotType);
     }
 
     public void cycleShotType() {
-        switch (this.currentShot) {
-        case BATTER:
-            setShotType(ShotType.MIDDLE);
-            break;
-        case MIDDLE:
-            setShotType(ShotType.RAMP);
-            break;
-        case RAMP:
-            setShotType(ShotType.BATTER);
-            break;
-        default:
-            setShotType(ShotType.BATTER);
-            log.severe("cycleShotType: ShotType='" + currentShot
-                    + "' not coded for!");
-        }
-        updateSmartDashboardShotDisplay();
+        shotTypeSelector.cycleShotType();
     }
 
-    private void updateSmartDashboardShotDisplay() {
-        SmartDashboard.putBoolean("MIDDLE", false);
-        SmartDashboard.putBoolean("RAMP", false);
-        SmartDashboard.putBoolean("BATTER", false);
-
-        switch (this.currentShot) {
-        case BATTER:
-            SmartDashboard.putBoolean("BATTER", true);
-            break;
-        case MIDDLE:
-            SmartDashboard.putBoolean("MIDDLE", true);
-            break;
-        case RAMP:
-            SmartDashboard.putBoolean("RAMP", true);
-            break;
-        default:
-            log.severe("updateSmartDashboardShotDisplay: ShotType='"
-                    + currentShot + "' not coded for!");
-        }
+    public double getCurrentShotDelay() {
+        return shotTypeSelector.getCurrentShotDelay();
     }
 
-    public ShotType getCurrentShot() {
-        return currentShot;
-    }
-
-    public double getMiddleShotDelay() {
-        return middleShotDelay;
-    }
-
-    public double getRampShotDelay() {
-        return rampShotDelay;
-    }
-
-    public double getBatterShotDelay() {
-        return batterShotDelay;
+    public double getShotDelay(ShotType shotType) {
+        return shotTypeSelector.getShotDelay(shotType);
     }
 }
