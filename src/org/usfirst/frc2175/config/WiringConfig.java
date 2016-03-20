@@ -22,6 +22,14 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class WiringConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "wiring.properties";
 
+    private static final double WHEEL_DIAMETER = 12.5;
+    private static final int LARGE_GEAR_TEETH_COUNT = 120;
+    private static final int ENCODER_GEAR_TEETH_COUNT = 20;
+    private static final int ENCODER_TICKS_PER_REVOLUTION = 120;
+
+    private static final double ENCODER_DISTANCE_CONVERSION_FACTOR =
+            calcEncoderDistanceConversion();
+
     // powertrain
     private TalonGroup leftDriveTalonGroup;
     private TalonGroup rightDriveTalonGroup;
@@ -98,6 +106,8 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.digital.encoder.left.port.b", properties);
         leftDriveEncoder = new Encoder(leftDriveEncoderPortA,
                 leftDriveEncoderPortB, isLeftDriveEncoderReversed);
+        leftDriveEncoder
+                .setDistancePerPulse(ENCODER_DISTANCE_CONVERSION_FACTOR);
 
         boolean isRightDriveEncoderReversed = getBooleanPropertyValue(
                 "powertrain.digital.encoder.right.isReversed", properties);
@@ -107,6 +117,8 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.digital.encoder.right.port.b", properties);
         rightDriveEncoder = new Encoder(rightDriveEncoderPortA,
                 rightDriveEncoderPortB, isRightDriveEncoderReversed);
+        rightDriveEncoder
+                .setDistancePerPulse(ENCODER_DISTANCE_CONVERSION_FACTOR);
 
         int leftDriveTalon1Port =
                 getIntPropertyValue("powertrain.talon.left.1.port", properties);
@@ -144,6 +156,14 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.digital.ultrasonic.port.echo", properties);
         ultrasonicSensor = new Ultrasonic(ultrasonicSensorPingPort,
                 ultrasonicSensorEchoPort);
+    }
+
+    private static double calcEncoderDistanceConversion() {
+        double wheelCircumference = WHEEL_DIAMETER * Math.PI;
+        double gearRatio = LARGE_GEAR_TEETH_COUNT / ENCODER_GEAR_TEETH_COUNT;
+
+        return 1 / (ENCODER_TICKS_PER_REVOLUTION * gearRatio
+                / wheelCircumference);
     }
 
     private void configureCatapult(Properties properties) {
