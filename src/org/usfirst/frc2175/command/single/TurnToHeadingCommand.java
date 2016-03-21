@@ -12,19 +12,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class TurnToHeadingCommand extends BaseCommand {
-    private PowertrainSubsystem powertrainSubsystem;
-    private GyroTurnPIDController pidController;
-    private double setpoint;
-    private double currentHeading;
-    private boolean isRelative = false;
+    private final PowertrainSubsystem powertrainSubsystem;
+    private final GyroTurnPIDController pidController;
+    private final double setpoint;
+    private final double currentHeading;
+    private final boolean isRelative;
 
     public TurnToHeadingCommand(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, double degrees,
             boolean isRelative) {
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
         this.currentHeading = powertrainSubsystem.getGyroAngle();
-        this.setpoint = degrees;
         this.isRelative = isRelative;
+
+        if (this.isRelative) {
+            this.setpoint = currentHeading + degrees;
+        } else {
+            this.setpoint = degrees;
+        }
 
         this.pidController = robotControllers.getGyroTurnPIDController();
 
@@ -33,21 +38,12 @@ public class TurnToHeadingCommand extends BaseCommand {
 
     public TurnToHeadingCommand(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, double degrees) {
-        this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-        this.currentHeading = powertrainSubsystem.getGyroAngle();
-        this.setpoint = degrees;
-
-        this.pidController = robotControllers.getGyroTurnPIDController();
-
-        requires(powertrainSubsystem);
+        this(robotSubsystems, robotControllers, degrees, false);
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        if (isRelative) {
-            setpoint = currentHeading + setpoint;
-        }
         pidController.setSetpoint(setpoint);
         SmartDashboard.putNumber("Setpoint:", setpoint);
 
