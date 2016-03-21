@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -22,29 +23,32 @@ public class CatapultShootGroup extends CommandGroup {
 
     @Override
     public void initialize() {
-        double delay = robotSubsystems.getCatapultShooterSubsystem()
-                .getCurrentShotDelay();
+        CatapultShooterSubsystem catapultShooterSubsystem =
+                robotSubsystems.getCatapultShooterSubsystem();
+        double delay = catapultShooterSubsystem.getCurrentShotDelay();
         log.log(Level.FINE, "Firing catapult with delay=" + delay);
 
-        ShotType currentShot = robotSubsystems.getCatapultShooterSubsystem()
-                .getShotTypeSelector().getCurrentShot();
+        ShotType currentShot =
+                catapultShooterSubsystem.getShotTypeSelector().getCurrentShot();
 
+        final CommandGroup command;
         switch (currentShot) {
         case BATTER:
-            Scheduler.getInstance()
-                    .add(new CatapultBatterShotCommandGroup(robotSubsystems));
+            command = new CatapultBatterShotCommandGroup(robotSubsystems);
             break;
         case MIDDLE:
-            Scheduler.getInstance()
-                    .add(new CatapultMiddleShotCommandGroup(robotSubsystems));
+            command = new CatapultMiddleShotCommandGroup(robotSubsystems);
             break;
         case RAMP:
-            Scheduler.getInstance()
-                    .add(new CatapultRampShotCommandGroup(robotSubsystems));
+            command = new CatapultRampShotCommandGroup(robotSubsystems);
             break;
         default:
-            log.severe("updateSmartDashboardShotDisplay: ShotType='"
-                    + currentShot + "' not coded for!");
+            command = new CatapultMiddleShotCommandGroup(robotSubsystems);
+            log.severe(
+                    "updateSmartDashboardShotDisplay: ShotType='" + currentShot
+                            + "' not coded for!  Using MIDDLE as default.");
         }
+
+        Scheduler.getInstance().add(command);
     }
 }
