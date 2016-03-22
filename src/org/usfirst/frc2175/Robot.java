@@ -16,6 +16,7 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -43,6 +44,8 @@ public class Robot extends IterativeRobot {
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
 
+    private Ultrasonic ultrasonicSensor;
+    private double distanceFromWall;
     private ImageHandler imageHandler;
 
     // This must come after RobotConfig
@@ -55,7 +58,19 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        configureSensor();
         // configureCamera();
+    }
+
+    protected void configureSensor() {
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        ultrasonicSensor = wiringConfig.getUltrasonicSensor();
+    }
+
+    private double getDistanceFromWall() {
+        ultrasonicSensor.ping();
+        distanceFromWall = ultrasonicSensor.getRangeInches();
+        return distanceFromWall;
     }
 
     protected void configureCamera() {
@@ -106,11 +121,13 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         log.info("Entered teleopInit()");
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
+        getDistanceFromWall();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        getDistanceFromWall();
     }
 
     @Override

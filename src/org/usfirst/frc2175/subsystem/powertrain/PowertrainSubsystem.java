@@ -9,7 +9,6 @@ import org.usfirst.frc2175.util.TalonGroup;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class PowertrainSubsystem extends BaseSubsystem {
@@ -21,9 +20,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
     private Encoder rightDriveEncoder;
     private Solenoid[] driveShifters;
     private Gyro gyro;
-
-    private Ultrasonic ultrasonicSensor;
-    private double distanceFromWall;
 
     private ShifterState shifterState;
 
@@ -39,7 +35,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
         gyro = wiringConfig.getGyro();
         driveShifters = wiringConfig.getShifterSolenoids();
-        ultrasonicSensor = wiringConfig.getUltrasonicSensor();
 
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
                 rightDriveSideTalonGroup);
@@ -53,7 +48,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         if (isDriveEngaged()) {
             // TODO get direction from a property file
             robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
-            getDistanceFromWall();
         }
     }
 
@@ -63,7 +57,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
         if (isDriveEngaged()) {
             // TODO get direction from a property file
             robotDrive.tankDrive(-leftSpeed, -rightSpeed);
-            getDistanceFromWall();
         }
     }
 
@@ -115,12 +108,6 @@ public class PowertrainSubsystem extends BaseSubsystem {
     public void resetEncoders() {
         leftDriveEncoder.reset();
         rightDriveEncoder.reset();
-    }
-
-    public double getDistanceFromWall() {
-        ultrasonicSensor.ping();
-        distanceFromWall = ultrasonicSensor.getRangeInches();
-        return distanceFromWall;
     }
 
     public double getLeftEncoderDistance() {
