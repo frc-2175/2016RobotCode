@@ -67,12 +67,6 @@ public class Robot extends IterativeRobot {
         ultrasonicSensor = wiringConfig.getUltrasonicSensor();
     }
 
-    private double getDistanceFromWall() {
-        ultrasonicSensor.ping();
-        distanceFromWall = ultrasonicSensor.getRangeInches();
-        return distanceFromWall;
-    }
-
     protected void configureCamera() {
         // CameraServer server = CameraServer.getInstance();
         // VisionProcessingConfig visionProcessingConfig =
@@ -121,13 +115,14 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         log.info("Entered teleopInit()");
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
-        getDistanceFromWall();
+        ultrasonicSensor.setAutomaticMode(true);
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        getDistanceFromWall();
+        distanceFromWall = ultrasonicSensor.getRangeInches();
+        System.out.println(distanceFromWall);
     }
 
     @Override
@@ -143,6 +138,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledInit() {
         log.info("Entered disabledInit()");
+        ultrasonicSensor.setAutomaticMode(false);
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
     }
