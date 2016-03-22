@@ -40,17 +40,29 @@ public class DriveInchesCommand extends BaseCommand {
 
     @Override
     protected void execute() {
-        System.out.println(powertrainSubsystem.getMeanEncoderDistance());
     }
 
     @Override
     protected boolean isFinished() {
+        log.info("Mean encoder distance="
+                + powertrainSubsystem.getMeanEncoderDistance());
+        log.info("PID controller error=" + pidController.getError());
+        log.info("PID controller avg error=" + pidController.getAvgError());
+
         return pidController.onTarget();
     }
 
     @Override
     protected void end() {
         super.end();
+
+        log.info("DriveInches: end");
+
+        log.info("Mean encoder distance="
+                + powertrainSubsystem.getMeanEncoderDistance());
+        log.info("PID controller error=" + pidController.getError());
+        log.info("PID controller avg error=" + pidController.getAvgError());
+
         pidController.disable();
     }
 
