@@ -1,6 +1,5 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.EmptyCommand;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
