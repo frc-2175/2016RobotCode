@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot {
         log.info("Entered autonomousInit()");
 
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
+        robotSubsystems.getPowertrainSubsystem().resetGyro();
 
         CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());
