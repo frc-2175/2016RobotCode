@@ -1,5 +1,11 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="Shot time:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1459" y="373"/>
+	</widget>
+	<widget field="Vision turn PID setpoint:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="588"/>
+	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.VideoStreamViewerExtension">
 		<location x="777" y="3"/>
 		<width>666</width>
