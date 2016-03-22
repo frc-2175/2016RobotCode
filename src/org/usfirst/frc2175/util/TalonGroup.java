@@ -1,10 +1,11 @@
 package org.usfirst.frc2175.util;
 
+import java.util.logging.Logger;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- *
  * This is a class that takes three CAN Talons and wraps them as one
  * SpeedController. Currently, it just sets them up as a standard
  * SpeedController, but it should be changed to set them up as a CAN
@@ -13,14 +14,13 @@ import edu.wpi.first.wpilibj.SpeedController;
  * TODO Change this to implement CANSpeedController
  *
  * @author Max Haland
- *
  */
-
 public class TalonGroup implements SpeedController {
+    private final Logger log = Logger.getLogger(getClass().getName());
 
-    private CANTalon talon1;
-    private CANTalon talon2;
-    private CANTalon talon3;
+    private final CANTalon talon1;
+    private final CANTalon talon2;
+    private final CANTalon talon3;
 
     private boolean isInverted = false;
 
@@ -38,9 +38,8 @@ public class TalonGroup implements SpeedController {
     @Override
     public double get() {
         if (talon1.get() != talon2.get() || talon1.get() != talon3.get()) {
-            // TODO Switch this to proper logging
-            System.out
-            .println("Talon gets not matching! Something has gone seriously wrong!");
+            log.severe("Talon get() values not matching!"
+                    + " Something has gone seriously wrong!");
         }
 
         return talon1.get();
@@ -84,5 +83,4 @@ public class TalonGroup implements SpeedController {
     public void stopMotor() {
         set(0);
     }
-
 }
