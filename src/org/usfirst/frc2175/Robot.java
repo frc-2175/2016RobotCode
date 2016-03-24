@@ -15,6 +15,7 @@ import org.usfirst.frc2175.driverstation.ImageHandler;
 import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.shooter.ShotType;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -57,6 +58,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        robotSubsystems.getCatapultShooterSubsystem()
+                .setShotType(ShotType.BATTER);
     }
 
     protected void configureCamera() {
