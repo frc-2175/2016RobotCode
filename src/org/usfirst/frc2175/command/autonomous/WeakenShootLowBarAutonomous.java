@@ -1,5 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
+import org.usfirst.frc2175.command.EmptyCommand;
 import org.usfirst.frc2175.command.group.CatapultRampShotCommandGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
@@ -10,7 +11,6 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -41,72 +41,10 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
                 new DriveInchesCommand(robotSubsystems, robotControllers, 24));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 45, false));
-        addSequential(new Command() {
-
-            @Override
-            protected boolean isFinished() {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            protected void interrupted() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void initialize() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void execute() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void end() {
-                // TODO Auto-generated method stub
-
-            }
-        }, .4);
+        addSequential(new EmptyCommand(), .4);
         addSequential(new TurnToFaceGoalCommand(robotSubsystems, robotConfig,
                 robotControllers));
-        addSequential(new Command() {
-
-            @Override
-            protected boolean isFinished() {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
-            @Override
-            protected void interrupted() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void initialize() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void execute() {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            protected void end() {
-                // TODO Auto-generated method stub
-
-            }
-        }, .4);
+        addSequential(new EmptyCommand(), .4);
         addSequential(new CatapultRampShotCommandGroup(robotSubsystems));
     }
 }
