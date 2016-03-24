@@ -20,7 +20,7 @@ public class DistanceSensor {
         ultrasonicSensor.startLiveWindowMode();
     }
 
-    public void updateDistanceSensor() {
+    public void updateDashboard() {
         double rangeInches = ultrasonicSensor.getRangeInches();
         double rangeFeet = convertDistanceFromInchesToFeet(rangeInches);
         SmartDashboard.putNumber("Distance:", rangeFeet);

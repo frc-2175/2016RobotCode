@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        frontDistanceSensor.updateDistanceSensor();
+        frontDistanceSensor.updateDashboard();
     }
 
     @Override
@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        frontDistanceSensor.updateDistanceSensor();
+        frontDistanceSensor.updateDashboard();
     }
 
     @Override
