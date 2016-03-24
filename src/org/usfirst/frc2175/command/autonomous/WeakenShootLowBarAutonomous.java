@@ -1,15 +1,17 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.EmptyCommand;
-import org.usfirst.frc2175.command.group.CatapultRampShotCommandGroup;
+import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
+import org.usfirst.frc2175.command.single.SetDesiredShotCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.shooter.ShotType;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -28,23 +30,41 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
         double distanceWithShoot =
                 travelLength + extraShootLength - 2 * caution;
 
-        // TODO Refine numbers if needed
-        // TODO Refine angle
+        // Set the desired shot type
+        addSequential(
+                new SetDesiredShotCommand(robotSubsystems, ShotType.MIDDLE));
+
+        // Drive forward
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
+
+        // Turn a bit
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 20, false));
-        // TODO make this take robotConfig
+
+        // Spin intake to settle ball
         addParallel(new RunIntakeInGroup(robotSubsystems,
                 robotConfig.getIntakeConfig()), 10);
+
+        // Drive forward to avoid wall
         addSequential(
                 new DriveInchesCommand(robotSubsystems, robotControllers, 24));
+
+        // Turn in general direction of goal
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 45, false));
+
+        // Wait for image to process
         addSequential(new EmptyCommand(), .4);
+
+        // Face the goal
         addSequential(new TurnToFaceGoalCommand(robotSubsystems, robotConfig,
                 robotControllers));
+
+        // Wait to settle ball
         addSequential(new EmptyCommand(), .4);
-        addSequential(new CatapultRampShotCommandGroup(robotSubsystems));
+
+        // Shoot!
+        addSequential(new CatapultShootGroup(robotSubsystems));
     }
 }
