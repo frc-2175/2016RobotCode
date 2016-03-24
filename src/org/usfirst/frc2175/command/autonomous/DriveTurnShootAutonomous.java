@@ -19,6 +19,7 @@ public class DriveTurnShootAutonomous extends CommandGroup {
         int distanceAfterTurn = 0;
         int specifiedDegrees = 0;
 
+        // TODO add descriptive comments for each command
         robotSubsystems.getPowertrainSubsystem().resetGyro();
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));

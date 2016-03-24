@@ -32,6 +32,7 @@ public class DamageShootChevalDeFriseAutonomous extends CommandGroup {
 
         // TODO Refine Numbers if needed
         // TODO Refine Angle
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));

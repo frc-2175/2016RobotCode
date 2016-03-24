@@ -25,6 +25,7 @@ public class DamageShootRampartsAutonomous extends CommandGroup {
         double distanceWithCaution = travelLength - caution;
 
         // TODO Refine Numbers if needed
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

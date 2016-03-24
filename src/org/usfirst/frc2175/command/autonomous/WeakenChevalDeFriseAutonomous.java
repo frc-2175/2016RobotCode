@@ -22,6 +22,7 @@ public class WeakenChevalDeFriseAutonomous extends CommandGroup {
         double distanceAfterCheval = travelLength - platformBeforeCheval;
 
         // TODO Refine numbers if needed
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));

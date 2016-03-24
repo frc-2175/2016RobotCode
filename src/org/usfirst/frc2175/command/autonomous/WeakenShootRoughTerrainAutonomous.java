@@ -20,6 +20,7 @@ public class WeakenShootRoughTerrainAutonomous extends CommandGroup {
 
         // TODO Refine Numbers if needed
         // TODO Change angle of turn
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

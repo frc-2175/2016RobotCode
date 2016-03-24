@@ -23,6 +23,7 @@ public class WeakenPortcullisAutonomous extends CommandGroup {
                 travelLength - platformBeforePortcullis;
 
         // TODO Refine numbers if needed
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforePortcullis));
         addSequential(new RaiseBootCommand(robotSubsystems));
