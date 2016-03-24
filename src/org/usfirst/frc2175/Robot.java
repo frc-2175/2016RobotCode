@@ -13,6 +13,7 @@ import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.driverstation.ImageHandler;
 import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
+import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -44,8 +45,8 @@ public class Robot extends IterativeRobot {
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
 
-    private Ultrasonic ultrasonicSensor;
-    private double distanceFromWall;
+    private DistanceSensor frontDistanceSensor;
+
     private ImageHandler imageHandler;
 
     // This must come after RobotConfig
@@ -58,13 +59,15 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
-        configureSensor();
+        configureDistanceSensor();
         // configureCamera();
     }
 
-    protected void configureSensor() {
+    protected void configureDistanceSensor() {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
-        ultrasonicSensor = wiringConfig.getUltrasonicSensor();
+        Ultrasonic ultrasonicSensor = wiringConfig.getUltrasonicSensor();
+
+        frontDistanceSensor = new DistanceSensor(ultrasonicSensor);
     }
 
     protected void configureCamera() {
@@ -101,6 +104,8 @@ public class Robot extends IterativeRobot {
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getPowertrainSubsystem().resetGyro();
 
+        frontDistanceSensor.enable();
+
         CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());
         selectedAuton.start();
@@ -109,20 +114,21 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        frontDistanceSensor.updateDistanceSensor();
     }
 
     @Override
     public void teleopInit() {
         log.info("Entered teleopInit()");
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
-        ultrasonicSensor.setAutomaticMode(true);
+
+        frontDistanceSensor.enable();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        distanceFromWall = ultrasonicSensor.getRangeInches();
-        System.out.println(distanceFromWall);
+        frontDistanceSensor.updateDistanceSensor();
     }
 
     @Override
@@ -138,7 +144,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledInit() {
         log.info("Entered disabledInit()");
-        ultrasonicSensor.setAutomaticMode(false);
+
+        frontDistanceSensor.disable();
+
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
     }
