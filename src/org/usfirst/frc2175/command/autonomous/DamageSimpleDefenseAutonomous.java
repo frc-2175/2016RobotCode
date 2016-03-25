@@ -18,11 +18,11 @@ public class DamageSimpleDefenseAutonomous extends CommandGroup {
         // TODO Fix numbers as needed
         // TODO add descriptive comments for each command
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 138));
-        addSequential(new EmptyCommand(), 0.2);
+                new DriveInchesCommand(robotSubsystems, robotControllers, 148));
+        addSequential(new EmptyCommand(), 0.5);
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                -106));
-        addSequential(new EmptyCommand(), 0.2);
+                -116));
+        addSequential(new EmptyCommand(), 0.5);
         addSequential(
                 new DriveInchesCommand(robotSubsystems, robotControllers, 76));
     }
