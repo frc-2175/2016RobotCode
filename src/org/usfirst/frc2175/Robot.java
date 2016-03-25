@@ -6,6 +6,7 @@ import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
@@ -15,7 +16,9 @@ import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.shooter.ShotType;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
@@ -59,6 +62,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        robotSubsystems.getCatapultShooterSubsystem()
+                .setShotType(ShotType.BATTER);
         configureDistanceSensor();
         // configureCamera();
     }
@@ -71,13 +76,13 @@ public class Robot extends IterativeRobot {
     }
 
     protected void configureCamera() {
-        // CameraServer server = CameraServer.getInstance();
-        // VisionProcessingConfig visionProcessingConfig =
-        // robotConfig.getVisionProcessingConfig();
-        // int webCamQuality = visionProcessingConfig.getWebCamQuality();
-        // String webCamName = visionProcessingConfig.getWebCamName();
-        // server.setQuality(webCamQuality);
-        // server.startAutomaticCapture(webCamName);
+        CameraServer server = CameraServer.getInstance();
+        VisionProcessingConfig visionProcessingConfig =
+                robotConfig.getVisionProcessingConfig();
+        int webCamQuality = visionProcessingConfig.getWebCamQuality();
+        String webCamName = visionProcessingConfig.getWebCamName();
+        server.setQuality(webCamQuality);
+        server.startAutomaticCapture(webCamName);
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         imageHandler = new ImageHandler(wiringConfig);
     }

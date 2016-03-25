@@ -21,6 +21,7 @@ public class WeakenSimpleDefenseNoEncoderAutonomous extends CommandGroup {
         double travelLength = autonomousConfig.getTravelLength();
 
         // TODO Refine numbers if needed
+        // TODO add descriptive comments for each command
         addSequential(new ArcadeDriveWithInputsCommand(robotSubsystems, .8, 0),
                 4);
     }

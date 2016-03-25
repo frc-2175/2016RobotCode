@@ -21,7 +21,8 @@ public class DamageSimpleDefenseAutonomous extends CommandGroup {
         int caution = autonomousConfig.getCaution();
         double distanceWithCaution = travelLength - caution;
 
-        // TO-DO Fix numbers as needed
+        // TODO Fix numbers as needed
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,

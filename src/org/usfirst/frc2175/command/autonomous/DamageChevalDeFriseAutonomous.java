@@ -24,6 +24,7 @@ public class DamageChevalDeFriseAutonomous extends CommandGroup {
         double distanceAfterCheval = travelLength - platformBeforeCheval;
         double distanceAfterChevalWithCaution = distanceAfterCheval - caution;
 
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
         addSequential(new LowerBootCommand(robotSubsystems));

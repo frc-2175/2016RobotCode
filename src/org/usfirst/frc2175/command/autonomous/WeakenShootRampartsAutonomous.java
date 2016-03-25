@@ -20,6 +20,7 @@ public class WeakenShootRampartsAutonomous extends CommandGroup {
 
         // TODO Fix number of inches as needed
         // TODO Refine angle
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

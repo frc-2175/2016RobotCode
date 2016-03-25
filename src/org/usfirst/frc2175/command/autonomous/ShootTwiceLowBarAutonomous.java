@@ -22,6 +22,7 @@ public class ShootTwiceLowBarAutonomous extends CommandGroup {
         double distanceWithCaution = travelLength - caution;
 
         // TODO Implement camera for unknown angles or refine angles
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

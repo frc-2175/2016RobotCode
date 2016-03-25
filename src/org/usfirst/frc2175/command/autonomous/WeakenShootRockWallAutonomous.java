@@ -20,6 +20,7 @@ public class WeakenShootRockWallAutonomous extends CommandGroup {
 
         // TODO Refine numbers if needed
         // TODO Refine Angle
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

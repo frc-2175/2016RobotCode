@@ -25,6 +25,7 @@ public class DamageShootMoatAutonomous extends CommandGroup {
 
         // TODO Refine numbers if needed
         // TODO Change angle of turn
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,

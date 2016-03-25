@@ -23,6 +23,7 @@ public class WeakenShootMoatAutonomous extends CommandGroup {
         double distanceWithShoot = travelLength + extraShootLength;
         // TODO Refine Numbers if needed
         // TODO Change angle of turn
+        // TODO add descriptive comments for each command
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
