@@ -16,7 +16,6 @@
 		<location x="0" y="0"/>
 		<width>775</width>
 		<height>587</height>
-		<property name="Camera IP Address or mDNS name" value="axis-camera"/>
 	</static-widget>
 	<widget field="Setpoint:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="1641" y="609"/>
