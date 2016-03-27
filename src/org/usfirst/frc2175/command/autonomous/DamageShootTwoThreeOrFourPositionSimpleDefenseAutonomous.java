@@ -1,8 +1,7 @@
 package org.usfirst.frc2175.command.autonomous;
 
+import org.usfirst.frc2175.command.group.TurnToFaceGoalAndShootGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
-import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
-import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -11,32 +10,32 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class DamageShootMoatAutonomous extends CommandGroup {
-
-    public DamageShootMoatAutonomous(RobotSubsystems robotSubsystems,
+public class DamageShootTwoThreeOrFourPositionSimpleDefenseAutonomous
+        extends CommandGroup {
+    public DamageShootTwoThreeOrFourPositionSimpleDefenseAutonomous(
+            RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         RobotConfig robotConfig = robotSubsystems.getRobotConfig();
         AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
         double travelLength = autonomousConfig.getTravelLength();
         int caution = autonomousConfig.getCaution();
-        int extraShootLength = autonomousConfig.getExtraShootLength();
-        double distanceWithShoot = travelLength + extraShootLength;
-        double distanceWithCaution = travelLength - caution;
+        double travelLengthWithCaution = travelLength - caution;
 
-        // TODO Refine numbers if needed
-        // TODO Change angle of turn
-        // TODO add descriptive comments for each command
+        // TODO refine distances
+        // drive through obstacle
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                distanceWithShoot));
+                travelLength));
+        // turn towards goal and shoot
+        addSequential(new TurnToFaceGoalAndShootGroup(robotSubsystems,
+                robotConfig, robotControllers));
+        // turn parallel to obstacle
         addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, 30, true));
-        addSequential(new ExtendCatapultCommand(robotSubsystems));
-        addParallel(new RetractCatapultCommand(robotSubsystems));
-        addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, 0, false));
+                robotControllers, 0, true));
+        // drive through obstacle
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                -distanceWithShoot));
+                -travelLength));
+        // drive through obstacle
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                distanceWithCaution));
+                travelLengthWithCaution));
     }
 }
