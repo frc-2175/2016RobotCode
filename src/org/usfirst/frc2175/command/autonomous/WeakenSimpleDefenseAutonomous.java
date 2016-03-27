@@ -19,7 +19,8 @@ public class WeakenSimpleDefenseAutonomous extends CommandGroup {
         AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
         double travelLength = autonomousConfig.getTravelLength();
 
-        // TODO Refine numbers if needed
+        // TODO refine numbers
+        // drive through obstacle
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
     }

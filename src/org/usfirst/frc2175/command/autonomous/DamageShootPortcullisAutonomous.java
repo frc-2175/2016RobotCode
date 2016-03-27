@@ -1,9 +1,5 @@
 package org.usfirst.frc2175.command.autonomous;
 
-import org.usfirst.frc2175.command.single.DriveInchesCommand;
-import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
-import org.usfirst.frc2175.command.single.LowerBootCommand;
-import org.usfirst.frc2175.command.single.RaiseBootCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
@@ -19,41 +15,25 @@ public class DamageShootPortcullisAutonomous extends CommandGroup {
             RobotControllers robotControllers) {
         RobotConfig robotConfig = robotSubsystems.getRobotConfig();
         AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
-        double travelLength = autonomousConfig.getTravelLength();
-        int caution = autonomousConfig.getCaution();
-        int platformBeforePortcullis =
-                autonomousConfig.getPlatformBeforePortcullis();
         int turnAround = autonomousConfig.getTurnAround();
-        double distanceAfterPortcullis =
-                travelLength - platformBeforePortcullis;
-        double distanceAfterPortcullisWithCaution =
-                distanceAfterPortcullis - caution;
 
-        // TODO Refine numbers if needed
-        // TODO add descriptive comments for each command
-        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                platformBeforePortcullis));
-        addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
-                distanceAfterPortcullis));
-        addSequential(new LowerBootCommand(robotSubsystems));
-        addSequential(new ExtendCatapultCommand(robotSubsystems));
-        addSequential(new RetractCatapultCommand(robotSubsystems));
+        // TODO refine numbers
+        // drive through portcullis
+        addSequential(new WeakenShootPortcullisAutonomous(robotSubsystems,
+                robotControllers));
+        // retract catapult and turn around
+        addParallel(new RetractCatapultCommand(robotSubsystems));
+        // turn around
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, turnAround, true));
-        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                platformBeforePortcullis));
-        addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
-                distanceAfterPortcullis));
-        addSequential(new LowerBootCommand(robotSubsystems));
+        // drive through portcullis
+        addSequential(new WeakenPortcullisAutonomous(robotSubsystems,
+                robotControllers));
+        // turn around
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, turnAround, true));
-        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                platformBeforePortcullis));
-        addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
-                distanceAfterPortcullisWithCaution));
-        addSequential(new RaiseBootCommand(robotSubsystems));
+        // drive through portcullis
+        addSequential(new WeakenPortcullisAutonomous(robotSubsystems,
+                robotControllers));
     }
 }

@@ -17,15 +17,16 @@ public class WeakenChevalDeFriseAutonomous extends CommandGroup {
         RobotConfig robotConfig = robotSubsystems.getRobotConfig();
         AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
         double travelLength = autonomousConfig.getTravelLength();
-        int caution = autonomousConfig.getCaution();
         int platformBeforeCheval = autonomousConfig.getPlatformBeforeCheval();
         double distanceAfterCheval = travelLength - platformBeforeCheval;
 
-        // TODO Refine numbers if needed
-        // TODO add descriptive comments for each command
+        // TODO refine numbers
+        // drive up to cheval's moving plates
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforeCheval));
+        // lower boot to lower the plates
         addSequential(new LowerBootCommand(robotSubsystems));
+        // drive off of the obstacle while raising the boot
         addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterCheval));
         addSequential(new RaiseBootCommand(robotSubsystems));

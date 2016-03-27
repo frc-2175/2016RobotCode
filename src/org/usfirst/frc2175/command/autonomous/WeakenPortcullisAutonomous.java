@@ -22,13 +22,15 @@ public class WeakenPortcullisAutonomous extends CommandGroup {
         double distanceAfterPortcullis =
                 travelLength - platformBeforePortcullis;
 
-        // TODO Refine numbers if needed
-        // TODO add descriptive comments for each command
+        // TODO refine numbers
+        // lower boot
+        addSequential(new LowerBootCommand(robotSubsystems));
+        // drive up to portcullis
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 platformBeforePortcullis));
-        addSequential(new RaiseBootCommand(robotSubsystems));
-        addParallel(new DriveInchesCommand(robotSubsystems, robotControllers,
+        // raise boot to raise portcullis and drive through
+        addParallel(new RaiseBootCommand(robotSubsystems));
+        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterPortcullis));
-        addSequential(new LowerBootCommand(robotSubsystems));
     }
 }
