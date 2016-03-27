@@ -2,9 +2,11 @@ package org.usfirst.frc2175;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
+import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
@@ -48,6 +50,8 @@ public class Robot extends IterativeRobot {
 
     private ImageHandler imageHandler;
 
+    private int distanceBetweenDefenseAndRobot;
+
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -60,6 +64,14 @@ public class Robot extends IterativeRobot {
         commandSchedulerLoop.start();
         robotSubsystems.getCatapultShooterSubsystem()
                 .setShotType(ShotType.BATTER);
+        configureAutonomous();
+    }
+
+    protected void configureAutonomous() {
+        AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
+        int distanceBetweenDefenseAndRobot =
+                autonomousConfig.getDistanceBetweenDefenseAndRobot();
+        this.distanceBetweenDefenseAndRobot = distanceBetweenDefenseAndRobot;
     }
 
     protected void configureCamera() {
@@ -95,6 +107,10 @@ public class Robot extends IterativeRobot {
 
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getPowertrainSubsystem().resetGyro();
+
+        // drive up to the defense
+        new DriveInchesCommand(robotSubsystems, robotControllers,
+                distanceBetweenDefenseAndRobot);
 
         CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());

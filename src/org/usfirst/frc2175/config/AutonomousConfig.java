@@ -13,6 +13,7 @@ public class AutonomousConfig extends BaseConfig {
     private int platformBeforeCheval;
     private int platformBeforePortcullis;
     private int turnAround;
+    private int distanceBetweenDefenseAndRobot;
 
     @Override
     protected String getPropertyFileName() {
@@ -42,6 +43,9 @@ public class AutonomousConfig extends BaseConfig {
         this.platformBeforePortcullis = platformBeforePortcullis;
         int turnAround = getIntPropertyValue("turnAround", properties);
         this.turnAround = turnAround;
+        int distanceBetweenDefenseAndRobot = getIntPropertyValue(
+                "distanceBetweenDefenseAndRobot", properties);
+        this.distanceBetweenDefenseAndRobot = distanceBetweenDefenseAndRobot;
         travelLength =
                 this.platformLength + this.sidePlateLength + this.marginOfError;
     }
@@ -68,5 +72,9 @@ public class AutonomousConfig extends BaseConfig {
 
     public int getTurnAround() {
         return turnAround;
+    }
+
+    public int getDistanceBetweenDefenseAndRobot() {
+        return distanceBetweenDefenseAndRobot;
     }
 }
