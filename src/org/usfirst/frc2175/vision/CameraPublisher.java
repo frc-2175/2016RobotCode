@@ -13,9 +13,11 @@ public class CameraPublisher {
 
     private Image cFrame;
     private int cSession;
+    private ImageProcessor imageProcessor;
 
     public CameraPublisher(RobotConfig robotConfig) {
         this.robotConfig = robotConfig;
+        imageProcessor = new ImageProcessor();
     }
 
     public void initCamera() {
@@ -27,14 +29,15 @@ public class CameraPublisher {
             NIVision.IMAQdxConfigureGrab(cSession);
             CameraServer.getInstance().setQuality(50);
             NIVision.IMAQdxStartAcquisition(cSession);
-
         } catch (VisionException e) {
             e.printStackTrace();
         }
+        // imageProcessor.initProcessing();
     }
 
     public void updateCameraServer() {
         NIVision.IMAQdxGrab(cSession, cFrame, 1);
+        // imageProcessor.processImage(cFrame);
         CameraServer.getInstance().setImage(cFrame);
     }
 
