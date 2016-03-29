@@ -6,18 +6,16 @@ import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
-import org.usfirst.frc2175.config.VisionProcessingConfig;
-import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
+import org.usfirst.frc2175.controlloop.VisionProcessingLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
-import org.usfirst.frc2175.driverstation.ImageHandler;
 import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
+import org.usfirst.frc2175.vision.CameraPublisher;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -42,11 +40,13 @@ public class Robot extends IterativeRobot {
                     robotControllers);
     private final SmartDashboardHandler smartDashboardHandler =
             new SmartDashboardHandler(robotSubsystems, robotControllers);
+    private final CameraPublisher cameraPublisher =
+            new CameraPublisher(robotConfig);
 
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
-
-    private ImageHandler imageHandler;
+    private final VisionProcessingLoop visionProcessingLoop =
+            new VisionProcessingLoop(cameraPublisher);
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -58,24 +58,12 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+
+        cameraPublisher.initCamera();
+        visionProcessingLoop.start();
+
         robotSubsystems.getCatapultShooterSubsystem()
                 .setShotType(ShotType.BATTER);
-    }
-
-    protected void configureCamera() {
-        CameraServer server = CameraServer.getInstance();
-        VisionProcessingConfig visionProcessingConfig =
-                robotConfig.getVisionProcessingConfig();
-        int webCamQuality = visionProcessingConfig.getWebCamQuality();
-        String webCamName = visionProcessingConfig.getWebCamName();
-        server.setQuality(webCamQuality);
-        server.startAutomaticCapture(webCamName);
-        WiringConfig wiringConfig = robotConfig.getWiringConfig();
-        imageHandler = new ImageHandler(wiringConfig);
-    }
-
-    protected void startCamera() {
-        imageHandler.run();
     }
 
     /**
@@ -133,4 +121,5 @@ public class Robot extends IterativeRobot {
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
     }
+
 }
