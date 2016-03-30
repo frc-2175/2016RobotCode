@@ -161,4 +161,9 @@ public class PowertrainSubsystem extends BaseSubsystem {
     private enum ShifterState {
         LOW, HIGH, CLIMB_NEUTRAL, CLIMB_LOW;
     }
+
+    public double getGoalAngle() {
+        // TODO Make the code for this based on the camera video
+        return 0;
+    }
 }
