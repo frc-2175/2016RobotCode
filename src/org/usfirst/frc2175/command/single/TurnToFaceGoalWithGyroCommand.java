@@ -20,7 +20,8 @@ public class TurnToFaceGoalWithGyroCommand extends BaseCommand {
                 robotControllers.getGyroTurnPIDController();
 
         // Get the angle from the goal and set the setpoint
-        double startingAngleFromGoal = powertrainSubsystem.getGoalAngle();
+        double startingAngleFromGoal = robotSubsystems.getCameraSubsystem()
+                .getGoalDistanceFromCenterInDegrees();
         this.setpoint = startingAngleFromGoal;
     }
 

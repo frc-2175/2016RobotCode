@@ -162,8 +162,4 @@ public class PowertrainSubsystem extends BaseSubsystem {
         LOW, HIGH, CLIMB_NEUTRAL, CLIMB_LOW;
     }
 
-    public double getGoalAngle() {
-        // TODO Make the code for this based on the camera video
-        return 0;
-    }
 }
