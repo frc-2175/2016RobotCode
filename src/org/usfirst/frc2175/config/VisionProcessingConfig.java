@@ -19,6 +19,7 @@ public class VisionProcessingConfig extends BaseConfig {
 
     private int webCamQuality;
     private String webCamName;
+    private double cameraFOV;
 
     @Override
     public String getPropertyFileName() {
@@ -42,6 +43,8 @@ public class VisionProcessingConfig extends BaseConfig {
         String webCamName =
                 getStringPropertyValue("webcam.usb.name", properties);
         this.webCamName = webCamName;
+        double cameraFOV = getDoublePropertyValue("camera.fov", properties);
+        this.cameraFOV = cameraFOV;
     }
 
     private void updateTable() {
@@ -103,4 +106,7 @@ public class VisionProcessingConfig extends BaseConfig {
         return value;
     }
 
+    public double getCameraFOV() {
+        return cameraFOV;
+    }
 }
