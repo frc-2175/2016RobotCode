@@ -23,20 +23,25 @@ public class DriveTurnShootAutonomous extends CommandGroup {
         int distanceAfterTurn = 0;
         int specifiedDegrees = 0;
 
-        // TODO add descriptive comments for each command
-        // reset gyro to 0
-        powertrainSubsystem.resetGyro();
-        // drive forward travelLength
+        // gyro zeroes at start
+        robotSubsystems.getPowertrainSubsystem().resetGyro();
+        // drive distance to cross over defense
+
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 travelLength));
+        // turn to gyro heading 0
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, true));
+        // drive distance after turn
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 distanceAfterTurn));
+        // turn a specified amount of degrees
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, specifiedDegrees, true));
+        // use auto-aim and face the goal
         addSequential(new TurnToFaceGoalCommand(robotSubsystems, robotConfig,
                 robotControllers));
+        // extend catapult to shoot
         addSequential(new ExtendCatapultCommand(robotSubsystems));
 
     }
