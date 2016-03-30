@@ -23,6 +23,8 @@ public class TurnToFaceGoalWithGyroCommand extends BaseCommand {
         double startingAngleFromGoal = robotSubsystems.getCameraSubsystem()
                 .getGoalDistanceFromCenterInDegrees();
         this.setpoint = startingAngleFromGoal;
+
+        requires(powertrainSubsystem);
     }
 
     @Override
