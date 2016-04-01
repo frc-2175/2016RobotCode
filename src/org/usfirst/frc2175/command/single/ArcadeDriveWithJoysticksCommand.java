@@ -11,6 +11,7 @@ import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     private final DriverStation driverStation;
     private final PowertrainSubsystem powertrainSubsystem;
+    private double previousMoveValue;
 
     public ArcadeDriveWithJoysticksCommand(DriverStation driverStation,
             RobotSubsystems robotSubsystems) {
@@ -24,6 +25,7 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     @Override
     protected void initialize() {
         super.initialize();
+        previousMoveValue = 0.0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,6 +33,17 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     protected void execute() {
         double moveValue = driverStation.getMoveValue();
         double turnValue = driverStation.getTurnValue();
+
+        double absoluteMoveValue = Math.abs(moveValue);
+        if (absoluteMoveValue > previousMoveValue) {
+            previousMoveValue = absoluteMoveValue;
+        } else if (previousMoveValue - absoluteMoveValue > 0.25) {
+            absoluteMoveValue = previousMoveValue - 0.15;
+            previousMoveValue = absoluteMoveValue;
+        }
+
+        double sign = Math.abs(moveValue) / moveValue;
+        moveValue = absoluteMoveValue * sign;
         powertrainSubsystem.arcadeDrive(moveValue, turnValue);
     }
 
