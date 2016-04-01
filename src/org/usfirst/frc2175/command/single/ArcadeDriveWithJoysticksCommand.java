@@ -31,12 +31,16 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     protected void execute() {
         double moveValue = driverStation.getMoveValue();
         double turnValue = driverStation.getTurnValue();
-        if (moveValue == 0) {
-            powertrainSubsystem.arcadeDrive(moveValue, turnValue);
-        } else if (turnValue <= 0) {
-            powertrainSubsystem.tankDrive(turnValue, 0);
+        if (moveValue != 0) {
+            if (turnValue == 0) {
+                powertrainSubsystem.arcadeDrive(moveValue, turnValue);
+            } else if (turnValue <= 0) {
+                powertrainSubsystem.tankDrive(moveValue, 0);
+            } else {
+                powertrainSubsystem.tankDrive(0, turnValue);
+            }
         } else {
-            powertrainSubsystem.tankDrive(0, turnValue);
+            powertrainSubsystem.arcadeDrive(0, turnValue);
         }
     }
 
