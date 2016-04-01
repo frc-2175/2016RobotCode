@@ -20,6 +20,7 @@ public class VisionProcessingConfig extends BaseConfig {
     private int webCamQuality;
     private String webCamName;
     private double cameraFOV;
+    private double cameraHorizontalRes;
 
     @Override
     public String getPropertyFileName() {
@@ -45,6 +46,9 @@ public class VisionProcessingConfig extends BaseConfig {
         this.webCamName = webCamName;
         double cameraFOV = getDoublePropertyValue("camera.fov", properties);
         this.cameraFOV = cameraFOV;
+        double cameraHorizontalRes =
+                getDoublePropertyValue("camera.res.horizontal", properties);
+        this.cameraHorizontalRes = cameraHorizontalRes;
     }
 
     private void updateTable() {
@@ -109,4 +113,9 @@ public class VisionProcessingConfig extends BaseConfig {
     public double getCameraFOV() {
         return cameraFOV;
     }
+
+    public double getCameraHorizontalRes() {
+        return cameraHorizontalRes;
+    }
+
 }

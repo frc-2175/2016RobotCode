@@ -5,15 +5,18 @@ import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 public class CameraSubsystem extends BaseSubsystem {
+    private static double CAMERA_FOV;
+    private static double CAMERA_HORIZONTAL_RES;
     private VisionProcessingConfig visionProcessingConfig;
     private double centerCamera;
-    private static double CAMERA_FOV;
 
     public CameraSubsystem(RobotConfig robotConfig) {
         this.visionProcessingConfig = robotConfig.getVisionProcessingConfig();
         this.centerCamera = robotConfig.getControlLoopConfig()
                 .getVisionTurnPID_centerCamera();
         this.CAMERA_FOV = visionProcessingConfig.getCameraFOV();
+        this.CAMERA_HORIZONTAL_RES =
+                visionProcessingConfig.getCameraHorizontalRes();
     }
 
     private double getGoalDistanceFromCenterInPixels() {
@@ -21,8 +24,8 @@ public class CameraSubsystem extends BaseSubsystem {
     }
 
     public double getGoalDistanceFromCenterInDegrees() {
-        // TODO figure out the math for this
-        return getGoalDistanceFromCenterInPixels();
+        double degreesPerPixel = CAMERA_FOV / CAMERA_HORIZONTAL_RES;
+        return getGoalDistanceFromCenterInPixels() * degreesPerPixel;
     }
 
 }
