@@ -12,6 +12,7 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     private final DriverStation driverStation;
     private final PowertrainSubsystem powertrainSubsystem;
     private double previousMoveValue;
+    private double lastTime;
 
     public ArcadeDriveWithJoysticksCommand(DriverStation driverStation,
             RobotSubsystems robotSubsystems) {
@@ -26,6 +27,7 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     protected void initialize() {
         super.initialize();
         previousMoveValue = 0.0;
+        lastTime = System.nanoTime() / 1000000000.0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,13 +35,19 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
     protected void execute() {
         double moveValue = driverStation.getMoveValue();
         double turnValue = driverStation.getTurnValue();
-
         double absoluteMoveValue = Math.abs(moveValue);
-        if (absoluteMoveValue > previousMoveValue) {
-            previousMoveValue = absoluteMoveValue;
-        } else if (previousMoveValue - absoluteMoveValue > 0.25) {
-            absoluteMoveValue = previousMoveValue - 0.15;
-            previousMoveValue = absoluteMoveValue;
+
+        double thisTime = System.nanoTime() / 1000000000.0;
+        double timeDifference = 0.3;
+
+        if (thisTime - lastTime > timeDifference) {
+            lastTime = thisTime;
+            if (absoluteMoveValue > previousMoveValue) {
+                previousMoveValue = absoluteMoveValue;
+            } else if (previousMoveValue - absoluteMoveValue > 0.25) {
+                absoluteMoveValue = previousMoveValue - 0.15;
+                previousMoveValue = absoluteMoveValue;
+            }
         }
 
         double sign = Math.abs(moveValue) / moveValue;
