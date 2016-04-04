@@ -52,6 +52,8 @@ public class WiringConfig extends BaseConfig {
     private Solenoid rightCatapultSolenoid;
     private DigitalInput catapultDownSwitch;
 
+    private Solenoid lowGoalSolenoid;
+
     // Manipulator
     private CANTalon bootTalon;
     private DigitalInput isBootUpSwitch;
@@ -179,6 +181,10 @@ public class WiringConfig extends BaseConfig {
         int catapultDownSwitchPort = getIntPropertyValue(
                 "catapult.digital.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
+
+        int lowGoalSolenoidPort =
+                getIntPropertyValue("catapult.solenoid.lowGoal", properties);
+        lowGoalSolenoid = new Solenoid(lowGoalSolenoidPort);
     }
 
     private void configureRollerbarIntake(Properties properties) {
@@ -303,6 +309,10 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid getRightCatapultSolenoid() {
         return rightCatapultSolenoid;
+    }
+
+    public Solenoid getLowGoalSolenoid() {
+        return lowGoalSolenoid;
     }
 
     public Solenoid[] getShifterSolenoids() {
