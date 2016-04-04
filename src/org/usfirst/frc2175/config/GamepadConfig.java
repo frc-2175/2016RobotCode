@@ -20,8 +20,8 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton extendCatapult;
     private JoystickButton retractCatapult;
     private JoystickButton cycleShot;
-    private JoystickButton runIntakeIn;
-    private JoystickButton runIntakeOut;
+    private JoystickButton runIntakeInAndRetractLowGoalSolenoid;
+    private JoystickButton runIntakeOutAndExtendLowGoalSolenoid;
     private JoystickButton testAction;
     private JoystickButton lowerBoot;
     private JoystickButton raiseBoot;
@@ -41,9 +41,9 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.catapult.extend", properties));
         retractCatapult = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.retract", properties));
-        runIntakeIn = new JoystickButton(gamepad,
+        runIntakeInAndRetractLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.in", properties));
-        runIntakeOut = new JoystickButton(gamepad,
+        runIntakeOutAndExtendLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.out", properties));
         testAction = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
@@ -84,11 +84,11 @@ public class GamepadConfig extends BaseConfig {
     }
 
     public JoystickButton getRunIntakeIn() {
-        return runIntakeIn;
+        return runIntakeInAndRetractLowGoalSolenoid;
     }
 
     public JoystickButton getRunIntakeOut() {
-        return runIntakeOut;
+        return runIntakeOutAndExtendLowGoalSolenoid;
     }
 
     public JoystickButton getTestAction() {
