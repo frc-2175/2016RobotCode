@@ -8,6 +8,7 @@ import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.group.TurnToFaceGoalAndShootGroup;
 import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
 import org.usfirst.frc2175.command.single.ExtendLowGoalSolenoidCommand;
+import org.usfirst.frc2175.command.single.RetractLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearLowCommand;
@@ -44,7 +45,9 @@ public class JoystickEventMapper {
 
         JoystickButton extendPuncher = gamepadConfig.getExtendPuncher();
         extendPuncher
-                .whileHeld(new ExtendLowGoalSolenoidCommand(robotSubsystems));
+                .whenPressed(new ExtendLowGoalSolenoidCommand(robotSubsystems));
+        extendPuncher.whenReleased(
+                new RetractLowGoalSolenoidCommand(robotSubsystems));
 
         JoystickButton cycleShot = gamepadConfig.getCycleShot();
         cycleShot.whenPressed(new CycleDesiredShotCommand(robotSubsystems));
