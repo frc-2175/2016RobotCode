@@ -37,7 +37,7 @@ public class ArcadeDriveWithJoysticksCommand extends BaseCommand {
             } else if (turnValue <= 0) {
                 powertrainSubsystem.tankDrive(moveValue, 0);
             } else {
-                powertrainSubsystem.tankDrive(0, turnValue);
+                powertrainSubsystem.tankDrive(0, moveValue);
             }
         } else {
             powertrainSubsystem.arcadeDrive(0, turnValue);
