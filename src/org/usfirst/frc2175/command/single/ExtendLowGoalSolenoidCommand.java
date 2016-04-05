@@ -8,7 +8,7 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 
 /**
- *
+ * AKA punch ball command
  */
 public class ExtendLowGoalSolenoidCommand extends BaseCommand {
     private CatapultShooterSubsystem catapultSubsystem;
@@ -43,6 +43,7 @@ public class ExtendLowGoalSolenoidCommand extends BaseCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        catapultSubsystem.setLowGoalPosition(false);
         super.end();
     }
 

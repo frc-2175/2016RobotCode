@@ -18,11 +18,11 @@ public class GamepadConfig extends BaseConfig {
     private Joystick gamepad;
 
     private JoystickButton extendCatapult;
-    private JoystickButton retractCatapult;
+    private JoystickButton extendPuncher;
     private JoystickButton cycleShot;
     private JoystickButton runIntakeInAndRetractLowGoalSolenoid;
     private JoystickButton runIntakeOutAndExtendLowGoalSolenoid;
-    private JoystickButton testAction;
+    private JoystickButton faceGoalAndShoot;
     private JoystickButton lowerBoot;
     private JoystickButton raiseBoot;
     private JoystickButton lowerIntake;
@@ -39,13 +39,13 @@ public class GamepadConfig extends BaseConfig {
 
         extendCatapult = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.extend", properties));
-        retractCatapult = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.retract", properties));
+        extendPuncher = new JoystickButton(gamepad,
+                getIntPropertyValue("button.puncher.extend", properties));
         runIntakeInAndRetractLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.in", properties));
         runIntakeOutAndExtendLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.out", properties));
-        testAction = new JoystickButton(gamepad,
+        faceGoalAndShoot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
         lowerBoot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.boot.lower", properties));
@@ -79,8 +79,8 @@ public class GamepadConfig extends BaseConfig {
         return extendCatapult;
     }
 
-    public JoystickButton getRetractCatapult() {
-        return retractCatapult;
+    public JoystickButton getExtendPuncher() {
+        return extendPuncher;
     }
 
     public JoystickButton getRunIntakeIn() {
@@ -91,8 +91,8 @@ public class GamepadConfig extends BaseConfig {
         return runIntakeOutAndExtendLowGoalSolenoid;
     }
 
-    public JoystickButton getTestAction() {
-        return testAction;
+    public JoystickButton getFaceGoalAndShoot() {
+        return faceGoalAndShoot;
     }
 
     public JoystickButton getLowerBoot() {
