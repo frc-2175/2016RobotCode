@@ -25,6 +25,8 @@ public class PowertrainSubsystem extends BaseSubsystem {
 
     private RobotDrive robotDrive;
 
+    private boolean isMoving;
+
     public PowertrainSubsystem(RobotConfig robotConfig) {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         powertrainConfig = robotConfig.getPowertrainConfig();
@@ -48,6 +50,12 @@ public class PowertrainSubsystem extends BaseSubsystem {
         if (isDriveEngaged()) {
             // TODO get direction from a property file
             robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
+            if (moveSpeed == 0 || rotateSpeed == 0) {
+                isMoving = false;
+
+            } else {
+                isMoving = true;
+            }
         }
     }
 
@@ -162,4 +170,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         LOW, HIGH, CLIMB_NEUTRAL, CLIMB_LOW;
     }
 
+    public boolean isMoving() {
+        return isMoving;
+    }
 }

@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -134,6 +135,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         frontDistanceSensor.updateDashboard();
+        SmartDashboard.putBoolean("isMoving",
+                robotSubsystems.getPowertrainSubsystem().isMoving());
     }
 
     @Override
