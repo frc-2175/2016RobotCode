@@ -3,6 +3,7 @@ package org.usfirst.frc2175.command.autonomous;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -22,6 +23,8 @@ public class DamageShootLowBarAutonomous extends CommandGroup {
         int extraShootLength = autonomousConfig.getExtraShootLength();
         double distanceWithCaution = travelLength + caution;
         double distanceWithShoot = travelLength + extraShootLength;
+        double liftIntakeSpeed =
+                robotConfig.getIntakeConfig().getLiftIntakeSpeed();
 
         // TODO Refine numbers if needed
         // TODO Change angle of turn
@@ -30,8 +33,12 @@ public class DamageShootLowBarAutonomous extends CommandGroup {
                 distanceWithShoot));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 30, true));
+        addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                -liftIntakeSpeed));
         addSequential(new ExtendCatapultCommand(robotSubsystems));
-        addParallel(new RetractCatapultCommand(robotSubsystems));
+        addSequential(new RetractCatapultCommand(robotSubsystems));
+        addParallel(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                liftIntakeSpeed));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
