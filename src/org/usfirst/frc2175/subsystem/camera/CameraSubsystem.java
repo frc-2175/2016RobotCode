@@ -25,9 +25,6 @@ public class CameraSubsystem extends BaseSubsystem {
 
         this.cameraLight = robotConfig.getWiringConfig().getCameraLight();
         this.isLightOn = false;
-        // Make sure this goes after the light and the base value are
-        // initialized
-        updateLight();
 
         this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 

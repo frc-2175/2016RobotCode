@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -108,6 +109,7 @@ public class Robot extends IterativeRobot {
 
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getPowertrainSubsystem().resetGyro();
+        robotSubsystems.getCameraSubsystem().updateLight();
 
         frontDistanceSensor.enable();
 
@@ -126,6 +128,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         log.info("Entered teleopInit()");
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
+        robotSubsystems.getCameraSubsystem().updateLight();
 
         frontDistanceSensor.enable();
     }
@@ -134,6 +137,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         frontDistanceSensor.updateDashboard();
+        SmartDashboard.putNumber("Gyro Angle",
+                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
     }
 
     @Override
