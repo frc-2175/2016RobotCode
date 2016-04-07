@@ -66,6 +66,7 @@ public class Robot extends IterativeRobot {
         robotSubsystems.getCatapultShooterSubsystem()
                 .setShotType(ShotType.BATTER);
         configureDistanceSensor();
+        robotSubsystems.getCameraSubsystem().updateLight();
         // configureCamera();
     }
 

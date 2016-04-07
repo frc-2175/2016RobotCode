@@ -51,7 +51,8 @@ public class CameraSubsystem extends BaseSubsystem {
     }
 
     public void updateLight() {
-        cameraLight.set(isLightOn);
+        // RoboRIO is dumb and false means on
+        cameraLight.set(!isLightOn);
         SmartDashboard.putBoolean("Light", isLightOn);
     }
 
