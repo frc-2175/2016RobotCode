@@ -6,11 +6,13 @@ import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CameraSubsystem extends BaseSubsystem {
     private VisionProcessingConfig visionProcessingConfig;
 
     private DigitalOutput cameraLight;
+
     private boolean isLightOn;
 
     private double cameraFov;
@@ -23,6 +25,9 @@ public class CameraSubsystem extends BaseSubsystem {
 
         this.cameraLight = robotConfig.getWiringConfig().getCameraLight();
         this.isLightOn = false;
+        // Make sure this goes after the light and the base value are
+        // initialized
+        updateLight();
 
         this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 
@@ -50,6 +55,7 @@ public class CameraSubsystem extends BaseSubsystem {
 
     public void updateLight() {
         cameraLight.set(isLightOn);
+        SmartDashboard.putBoolean("Light", isLightOn);
     }
 
     public boolean isLightOn() {
