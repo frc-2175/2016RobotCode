@@ -25,6 +25,7 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton faceGoalAndShoot;
     private JoystickButton lowerBoot;
     private JoystickButton raiseBoot;
+    private JoystickButton toggleLight;
     private JoystickButton lowerIntake;
     private JoystickButton raiseIntake;
 
@@ -55,8 +56,14 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.intake.raise", properties));
         lowerIntake = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.lower", properties));
+        toggleLight = new JoystickButton(gamepad,
+                getIntPropertyValue("button.light.toggle", properties));
         cycleShot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.cycleShot", properties));
+    }
+
+    public JoystickButton getToggleLight() {
+        return toggleLight;
     }
 
     public JoystickButton getCycleShot() {

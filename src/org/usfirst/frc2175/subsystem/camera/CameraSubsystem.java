@@ -5,15 +5,24 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
+
 public class CameraSubsystem extends BaseSubsystem {
+    private VisionProcessingConfig visionProcessingConfig;
+
+    private DigitalOutput cameraLight;
+    private boolean isLightOn;
+
     private double cameraFov;
     private double cameraHorizontalRes;
-    private VisionProcessingConfig visionProcessingConfig;
     private double centerCamera;
 
     public CameraSubsystem(RobotConfig robotConfig) {
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
+
+        this.cameraLight = robotConfig.getWiringConfig().getCameraLight();
+        this.isLightOn = false;
 
         this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 
@@ -21,6 +30,30 @@ public class CameraSubsystem extends BaseSubsystem {
         this.cameraFov = visionProcessingConfig.getCameraFOV();
         this.cameraHorizontalRes =
                 visionProcessingConfig.getCameraHorizontalRes();
+
+    }
+
+    public void turnLightOn() {
+        isLightOn = true;
+        updateLight();
+    }
+
+    public void turnLightOff() {
+        isLightOn = false;
+        updateLight();
+    }
+
+    public void toggleLight() {
+        isLightOn = !isLightOn;
+        updateLight();
+    }
+
+    public void updateLight() {
+        cameraLight.set(isLightOn);
+    }
+
+    public boolean isLightOn() {
+        return isLightOn;
     }
 
     private double getGoalDistanceFromCenterInPixels() {

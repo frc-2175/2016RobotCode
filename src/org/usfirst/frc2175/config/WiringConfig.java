@@ -7,6 +7,7 @@ import org.usfirst.frc2175.util.TalonGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -65,6 +66,7 @@ public class WiringConfig extends BaseConfig {
     private DigitalInput climberExtendedSwitch;
 
     // cameras
+    private DigitalOutput cameraLight;
     private String camera1IP;
     private String camera2IP;
 
@@ -235,8 +237,14 @@ public class WiringConfig extends BaseConfig {
     }
 
     private void configureCameras(Properties properties) {
+        cameraLight = new DigitalOutput(
+                getIntPropertyValue("camera.digital.light.port", properties));
         camera1IP = getStringPropertyValue("camera.axis1.IP", properties);
         camera2IP = getStringPropertyValue("camera.axis2.IP", properties);
+    }
+
+    public DigitalOutput getCameraLight() {
+        return cameraLight;
     }
 
     public CANTalon getRollerbarIntakeLiftTalon() {
