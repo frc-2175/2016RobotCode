@@ -18,6 +18,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
     private final DigitalInput catapultDownSwitch;
     private final DigitalInput rollerbarIntakeOutSwitch;
 
+    private final Solenoid lowGoalSolenoid;
+
     private final ShotTypeSelector shotTypeSelector;
 
     public CatapultShooterSubsystem(RobotConfig robotConfig) {
@@ -33,6 +35,8 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         this.rollerbarIntakeOutSwitch =
                 wiringConfig.getRollerbarIntakeOutSwitch();
 
+        this.lowGoalSolenoid = wiringConfig.getLowGoalSolenoid();
+
         this.shotTypeSelector = new ShotTypeSelector(catapultShooterConfig);
     }
 
@@ -41,6 +45,10 @@ public class CatapultShooterSubsystem extends BaseSubsystem {
         leftCatapultSolenoid.set(isUp);
         rightCatapultSolenoid.set(isUp);
         // }
+    }
+
+    public void setLowGoalPosition(boolean isOut) {
+        lowGoalSolenoid.set(isOut);
     }
 
     protected boolean isSafeToFireCatapult() {

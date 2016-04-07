@@ -26,6 +26,9 @@ public class VisionProcessingConfig extends BaseConfig {
     private int[] crosshairPointLeft;
     private int[] crosshairPointRight;
 
+    private double cameraFOV;
+    private double cameraHorizontalRes;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -60,6 +63,11 @@ public class VisionProcessingConfig extends BaseConfig {
                 getIntArrayPropertyValue("crosshair.point.left", properties);
         this.crosshairPointRight =
                 getIntArrayPropertyValue("crosshair.point.right", properties);
+        double cameraFOV = getDoublePropertyValue("camera.fov", properties);
+        this.cameraFOV = cameraFOV;
+        double cameraHorizontalRes =
+                getDoublePropertyValue("camera.res.horizontal", properties);
+        this.cameraHorizontalRes = cameraHorizontalRes;
     }
 
     private void updateTable() {
@@ -139,6 +147,14 @@ public class VisionProcessingConfig extends BaseConfig {
             value = contourCenterXs[largestContourIndex];
         }
         return value;
+    }
+
+    public double getCameraFOV() {
+        return cameraFOV;
+    }
+
+    public double getCameraHorizontalRes() {
+        return cameraHorizontalRes;
     }
 
 }

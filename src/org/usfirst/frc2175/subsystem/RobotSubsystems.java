@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
+import org.usfirst.frc2175.subsystem.camera.CameraSubsystem;
 import org.usfirst.frc2175.subsystem.climber.ClimberSubsystem;
 import org.usfirst.frc2175.subsystem.intake.RollerbarIntakeSubsystem;
 import org.usfirst.frc2175.subsystem.manipulator.ManipulatorSubsystem;
@@ -22,6 +23,7 @@ public class RobotSubsystems {
     private final CatapultShooterSubsystem catapultShooterSubsystem;
     private final ManipulatorSubsystem manipulatorSubsystem;
     private final ClimberSubsystem climberSubsystem;
+    private final CameraSubsystem cameraSubsystem;
 
     public RobotSubsystems(RobotConfig robotConfig,
             DriverStation driverStation) {
@@ -35,6 +37,7 @@ public class RobotSubsystems {
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
         manipulatorSubsystem = new ManipulatorSubsystem(robotConfig);
         climberSubsystem = new ClimberSubsystem(robotConfig);
+        cameraSubsystem = new CameraSubsystem(robotConfig);
 
         setDefaultCommands();
     }
@@ -66,5 +69,9 @@ public class RobotSubsystems {
 
     public RobotConfig getRobotConfig() {
         return robotConfig;
+    }
+
+    public CameraSubsystem getCameraSubsystem() {
+        return cameraSubsystem;
     }
 }

@@ -1,5 +1,17 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="Gyro Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="680"/>
+	</widget>
+	<widget field="Light" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="657"/>
+	</widget>
+	<widget field="isMoving" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="634"/>
+	</widget>
+	<widget field="Distance:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="611"/>
+	</widget>
 	<widget field="Shot time:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="1459" y="373"/>
 	</widget>

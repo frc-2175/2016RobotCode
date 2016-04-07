@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.group;
 
-import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
+import org.usfirst.frc2175.command.single.EmptyCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -17,8 +17,8 @@ public class TurnToFaceGoalAndShootGroup extends CommandGroup {
             RobotConfig robotConfig, RobotControllers robotControllers) {
 
         addSequential(new TurnToFaceGoalCommand(robotSubsystems, robotConfig,
-                robotControllers), 10);
-        addSequential(new DoNothingAutonomous(), .5);
+                robotControllers));
+        addSequential(new EmptyCommand(), .2);
         addSequential(new CatapultShootGroup(robotSubsystems));
 
     }

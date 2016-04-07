@@ -18,13 +18,14 @@ public class GamepadConfig extends BaseConfig {
     private Joystick gamepad;
 
     private JoystickButton extendCatapult;
-    private JoystickButton retractCatapult;
+    private JoystickButton extendPuncher;
     private JoystickButton cycleShot;
-    private JoystickButton runIntakeIn;
-    private JoystickButton runIntakeOut;
-    private JoystickButton testAction;
+    private JoystickButton runIntakeInAndRetractLowGoalSolenoid;
+    private JoystickButton runIntakeOutAndExtendLowGoalSolenoid;
+    private JoystickButton faceGoalAndShoot;
     private JoystickButton lowerBoot;
     private JoystickButton raiseBoot;
+    private JoystickButton toggleLight;
     private JoystickButton lowerIntake;
     private JoystickButton raiseIntake;
 
@@ -39,13 +40,13 @@ public class GamepadConfig extends BaseConfig {
 
         extendCatapult = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.extend", properties));
-        retractCatapult = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.retract", properties));
-        runIntakeIn = new JoystickButton(gamepad,
+        extendPuncher = new JoystickButton(gamepad,
+                getIntPropertyValue("button.puncher.extend", properties));
+        runIntakeInAndRetractLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.in", properties));
-        runIntakeOut = new JoystickButton(gamepad,
+        runIntakeOutAndExtendLowGoalSolenoid = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.out", properties));
-        testAction = new JoystickButton(gamepad,
+        faceGoalAndShoot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.action.test", properties));
         lowerBoot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.boot.lower", properties));
@@ -55,8 +56,14 @@ public class GamepadConfig extends BaseConfig {
                 getIntPropertyValue("button.intake.raise", properties));
         lowerIntake = new JoystickButton(gamepad,
                 getIntPropertyValue("button.intake.lower", properties));
+        toggleLight = new JoystickButton(gamepad,
+                getIntPropertyValue("button.light.toggle", properties));
         cycleShot = new JoystickButton(gamepad,
                 getIntPropertyValue("button.catapult.cycleShot", properties));
+    }
+
+    public JoystickButton getToggleLight() {
+        return toggleLight;
     }
 
     public JoystickButton getCycleShot() {
@@ -79,20 +86,20 @@ public class GamepadConfig extends BaseConfig {
         return extendCatapult;
     }
 
-    public JoystickButton getRetractCatapult() {
-        return retractCatapult;
+    public JoystickButton getExtendPuncher() {
+        return extendPuncher;
     }
 
     public JoystickButton getRunIntakeIn() {
-        return runIntakeIn;
+        return runIntakeInAndRetractLowGoalSolenoid;
     }
 
     public JoystickButton getRunIntakeOut() {
-        return runIntakeOut;
+        return runIntakeOutAndExtendLowGoalSolenoid;
     }
 
-    public JoystickButton getTestAction() {
-        return testAction;
+    public JoystickButton getFaceGoalAndShoot() {
+        return faceGoalAndShoot;
     }
 
     public JoystickButton getLowerBoot() {

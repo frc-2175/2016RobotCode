@@ -7,6 +7,7 @@ import org.usfirst.frc2175.util.TalonGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -32,6 +33,8 @@ public class WiringConfigTest extends TestBase {
     private CANTalon cantalon;
     @Mocked
     private DigitalInput digitalinput;
+    @Mocked
+    private DigitalOutput digitalOutput;
     @Mocked
     private AnalogGyro analogGyro;
     @Mocked

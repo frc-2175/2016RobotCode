@@ -7,6 +7,7 @@ import org.usfirst.frc2175.util.TalonGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -52,6 +53,8 @@ public class WiringConfig extends BaseConfig {
     private Solenoid rightCatapultSolenoid;
     private DigitalInput catapultDownSwitch;
 
+    private Solenoid lowGoalSolenoid;
+
     // Manipulator
     private CANTalon bootTalon;
     private DigitalInput isBootUpSwitch;
@@ -63,6 +66,7 @@ public class WiringConfig extends BaseConfig {
     private DigitalInput climberExtendedSwitch;
 
     // cameras
+    private DigitalOutput cameraLight;
     private String camera1IP;
     private String camera2IP;
 
@@ -179,6 +183,10 @@ public class WiringConfig extends BaseConfig {
         int catapultDownSwitchPort = getIntPropertyValue(
                 "catapult.digital.switch.down.port", properties);
         catapultDownSwitch = new DigitalInput(catapultDownSwitchPort);
+
+        int lowGoalSolenoidPort =
+                getIntPropertyValue("catapult.solenoid.lowGoal", properties);
+        lowGoalSolenoid = new Solenoid(lowGoalSolenoidPort);
     }
 
     private void configureRollerbarIntake(Properties properties) {
@@ -229,8 +237,14 @@ public class WiringConfig extends BaseConfig {
     }
 
     private void configureCameras(Properties properties) {
+        cameraLight = new DigitalOutput(
+                getIntPropertyValue("camera.digital.light.port", properties));
         camera1IP = getStringPropertyValue("camera.axis1.IP", properties);
         camera2IP = getStringPropertyValue("camera.axis2.IP", properties);
+    }
+
+    public DigitalOutput getCameraLight() {
+        return cameraLight;
     }
 
     public CANTalon getRollerbarIntakeLiftTalon() {
@@ -303,6 +317,10 @@ public class WiringConfig extends BaseConfig {
 
     public Solenoid getRightCatapultSolenoid() {
         return rightCatapultSolenoid;
+    }
+
+    public Solenoid getLowGoalSolenoid() {
+        return lowGoalSolenoid;
     }
 
     public Solenoid[] getShifterSolenoids() {

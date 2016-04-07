@@ -6,19 +6,24 @@ import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
 import org.usfirst.frc2175.controlloop.VisionProcessingLoop;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
+import org.usfirst.frc2175.driverstation.ImageHandler;
 import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
+import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
 import org.usfirst.frc2175.vision.CameraPublisher;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -48,6 +53,10 @@ public class Robot extends IterativeRobot {
     private final VisionProcessingLoop visionProcessingLoop =
             new VisionProcessingLoop(cameraPublisher);
 
+    private DistanceSensor frontDistanceSensor;
+
+    private ImageHandler imageHandler;
+
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
 
@@ -58,12 +67,23 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
+        robotSubsystems.getCatapultShooterSubsystem()
+                .setShotType(ShotType.BATTER);
+        configureDistanceSensor();
+        robotSubsystems.getCameraSubsystem().updateLight();
 
         cameraPublisher.initCamera();
         visionProcessingLoop.start();
-
         robotSubsystems.getCatapultShooterSubsystem()
                 .setShotType(ShotType.BATTER);
+        // configureCamera();
+    }
+
+    protected void configureDistanceSensor() {
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        Ultrasonic ultrasonicSensor = wiringConfig.getUltrasonicSensor();
+
+        frontDistanceSensor = new DistanceSensor(ultrasonicSensor);
     }
 
     /**
@@ -83,6 +103,9 @@ public class Robot extends IterativeRobot {
 
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getPowertrainSubsystem().resetGyro();
+        robotSubsystems.getCameraSubsystem().updateLight();
+
+        frontDistanceSensor.enable();
 
         CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());
@@ -92,17 +115,24 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        frontDistanceSensor.updateDashboard();
     }
 
     @Override
     public void teleopInit() {
         log.info("Entered teleopInit()");
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
+        robotSubsystems.getCameraSubsystem().updateLight();
+
+        frontDistanceSensor.enable();
     }
 
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        frontDistanceSensor.updateDashboard();
+        SmartDashboard.putNumber("Gyro Angle",
+                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
     }
 
     @Override
@@ -118,6 +148,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledInit() {
         log.info("Entered disabledInit()");
+
+        frontDistanceSensor.disable();
+
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
     }

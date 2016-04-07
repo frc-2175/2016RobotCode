@@ -5,13 +5,15 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
-import org.usfirst.frc2175.command.group.TurnToFaceGoalAndShootGroup;
 import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
-import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.ExtendLowGoalSolenoidCommand;
+import org.usfirst.frc2175.command.single.RetractLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearLowCommand;
 import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
+import org.usfirst.frc2175.command.single.ToggleLightCommand;
+import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.IntakeConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -42,9 +44,11 @@ public class JoystickEventMapper {
         JoystickButton extendCatapult = gamepadConfig.getExtendCatapult();
         extendCatapult.whenPressed(new CatapultShootGroup(robotSubsystems));
 
-        JoystickButton retractCatapult = gamepadConfig.getRetractCatapult();
-        retractCatapult
-                .whenPressed(new RetractCatapultCommand(robotSubsystems));
+        JoystickButton extendPuncher = gamepadConfig.getExtendPuncher();
+        extendPuncher
+                .whenPressed(new ExtendLowGoalSolenoidCommand(robotSubsystems));
+        extendPuncher.whenReleased(
+                new RetractLowGoalSolenoidCommand(robotSubsystems));
 
         JoystickButton cycleShot = gamepadConfig.getCycleShot();
         cycleShot.whenPressed(new CycleDesiredShotCommand(robotSubsystems));
@@ -57,9 +61,9 @@ public class JoystickEventMapper {
         runIntakeOut.whileHeld(
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
-        JoystickButton testAction = gamepadConfig.getTestAction();
-        testAction.whenPressed(new TurnToFaceGoalAndShootGroup(robotSubsystems,
-                robotConfig, robotControllers));
+        JoystickButton faceGoalAndShoot = gamepadConfig.getFaceGoalAndShoot();
+        faceGoalAndShoot.whenPressed(new TurnToFaceGoalWithGyroCommand(
+                robotSubsystems, robotControllers));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();
@@ -91,5 +95,9 @@ public class JoystickEventMapper {
                 robotConfig.getGamepadConfig().getLowerIntake();
         lowerIntake.whileHeld(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 -liftIntakeSpeed));
+
+        JoystickButton toggleLight =
+                robotConfig.getGamepadConfig().getToggleLight();
+        toggleLight.whenPressed(new ToggleLightCommand(robotSubsystems));
     }
 }
