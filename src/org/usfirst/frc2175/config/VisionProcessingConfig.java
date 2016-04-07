@@ -18,7 +18,13 @@ public class VisionProcessingConfig extends BaseConfig {
     private double[] defaultValue = { 0 };
 
     private int webCamQuality;
-    private String webCamName;
+    private String webCamUSBName;
+    private String webCamAxisName;
+
+    private int[] crosshairPointTop;
+    private int[] crosshairPointBottom;
+    private int[] crosshairPointLeft;
+    private int[] crosshairPointRight;
 
     @Override
     public String getPropertyFileName() {
@@ -39,9 +45,21 @@ public class VisionProcessingConfig extends BaseConfig {
         int webCamQuality =
                 getIntPropertyValue("webcam.usb.quality", properties);
         this.webCamQuality = webCamQuality;
-        String webCamName =
+        String webCamUSBName =
                 getStringPropertyValue("webcam.usb.name", properties);
-        this.webCamName = webCamName;
+        this.webCamUSBName = webCamUSBName;
+        String webCamAxisName =
+                getStringPropertyValue("webcam.axis.name", properties);
+        this.webCamAxisName = webCamAxisName;
+
+        this.crosshairPointTop =
+                getIntArrayPropertyValue("crosshair.point.top", properties);
+        this.crosshairPointBottom =
+                getIntArrayPropertyValue("crosshair.point.bottom", properties);
+        this.crosshairPointLeft =
+                getIntArrayPropertyValue("crosshair.point.left", properties);
+        this.crosshairPointRight =
+                getIntArrayPropertyValue("crosshair.point.right", properties);
     }
 
     private void updateTable() {
@@ -58,8 +76,12 @@ public class VisionProcessingConfig extends BaseConfig {
         return webCamQuality;
     }
 
-    public String getWebCamName() {
-        return webCamName;
+    public String getWebCamUSBName() {
+        return webCamUSBName;
+    }
+
+    public String getWebCamAxisName() {
+        return webCamAxisName;
     }
 
     public double[] getContourCenterY() {
@@ -75,6 +97,22 @@ public class VisionProcessingConfig extends BaseConfig {
     public double[] getContourWidth() {
         updateTable();
         return contourReport.getNumberArray("width", defaultValue);
+    }
+
+    public int[] getCrosshairPointTop() {
+        return crosshairPointTop;
+    }
+
+    public int[] getCrosshairPointBottom() {
+        return crosshairPointBottom;
+    }
+
+    public int[] getCrosshairPointLeft() {
+        return crosshairPointLeft;
+    }
+
+    public int[] getCrosshairPointRight() {
+        return crosshairPointRight;
     }
 
     public double getLargestContourCenterX() {
