@@ -143,15 +143,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Contour CenterX",
                 robotSubsystems.getRobotConfig().getVisionProcessingConfig()
                         .getLargestContourCenterX());
-        SmartDashboard.putNumber("Contour CenterY",
-                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
-                        .getLargestContourCenterY());
-        SmartDashboard.putNumber("Contour Height",
-                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
-                        .getLargestContourHeight());
-        SmartDashboard.putNumber("Contour Width",
-                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
-                        .getLargestContourWidth());
 
         // 138-155
 
