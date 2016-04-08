@@ -4,7 +4,6 @@ import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.single.EmptyCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
-import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -12,10 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class WeakenSimpleDefenseAndShootForwardAutonomous extends CommandGroup {
     public WeakenSimpleDefenseAndShootForwardAutonomous(
-            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
-            RobotConfig robotConfig) {
-        double liftIntakeSpeed =
-                -robotConfig.getIntakeConfig().getLiftIntakeSpeed();
+            RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers) {
+        double liftIntakeSpeed = 1;
 
         // Drive forwards
         addSequential(new WeakenSimpleDefenseAutonomous(robotSubsystems,
