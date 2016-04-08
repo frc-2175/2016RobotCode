@@ -1,6 +1,6 @@
 package org.usfirst.frc2175.command.group;
 
-import org.usfirst.frc2175.command.single.EmptyCommand;
+import org.usfirst.frc2175.command.EmptyCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
