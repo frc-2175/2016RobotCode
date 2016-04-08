@@ -5,6 +5,8 @@ import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAndShootForwardAutonomous;
+import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAndShootSlightLeftAutonomous;
+import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAndShootSlightRightAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenSimpleDefenseNoEncoderAutonomous;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -42,6 +44,12 @@ public class AutonomousChooserFactory {
             RobotControllers robotControllers) {
         autonChooser.addObject("Weaken simple defense and shoot forward",
                 new WeakenSimpleDefenseAndShootForwardAutonomous(
+                        robotSubsystems, robotControllers));
+        autonChooser.addObject("Weaken simple defense and shoot slight left",
+                new WeakenSimpleDefenseAndShootSlightLeftAutonomous(
+                        robotSubsystems, robotControllers));
+        autonChooser.addObject("Weaken simple defense and shoot slight right",
+                new WeakenSimpleDefenseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers));
         autonChooser.addObject("Weaken simple defense - no encoders",
                 new WeakenSimpleDefenseNoEncoderAutonomous(robotSubsystems,
