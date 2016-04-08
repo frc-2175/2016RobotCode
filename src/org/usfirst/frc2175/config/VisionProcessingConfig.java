@@ -110,6 +110,77 @@ public class VisionProcessingConfig extends BaseConfig {
         return value;
     }
 
+    public double getLargestContourWidth() {
+        double[] contourWidths;
+        synchronized (this) {
+            contourWidths = getContourWidth();
+        }
+
+        double value;
+
+        int largestContourIndex =
+                indexFinder.determineLargestArrayItemIndex(contourWidths);
+
+        if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
+            value = HighestArrayIndexFinder.NO_VALUES;
+        } else {
+            value = contourWidths[largestContourIndex];
+        }
+        return value;
+    }
+
+    public double getLargestContourHeight() {
+        double[] contourWidths;
+        double[] contourHeights;
+        synchronized (this) {
+            contourWidths = getContourWidth();
+            contourHeights = getContourCenterY();
+        }
+
+        double value;
+
+        int largestContourIndex =
+                indexFinder.determineLargestArrayItemIndex(contourWidths);
+
+        if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
+            value = HighestArrayIndexFinder.NO_VALUES;
+        } else {
+            if (contourHeights.length != contourWidths.length) {
+                System.out.println("contourCenterYs.length="
+                        + contourHeights.length + "; contourWidths.length="
+                        + contourWidths.length);
+            }
+            value = contourHeights[largestContourIndex];
+        }
+        return value;
+    }
+
+    public double getLargestContourCenterY() {
+        double[] contourWidths;
+        double[] contourCenterYs;
+        synchronized (this) {
+            contourWidths = getContourWidth();
+            contourCenterYs = getContourCenterY();
+        }
+
+        double value;
+
+        int largestContourIndex =
+                indexFinder.determineLargestArrayItemIndex(contourWidths);
+
+        if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
+            value = HighestArrayIndexFinder.NO_VALUES;
+        } else {
+            if (contourCenterYs.length != contourWidths.length) {
+                System.out.println("contourCenterYs.length="
+                        + contourCenterYs.length + "; contourWidths.length="
+                        + contourWidths.length);
+            }
+            value = contourCenterYs[largestContourIndex];
+        }
+        return value;
+    }
+
     public double getCameraFOV() {
         return cameraFOV;
     }
