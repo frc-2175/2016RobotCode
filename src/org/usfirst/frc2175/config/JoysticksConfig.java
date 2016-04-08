@@ -21,6 +21,8 @@ public class JoysticksConfig extends BaseConfig {
     private JoystickButton upshift;
     private JoystickButton climbshift;
 
+    private JoystickButton stealControl;
+
     private double deadbandValue;
 
     @Override
@@ -30,10 +32,12 @@ public class JoysticksConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        int leftStickPort = getIntPropertyValue("joystick.left.port", properties);
+        int leftStickPort =
+                getIntPropertyValue("joystick.left.port", properties);
         leftStick = new Joystick(leftStickPort);
 
-        int rightStickPort = getIntPropertyValue("joystick.right.port", properties);
+        int rightStickPort =
+                getIntPropertyValue("joystick.right.port", properties);
         rightStick = new Joystick(rightStickPort);
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
@@ -44,6 +48,14 @@ public class JoysticksConfig extends BaseConfig {
         int climbshiftButton =
                 getIntPropertyValue("climbshift.button", properties);
         climbshift = new JoystickButton(rightStick, climbshiftButton);
+
+        int stealControlButton =
+                getIntPropertyValue("stealcontrol.button", properties);
+        stealControl = new JoystickButton(rightStick, stealControlButton);
+    }
+
+    public JoystickButton getStealControl() {
+        return stealControl;
     }
 
     public JoystickButton getClimbshiftButton() {

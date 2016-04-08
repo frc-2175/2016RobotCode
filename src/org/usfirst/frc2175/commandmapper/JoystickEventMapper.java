@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
+import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
 import org.usfirst.frc2175.command.single.ExtendLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RetractLowGoalSolenoidCommand;
@@ -99,5 +100,10 @@ public class JoystickEventMapper {
         JoystickButton toggleLight =
                 robotConfig.getGamepadConfig().getToggleLight();
         toggleLight.whenPressed(new ToggleLightCommand(robotSubsystems));
+
+        JoystickButton stealControl =
+                robotConfig.getJoysticksConfig().getStealControl();
+        stealControl.whenPressed(new ArcadeDriveWithJoysticksCommand(
+                driverStation, robotSubsystems));
     }
 }
