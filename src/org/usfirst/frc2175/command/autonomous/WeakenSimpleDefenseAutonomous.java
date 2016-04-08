@@ -21,6 +21,7 @@ public class WeakenSimpleDefenseAutonomous extends CommandGroup {
 
         // TODO Refine numbers if needed
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 148));
+                new DriveInchesCommand(robotSubsystems, robotControllers, 148),
+                8);
     }
 }
