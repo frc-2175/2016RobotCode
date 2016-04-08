@@ -5,7 +5,7 @@ import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.SetDesiredShotCommand;
-import org.usfirst.frc2175.command.single.TurnToFaceGoalCommand;
+import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.config.AutonomousConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -58,7 +58,7 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
         addSequential(new EmptyCommand(), .4);
 
         // Face the goal
-        addSequential(new TurnToFaceGoalCommand(robotSubsystems, robotConfig,
+        addSequential(new TurnToFaceGoalWithGyroCommand(robotSubsystems,
                 robotControllers));
 
         // Wait to settle ball
