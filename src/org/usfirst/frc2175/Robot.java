@@ -2,6 +2,7 @@ package org.usfirst.frc2175;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
@@ -52,6 +53,8 @@ public class Robot extends IterativeRobot {
     private DistanceSensor frontDistanceSensor;
 
     private ImageHandler imageHandler;
+
+    private CommandGroup selectedAuton = new DoNothingAutonomous();
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -114,7 +117,7 @@ public class Robot extends IterativeRobot {
 
         frontDistanceSensor.enable();
 
-        CommandGroup selectedAuton = smartDashboardHandler.getAutonCommand();
+        selectedAuton = smartDashboardHandler.getAutonCommand();
         log.info("Starting auto command: " + selectedAuton.getName());
         selectedAuton.start();
     }
@@ -128,6 +131,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         log.info("Entered teleopInit()");
+        if (selectedAuton != null) {
+            selectedAuton.cancel();
+        }
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getCameraSubsystem().updateLight();
 
