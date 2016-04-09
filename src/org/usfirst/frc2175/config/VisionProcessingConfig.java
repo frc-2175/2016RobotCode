@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.config;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
@@ -8,6 +9,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class VisionProcessingConfig extends BaseConfig {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private static final String PROPERTY_FILE_NAME = "vision.properties";
 
     private NetworkTable contourReport;
@@ -21,6 +24,8 @@ public class VisionProcessingConfig extends BaseConfig {
     private String webCamName;
     private double cameraFOV;
     private double cameraHorizontalRes;
+
+    private double previousCenterXValue;
 
     @Override
     public String getPropertyFileName() {
@@ -74,11 +79,6 @@ public class VisionProcessingConfig extends BaseConfig {
         return contourReport.getNumberArray("centerY", defaultValue);
     }
 
-    public double[] getContourHeight() {
-        updateTable();
-        return contourReport.getNumberArray("height", defaultValue);
-    }
-
     public double[] getContourWidth() {
         updateTable();
         return contourReport.getNumberArray("width", defaultValue);
@@ -99,14 +99,17 @@ public class VisionProcessingConfig extends BaseConfig {
 
         if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
             value = HighestArrayIndexFinder.NO_VALUES;
+        } else if (largestContourIndex != contourCenterXs.length) {
+            log.warning(
+                    "Center X arrays weren't the same length! Using previous value. contourCenterXs.length="
+                            + contourCenterXs.length + "; contourWidths.length="
+                            + contourWidths.length);
+            value = previousCenterXValue;
         } else {
-            if (contourCenterXs.length != contourWidths.length) {
-                System.out.println("contourCenterXs.length="
-                        + contourCenterXs.length + "; contourWidths.length="
-                        + contourWidths.length);
-            }
             value = contourCenterXs[largestContourIndex];
+            previousCenterXValue = value;
         }
+
         return value;
     }
 
