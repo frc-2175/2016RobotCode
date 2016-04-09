@@ -1,5 +1,17 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="Contour CenterY" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="772"/>
+	</widget>
+	<widget field="Contour Width" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="749"/>
+	</widget>
+	<widget field="Contour CenterX" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="726"/>
+	</widget>
+	<widget field="Contour Height" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="703"/>
+	</widget>
 	<widget field="Gyro Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="0" y="680"/>
 	</widget>
