@@ -99,9 +99,10 @@ public class VisionProcessingConfig extends BaseConfig {
 
         if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
             value = HighestArrayIndexFinder.NO_VALUES;
-        } else if (largestContourIndex != contourCenterXs.length) {
+        } else if (contourWidths.length != contourCenterXs.length) {
             log.warning(
-                    "Center X arrays weren't the same length! Using previous value. contourCenterXs.length="
+                    "Center X arrays weren't the same length! Using previous value of "
+                            + previousCenterXValue + ". contourCenterXs.length="
                             + contourCenterXs.length + "; contourWidths.length="
                             + contourWidths.length);
             value = previousCenterXValue;
@@ -110,6 +111,7 @@ public class VisionProcessingConfig extends BaseConfig {
             previousCenterXValue = value;
         }
 
+        log.info("Center X value returned: " + value);
         return value;
     }
 

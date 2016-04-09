@@ -4,6 +4,7 @@ import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
+import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -61,7 +62,12 @@ public class CameraSubsystem extends BaseSubsystem {
     }
 
     private double getGoalDistanceFromCenterInPixels() {
-        return visionProcessingConfig.getLargestContourCenterX() - centerCamera;
+        double centerX = visionProcessingConfig.getLargestContourCenterX();
+        if (centerX == HighestArrayIndexFinder.NO_VALUES) {
+            return 0;
+        }
+
+        return centerX - centerCamera;
     }
 
     public double getGoalDistanceFromCenterInDegrees() {

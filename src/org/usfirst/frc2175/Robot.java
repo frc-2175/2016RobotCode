@@ -131,6 +131,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         log.info("Entered teleopInit()");
+
         if (selectedAuton != null) {
             selectedAuton.cancel();
         }
