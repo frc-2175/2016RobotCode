@@ -2,10 +2,8 @@ package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.EmptyCommand;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
-import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
-import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
@@ -42,11 +40,11 @@ public class WeakenSimpleDefenseAndShootForwardAutonomous extends CommandGroup {
         addSequential(new EmptyCommand(), 2);
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 -liftIntakeSpeed), .8);
-        addSequential(
-                new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
-        addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, -148),
-                8);
+        // addSequential(
+        // new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
+        // addSequential(
+        // new DriveInchesCommand(robotSubsystems, robotControllers, -148),
+        // 8);
     }
 
 }
