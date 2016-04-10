@@ -47,7 +47,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // do nothing
         if (isDriveEngaged()) {
             // TODO get direction from a property file
-            robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
+            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
         }
     }
 
@@ -56,7 +56,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // do nothing
         if (isDriveEngaged()) {
             // TODO get direction from a property file
-            robotDrive.tankDrive(-leftSpeed, -rightSpeed);
+            robotDrive.tankDrive(leftSpeed, rightSpeed);
         }
     }
 
