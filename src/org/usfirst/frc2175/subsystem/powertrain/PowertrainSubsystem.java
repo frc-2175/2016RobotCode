@@ -47,7 +47,19 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // do nothing
         if (isDriveEngaged()) {
             // TODO get direction from a property file
-            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+            if (getShifterState() == ShifterState.LOW) {
+                robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+            } else if (getShifterState() == ShifterState.HIGH) {
+                if (rotateSpeed != 0) {
+                    if (rotateSpeed < 0) {
+                        robotDrive.tankDrive(moveSpeed, 0);
+                    } else {
+                        robotDrive.tankDrive(0, moveSpeed);
+                    }
+                } else {
+                    robotDrive.arcadeDrive(moveSpeed, 0);
+                }
+            }
         }
     }
 
