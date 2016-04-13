@@ -43,17 +43,12 @@ public class VisionProcessingConfig extends BaseConfig {
 
         indexFinder = new HighestArrayIndexFinder();
 
-        int webCamQuality =
+        this.webCamQuality =
                 getIntPropertyValue("webcam.usb.quality", properties);
-        this.webCamQuality = webCamQuality;
-        String webCamName =
-                getStringPropertyValue("webcam.usb.name", properties);
-        this.webCamName = webCamName;
-        double cameraFOV = getDoublePropertyValue("camera.fov", properties);
-        this.cameraFOV = cameraFOV;
-        double cameraHorizontalRes =
+        this.webCamName = getStringPropertyValue("webcam.usb.name", properties);
+        this.cameraFOV = getDoublePropertyValue("camera.fov", properties);
+        this.cameraHorizontalRes =
                 getDoublePropertyValue("camera.res.horizontal", properties);
-        this.cameraHorizontalRes = cameraHorizontalRes;
     }
 
     private void updateTable() {
@@ -64,14 +59,6 @@ public class VisionProcessingConfig extends BaseConfig {
         updateTable();
         double[] value = contourReport.getNumberArray("centerX", defaultValue);
         return value;
-    }
-
-    public int getWebCamQuality() {
-        return webCamQuality;
-    }
-
-    public String getWebCamName() {
-        return webCamName;
     }
 
     public double[] getContourCenterY() {
@@ -92,7 +79,7 @@ public class VisionProcessingConfig extends BaseConfig {
             contourCenterXs = getContourCenterX();
         }
 
-        double value;
+        final double value;
 
         int largestContourIndex =
                 indexFinder.determineLargestArrayItemIndex(contourWidths);
@@ -100,11 +87,10 @@ public class VisionProcessingConfig extends BaseConfig {
         if (largestContourIndex == HighestArrayIndexFinder.NO_VALUES) {
             value = HighestArrayIndexFinder.NO_VALUES;
         } else if (contourWidths.length != contourCenterXs.length) {
-            log.warning(
-                    "Center X arrays weren't the same length! Using previous value of "
-                            + previousCenterXValue + ". contourCenterXs.length="
-                            + contourCenterXs.length + "; contourWidths.length="
-                            + contourWidths.length);
+            log.warning("Center X arrays weren't the same length!"
+                    + " Using previous value of " + previousCenterXValue
+                    + ". contourCenterXs.length=" + contourCenterXs.length
+                    + "; contourWidths.length=" + contourWidths.length);
             value = previousCenterXValue;
         } else {
             value = contourCenterXs[largestContourIndex];
@@ -123,4 +109,11 @@ public class VisionProcessingConfig extends BaseConfig {
         return cameraHorizontalRes;
     }
 
+    public int getWebCamQuality() {
+        return webCamQuality;
+    }
+
+    public String getWebCamName() {
+        return webCamName;
+    }
 }
