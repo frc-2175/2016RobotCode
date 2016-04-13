@@ -11,29 +11,33 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PhotonCannonSubsystem extends BaseSubsystem {
-    private VisionProcessingConfig visionProcessingConfig;
     private final DigitalOutput cameraLight;
 
     private final double cameraFov;
     private final double cameraHorizontalRes;
     private final double centerCamera;
 
+    private final VisionProcessing visionProcessing;
+
     private boolean isLightOn;
 
-
-    public PhotonCannonSubsystem(RobotConfig robotConfig) {
+    public PhotonCannonSubsystem(RobotConfig robotConfig,
+            VisionProcessing visionProcessing) {
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
-
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
+        VisionProcessingConfig visionProcessingConfig =
+                robotConfig.getVisionProcessingConfig();
 
         this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 
-        this.visionProcessingConfig = robotConfig.getVisionProcessingConfig();
         this.cameraLight = wiringConfig.getCameraLight();
+
         this.cameraFov = visionProcessingConfig.getCameraFOV();
         this.cameraHorizontalRes =
                 visionProcessingConfig.getCameraHorizontalRes();
+
+        this.visionProcessing = visionProcessing;
     }
 
     public void turnLightOn() {

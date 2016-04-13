@@ -4,19 +4,19 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
-import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
 public class VisionTurnPIDController extends PIDControllerComplete {
     private final Logger log = Logger.getLogger(getClass().getName());
 
     private PowertrainSubsystem powertrainSubsystem;
-    private VisionProcessingConfig visionConfig;
+    private final VisionProcessing visionProcessing;
 
     public VisionTurnPIDController(RobotSubsystems robotSubsystems,
-            RobotConfig robotConfig) {
+            RobotConfig robotConfig, VisionProcessing visionProcessing) {
         ControlLoopConfig controlConfig = robotConfig.getControlLoopConfig();
 
         double p = controlConfig.getVisionTurnPID_kProportional();
@@ -32,13 +32,16 @@ public class VisionTurnPIDController extends PIDControllerComplete {
         setAbsoluteTolerance(absTolerance);
 
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-        this.visionConfig = robotConfig.getVisionProcessingConfig();
+
+        this.visionProcessing = visionProcessing;
     }
 
     @Override
     public double pidGet() {
-        double goalLocation = visionConfig.getLargestContourCenterX();
-        double value;
+        final double value;
+
+        final double goalLocation = visionProcessing.getLargestContourCenterX();
+
         if (goalLocation == HighestArrayIndexFinder.NO_VALUES) {
             value = getSetpoint();
             disable();

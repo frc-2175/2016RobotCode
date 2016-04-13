@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 public class RobotControllers {
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -16,13 +17,13 @@ public class RobotControllers {
     private final DriveInchesPIDController driveInchesPIDController;
 
     public RobotControllers(RobotSubsystems robotSubsystems,
-            RobotConfig robotConfig) {
+            RobotConfig robotConfig, VisionProcessing visionProcessing) {
         log.info("Configuring class=" + getClass());
 
         try {
             this.robotConfig = robotConfig;
-            this.visionTurnPIDController =
-                    new VisionTurnPIDController(robotSubsystems, robotConfig);
+            this.visionTurnPIDController = new VisionTurnPIDController(
+                    robotSubsystems, robotConfig, visionProcessing);
             this.gyroTurnPIDController =
                     new GyroTurnPIDController(robotSubsystems, robotConfig);
             this.driveInchesPIDController =

@@ -18,6 +18,7 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -35,12 +36,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
     private final RobotConfig robotConfig = new RobotConfig();
+
     private final DriverStation driverStation =
             new DriverStation(robotConfig, new DeadbandCalculator());
+
+    private final VisionProcessingConfig visionProcessingConfig =
+            robotConfig.getVisionProcessingConfig();
+    private final VisionProcessing visionProcessing =
+            new VisionProcessing(visionProcessingConfig);
+
     private final RobotSubsystems robotSubsystems =
-            new RobotSubsystems(robotConfig, driverStation);
-    private final RobotControllers robotControllers =
-            new RobotControllers(robotSubsystems, robotConfig);
+            new RobotSubsystems(robotConfig, driverStation, visionProcessing);
+    private final RobotControllers robotControllers = new RobotControllers(
+            robotSubsystems, robotConfig, visionProcessing);
     private final JoystickEventMapper joystickEventMapper =
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
                     robotControllers);
@@ -148,8 +156,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Gyro Angle",
                 robotSubsystems.getPowertrainSubsystem().getGyroAngle());
         SmartDashboard.putNumber("Contour CenterX",
-                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
-                        .getLargestContourCenterX());
+                visionProcessing.getLargestContourCenterX());
 
         // 138-155
 

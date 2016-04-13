@@ -11,6 +11,7 @@ import org.usfirst.frc2175.subsystem.manipulator.ManipulatorSubsystem;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 import org.usfirst.frc2175.subsystem.vision.PhotonCannonSubsystem;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 public class RobotSubsystems {
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -25,8 +26,8 @@ public class RobotSubsystems {
     private final ClimberSubsystem climberSubsystem;
     private final PhotonCannonSubsystem photonCannonSubsystem;
 
-    public RobotSubsystems(RobotConfig robotConfig,
-            DriverStation driverStation) {
+    public RobotSubsystems(RobotConfig robotConfig, DriverStation driverStation,
+            VisionProcessing visionProcessing) {
         log.info("Configuring class=" + getClass());
 
         this.robotConfig = robotConfig;
@@ -37,7 +38,8 @@ public class RobotSubsystems {
         catapultShooterSubsystem = new CatapultShooterSubsystem(robotConfig);
         manipulatorSubsystem = new ManipulatorSubsystem(robotConfig);
         climberSubsystem = new ClimberSubsystem(robotConfig);
-        photonCannonSubsystem = new PhotonCannonSubsystem(robotConfig);
+        photonCannonSubsystem =
+                new PhotonCannonSubsystem(robotConfig, visionProcessing);
 
         setDefaultCommands();
     }
