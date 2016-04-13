@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
         robotSubsystems.getCatapultShooterSubsystem()
                 .setShotType(ShotType.BATTER);
         configureDistanceSensor();
-        robotSubsystems.getCameraSubsystem().updateLight();
+        robotSubsystems.getPhotonCannonSubsystem().updateLight();
         // configureCamera();
     }
 
@@ -113,7 +113,7 @@ public class Robot extends IterativeRobot {
 
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
         robotSubsystems.getPowertrainSubsystem().resetGyro();
-        robotSubsystems.getCameraSubsystem().updateLight();
+        robotSubsystems.getPhotonCannonSubsystem().updateLight();
 
         frontDistanceSensor.enable();
 
@@ -136,7 +136,7 @@ public class Robot extends IterativeRobot {
             selectedAuton.cancel();
         }
         robotSubsystems.getPowertrainSubsystem().resetEncoders();
-        robotSubsystems.getCameraSubsystem().updateLight();
+        robotSubsystems.getPhotonCannonSubsystem().updateLight();
 
         frontDistanceSensor.enable();
     }

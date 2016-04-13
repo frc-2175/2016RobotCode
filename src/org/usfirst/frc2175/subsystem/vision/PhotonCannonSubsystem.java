@@ -1,39 +1,39 @@
-package org.usfirst.frc2175.subsystem.camera;
+package org.usfirst.frc2175.subsystem.vision;
 
 import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
+import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class CameraSubsystem extends BaseSubsystem {
+public class PhotonCannonSubsystem extends BaseSubsystem {
     private VisionProcessingConfig visionProcessingConfig;
+    private final DigitalOutput cameraLight;
 
-    private DigitalOutput cameraLight;
+    private final double cameraFov;
+    private final double cameraHorizontalRes;
+    private final double centerCamera;
 
     private boolean isLightOn;
 
-    private double cameraFov;
-    private double cameraHorizontalRes;
-    private double centerCamera;
 
-    public CameraSubsystem(RobotConfig robotConfig) {
+    public PhotonCannonSubsystem(RobotConfig robotConfig) {
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
 
-        this.cameraLight = robotConfig.getWiringConfig().getCameraLight();
-        this.isLightOn = false;
+        WiringConfig wiringConfig = robotConfig.getWiringConfig();
 
         this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 
         this.visionProcessingConfig = robotConfig.getVisionProcessingConfig();
+        this.cameraLight = wiringConfig.getCameraLight();
         this.cameraFov = visionProcessingConfig.getCameraFOV();
         this.cameraHorizontalRes =
                 visionProcessingConfig.getCameraHorizontalRes();
-
     }
 
     public void turnLightOn() {
@@ -62,12 +62,16 @@ public class CameraSubsystem extends BaseSubsystem {
     }
 
     private double getGoalDistanceFromCenterInPixels() {
-        double centerX = visionProcessingConfig.getLargestContourCenterX();
+        final double distance;
+
+        double centerX = visionProcessing.getLargestContourCenterX();
         if (centerX == HighestArrayIndexFinder.NO_VALUES) {
-            return 0;
+            distance = 0;
+        } else {
+            distance = centerX - centerCamera;
         }
 
-        return centerX - centerCamera;
+        return distance;
     }
 
     public double getGoalDistanceFromCenterInDegrees() {

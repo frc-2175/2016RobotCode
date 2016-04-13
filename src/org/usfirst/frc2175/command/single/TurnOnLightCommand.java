@@ -2,18 +2,18 @@ package org.usfirst.frc2175.command.single;
 
 import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
-import org.usfirst.frc2175.subsystem.camera.CameraSubsystem;
+import org.usfirst.frc2175.subsystem.vision.PhotonCannonSubsystem;
 
 public class TurnOnLightCommand extends BaseCommand {
-    private CameraSubsystem cameraSubsystem;
+    private PhotonCannonSubsystem photonCannonSubsystem;
 
     public TurnOnLightCommand(RobotSubsystems robotSubsystems) {
-        this.cameraSubsystem = robotSubsystems.getCameraSubsystem();
+        this.photonCannonSubsystem = robotSubsystems.getPhotonCannonSubsystem();
     }
 
     @Override
     protected void initialize() {
-        cameraSubsystem.turnLightOn();
+        photonCannonSubsystem.turnLightOn();
     }
 
     @Override
