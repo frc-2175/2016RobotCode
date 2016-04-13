@@ -12,19 +12,19 @@ import org.usfirst.frc2175.subsystem.RobotSubsystems;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class WeakenSimpleDefenseAndShootSlightLeftAutonomous
+public class CrossStaticDefenseAndShootSlightRightAutonomous
         extends CommandGroup {
-    public WeakenSimpleDefenseAndShootSlightLeftAutonomous(
+    public CrossStaticDefenseAndShootSlightRightAutonomous(
             RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         double liftIntakeSpeed = -.5;
 
         // Drive forwards
-        addSequential(new WeakenSimpleDefenseAutonomous(robotSubsystems,
+        addSequential(new CrossStaticDefenseAutonomous(robotSubsystems,
                 robotControllers));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, -20));
+                robotControllers, 20));
         // Drive a bit more (may not be necessary)
         addSequential(
                 new DriveInchesCommand(robotSubsystems, robotControllers, 24));
