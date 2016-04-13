@@ -2,6 +2,7 @@ package org.usfirst.frc2175.subsystem.vision;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
 
@@ -15,14 +16,28 @@ public class VisionProcessing {
     private final HighestArrayIndexFinder indexFinder =
             new HighestArrayIndexFinder();;
 
+    private final VisionProcessingConfig visionProcessingConfig;
+
     private final NetworkTable contourReport;
 
     private double previousCenterXValue;
 
-    public VisionProcessing(VisionProcessingConfig visionProcessingConfig) {
+    private final double cameraFov;
+    private final double cameraHorizontalRes;
+    private final double centerCamera;
+
+    public VisionProcessing(RobotConfig robotConfig) {
+        this.visionProcessingConfig = robotConfig.getVisionProcessingConfig();
         String contourReportName =
                 visionProcessingConfig.getContourReportName();
         contourReport = NetworkTable.getTable(contourReportName);
+
+        this.centerCamera = robotConfig.getControlLoopConfig()
+                .getVisionTurnPID_centerCamera();
+
+        this.cameraFov = visionProcessingConfig.getCameraFOV();
+        this.cameraHorizontalRes =
+                visionProcessingConfig.getCameraHorizontalRes();
     }
 
     private void updateTable() {
@@ -70,5 +85,23 @@ public class VisionProcessing {
 
         log.info("Center X value returned: " + value);
         return value;
+    }
+
+    private double getGoalDistanceFromCenterInPixels() {
+        final double distance;
+
+        double centerX = getLargestContourCenterX();
+        if (centerX == HighestArrayIndexFinder.NO_VALUES) {
+            distance = 0;
+        } else {
+            distance = centerX - centerCamera;
+        }
+
+        return distance;
+    }
+
+    public double getGoalDistanceFromCenterInDegrees() {
+        double degreesPerPixel = cameraFov / cameraHorizontalRes;
+        return getGoalDistanceFromCenterInPixels() * degreesPerPixel;
     }
 }

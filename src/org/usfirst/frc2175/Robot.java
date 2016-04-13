@@ -40,10 +40,8 @@ public class Robot extends IterativeRobot {
     private final DriverStation driverStation =
             new DriverStation(robotConfig, new DeadbandCalculator());
 
-    private final VisionProcessingConfig visionProcessingConfig =
-            robotConfig.getVisionProcessingConfig();
     private final VisionProcessing visionProcessing =
-            new VisionProcessing(visionProcessingConfig);
+            new VisionProcessing(robotConfig);
 
     private final RobotSubsystems robotSubsystems =
             new RobotSubsystems(robotConfig, driverStation, visionProcessing);
