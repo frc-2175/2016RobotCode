@@ -21,26 +21,30 @@ import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class AutonomousChooserFactory {
     public SendableChooser make(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         final SendableChooser autonChooser = new SendableChooser();
 
-        populateAutonChooser(autonChooser, robotSubsystems, robotControllers);
+        populateAutonChooser(autonChooser, robotSubsystems, robotControllers,
+                visionProcessing);
 
         return autonChooser;
     }
 
     protected void populateAutonChooser(SendableChooser autonChooser,
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         autonChooser.addDefault("Do nothing", new DoNothingAutonomous());
 
         // list cross ones first as probably most common
-        addCrossAutons(autonChooser, robotSubsystems, robotControllers);
+        addCrossAutons(autonChooser, robotSubsystems, robotControllers,
+                visionProcessing);
         addCrossTwiceAutons(autonChooser, robotSubsystems, robotControllers);
 
         autonChooser.addObject("Careful: Test all robot features",
@@ -50,50 +54,50 @@ public class AutonomousChooserFactory {
 
     // WARNING: keep these same order as Damage ones for driver clarity
     protected void addCrossAutons(SendableChooser autonChooser,
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         autonChooser.addObject("Cross simple defense",
                 new CrossStaticDefenseAutonomous(robotSubsystems,
                         robotControllers));
         autonChooser.addObject("Cross simple defense and shoot forward",
                 new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers));
+                        robotControllers, visionProcessing));
         autonChooser.addObject("Cross simple defense and shoot slight left",
                 new CrossStaticDefenseAndShootSlightLeftAutonomous(
-                        robotSubsystems, robotControllers));
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Cross simple defense and shoot slight right",
                 new CrossStaticDefenseAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers));
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Cross cheval de frise",
                 new CrossChevalDeFriseAutonomous(robotSubsystems,
                         robotControllers));
         autonChooser.addObject("Cross ChevalDeFrise and shoot forward",
                 new CrossChevalDeFriseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers));
+                        robotControllers, visionProcessing));
         autonChooser.addObject("Cross ChevalDeFrise and shoot slight left",
                 new CrossChevalDeFriseAndShootSlightLeftAutonomous(
-                        robotSubsystems, robotControllers));
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Cross ChevalDeFrise and shoot slight right",
                 new CrossChevalDeFriseAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers));
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Cross portcullis",
                 new CrossPortcullisAutonomous(robotSubsystems,
                         robotControllers));
         autonChooser.addObject("Cross portcullis and shoot forward",
                 new CrossPortcullisAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers));
+                        robotControllers, visionProcessing));
         autonChooser.addObject("Cross portcullis and shoot slight left",
                 new CrossPortcullisAndShootSlightLeftAutonomous(robotSubsystems,
-                        robotControllers));
+                        robotControllers, visionProcessing));
         autonChooser.addObject("Cross portcullis and shoot slight right",
                 new CrossPortcullisAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers));
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Cross simple defense - no encoders",
                 new CrossStaticDefenseNoEncoderAutonomous(robotSubsystems,
                         robotControllers));
         autonChooser.addObject("Weaken shoot low bar",
                 new WeakenShootLowBarAutonomous(robotSubsystems,
-                        robotControllers));
+                        robotControllers, visionProcessing));
     }
 
     // WARNING: keep these same order as Weaken ones for driver clarity

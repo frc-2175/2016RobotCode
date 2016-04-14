@@ -7,13 +7,14 @@ import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
     public CrossStaticDefenseAndShootForwardAutonomous(
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         double liftIntakeSpeed = -.5;
         int times = 5;
 
@@ -27,7 +28,7 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
         addSequential(new EmptyCommand(), .4);
         // Aim at goal
         addSequential(new TurnToCenterOfGoalBlock(robotSubsystems,
-                robotControllers, times));
+                robotControllers, visionProcessing, times));
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
         addSequential(new EmptyCommand(), 2);
@@ -39,5 +40,4 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
         // new DriveInchesCommand(robotSubsystems, robotControllers, -148),
         // 8);
     }
-
 }

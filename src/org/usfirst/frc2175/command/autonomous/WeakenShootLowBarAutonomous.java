@@ -12,6 +12,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -19,9 +20,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class WeakenShootLowBarAutonomous extends CommandGroup {
-
     public WeakenShootLowBarAutonomous(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         RobotConfig robotConfig = robotSubsystems.getRobotConfig();
         AutonomousConfig autonomousConfig = robotConfig.getAutonomousConfig();
         double travelLength = autonomousConfig.getTravelLength();
@@ -59,7 +60,7 @@ public class WeakenShootLowBarAutonomous extends CommandGroup {
 
         // Face the goal
         addSequential(new TurnToFaceGoalWithGyroCommand(robotSubsystems,
-                robotControllers));
+                robotControllers, visionProcessing));
 
         // Wait to settle ball
         addSequential(new EmptyCommand(), .4);

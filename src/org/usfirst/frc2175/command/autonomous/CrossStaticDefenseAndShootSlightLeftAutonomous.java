@@ -9,14 +9,15 @@ import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CrossStaticDefenseAndShootSlightLeftAutonomous
         extends CommandGroup {
     public CrossStaticDefenseAndShootSlightLeftAutonomous(
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         double liftIntakeSpeed = -.5;
 
         // Drive forwards
@@ -39,10 +40,9 @@ public class CrossStaticDefenseAndShootSlightLeftAutonomous
         addSequential(new EmptyCommand(), .4);
         // Aim at goal
         addSequential(new TurnToFaceGoalWithGyroCommand(robotSubsystems,
-                robotControllers));
+                robotControllers, visionProcessing));
         addSequential(new EmptyCommand(), .4);
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
     }
-
 }

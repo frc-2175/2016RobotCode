@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -15,11 +16,12 @@ public class SmartDashboardHandler {
     private final SendableChooser autonChooser;
 
     public SmartDashboardHandler(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         log.info("Configuring class=" + getClass());
 
         autonChooser = new AutonomousChooserFactory().make(robotSubsystems,
-                robotControllers);
+                robotControllers, visionProcessing);
 
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }

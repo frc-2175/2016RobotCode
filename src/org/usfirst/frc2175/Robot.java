@@ -49,9 +49,10 @@ public class Robot extends IterativeRobot {
             robotSubsystems, robotConfig, visionProcessing);
     private final JoystickEventMapper joystickEventMapper =
             new JoystickEventMapper(robotConfig, driverStation, robotSubsystems,
-                    robotControllers);
+                    robotControllers, visionProcessing);
     private final SmartDashboardHandler smartDashboardHandler =
-            new SmartDashboardHandler(robotSubsystems, robotControllers);
+            new SmartDashboardHandler(robotSubsystems, robotControllers,
+                    visionProcessing);
 
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();

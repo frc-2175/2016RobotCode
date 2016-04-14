@@ -21,6 +21,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,7 +37,8 @@ public class JoystickEventMapper {
 
     public JoystickEventMapper(RobotConfig robotConfig,
             DriverStation driverStation, RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         log.info("Configuring class=" + getClass());
 
         GamepadConfig gamepadConfig = robotConfig.getGamepadConfig();
@@ -64,7 +66,7 @@ public class JoystickEventMapper {
 
         JoystickButton faceGoalAndShoot = gamepadConfig.getFaceGoalAndShoot();
         faceGoalAndShoot.whenPressed(new TurnToFaceGoalWithGyroCommand(
-                robotSubsystems, robotControllers));
+                robotSubsystems, robotControllers, visionProcessing));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();

@@ -17,7 +17,6 @@ public class PhotonCannonSubsystem extends BaseSubsystem {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
 
         this.cameraLight = wiringConfig.getCameraLight();
-
     }
 
     public void turnLightOn() {
@@ -44,5 +43,4 @@ public class PhotonCannonSubsystem extends BaseSubsystem {
     public boolean isLightOn() {
         return isLightOn;
     }
-
 }

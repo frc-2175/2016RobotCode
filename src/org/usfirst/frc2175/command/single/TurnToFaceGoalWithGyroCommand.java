@@ -5,20 +5,21 @@ import org.usfirst.frc2175.pid.GyroTurnPIDController;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
-import org.usfirst.frc2175.subsystem.vision.PhotonCannonSubsystem;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 public class TurnToFaceGoalWithGyroCommand extends BaseCommand {
-    private PowertrainSubsystem powertrainSubsystem;
-    private PhotonCannonSubsystem photonCannonSubsystem;
-    private GyroTurnPIDController gyroTurnPIDController;
+    private final PowertrainSubsystem powertrainSubsystem;
+    private final VisionProcessing visionProcessing;
+    private final GyroTurnPIDController gyroTurnPIDController;
 
     private double setpoint;
 
     public TurnToFaceGoalWithGyroCommand(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         // TODO make sure this doesn't construct once on startup
         this.powertrainSubsystem = robotSubsystems.getPowertrainSubsystem();
-        this.photonCannonSubsystem = robotSubsystems.getPhotonCannonSubsystem();
+        this.visionProcessing = visionProcessing;
         this.gyroTurnPIDController =
                 robotControllers.getGyroTurnPIDController();
 
@@ -32,7 +33,7 @@ public class TurnToFaceGoalWithGyroCommand extends BaseCommand {
         super.initialize();
         double currentGyro = powertrainSubsystem.getGyroAngle();
         double startingAngleFromGoal =
-                photonCannonSubsystem.getGoalDistanceFromCenterInDegrees();
+                visionProcessing.getGoalDistanceFromCenterInDegrees();
         gyroTurnPIDController.setSetpoint(startingAngleFromGoal + currentGyro);
         gyroTurnPIDController.enable();
 

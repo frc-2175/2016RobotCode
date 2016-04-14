@@ -2,6 +2,7 @@ package org.usfirst.frc2175.subsystem.vision;
 
 import java.util.logging.Logger;
 
+import org.usfirst.frc2175.config.ControlLoopConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.util.HighestArrayIndexFinder;
@@ -16,24 +17,24 @@ public class VisionProcessing {
     private final HighestArrayIndexFinder indexFinder =
             new HighestArrayIndexFinder();;
 
-    private final VisionProcessingConfig visionProcessingConfig;
-
     private final NetworkTable contourReport;
-
-    private double previousCenterXValue;
 
     private final double cameraFov;
     private final double cameraHorizontalRes;
     private final double centerCamera;
 
+    private double previousCenterXValue;
+
     public VisionProcessing(RobotConfig robotConfig) {
-        this.visionProcessingConfig = robotConfig.getVisionProcessingConfig();
+        VisionProcessingConfig visionProcessingConfig =
+                robotConfig.getVisionProcessingConfig();
         String contourReportName =
                 visionProcessingConfig.getContourReportName();
-        contourReport = NetworkTable.getTable(contourReportName);
+        this.contourReport = NetworkTable.getTable(contourReportName);
 
-        this.centerCamera = robotConfig.getControlLoopConfig()
-                .getVisionTurnPID_centerCamera();
+        ControlLoopConfig controlLoopConfig =
+                robotConfig.getControlLoopConfig();
+        this.centerCamera = controlLoopConfig.getVisionTurnPID_centerCamera();
 
         this.cameraFov = visionProcessingConfig.getCameraFOV();
         this.cameraHorizontalRes =
