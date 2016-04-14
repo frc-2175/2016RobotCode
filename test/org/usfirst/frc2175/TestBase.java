@@ -50,6 +50,7 @@ public abstract class TestBase {
     protected void processMockUps() {
         new MockJNIWrapper();
         new MockSmartDashboard();
+        new MockNetworkTablesJNI();
     }
 
     protected void assertInstanceVariablesNotNull(Object sut)

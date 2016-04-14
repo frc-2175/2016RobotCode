@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class VisionProcessing {
     private final Logger log = Logger.getLogger(getClass().getName());
 
-    private static final double[] DEFAULT_NUMBER_ARRAY = { 0 };
+    protected static final double[] DEFAULT_NUMBER_ARRAY = { 0 };
 
     private final HighestArrayIndexFinder indexFinder =
             new HighestArrayIndexFinder();
