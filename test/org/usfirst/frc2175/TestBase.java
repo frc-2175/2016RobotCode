@@ -30,8 +30,16 @@ public abstract class TestBase {
             "src/properties/competitionbot/";
     public static final String PROPERTY_FILE_DIR_SRC_PRACTICE =
             "src/properties/practicebot/";
+    public static final String PROPERTY_FILE_DIR_SRC_TESTS =
+            "src/properties/tests/";
 
     public final double ALLOWED_DOUBLE_DELTA = 0.01;
+
+    static {
+        BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_TESTS);
+        // RobotConfig mocks fire its static initializer so this not needed:
+        // new LoggingConfig();
+    }
 
     @Rule
     public TestName testName = new TestName();
