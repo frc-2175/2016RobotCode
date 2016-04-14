@@ -15,7 +15,7 @@ public class VisionProcessing {
     private static final double[] DEFAULT_NUMBER_ARRAY = { 0 };
 
     private final HighestArrayIndexFinder indexFinder =
-            new HighestArrayIndexFinder();;
+            new HighestArrayIndexFinder();
 
     private final NetworkTable contourReport;
 
@@ -57,6 +57,13 @@ public class VisionProcessing {
         return contourReport.getNumberArray("width", DEFAULT_NUMBER_ARRAY);
     }
 
+    /**
+     * @return The largest width's center X value or the prior value if an
+     *         "uneven read condition" occurred or
+     *         HighestArrayIndexFinder.NO_VALUES when no objects seen in vision
+     *         processing. Be sure to check for and handle NO_VALUES to prevent
+     *         problems.
+     */
     public double getLargestContourCenterX() {
         updateTable();
         double[] contourWidths;
@@ -75,7 +82,7 @@ public class VisionProcessing {
             value = HighestArrayIndexFinder.NO_VALUES;
         } else if (contourWidths.length != contourCenterXs.length) {
             log.warning("Center X arrays weren't the same length!"
-                    + " Using previous value of " + previousCenterXValue
+                    + " Using previous value=" + previousCenterXValue
                     + ". contourCenterXs.length=" + contourCenterXs.length
                     + "; contourWidths.length=" + contourWidths.length);
             value = previousCenterXValue;
@@ -84,7 +91,7 @@ public class VisionProcessing {
             previousCenterXValue = value;
         }
 
-        log.info("Center X value returned: " + value);
+        log.info("Largest center X value=" + value);
         return value;
     }
 

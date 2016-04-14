@@ -19,6 +19,7 @@ public class VisionProcessingConfigTest extends TestBase {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_COMPETITION);
         VisionProcessingConfig sut = new VisionProcessingConfig();
         assertInstanceVariablesNotNull(sut);
+        assertDoublesNotZero(sut);
     }
 
     @Test
@@ -27,13 +28,6 @@ public class VisionProcessingConfigTest extends TestBase {
         BaseConfig.setPropertyFileDir(PROPERTY_FILE_DIR_SRC_PRACTICE);
         VisionProcessingConfig sut = new VisionProcessingConfig();
         assertInstanceVariablesNotNull(sut);
+        assertDoublesNotZero(sut);
     }
-    // TODO Fix test so it will not fail
-    // @Test
-    // public void testVisionProcessingArrayOutOfBoundsPatch() {
-    // VisionProcessingConfig visionProcessingConfig =
-    // new VisionProcessingConfig();
-    // visionProcessingConfig.getLargestContourCenterX();
-    // }
-
 }

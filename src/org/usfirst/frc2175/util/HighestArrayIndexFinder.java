@@ -14,7 +14,9 @@ public class HighestArrayIndexFinder {
      *
      * @param array
      *            Array to use
-     * @return Index of the largest value in the array
+     * @return Index of the largest value in the array or
+     *         HighestArrayIndexFinder.NO_VALUES for null and zero element
+     *         arrays.
      */
     public int determineLargestArrayItemIndex(double[] array) {
         int largestItemIndex = NO_VALUES;
