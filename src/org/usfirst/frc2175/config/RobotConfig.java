@@ -4,10 +4,6 @@ package org.usfirst.frc2175.config;
  * Robot configuration values.
  */
 public class RobotConfig {
-    // WARNING: must place LoggingConfig first!
-    // so that logging configured ASAP to capture and other problems
-    private final LoggingConfig loggingConfiguration = new LoggingConfig();
-
     private final GamepadConfig gamepadConfig = new GamepadConfig();
     private final JoysticksConfig joystickConfig = new JoysticksConfig();
     private final WiringConfig wiringConfig = new WiringConfig();
@@ -22,12 +18,14 @@ public class RobotConfig {
 
     private final PowertrainConfig powertrainConfig = new PowertrainConfig();
 
-    public PowertrainConfig getPowertrainConfig() {
-        return powertrainConfig;
+    static {
+        // WARNING: must load first before all other things
+        // so that logging configured ASAP to capture messages
+        new LoggingConfig();
     }
 
-    public LoggingConfig getLoggingConfiguration() {
-        return loggingConfiguration;
+    public PowertrainConfig getPowertrainConfig() {
+        return powertrainConfig;
     }
 
     public GamepadConfig getGamepadConfig() {
