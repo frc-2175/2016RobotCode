@@ -41,10 +41,6 @@ public class VisionProcessing {
                 visionProcessingConfig.getCameraHorizontalRes();
     }
 
-    private void updateTable() {
-        // TODO figure out how to refresh a networktable
-    }
-
     public double[] getContourCenterX() {
         return contourReport.getNumberArray("centerX", DEFAULT_NUMBER_ARRAY);
     }
@@ -65,7 +61,6 @@ public class VisionProcessing {
      *         problems.
      */
     public double getLargestContourCenterX() {
-        updateTable();
         double[] contourWidths;
         double[] contourCenterXs;
         synchronized (this) {
