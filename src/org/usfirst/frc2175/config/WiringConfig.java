@@ -1,17 +1,21 @@
 package org.usfirst.frc2175.config;
 
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.usfirst.frc2175.util.TalonGroup;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * Wiring configuration values - robot sensors and actuators port numbers.
@@ -21,6 +25,8 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  * Do not use port numbers in code, use these configuration methods.
  */
 public class WiringConfig extends BaseConfig {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
     private static final String PROPERTY_FILE_NAME = "wiring.properties";
 
     private static final double WHEEL_DIAMETER = 12.5;
@@ -36,7 +42,7 @@ public class WiringConfig extends BaseConfig {
     private TalonGroup rightDriveTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
-    private Gyro gyro;
+    private AHRS fancyGyro;
     private Ultrasonic ultrasonicSensor;
 
     // Shifters
@@ -98,9 +104,6 @@ public class WiringConfig extends BaseConfig {
     }
 
     private void configurePowertrain(Properties properties) {
-        int gyroPort =
-                getIntPropertyValue("powertrain.analog.gyro.port", properties);
-        gyro = new AnalogGyro(gyroPort);
 
         boolean isLeftDriveEncoderReversed = getBooleanPropertyValue(
                 "powertrain.digital.encoder.left.isReversed", properties);
@@ -160,6 +163,14 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.digital.ultrasonic.port.echo", properties);
         ultrasonicSensor = new Ultrasonic(ultrasonicSensorPingPort,
                 ultrasonicSensorEchoPort);
+
+        try {
+            fancyGyro = new AHRS(SPI.Port.kMXP);
+        } catch (RuntimeException ex) {
+            log.log(Level.SEVERE, "Error instantiating navX-MXP over SPI:", ex);
+            DriverStation.reportError("Error instantiating navX-MXP over SPI:  "
+                    + ex.getMessage(), true);
+        }
     }
 
     private static double calcEncoderDistanceConversion() {
@@ -307,10 +318,6 @@ public class WiringConfig extends BaseConfig {
         return rightDriveEncoder;
     }
 
-    public Gyro getGyro() {
-        return gyro;
-    }
-
     public Solenoid getLeftCatapultSolenoid() {
         return leftCatapultSolenoid;
     }
@@ -349,6 +356,10 @@ public class WiringConfig extends BaseConfig {
 
     public Ultrasonic getUltrasonicSensor() {
         return ultrasonicSensor;
+    }
+
+    public AHRS getFancyGyro() {
+        return fancyGyro;
     }
 
 }

@@ -6,10 +6,11 @@ import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
 import org.usfirst.frc2175.util.TalonGroup;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class PowertrainSubsystem extends BaseSubsystem {
     private PowertrainConfig powertrainConfig;
@@ -19,7 +20,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Solenoid[] driveShifters;
-    private Gyro gyro;
+    private AHRS fancyGyro;
 
     private ShifterState shifterState;
 
@@ -33,7 +34,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
-        gyro = wiringConfig.getGyro();
+        fancyGyro = wiringConfig.getFancyGyro();
         driveShifters = wiringConfig.getShifterSolenoids();
 
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
@@ -151,11 +152,12 @@ public class PowertrainSubsystem extends BaseSubsystem {
     }
 
     public void resetGyro() {
-        gyro.reset();
+        // We should almost never need to run this with the nice gyro
+        fancyGyro.reset();
     }
 
     public double getGyroAngle() {
-        return gyro.getAngle();
+        return fancyGyro.getAngle();
     }
 
     private enum ShifterState {
