@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 /**
  * Treats a collection of {@link #edu.wpi.first.wpilibj.SpeedController speed
  * controllers} as one. Controllers can be added to the collection with
- * addController(SpeedController controller).
+ * {@link #addController(SpeedController controller) addController}.
  *
  * @author Max Haland
  */
