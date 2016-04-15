@@ -12,13 +12,7 @@ public class RunIntakeInGroup extends CommandGroup {
             IntakeConfig intakeConfig) {
         double rollerbarSpeed = intakeConfig.getRollerbarSpeedIn();
 
-        if (robotSubsystems.getRollerbarIntakeSubsystem()
-                .isIntakeCompletelyIn()) {
-            addSequential(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
-                    rollerbarSpeed));
-        } else {
-            addSequential(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
-                    rollerbarSpeed + .3));
-        }
+        addSequential(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
+                rollerbarSpeed));
     }
 }
