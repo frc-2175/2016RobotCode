@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -10,22 +11,16 @@ import edu.wpi.first.wpilibj.SpeedController;
  * addController(SpeedController controller).
  *
  * @author Max Haland
- *
  */
-
 public class SpeedControllerGroup implements SpeedController {
-
-    private final ArrayList<SpeedController> controllers;
-
-    public SpeedControllerGroup() {
-        controllers = new ArrayList<SpeedController>();
-    }
+    private final List<SpeedController> controllers =
+            new ArrayList<SpeedController>();
 
     /**
      * Add a new speed controller to the group.
      *
      * @param controller
-     *            controller to add
+     *            controller to add.
      */
     public void addController(SpeedController controller) {
         controllers.add(controller);
@@ -34,14 +29,14 @@ public class SpeedControllerGroup implements SpeedController {
     /**
      * Gets the size of the controller group.
      *
-     * @return the size of the controller group
+     * @return the size of the controller group.
      */
     public int getSize() {
         return controllers.size();
     }
 
     /**
-     * Writes a value to each controller in the group
+     * Writes a value to each controller in the group.
      */
     @Override
     public synchronized void pidWrite(double output) {
@@ -55,13 +50,13 @@ public class SpeedControllerGroup implements SpeedController {
      * each controller is checked against the speed of each other controller. If
      * any of the speeds do not match, and IllegalStateException is thrown.
      *
-     * @return overall speed of the controller group
+     * @return overall speed of the controller group.
      * @throws IllegalStateException
      *             if the speed controller gets do not match.
      */
     @Override
-    public double get() {
-        ArrayList<Double> speeds = new ArrayList<Double>();
+    public synchronized double get() {
+        List<Double> speeds = new ArrayList<Double>();
         double overallSpeed;
 
         for (SpeedController controller : controllers) {
@@ -77,13 +72,14 @@ public class SpeedControllerGroup implements SpeedController {
                 }
             }
         }
+
         overallSpeed = speeds.get(0).doubleValue();
 
         return overallSpeed;
     }
 
     /**
-     * Sets the output of each controller in the group
+     * Sets the output of each controller in the group.
      */
     @Override
     public synchronized void set(double speed, byte syncGroup) {
@@ -97,7 +93,7 @@ public class SpeedControllerGroup implements SpeedController {
      *
      * @param speed
      *            Speed to set the group to. This value should be between -1.0
-     *            and 1.0
+     *            and 1.0.
      */
     @Override
     public synchronized void set(double speed) {
@@ -107,10 +103,10 @@ public class SpeedControllerGroup implements SpeedController {
     }
 
     /**
-     * Sets each controller in the group to be inverted
+     * Sets each controller in the group to be inverted.
      *
      * @param isInverted
-     *            Whether the group should be inverted
+     *            Whether the group should be inverted.
      */
     @Override
     public synchronized void setInverted(boolean isInverted) {
@@ -120,16 +116,16 @@ public class SpeedControllerGroup implements SpeedController {
     }
 
     /**
-     * Checks whether the group is in the inverted state
+     * Checks whether the group is in the inverted state.
      *
-     * @return boolean representing whether the group is inverted
+     * @return boolean representing whether the group is inverted.
      * @throws IllegalStateException
      *             if the speed controller gets do not match.
      */
     @Override
-    public boolean getInverted() {
-        ArrayList<Boolean> values = new ArrayList<Boolean>();
+    public synchronized boolean getInverted() {
         boolean returnValue;
+        List<Boolean> values = new ArrayList<Boolean>();
 
         for (SpeedController controller : controllers) {
             Boolean value = controller.getInverted();
@@ -144,13 +140,14 @@ public class SpeedControllerGroup implements SpeedController {
                 }
             }
         }
+
         returnValue = values.get(0).booleanValue();
 
         return returnValue;
     }
 
     /**
-     * Disables all controllers in the group
+     * Disables all controllers in the group.
      */
     @Override
     public synchronized void disable() {
@@ -160,7 +157,7 @@ public class SpeedControllerGroup implements SpeedController {
     }
 
     /**
-     * Stops all motors in the group by setting their speed to 0
+     * Stops all motors in the group by setting their speed to 0.
      */
     @Override
     public synchronized void stopMotor() {
@@ -168,5 +165,4 @@ public class SpeedControllerGroup implements SpeedController {
             controller.set(0);
         }
     }
-
 }
