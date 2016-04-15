@@ -64,16 +64,13 @@ public class SpeedControllerGroup implements SpeedController {
             speeds.add(controllerSpeed);
         }
 
-        for (Double speed : speeds) {
-            for (Double speed2 : speeds) {
-                if (!speed.equals(speed2)) {
-                    throw new IllegalStateException(
-                            "Controller gets not matching! Something has gone terribly wrong!");
-                }
-            }
+        boolean areSpeedsEqual = areDoublesInListEqual(speeds);
+        if (areSpeedsEqual) {
+            overallSpeed = speeds.get(0).doubleValue();
+        } else {
+            throw new IllegalStateException(
+                    "Controller speeds not equal! Something has gone terribly wrong!");
         }
-
-        overallSpeed = speeds.get(0).doubleValue();
 
         return overallSpeed;
     }
@@ -132,16 +129,13 @@ public class SpeedControllerGroup implements SpeedController {
             values.add(value);
         }
 
-        for (Boolean value : values) {
-            for (Boolean value2 : values) {
-                if (value != value2) {
-                    throw new IllegalStateException(
-                            "Controller gets not matching! Something has gone terribly wrong!");
-                }
-            }
+        boolean areValuesEqual = areBooleansInListEqual(values);
+        if (areValuesEqual) {
+            returnValue = values.get(0).booleanValue();
+        } else {
+            throw new IllegalStateException(
+                    "Talons are not all set to the same inverted value! Something has gone terribly wrong!");
         }
-
-        returnValue = values.get(0).booleanValue();
 
         return returnValue;
     }
@@ -165,4 +159,29 @@ public class SpeedControllerGroup implements SpeedController {
             controller.set(0);
         }
     }
+
+    private boolean areDoublesInListEqual(List<Double> l) {
+        boolean areDoublesEqual = true;
+        for (Double d : l) {
+            for (Double d2 : l) {
+                if (!d.equals(d2)) {
+                    areDoublesEqual = false;
+                }
+            }
+        }
+        return areDoublesEqual;
+    }
+
+    private boolean areBooleansInListEqual(List<Boolean> l) {
+        boolean areDoublesEqual = true;
+        for (Boolean b : l) {
+            for (Boolean b2 : l) {
+                if (!(b == b2)) {
+                    areDoublesEqual = false;
+                }
+            }
+        }
+        return areDoublesEqual;
+    }
+
 }
