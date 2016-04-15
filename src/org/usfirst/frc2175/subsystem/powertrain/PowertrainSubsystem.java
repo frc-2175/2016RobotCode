@@ -52,9 +52,9 @@ public class PowertrainSubsystem extends BaseSubsystem {
             } else if (getShifterState() == ShifterState.HIGH) {
                 if (rotateSpeed != 0) {
                     if (rotateSpeed < 0) {
-                        robotDrive.tankDrive(moveSpeed, 0);
-                    } else {
                         robotDrive.tankDrive(0, moveSpeed);
+                    } else {
+                        robotDrive.tankDrive(moveSpeed, 0);
                     }
                 } else {
                     robotDrive.arcadeDrive(moveSpeed, 0);
