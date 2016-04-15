@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- * Treats a collection of speed controllers as one. Controllers can be added to
- * the collection with addController(SpeedController controller).
+ * Treats a collection of {@link #edu.wpi.first.wpilibj.SpeedController speed
+ * controllers} as one. Controllers can be added to the collection with
+ * addController(SpeedController controller).
  *
  * @author Max Haland
  *
@@ -32,7 +33,7 @@ public class SpeedControllerGroup implements SpeedController {
 
     /**
      * Gets the size of the controller group.
-     * 
+     *
      * @return the size of the controller group
      */
     public int getSize() {
@@ -55,6 +56,8 @@ public class SpeedControllerGroup implements SpeedController {
      * any of the speeds do not match, and IllegalStateException is thrown.
      *
      * @return overall speed of the controller group
+     * @throws IllegalStateException
+     *             if the speed controller gets do not match.
      */
     @Override
     public double get() {
@@ -116,6 +119,13 @@ public class SpeedControllerGroup implements SpeedController {
         }
     }
 
+    /**
+     * Checks whether the group is in the inverted state
+     *
+     * @return boolean representing whether the group is inverted
+     * @throws IllegalStateException
+     *             if the speed controller gets do not match.
+     */
     @Override
     public boolean getInverted() {
         ArrayList<Boolean> values = new ArrayList<Boolean>();
