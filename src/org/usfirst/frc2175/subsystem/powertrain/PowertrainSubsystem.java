@@ -32,6 +32,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
 
         leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonHandler();
         rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
+
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
         fancyGyro = wiringConfig.getFancyGyro();
@@ -47,8 +48,10 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
-            // TODO get direction from a property file
             robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+        }
+        if (isClimberEngaged()) {
+            winchWithPTO(moveSpeed);
         }
     }
 
