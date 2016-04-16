@@ -126,6 +126,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         frontDistanceSensor.updateDashboard();
+        updateSmartDashboard();
     }
 
     @Override
@@ -144,12 +145,8 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        frontDistanceSensor.updateDashboard();
-        SmartDashboard.putNumber("Gyro Angle",
-                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
-        SmartDashboard.putNumber("Contour CenterX",
-                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
-                        .getLargestContourCenterX());
+
+        updateSmartDashboard();
 
         // 138-155
 
@@ -173,5 +170,16 @@ public class Robot extends IterativeRobot {
 
         Command retractCatapult = new RetractCatapultCommand(robotSubsystems);
         retractCatapult.start();
+    }
+
+    private void updateSmartDashboard() {
+        frontDistanceSensor.updateDashboard();
+        SmartDashboard.putNumber("Gyro Angle",
+                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
+        SmartDashboard.putNumber("Contour CenterX",
+                robotSubsystems.getRobotConfig().getVisionProcessingConfig()
+                        .getLargestContourCenterX());
+        SmartDashboard.putNumber("Aim Angle Offset", robotSubsystems
+                .getCameraSubsystem().getGoalDistanceFromCenterInDegrees());
     }
 }
