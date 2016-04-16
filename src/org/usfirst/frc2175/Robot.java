@@ -17,6 +17,7 @@ import org.usfirst.frc2175.driverstation.SmartDashboardHandler;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
@@ -62,6 +63,9 @@ public class Robot extends IterativeRobot {
     private ImageHandler imageHandler;
 
     private CommandGroup selectedAuton = new DoNothingAutonomous();
+
+    private PowertrainSubsystem powertrainSubsystem =
+            robotSubsystems.getPowertrainSubsystem();
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -185,5 +189,11 @@ public class Robot extends IterativeRobot {
                 visionProcessing.getLargestContourCenterX());
         SmartDashboard.putNumber("Aim Angle Offset",
                 visionProcessing.getGoalDistanceFromCenterInDegrees());
+        SmartDashboard.putNumber("Mean Encoder",
+                powertrainSubsystem.getMeanEncoderDistance());
+        SmartDashboard.putNumber("Left Encoder",
+                powertrainSubsystem.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Right Encoder",
+                powertrainSubsystem.getRightEncoderDistance());
     }
 }
