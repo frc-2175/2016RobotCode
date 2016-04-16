@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.usfirst.frc2175.TestBase;
 import org.usfirst.frc2175.util.TalonGroup;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,7 +15,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import mockit.Mocked;
 
 public class WiringConfigTest extends TestBase {
@@ -21,8 +22,6 @@ public class WiringConfigTest extends TestBase {
     private TalonGroup talongroup;
     @Mocked
     private Encoder encoder;
-    @Mocked
-    private Gyro gyro;
     @Mocked
     private Solenoid solenoid;
     @Mocked
@@ -39,6 +38,8 @@ public class WiringConfigTest extends TestBase {
     private AnalogGyro analogGyro;
     @Mocked
     private Ultrasonic ultrasonic;
+    @Mocked
+    private AHRS fancyGyro;
 
     @Test
     public void testWiringConfig_Competition()
