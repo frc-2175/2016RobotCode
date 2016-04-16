@@ -48,9 +48,10 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing
         if (isDriveEngaged()) {
-            robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+            robotDrive.arcadeDrive(-moveSpeed, rotateSpeed);
         }
         if (isClimberEngaged()) {
+            // TODO check direction
             winchWithPTO(moveSpeed);
         }
     }
@@ -60,7 +61,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         // do nothing
         if (isDriveEngaged()) {
             // TODO get direction from a property file
-            robotDrive.tankDrive(leftSpeed, rightSpeed);
+            robotDrive.tankDrive(-leftSpeed, -rightSpeed);
         }
     }
 
