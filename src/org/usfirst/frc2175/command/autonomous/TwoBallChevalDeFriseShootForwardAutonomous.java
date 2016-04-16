@@ -5,17 +5,19 @@ import org.usfirst.frc2175.command.single.RunRollerbarIntakeAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
+import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class TwoBallChevalDeFriseShootForwardAutonomous extends CommandGroup {
     public TwoBallChevalDeFriseShootForwardAutonomous(
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
         double liftIntakeSpeed = robotSubsystems.getRobotConfig()
                 .getIntakeConfig().getLiftIntakeSpeed();
+
         addSequential(new CrossChevalDeFriseAndShootForwardAutonomous(
-                robotSubsystems, robotControllers));
+                robotSubsystems, robotControllers, visionProcessing));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
@@ -32,6 +34,6 @@ public class TwoBallChevalDeFriseShootForwardAutonomous extends CommandGroup {
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
         addSequential(new CrossChevalDeFriseAndShootForwardAutonomous(
-                robotSubsystems, robotControllers));
+                robotSubsystems, robotControllers, visionProcessing));
     }
 }
