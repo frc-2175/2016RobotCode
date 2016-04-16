@@ -18,7 +18,9 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.sensor.DistanceSensor;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
+import org.usfirst.frc2175.subsystem.shooter.CatapultShooterSubsystem;
 import org.usfirst.frc2175.subsystem.shooter.ShotType;
+import org.usfirst.frc2175.subsystem.vision.PhotonCannonSubsystem;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -55,6 +57,11 @@ public class Robot extends IterativeRobot {
             new SmartDashboardHandler(robotSubsystems, robotControllers,
                     visionProcessing);
 
+    private final PowertrainSubsystem powertrainSubsystem =
+            robotSubsystems.getPowertrainSubsystem();
+    private final PhotonCannonSubsystem photonCannonSubsystem =
+            robotSubsystems.getPhotonCannonSubsystem();
+
     private final CommandSchedulerLoop commandSchedulerLoop =
             new CommandSchedulerLoop();
 
@@ -63,9 +70,6 @@ public class Robot extends IterativeRobot {
     private ImageHandler imageHandler;
 
     private CommandGroup selectedAuton = new DoNothingAutonomous();
-
-    private PowertrainSubsystem powertrainSubsystem =
-            robotSubsystems.getPowertrainSubsystem();
 
     // This must come after RobotConfig
     private final Logger log = Logger.getLogger(getClass().getName());
@@ -77,10 +81,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         commandSchedulerLoop.start();
-        robotSubsystems.getCatapultShooterSubsystem()
-                .setShotType(ShotType.BATTER);
+        CatapultShooterSubsystem catapultShooterSubsystem =
+                robotSubsystems.getCatapultShooterSubsystem();
+        catapultShooterSubsystem.setShotType(ShotType.BATTER);
         configureDistanceSensor();
-        robotSubsystems.getPhotonCannonSubsystem().updateLight();
+        photonCannonSubsystem.updateLight();
         // configureCamera();
     }
 
@@ -92,15 +97,17 @@ public class Robot extends IterativeRobot {
     }
 
     protected void configureCamera() {
-        CameraServer server = CameraServer.getInstance();
         VisionProcessingConfig visionProcessingConfig =
                 robotConfig.getVisionProcessingConfig();
         int webCamQuality = visionProcessingConfig.getWebCamQuality();
         String webCamName = visionProcessingConfig.getWebCamName();
-        server.setQuality(webCamQuality);
-        server.startAutomaticCapture(webCamName);
+
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         imageHandler = new ImageHandler(wiringConfig);
+
+        CameraServer server = CameraServer.getInstance();
+        server.setQuality(webCamQuality);
+        server.startAutomaticCapture(webCamName);
     }
 
     protected void startCamera() {
@@ -122,9 +129,9 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         log.info("Entered autonomousInit()");
 
-        robotSubsystems.getPowertrainSubsystem().resetEncoders();
-        robotSubsystems.getPowertrainSubsystem().resetGyro();
-        robotSubsystems.getPhotonCannonSubsystem().updateLight();
+        powertrainSubsystem.resetEncoders();
+        powertrainSubsystem.resetGyro();
+        photonCannonSubsystem.updateLight();
 
         frontDistanceSensor.enable();
 
@@ -136,7 +143,6 @@ public class Robot extends IterativeRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        frontDistanceSensor.updateDashboard();
         updateSmartDashboard();
     }
 
@@ -147,8 +153,8 @@ public class Robot extends IterativeRobot {
         if (selectedAuton != null) {
             selectedAuton.cancel();
         }
-        robotSubsystems.getPowertrainSubsystem().resetEncoders();
-        robotSubsystems.getPhotonCannonSubsystem().updateLight();
+        powertrainSubsystem.resetEncoders();
+        photonCannonSubsystem.updateLight();
 
         frontDistanceSensor.enable();
     }
@@ -184,7 +190,7 @@ public class Robot extends IterativeRobot {
     private void updateSmartDashboard() {
         frontDistanceSensor.updateDashboard();
         SmartDashboard.putNumber("Gyro Angle",
-                robotSubsystems.getPowertrainSubsystem().getGyroAngle());
+                powertrainSubsystem.getGyroAngle());
         SmartDashboard.putNumber("Contour CenterX",
                 visionProcessing.getLargestContourCenterX());
         SmartDashboard.putNumber("Aim Angle Offset",
