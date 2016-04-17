@@ -3,11 +3,9 @@ package org.usfirst.frc2175.driverstation;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootSlightRightAutonomous;
-import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootSlightRightAutonomous;
-import org.usfirst.frc2175.command.autonomous.CrossPortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightRightAutonomous;
@@ -68,9 +66,9 @@ public class AutonomousChooserFactory {
         autonChooser.addObject("Cross simple defense and shoot slight right",
                 new CrossStaticDefenseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross cheval de frise",
-                new CrossChevalDeFriseAutonomous(robotSubsystems,
-                        robotControllers));
+        // autonChooser.addObject("Cross cheval de frise",
+        // new CrossChevalDeFriseAutonomous(robotSubsystems,
+        // robotControllers));
         autonChooser.addObject("Cross ChevalDeFrise and shoot forward",
                 new CrossChevalDeFriseAndShootForwardAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
@@ -80,9 +78,9 @@ public class AutonomousChooserFactory {
         autonChooser.addObject("Cross ChevalDeFrise and shoot slight right",
                 new CrossChevalDeFriseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross portcullis",
-                new CrossPortcullisAutonomous(robotSubsystems,
-                        robotControllers));
+        // autonChooser.addObject("Cross portcullis",
+        // new CrossPortcullisAutonomous(robotSubsystems,
+        // robotControllers));
         autonChooser.addObject("Cross portcullis and shoot forward",
                 new CrossPortcullisAndShootForwardAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
