@@ -1,5 +1,9 @@
 package org.usfirst.frc2175.driverstation.autonomous;
 
-public class ShootTwiceAutonomous {
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
+public class ShootTwiceAutonomous extends CommandGroup {
+    public ShootTwiceAutonomous() {
+
+    }
 }

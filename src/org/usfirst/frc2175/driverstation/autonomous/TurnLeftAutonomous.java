@@ -1,5 +1,9 @@
 package org.usfirst.frc2175.driverstation.autonomous;
 
-public class TurnLeftAutonomous {
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
+public class TurnLeftAutonomous extends CommandGroup {
+    public TurnLeftAutonomous() {
+
+    }
 }

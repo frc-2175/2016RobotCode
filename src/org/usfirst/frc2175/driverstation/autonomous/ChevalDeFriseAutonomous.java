@@ -1,5 +1,9 @@
 package org.usfirst.frc2175.driverstation.autonomous;
 
-public class ChevalDeFriseAutonomous {
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
+public class ChevalDeFriseAutonomous extends CommandGroup {
+    public ChevalDeFriseAutonomous() {
+
+    }
 }
