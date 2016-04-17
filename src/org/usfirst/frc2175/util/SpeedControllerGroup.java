@@ -20,12 +20,18 @@ public class SpeedControllerGroup implements SpeedController {
             new ArrayList<SpeedController>();
 
     /**
-     * Constructor for any number of speed controllers
+     * Constructor for any number of speed controllers.
      *
      * @param controllers
-     *            - list of controllers to add.
+     *            list of controllers to add.
      */
     public SpeedControllerGroup(SpeedController... controllers) {
+        // protect against 0 element array
+        if (controllers.length == 0) {
+            throw new IllegalArgumentException(
+                    "Must specify at least one controller");
+        }
+
         for (SpeedController controller : controllers) {
             addController(controller);
         }
@@ -160,18 +166,4 @@ public class SpeedControllerGroup implements SpeedController {
             controller.set(0);
         }
     }
-
-    public synchronized boolean areItemsInListEqual(
-            List<? extends Object> list) {
-        boolean areBooleansEqual = true;
-        for (Object b : list) {
-            for (Object b2 : list) {
-                if (!b.equals(b2)) {
-                    areBooleansEqual = false;
-                }
-            }
-        }
-        return areBooleansEqual;
-    }
-
 }
