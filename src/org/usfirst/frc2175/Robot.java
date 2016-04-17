@@ -135,7 +135,13 @@ public class Robot extends IterativeRobot {
 
         frontDistanceSensor.enable();
 
+        selectAndStartAutonomous();
+
+    }
+
+    public void selectAndStartAutonomous() {
         selectedAuton = smartDashboardHandler.getAutonCommand();
+
         log.info("Starting auto command: " + selectedAuton.getName());
         selectedAuton.start();
     }
