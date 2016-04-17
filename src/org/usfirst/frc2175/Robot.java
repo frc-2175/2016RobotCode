@@ -10,6 +10,7 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.VisionProcessingConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.controlloop.CommandSchedulerLoop;
+import org.usfirst.frc2175.driverstation.AutonomousChooserFactory;
 import org.usfirst.frc2175.driverstation.DeadbandCalculator;
 import org.usfirst.frc2175.driverstation.DriverStation;
 import org.usfirst.frc2175.driverstation.ImageHandler;
@@ -135,8 +136,9 @@ public class Robot extends IterativeRobot {
 
         frontDistanceSensor.enable();
 
-        selectedAuton = smartDashboardHandler.getAutonCommand();
-        log.info("Starting auto command: " + selectedAuton.getName());
+        AutonomousChooserFactory.decideOnAuton(smartDashboardHandler,
+                robotSubsystems, robotControllers, visionProcessing);
+        selectedAuton = AutonomousChooserFactory.getSelectedAuton();
         selectedAuton.start();
     }
 

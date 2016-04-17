@@ -9,119 +9,230 @@ import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootSlightRight
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightRightAutonomous;
-import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseNoEncoderAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwiceChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwicePortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwiceStaticDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
-import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallChevalDeFriseShootForwardAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallChevalDeFriseShootSlightLeftAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallChevalDeFriseShootSlightRightAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallPortcullisShootForwardAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallStaticShootForwardAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallStaticShootSlightLeftAutonomous;
+import org.usfirst.frc2175.command.autonomous.TwoBallStaticShootSlightRightAutonomous;
+import org.usfirst.frc2175.command.autonomous.block.CrossChevalBlock;
+import org.usfirst.frc2175.command.autonomous.block.CrossPortcullisBlock;
 import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousChooserFactory {
-    public SendableChooser make(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers,
-            VisionProcessing visionProcessing) {
-        final SendableChooser autonChooser = new SendableChooser();
 
-        populateAutonChooser(autonChooser, robotSubsystems, robotControllers,
-                visionProcessing);
+    private static CommandGroup selectedAuton;
+    private static CommandGroup autonType;
+    private static CommandGroup autonOuterwork;
+    private static CommandGroup autonAngle;
+    private static CommandGroup extraAuton;
 
-        return autonChooser;
-    }
-
-    protected void populateAutonChooser(SendableChooser autonChooser,
+    public static void decideOnAuton(
+            SmartDashboardHandler smartDashboardHandler,
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
-        autonChooser.addDefault("Do nothing", new DoNothingAutonomous());
-
-        // list cross ones first as probably most common
-        addCrossAutons(autonChooser, robotSubsystems, robotControllers,
-                visionProcessing);
-        addCrossTwiceAutons(autonChooser, robotSubsystems, robotControllers);
-
-        autonChooser.addObject("Careful: Test all robot features",
-                new TestAllFeaturesAutonomous(robotSubsystems,
-                        robotControllers));
+        autonType = smartDashboardHandler.getChosenAutonType();
+        autonOuterwork = smartDashboardHandler.getChosenAutonOuterwork();
+        autonAngle = smartDashboardHandler.getChosenAutonAngle();
+        extraAuton = smartDashboardHandler.getChosenExtraAuton();
+        if (extraAuton.toString() == "None") {
+            switch (autonType.toString()) {
+            case "Do Nothing":
+                selectedAuton = new DoNothingAutonomous();
+                break;
+            case "Cross":
+                figureOutCrossAuton(robotSubsystems, robotControllers);
+                break;
+            case "Cross Twice":
+                figureOutCrossTwiceAuton(robotSubsystems, robotControllers);
+                break;
+            case "Cross And Shoot":
+                figureOutCrossAndShootAuton(robotSubsystems, robotControllers,
+                        visionProcessing);
+                break;
+            case "Shoot Twice":
+                figureOutShootTwiceAuton(robotSubsystems, robotControllers,
+                        visionProcessing);
+                break;
+            }
+        } else {
+            selectedAuton = extraAuton;
+        }
     }
 
-    // WARNING: keep these same order as Damage ones for driver clarity
-    protected void addCrossAutons(SendableChooser autonChooser,
-            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
-            VisionProcessing visionProcessing) {
-        autonChooser.addObject("Cross simple defense",
-                new CrossStaticDefenseBlock(robotSubsystems, robotControllers,
-                        true));
-        autonChooser.addObject("Cross simple defense and shoot forward",
-                new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense and shoot slight left",
-                new CrossStaticDefenseAndShootSlightLeftAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense and shoot slight right",
-                new CrossStaticDefenseAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        // autonChooser.addObject("Cross cheval de frise",
-        // new CrossChevalDeFriseAutonomous(robotSubsystems,
-        // robotControllers));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot forward",
-                new CrossChevalDeFriseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot slight left",
-                new CrossChevalDeFriseAndShootSlightLeftAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot slight right",
-                new CrossChevalDeFriseAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        // autonChooser.addObject("Cross portcullis",
-        // new CrossPortcullisAutonomous(robotSubsystems,
-        // robotControllers));
-        autonChooser.addObject("Cross portcullis and shoot forward",
-                new CrossPortcullisAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross portcullis and shoot slight left",
-                new CrossPortcullisAndShootSlightLeftAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross portcullis and shoot slight right",
-                new CrossPortcullisAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense - no encoders",
-                new CrossStaticDefenseNoEncoderAutonomous(robotSubsystems,
-                        robotControllers));
-        autonChooser.addObject("Weaken shoot low bar",
-                new WeakenShootLowBarAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
+    private static void figureOutCrossAuton(RobotSubsystems robotSubsystems,
+            RobotControllers robotControllers) {
+        switch (autonOuterwork.toString()) {
+        case "Static":
+            selectedAuton = new CrossStaticDefenseBlock(robotSubsystems,
+                    robotControllers, true);
+            break;
+        case "Portcullis":
+            selectedAuton = new CrossPortcullisBlock(robotSubsystems,
+                    robotControllers, false);
+            break;
+        case "ChevalDeFrise":
+            selectedAuton = new CrossChevalBlock(robotSubsystems,
+                    robotControllers, false);
+            break;
+        }
     }
 
-    // WARNING: keep these same order as Weaken ones for driver clarity
-    protected void addCrossTwiceAutons(SendableChooser autonChooser,
+    private static void figureOutCrossTwiceAuton(
             RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        autonChooser.addObject("Cross twice simple defense",
-                new CrossTwiceStaticDefenseAutonomous(robotSubsystems,
-                        robotControllers));
-        autonChooser.addObject("Cross twice cheval de frise",
-                new CrossTwiceChevalDeFriseAutonomous(robotSubsystems,
-                        robotControllers));
-        autonChooser.addObject("Cross twice portcullis",
-                new CrossTwicePortcullisAutonomous(robotSubsystems,
-                        robotControllers));
-        // autonChooser.addObject("Damage shoot low bar",
-        // new DamageShootLowBarAutonomous(robotSubsystems,
-        // robotControllers));
-        // autonChooser.addObject("Damage shoot cheval de frise",
-        // new DamageShootChevalDeFriseAutonomous(robotSubsystems,
-        // robotControllers));
-        // autonChooser.addObject("Damage shoot portcullis",
-        // new DamageShootPortcullisAutonomous(robotSubsystems,
-        // robotControllers));
-        // autonChooser.addObject("Damage shoot rock wall",
-        // new DamageShootRockWallAutonomous(robotSubsystems,
-        // robotControllers));
+        switch (autonOuterwork.toString()) {
+        case "Static":
+            selectedAuton = new CrossTwiceStaticDefenseAutonomous(
+                    robotSubsystems, robotControllers);
+            break;
+        case "Portcullis":
+            selectedAuton = new CrossTwicePortcullisAutonomous(robotSubsystems,
+                    robotControllers);
+            break;
+        case "ChevalDeFrise":
+            selectedAuton = new CrossTwiceChevalDeFriseAutonomous(
+                    robotSubsystems, robotControllers);
+            break;
+        }
+    }
+
+    private static void figureOutCrossAndShootAuton(
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
+        switch (autonOuterwork.toString()) {
+        case "Static":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new CrossStaticDefenseAndShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton =
+                        new CrossStaticDefenseAndShootSlightLeftAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton =
+                        new CrossStaticDefenseAndShootSlightRightAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            }
+            break;
+        case "Portcullis":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new CrossPortcullisAndShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton = new CrossPortcullisAndShootSlightLeftAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton =
+                        new CrossPortcullisAndShootSlightRightAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            }
+            break;
+        case "ChevalDeFrise":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new CrossChevalDeFriseAndShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton =
+                        new CrossChevalDeFriseAndShootSlightLeftAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton =
+                        new CrossChevalDeFriseAndShootSlightRightAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            }
+            break;
+        }
+    }
+
+    private static void figureOutShootTwiceAuton(
+            RobotSubsystems robotSubsystems, RobotControllers robotControllers,
+            VisionProcessing visionProcessing) {
+        switch (autonOuterwork.toString()) {
+        case "Static":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new TwoBallStaticShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton = new TwoBallStaticShootSlightLeftAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton = new TwoBallStaticShootSlightRightAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            }
+            break;
+        case "Portcullis":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new TwoBallPortcullisShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton = new TwoBallStaticShootSlightLeftAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton = new TwoBallStaticShootSlightRightAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            }
+            break;
+        case "ChevalDeFrise":
+            switch (autonAngle.toString()) {
+            case "Forwards":
+                selectedAuton = new TwoBallChevalDeFriseShootForwardAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing);
+                break;
+            case "Slight Left":
+                selectedAuton =
+                        new TwoBallChevalDeFriseShootSlightLeftAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            case "Slight Right":
+                selectedAuton =
+                        new TwoBallChevalDeFriseShootSlightRightAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing);
+                break;
+            }
+            break;
+
+        }
+    }
+
+    public static CommandGroup getSelectedAuton() {
+        return selectedAuton;
     }
 }

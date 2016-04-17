@@ -12,24 +12,48 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SmartDashboardHandler {
     private final Logger log = Logger.getLogger(getClass().getName());
-
-    private final SendableChooser autonChooser;
+    private SendableChooser typeOfAuton;
+    private SendableChooser turnAngle;
+    private SendableChooser outerworkType;
+    private SendableChooser extraAuton;
 
     public SmartDashboardHandler(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
         log.info("Configuring class=" + getClass());
-
-        autonChooser = new AutonomousChooserFactory().make(robotSubsystems,
+        typeOfAuton = new AutonomousTraitFactory().findAutonType();
+        turnAngle = new AutonomousTraitFactory().findAutonAngle();
+        outerworkType = new AutonomousTraitFactory().findOuterworkType();
+        extraAuton = new AutonomousTraitFactory().extraAutons(robotSubsystems,
                 robotControllers, visionProcessing);
-
-        SmartDashboard.putData("Autonomous Routine", autonChooser);
+        SmartDashboard.putData("Auton Type", typeOfAuton);
+        SmartDashboard.putData("Turn Angle", turnAngle);
+        SmartDashboard.putData("Outerwork Type", outerworkType);
+        SmartDashboard.putData("Extra Autons", extraAuton);
     }
 
-    public CommandGroup getAutonCommand() {
-        CommandGroup selectedAuton = (CommandGroup) autonChooser.getSelected();
-        log.info("Selected auton='" + selectedAuton + "'");
+    public CommandGroup getChosenAutonType() {
+        CommandGroup chosenAutonType = (CommandGroup) typeOfAuton.getSelected();
+        log.info("ChosenAutonType'" + typeOfAuton + "'");
+        return chosenAutonType;
+    }
 
-        return selectedAuton;
+    public CommandGroup getChosenAutonOuterwork() {
+        CommandGroup chosenAutonOuterwork =
+                (CommandGroup) outerworkType.getSelected();
+        log.info("ChosenAutonOuterwork'" + typeOfAuton + "'");
+        return chosenAutonOuterwork;
+    }
+
+    public CommandGroup getChosenAutonAngle() {
+        CommandGroup chosenAutonAngle = (CommandGroup) turnAngle.getSelected();
+        log.info("ChosenAutonAngle'" + turnAngle + "'");
+        return chosenAutonAngle;
+    }
+
+    public CommandGroup getChosenExtraAuton() {
+        CommandGroup chosenExtraAuton = (CommandGroup) extraAuton.getSelected();
+        log.info("ChosenExtraAuton'" + extraAuton + "'");
+        return chosenExtraAuton;
     }
 }
