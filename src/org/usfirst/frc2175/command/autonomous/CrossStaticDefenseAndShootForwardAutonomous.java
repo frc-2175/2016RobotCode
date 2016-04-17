@@ -21,7 +21,7 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
 
         // Drive forwards
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
-                robotControllers));
+                robotControllers, true));
         // open up pathway for catapult to shoot
         addSequential(new PutBallInCorrectPlacement(robotSubsystems,
                 robotControllers));

@@ -1,7 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.EmptyCommand;
-import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBackwardsBlock;
 import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
@@ -23,8 +22,8 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         double liftIntakeSpeed = -.5;
 
         // Drive forwards
-        addSequential(
-                new CrossStaticDefenseBlock(robotSubsystems, robotControllers));
+        addSequential(new CrossStaticDefenseBlock(robotSubsystems,
+                robotControllers, true));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 20));
@@ -60,8 +59,8 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
                 new TurnToHeadingCommand(robotSubsystems, robotControllers, 0),
                 1.5);
         // Back up
-        addSequential(new CrossStaticDefenseBackwardsBlock(robotSubsystems,
-                robotControllers));
+        addSequential(new CrossStaticDefenseBlock(robotSubsystems,
+                robotControllers, false));
 
     }
 

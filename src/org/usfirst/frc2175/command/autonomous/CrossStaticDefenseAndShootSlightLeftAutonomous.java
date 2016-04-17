@@ -23,7 +23,7 @@ public class CrossStaticDefenseAndShootSlightLeftAutonomous
 
         // Drive forwards
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
-                robotControllers));
+                robotControllers, true));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, -20));

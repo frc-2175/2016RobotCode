@@ -8,9 +8,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CrossStaticDefenseBlock extends CommandGroup {
     public CrossStaticDefenseBlock(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
-        addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 135),
-                6);
+            RobotControllers robotControllers, boolean goingForwards) {
+        if (goingForwards) {
+            addSequential(new DriveInchesCommand(robotSubsystems,
+                    robotControllers, 135), 6);
+        } else {
+            addSequential(new DriveInchesCommand(robotSubsystems,
+                    robotControllers, -135));
+        }
     }
 }

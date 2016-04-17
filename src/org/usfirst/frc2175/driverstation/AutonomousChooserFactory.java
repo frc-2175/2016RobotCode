@@ -57,8 +57,8 @@ public class AutonomousChooserFactory {
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
         autonChooser.addObject("Cross simple defense",
-                new CrossStaticDefenseBlock(robotSubsystems,
-                        robotControllers));
+                new CrossStaticDefenseBlock(robotSubsystems, robotControllers,
+                        true));
         autonChooser.addObject("Cross simple defense and shoot forward",
                 new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
