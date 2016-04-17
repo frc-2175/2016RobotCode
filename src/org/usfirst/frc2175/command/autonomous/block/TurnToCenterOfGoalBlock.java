@@ -15,7 +15,7 @@ public class TurnToCenterOfGoalBlock extends CommandGroup {
         for (int i = 0; i < times; i++) {
             addSequential(new TurnToFaceGoalWithGyroCommand(robotSubsystems,
                     robotControllers, visionProcessing));
-            addSequential(new EmptyCommand(), (times - (i * 3 / 4)) / 10);
+            addSequential(new EmptyCommand(), .25);
         }
     }
 }
