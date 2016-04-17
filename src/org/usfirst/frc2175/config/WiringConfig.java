@@ -4,7 +4,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.usfirst.frc2175.util.TalonGroup;
+import org.usfirst.frc2175.util.SpeedControllerGroup;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -38,8 +38,8 @@ public class WiringConfig extends BaseConfig {
             calcEncoderDistanceConversion();
 
     // powertrain
-    private TalonGroup leftDriveTalonGroup;
-    private TalonGroup rightDriveTalonGroup;
+    private SpeedControllerGroup leftDriveTalonGroup;
+    private SpeedControllerGroup rightDriveTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private AHRS fancyGyro;
@@ -139,8 +139,8 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("powertrain.talon.left.3.port", properties);
         CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
 
-        leftDriveTalonGroup = new TalonGroup(leftDriveTalon1, leftDriveTalon2,
-                leftDriveTalon3);
+        leftDriveTalonGroup = new SpeedControllerGroup(leftDriveTalon1,
+                leftDriveTalon2, leftDriveTalon3);
 
         int rightDriveTalon1Port = getIntPropertyValue(
                 "powertrain.talon.right.1.port", properties);
@@ -154,7 +154,7 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.talon.right.3.port", properties);
         CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
 
-        rightDriveTalonGroup = new TalonGroup(rightDriveTalon1,
+        rightDriveTalonGroup = new SpeedControllerGroup(rightDriveTalon1,
                 rightDriveTalon2, rightDriveTalon3);
 
         int ultrasonicSensorPingPort = getIntPropertyValue(
@@ -262,7 +262,7 @@ public class WiringConfig extends BaseConfig {
         return rollerbarIntakeLiftTalon;
     }
 
-    public TalonGroup getLeftDriveTalonGroup() {
+    public SpeedControllerGroup getLeftDriveTalonGroup() {
         return leftDriveTalonGroup;
     }
 
@@ -274,7 +274,7 @@ public class WiringConfig extends BaseConfig {
         return isBootDownSwitch;
     }
 
-    public TalonGroup getRightDriveTalonGroup() {
+    public SpeedControllerGroup getRightDriveTalonGroup() {
         return rightDriveTalonGroup;
     }
 
@@ -300,14 +300,6 @@ public class WiringConfig extends BaseConfig {
 
     public DigitalInput getCatapultDownSwitch() {
         return catapultDownSwitch;
-    }
-
-    public TalonGroup getLeftDriveTalonHandler() {
-        return leftDriveTalonGroup;
-    }
-
-    public TalonGroup getRightDriveTalonHandler() {
-        return rightDriveTalonGroup;
     }
 
     public Encoder getLeftDriveEncoder() {

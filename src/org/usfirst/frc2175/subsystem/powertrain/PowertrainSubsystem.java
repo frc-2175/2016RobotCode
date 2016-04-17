@@ -4,7 +4,7 @@ import org.usfirst.frc2175.config.PowertrainConfig;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
-import org.usfirst.frc2175.util.TalonGroup;
+import org.usfirst.frc2175.util.SpeedControllerGroup;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class PowertrainSubsystem extends BaseSubsystem {
     private PowertrainConfig powertrainConfig;
 
-    private TalonGroup leftDriveSideTalonGroup;
-    private TalonGroup rightDriveSideTalonGroup;
+    private SpeedControllerGroup leftDriveSideTalonGroup;
+    private SpeedControllerGroup rightDriveSideTalonGroup;
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Solenoid[] driveShifters;
@@ -32,8 +32,8 @@ public class PowertrainSubsystem extends BaseSubsystem {
         WiringConfig wiringConfig = robotConfig.getWiringConfig();
         powertrainConfig = robotConfig.getPowertrainConfig();
 
-        leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonHandler();
-        rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonHandler();
+        leftDriveSideTalonGroup = wiringConfig.getLeftDriveTalonGroup();
+        rightDriveSideTalonGroup = wiringConfig.getRightDriveTalonGroup();
 
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();

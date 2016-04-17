@@ -8,7 +8,10 @@ import edu.wpi.first.wpilibj.SpeedController;
 /**
  * Treats a collection of {@link #edu.wpi.first.wpilibj.SpeedController speed
  * controllers} as one. Controllers can be added to the collection with
- * {@link #addController(SpeedController controller) addController}.
+ * {@link #addController(SpeedController controller) addController}. You
+ * probably shouldn't mix speed controller types, as they have different
+ * physical properties and work slightly differently. From a code standpoint, it
+ * will work, but it's just a bad idea.
  *
  * @author Max Haland
  */
@@ -17,12 +20,24 @@ public class SpeedControllerGroup implements SpeedController {
             new ArrayList<SpeedController>();
 
     /**
+     * Constructor for any number of speed controllers
+     *
+     * @param controllers
+     *            - list of controllers to add.
+     */
+    public SpeedControllerGroup(SpeedController... controllers) {
+        for (SpeedController controller : controllers) {
+            addController(controller);
+        }
+    }
+
+    /**
      * Add a new speed controller to the group.
      *
      * @param controller
      *            controller to add.
      */
-    public void addController(SpeedController controller) {
+    public synchronized void addController(SpeedController controller) {
         controllers.add(controller);
     }
 
@@ -31,7 +46,7 @@ public class SpeedControllerGroup implements SpeedController {
      *
      * @return the size of the controller group.
      */
-    public int getSize() {
+    public synchronized int getControllerCount() {
         return controllers.size();
     }
 
@@ -56,23 +71,16 @@ public class SpeedControllerGroup implements SpeedController {
      */
     @Override
     public synchronized double get() {
-        List<Double> speeds = new ArrayList<Double>();
-        double overallSpeed;
+        double referenceSpeed = controllers.get(0).get();
 
         for (SpeedController controller : controllers) {
-            Double controllerSpeed = controller.get();
-            speeds.add(controllerSpeed);
+            double currentSpeed = controller.get();
+            if (currentSpeed != referenceSpeed) {
+                throw new IllegalStateException(
+                        "Controller speeds not equal! Something has gone terribly wrong!");
+            }
         }
-
-        boolean areSpeedsEqual = areDoublesInListEqual(speeds);
-        if (areSpeedsEqual) {
-            overallSpeed = speeds.get(0).doubleValue();
-        } else {
-            throw new IllegalStateException(
-                    "Controller speeds not equal! Something has gone terribly wrong!");
-        }
-
-        return overallSpeed;
+        return referenceSpeed;
     }
 
     /**
@@ -121,23 +129,16 @@ public class SpeedControllerGroup implements SpeedController {
      */
     @Override
     public synchronized boolean getInverted() {
-        boolean returnValue;
-        List<Boolean> values = new ArrayList<Boolean>();
+        boolean referenceInverted = controllers.get(0).getInverted();
 
         for (SpeedController controller : controllers) {
-            Boolean value = controller.getInverted();
-            values.add(value);
+            boolean currentInverted = controller.getInverted();
+            if (currentInverted != referenceInverted) {
+                throw new IllegalStateException(
+                        "Controllers set to run different directions! Something has gone terribly wrong!");
+            }
         }
-
-        boolean areValuesEqual = areBooleansInListEqual(values);
-        if (areValuesEqual) {
-            returnValue = values.get(0).booleanValue();
-        } else {
-            throw new IllegalStateException(
-                    "Talons are not all set to the same inverted value! Something has gone terribly wrong!");
-        }
-
-        return returnValue;
+        return referenceInverted;
     }
 
     /**
@@ -160,28 +161,17 @@ public class SpeedControllerGroup implements SpeedController {
         }
     }
 
-    private boolean areDoublesInListEqual(List<Double> l) {
-        boolean areDoublesEqual = true;
-        for (Double d : l) {
-            for (Double d2 : l) {
-                if (!d.equals(d2)) {
-                    areDoublesEqual = false;
+    public synchronized boolean areItemsInListEqual(
+            List<? extends Object> list) {
+        boolean areBooleansEqual = true;
+        for (Object b : list) {
+            for (Object b2 : list) {
+                if (!b.equals(b2)) {
+                    areBooleansEqual = false;
                 }
             }
         }
-        return areDoublesEqual;
-    }
-
-    private boolean areBooleansInListEqual(List<Boolean> l) {
-        boolean areDoublesEqual = true;
-        for (Boolean b : l) {
-            for (Boolean b2 : l) {
-                if (!(b == b2)) {
-                    areDoublesEqual = false;
-                }
-            }
-        }
-        return areDoublesEqual;
+        return areBooleansEqual;
     }
 
 }
