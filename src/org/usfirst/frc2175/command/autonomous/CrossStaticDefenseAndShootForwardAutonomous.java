@@ -6,6 +6,7 @@ import org.usfirst.frc2175.command.autonomous.block.PutBallInCorrectPlacement;
 import org.usfirst.frc2175.command.autonomous.block.TurnToCenterOfGoalBlock;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
+import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
@@ -35,10 +36,9 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
         addSequential(new EmptyCommand(), 2);
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 -liftIntakeSpeed), .8);
-        // addSequential(
-        // new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
-        // addSequential(
-        // new DriveInchesCommand(robotSubsystems, robotControllers, -148),
-        // 8);
+        addSequential(
+                new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
+        addSequential(new CrossStaticDefenseBlock(robotSubsystems,
+                robotControllers, false));
     }
 }
