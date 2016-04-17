@@ -16,6 +16,24 @@ public class SpeedControllerGroup implements SpeedController {
     private final List<SpeedController> controllers =
             new ArrayList<SpeedController>();
 
+    public SpeedControllerGroup() {
+    }
+
+    /**
+     * Constructor for three speed controllers.
+     *
+     * @param controller1
+     * @param controller2
+     * @param controller3
+     */
+    public SpeedControllerGroup(SpeedController controller1,
+            SpeedController controller2, SpeedController controller3) {
+        this();
+        addController(controller1);
+        addController(controller2);
+        addController(controller3);
+    }
+
     /**
      * Add a new speed controller to the group.
      *

@@ -139,10 +139,8 @@ public class WiringConfig extends BaseConfig {
                 getIntPropertyValue("powertrain.talon.left.3.port", properties);
         CANTalon leftDriveTalon3 = new CANTalon(leftDriveTalon3Port);
 
-        leftDriveTalonGroup = new SpeedControllerGroup();
-        leftDriveTalonGroup.addController(leftDriveTalon1);
-        leftDriveTalonGroup.addController(leftDriveTalon2);
-        leftDriveTalonGroup.addController(leftDriveTalon3);
+        leftDriveTalonGroup = new SpeedControllerGroup(leftDriveTalon1,
+                leftDriveTalon2, leftDriveTalon3);
 
         int rightDriveTalon1Port = getIntPropertyValue(
                 "powertrain.talon.right.1.port", properties);
@@ -156,10 +154,8 @@ public class WiringConfig extends BaseConfig {
                 "powertrain.talon.right.3.port", properties);
         CANTalon rightDriveTalon3 = new CANTalon(rightDriveTalon3Port);
 
-        rightDriveTalonGroup = new SpeedControllerGroup();
-        rightDriveTalonGroup.addController(rightDriveTalon1);
-        rightDriveTalonGroup.addController(rightDriveTalon2);
-        rightDriveTalonGroup.addController(rightDriveTalon3);
+        rightDriveTalonGroup = new SpeedControllerGroup(rightDriveTalon1,
+                rightDriveTalon2, rightDriveTalon3);
 
         int ultrasonicSensorPingPort = getIntPropertyValue(
                 "powertrain.digital.ultrasonic.port.ping", properties);
