@@ -160,7 +160,7 @@ public class SpeedControllerGroup implements SpeedController {
         }
     }
 
-    private boolean areDoublesInListEqual(List<Double> l) {
+    public boolean areDoublesInListEqual(List<Double> l) {
         boolean areDoublesEqual = true;
         for (Double d : l) {
             for (Double d2 : l) {
@@ -172,16 +172,16 @@ public class SpeedControllerGroup implements SpeedController {
         return areDoublesEqual;
     }
 
-    private boolean areBooleansInListEqual(List<Boolean> l) {
-        boolean areDoublesEqual = true;
+    public boolean areBooleansInListEqual(List<Boolean> l) {
+        boolean areBooleansEqual = true;
         for (Boolean b : l) {
             for (Boolean b2 : l) {
-                if (!(b == b2)) {
-                    areDoublesEqual = false;
+                if (!b.equals(b2)) {
+                    areBooleansEqual = false;
                 }
             }
         }
-        return areDoublesEqual;
+        return areBooleansEqual;
     }
 
 }
