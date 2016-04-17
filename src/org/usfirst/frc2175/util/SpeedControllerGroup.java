@@ -20,6 +20,20 @@ public class SpeedControllerGroup implements SpeedController {
     }
 
     /**
+     * Constructor for two speed controllers.
+     *
+     * @param controller1
+     * @param controller2
+     * @param controller3
+     */
+    public SpeedControllerGroup(SpeedController controller1,
+            SpeedController controller2) {
+        this();
+        addController(controller1);
+        addController(controller2);
+    }
+
+    /**
      * Constructor for three speed controllers.
      *
      * @param controller1
@@ -32,6 +46,19 @@ public class SpeedControllerGroup implements SpeedController {
         addController(controller1);
         addController(controller2);
         addController(controller3);
+    }
+
+    /**
+     * Constructor for a list of speed controllers.
+     *
+     * @param controllers
+     *            - list of controllers to add.
+     */
+    public SpeedControllerGroup(List<SpeedController> controllers) {
+        this();
+        for (SpeedController controller : controllers) {
+            addController(controller);
+        }
     }
 
     /**
