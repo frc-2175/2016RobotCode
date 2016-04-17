@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossStaticDefenseBlock extends CommandGroup {
     public CrossStaticDefenseBlock(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, boolean goingForwards) {
-        double moveAmount = 135;
+        double moveAmount = 145;
         if (!goingForwards) {
             moveAmount = -moveAmount;
         }
