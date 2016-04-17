@@ -3,15 +3,15 @@ package org.usfirst.frc2175.subsystem.climber;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.config.WiringConfig;
 import org.usfirst.frc2175.subsystem.BaseSubsystem;
-import org.usfirst.frc2175.util.TalonGroup;
+import org.usfirst.frc2175.util.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class ClimberSubsystem extends BaseSubsystem {
     private Solenoid climberSolenoid;
-    private TalonGroup leftDriveSideTalonGroup;
-    private TalonGroup rightDriveSideTalonGroup;
+    private SpeedControllerGroup leftDriveSideTalonGroup;
+    private SpeedControllerGroup rightDriveSideTalonGroup;
     private DigitalInput climberExtendedSwitch;
     private DigitalInput climberUpSwitch;
 
