@@ -1,6 +1,8 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.EmptyCommand;
+import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBackwardsBlock;
+import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
@@ -21,8 +23,8 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         double liftIntakeSpeed = -.5;
 
         // Drive forwards
-        addSequential(new CrossStaticDefenseAutonomous(robotSubsystems,
-                robotControllers));
+        addSequential(
+                new CrossStaticDefenseBlock(robotSubsystems, robotControllers));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 20));
@@ -31,7 +33,8 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
                 new DriveInchesCommand(robotSubsystems, robotControllers, 24));
         // Lower intake
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
-                liftIntakeSpeed), .8);
+                liftIntakeSpeed));
+
         addSequential(new EmptyCommand(), .4);
 
         // Spin Wheels In
@@ -44,6 +47,19 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         addSequential(new EmptyCommand(), .4);
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
+        // Turn back
+        addSequential(new TurnToHeadingCommand(robotSubsystems,
+                robotControllers, 20));
+        // Back up
+        addSequential(
+                new DriveInchesCommand(robotSubsystems, robotControllers, -24));
+        // Turn normal to defenses again
+        addSequential(
+                new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
+        // Back up
+        addSequential(new CrossStaticDefenseBackwardsBlock(robotSubsystems,
+                robotControllers));
+
     }
 
 }

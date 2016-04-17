@@ -11,7 +11,6 @@ import org.usfirst.frc2175.command.autonomous.CrossPortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightRightAutonomous;
-import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseNoEncoderAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwiceChevalDeFriseAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwicePortcullisAutonomous;
@@ -19,6 +18,7 @@ import org.usfirst.frc2175.command.autonomous.CrossTwiceStaticDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
+import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
@@ -57,7 +57,7 @@ public class AutonomousChooserFactory {
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
         autonChooser.addObject("Cross simple defense",
-                new CrossStaticDefenseAutonomous(robotSubsystems,
+                new CrossStaticDefenseBlock(robotSubsystems,
                         robotControllers));
         autonChooser.addObject("Cross simple defense and shoot forward",
                 new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,

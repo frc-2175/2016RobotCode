@@ -1,6 +1,7 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.EmptyCommand;
+import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.command.autonomous.block.PutBallInCorrectPlacement;
 import org.usfirst.frc2175.command.autonomous.block.TurnToCenterOfGoalBlock;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
@@ -19,7 +20,7 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
         int times = 5;
 
         // Drive forwards
-        addSequential(new CrossStaticDefenseAutonomous(robotSubsystems,
+        addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers));
         // open up pathway for catapult to shoot
         addSequential(new PutBallInCorrectPlacement(robotSubsystems,
