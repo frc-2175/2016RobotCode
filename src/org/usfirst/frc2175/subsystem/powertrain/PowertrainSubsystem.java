@@ -20,7 +20,9 @@ public class PowertrainSubsystem extends BaseSubsystem {
     private Encoder leftDriveEncoder;
     private Encoder rightDriveEncoder;
     private Solenoid[] driveShifters;
+
     private AHRS fancyGyro;
+    private double gyroOffset;
 
     private ShifterState shifterState;
 
@@ -36,6 +38,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
         leftDriveEncoder = wiringConfig.getLeftDriveEncoder();
         rightDriveEncoder = wiringConfig.getRightDriveEncoder();
         fancyGyro = wiringConfig.getFancyGyro();
+        gyroOffset = 0;
         driveShifters = wiringConfig.getShifterSolenoids();
 
         robotDrive = new RobotDrive(leftDriveSideTalonGroup,
@@ -155,13 +158,16 @@ public class PowertrainSubsystem extends BaseSubsystem {
                 || shifterState == ShifterState.CLIMB_LOW;
     }
 
+    /**
+     * Resets the gyro angle to zero. This should only be run at the beginning
+     * of auton.
+     */
     public void resetGyro() {
-        // We should almost never need to run this with the nice gyro
-        fancyGyro.reset();
+        gyroOffset = -fancyGyro.getAngle();
     }
 
     public double getGyroAngle() {
-        return fancyGyro.getAngle();
+        return fancyGyro.getAngle() + gyroOffset;
     }
 
     private enum ShifterState {
