@@ -10,6 +10,7 @@ public class CrossStaticDefenseBlock extends CommandGroup {
     public CrossStaticDefenseBlock(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 135));
+                new DriveInchesCommand(robotSubsystems, robotControllers, 135),
+                6);
     }
 }
