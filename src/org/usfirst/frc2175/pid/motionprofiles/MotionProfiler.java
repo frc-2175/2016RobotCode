@@ -31,6 +31,11 @@ public class MotionProfiler {
     public class MotionProfile {
         private List<MotionProfilePoint> profileAsList =
                 new ArrayList<MotionProfilePoint>();
+        private int dTime;
+
+        public MotionProfile(int dTime) {
+            this.dTime = dTime;
+        }
 
         public void addMotionProfilePoint(MotionProfilePoint point) {
             profileAsList.add(point);
@@ -38,6 +43,14 @@ public class MotionProfiler {
 
         public List<MotionProfilePoint> getProfileAsList() {
             return profileAsList;
+        }
+
+        public int getDTime() {
+            return dTime;
+        }
+
+        public int getProfileRunTime() {
+            return dTime * profileAsList.size();
         }
     }
 
@@ -55,7 +68,7 @@ public class MotionProfiler {
      */
     public MotionProfile generateDriveDistanceMotionProfile(double distance,
             double maxVelocity, double maxAcceleration, int dTime) {
-        MotionProfile profile = new MotionProfile();
+        MotionProfile profile = new MotionProfile(dTime);
 
         // Values for profile
         double t_accel = (maxVelocity / maxAcceleration);
