@@ -1,4 +1,4 @@
-package org.usfirst.frc2175.pid;
+package org.usfirst.frc2175.pid.motionprofiles;
 
 import java.util.ArrayList;
 import java.util.List;
