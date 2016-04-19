@@ -123,13 +123,29 @@ public class PowertrainSubsystem extends BaseSubsystem {
         return leftEncoderDistance;
     }
 
+    public double getLeftEncoderSpeed() {
+        return leftDriveEncoder.getRate();
+    }
+
     public double getRightEncoderDistance() {
         double rightEncoderDistance = rightDriveEncoder.getDistance();
         return rightEncoderDistance;
     }
 
+    public double getRightEncoderSpeed() {
+        return rightDriveEncoder.getRate();
+    }
+
     public double getMeanEncoderDistance() {
         return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2;
+    }
+
+    public SpeedControllerGroup getLeftDriveSideTalonGroup() {
+        return leftDriveSideTalonGroup;
+    }
+
+    public SpeedControllerGroup getRightDriveSideTalonGroup() {
+        return rightDriveSideTalonGroup;
     }
 
     public void shiftToHighGear() {
