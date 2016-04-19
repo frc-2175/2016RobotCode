@@ -158,7 +158,7 @@ public class SpeedControllerGroup implements SpeedController {
     }
 
     /**
-     * Stops all motors in the group by setting their speed to 0.
+     * Stops all motors in the group by setting each motor's speed to 0.
      */
     @Override
     public synchronized void stopMotor() {
