@@ -1,7 +1,7 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.autonomous.block.CrossChevalBlock;
-import org.usfirst.frc2175.command.autonomous.block.DriveUpToOuterworksBlock;
+import org.usfirst.frc2175.command.autonomous.block.DriveUpToOuterWorksBlock;
 import org.usfirst.frc2175.command.autonomous.block.TurnToCenterOfGoalBlock;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
@@ -17,7 +17,7 @@ public class CrossChevalDeFriseAndShootSlightRightAutonomous
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
         // drive up to outerworks
-        addSequential(new DriveUpToOuterworksBlock(robotSubsystems,
+        addSequential(new DriveUpToOuterWorksBlock(robotSubsystems,
                 robotControllers));
         // crosses cheval
         addSequential(

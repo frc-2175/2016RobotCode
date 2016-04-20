@@ -37,7 +37,7 @@ public class DriveInchesPIDController extends PIDControllerComplete {
 
     @Override
     public void pidWrite(double output) {
-        powertrainSubsystem.arcadeDrive(output, 0);
+        powertrainSubsystem.driveAtZeroHeading(output);
     }
 
 }

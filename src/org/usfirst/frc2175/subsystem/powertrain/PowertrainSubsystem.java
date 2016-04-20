@@ -59,6 +59,12 @@ public class PowertrainSubsystem extends BaseSubsystem {
         }
     }
 
+    public void driveAtZeroHeading(double speed) {
+        // TODO make this a property
+        double kP = 0.1;
+        arcadeDrive(speed, 0 - kP * getGyroAngle());
+    }
+
     public void tankDrive(double leftSpeed, double rightSpeed) {
         // If the shifters are in a state where we can drive, drive. Otherwise,
         // do nothing

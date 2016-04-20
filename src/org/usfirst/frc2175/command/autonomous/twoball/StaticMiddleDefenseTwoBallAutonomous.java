@@ -14,8 +14,8 @@ public class StaticMiddleDefenseTwoBallAutonomous extends CommandGroup {
 
         addParallel(new TwoBallManipulatorCommandGroup(robotConfig,
                 robotSubsystems));
-        addParallel(new TwoBallPowertrainCommandGroup(robotConfig,
-                robotSubsystems, robotControllers, visionProcessing));
+        addParallel(new TwoBallPowertrainCommandGroup(robotSubsystems,
+                robotControllers, visionProcessing));
     }
 
 }

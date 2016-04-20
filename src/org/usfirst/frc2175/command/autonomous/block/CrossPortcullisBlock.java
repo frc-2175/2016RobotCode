@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossPortcullisBlock extends CommandGroup {
     public CrossPortcullisBlock(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, boolean withCaution) {
-        addSequential(new DriveUpToOuterworksBlock(robotSubsystems,
+        addSequential(new DriveUpToOuterWorksBlock(robotSubsystems,
                 robotControllers));
         addParallel(new LowerBootCommand(robotSubsystems));
         addSequential(

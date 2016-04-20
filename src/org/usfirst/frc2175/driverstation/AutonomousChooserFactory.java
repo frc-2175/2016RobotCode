@@ -17,6 +17,7 @@ import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
 import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
+import org.usfirst.frc2175.command.autonomous.twoball.TwoBallPowertrainCommandGroup;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
 import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
@@ -43,7 +44,8 @@ public class AutonomousChooserFactory {
         // list cross ones first as probably most common
         addCrossAutons(autonChooser, robotSubsystems, robotControllers,
                 visionProcessing);
-        addCrossTwiceAutons(autonChooser, robotSubsystems, robotControllers);
+        addCrossTwiceAutons(autonChooser, robotControllers, robotSubsystems,
+                visionProcessing);
 
         autonChooser.addObject("Careful: Test all robot features",
                 new TestAllFeaturesAutonomous(robotSubsystems,
@@ -100,8 +102,11 @@ public class AutonomousChooserFactory {
 
     // WARNING: keep these same order as Weaken ones for driver clarity
     protected void addCrossTwiceAutons(SendableChooser autonChooser,
-            RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers) {
+            RobotControllers robotControllers, RobotSubsystems robotSubsystems,
+            VisionProcessing visionProcessing) {
+        autonChooser.addObject("Two ball powertrain side",
+                new TwoBallPowertrainCommandGroup(robotSubsystems,
+                        robotControllers, visionProcessing));
         autonChooser.addObject("Cross twice simple defense",
                 new CrossTwiceStaticDefenseAutonomous(robotSubsystems,
                         robotControllers));

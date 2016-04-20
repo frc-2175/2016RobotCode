@@ -11,18 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossChevalBlock extends CommandGroup {
     public CrossChevalBlock(RobotSubsystems robotSubsystems,
             RobotControllers robotControllers, boolean withCaution) {
-        addSequential(new DriveUpToOuterworksBlock(robotSubsystems,
-                robotControllers));
+        addSequential(new LowerBootCommand(robotSubsystems), 1);
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 12));
-        addSequential(new LowerBootCommand(robotSubsystems));
-        if (withCaution) {
-            addSequential(new DriveInchesCommand(robotSubsystems,
-                    robotControllers, 85));
-        } else {
-            addSequential(new DriveInchesCommand(robotSubsystems,
-                    robotControllers, 105));
-        }
-        addSequential(new RaiseBootCommand(robotSubsystems));
+                new DriveInchesCommand(robotSubsystems, robotControllers, 105));
+        addSequential(new RaiseBootCommand(robotSubsystems), 1);
     }
 }
