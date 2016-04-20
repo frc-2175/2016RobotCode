@@ -27,11 +27,15 @@ public class MotionProfileControllerHandler {
         }
     }
 
-    private void enable() {
+    public void enable() {
         ControllerHandlerTimerTask controllerTask =
                 new ControllerHandlerTimerTask(profile);
         setpointSetterTimer = new Timer();
         setpointSetterTimer.schedule(controllerTask, 0, profile.getDTime());
+    }
+
+    public void disable() {
+        setpointSetterTimer.cancel();
     }
 
     public class ControllerHandlerTimerTask extends TimerTask {
@@ -62,6 +66,7 @@ public class MotionProfileControllerHandler {
             indexTime();
             if (isFinished) {
                 cancel();
+                setpointSetterTimer.cancel();
             }
         }
 
