@@ -26,6 +26,7 @@ public class MotionProfiler {
             double[] pointAsArray = { time, velocity };
             return pointAsArray;
         }
+
     }
 
     public class MotionProfile {
@@ -35,6 +36,26 @@ public class MotionProfiler {
 
         public MotionProfile(int dTime) {
             this.dTime = dTime;
+        }
+
+        /**
+         * Gets the MotionProfilePoint at the specified time.
+         *
+         * @param time
+         *            Time value of point to grab. This must be a multiple of
+         *            dTime for the profile
+         * @return The Point at the specified time value
+         */
+        public MotionProfilePoint getPointAtTime(int time) {
+            MotionProfilePoint point;
+            // Check to make sure the point is a multiple of dTime, throw an
+            // exception otherwise
+            if (time % dTime != 0) {
+                throw new IllegalArgumentException(
+                        "Time signature must be a multiple of dTime!");
+            }
+            point = profileAsList.get(time / dTime);
+            return point;
         }
 
         public void addMotionProfilePoint(MotionProfilePoint point) {
@@ -65,6 +86,11 @@ public class MotionProfiler {
      *            Highest acceleration allowed
      * @param dTime
      *            Time per profile step (in ms)
+     */
+    /*
+     * TODO make unit tests for this (or test it with a spreadsheet or
+     * something). Currently, it probably doesn't work for distances where the
+     * robot cannot hit max velocity.
      */
     public MotionProfile generateDriveDistanceMotionProfile(double distance,
             double maxVelocity, double maxAcceleration, int dTime) {
