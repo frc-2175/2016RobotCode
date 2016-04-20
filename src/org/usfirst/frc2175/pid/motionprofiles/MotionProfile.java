@@ -13,8 +13,9 @@ import java.util.List;
 public class MotionProfile {
     private List<MotionProfilePoint> profileAsList =
             new ArrayList<MotionProfilePoint>();
-    // Default time between points in ms
-    private static final int DEFAULT_D_TIME = 20;
+    // Default time between points in ms. This should be longer than the PID
+    // loop cycle time.
+    private static final int DEFAULT_D_TIME = 50;
 
     // Time between points in the profile
     private final int dTime;
