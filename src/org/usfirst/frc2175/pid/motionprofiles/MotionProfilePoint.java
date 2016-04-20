@@ -1,10 +1,10 @@
 package org.usfirst.frc2175.pid.motionprofiles;
 
 /**
- * A MotionProfilePoint is one piece of data in a MotionProfile, consisting of
- * several components. Time is always required. Currently has only time and
- * velocity as components for each point, but could be extended to have
- * position, acceleration, or jerk.
+ * A MotionProfilePoint is one piece of data in a {@link MotionProfile},
+ * consisting of several components. Time is always required. Currently, it has
+ * only time and velocity as components for each point, but could be extended to
+ * have position, acceleration, or jerk.
  *
  * @author Max Haland
  *

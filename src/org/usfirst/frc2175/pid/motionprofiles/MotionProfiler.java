@@ -1,9 +1,19 @@
 package org.usfirst.frc2175.pid.motionprofiles;
 
+/**
+ * The class MotionProfiler serves as a collection of methods to generate and
+ * make {@link #MotionProfile MotionProfiles}. There are many different ways to
+ * do this, but only trapezoidal velocity profiling is implemented now.
+ * Eventually, there will be functionality to import a motion profile from a CSV
+ * file.
+ *
+ * @author Max Haland
+ *
+ */
 public class MotionProfiler {
 
     /**
-     * Generates a trapezoidal velocity motion profile with a specific dTime
+     * Generates a trapezoidal velocity motion profile with a specific dTime.
      *
      * @param distance
      *            Distance to drive

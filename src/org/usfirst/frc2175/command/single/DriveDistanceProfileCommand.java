@@ -9,9 +9,9 @@ import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
 /**
- * Command to drive a specific distance using a generated motion profile. The
- * profile is generated based on arguments passed to the constructor, and then
- * executed.
+ * Command to drive a specific distance using a generated {@link MotionProfile}.
+ * The profile is generated using the {@link MotionProfiler} class based on
+ * arguments passed to the constructor, and then executed.
  *
  * @author Max Haland
  *
