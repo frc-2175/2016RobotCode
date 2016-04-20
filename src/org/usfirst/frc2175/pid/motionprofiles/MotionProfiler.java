@@ -19,8 +19,9 @@ public class MotionProfiler {
      * something). Currently, it probably doesn't work for distances where the
      * robot cannot hit max velocity.
      */
-    public MotionProfile generateDriveDistanceMotionProfile(double distance,
-            double maxVelocity, double maxAcceleration, int dTime) {
+    public static MotionProfile generateDriveDistanceMotionProfile(
+            double distance, double maxVelocity, double maxAcceleration,
+            int dTime) {
         MotionProfile profile = new MotionProfile(dTime);
 
         // Values for profile
@@ -66,8 +67,8 @@ public class MotionProfiler {
      * something). Currently, it probably doesn't work for distances where the
      * robot cannot hit max velocity.
      */
-    public MotionProfile generateDriveDistanceMotionProfile(double distance,
-            double maxVelocity, double maxAcceleration) {
+    public static MotionProfile generateDriveDistanceMotionProfile(
+            double distance, double maxVelocity, double maxAcceleration) {
         MotionProfile profile = new MotionProfile();
 
         // Values for profile

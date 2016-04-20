@@ -30,10 +30,10 @@ public class DriveDistanceProfileCommand extends BaseCommand {
      */
     public DriveDistanceProfileCommand(RobotConfig robotConfig,
             RobotControllers robotControllers, double distance) {
-        MotionProfiler profiler = new MotionProfiler();
-        MotionProfile profile = profiler.generateDriveDistanceMotionProfile(
-                distance, PowertrainSubsystem.MAX_LOW_GEAR_SPEED,
-                PowertrainSubsystem.MAX_AUTON_ACCELERATION);
+        MotionProfile profile =
+                MotionProfiler.generateDriveDistanceMotionProfile(distance,
+                        PowertrainSubsystem.MAX_LOW_GEAR_SPEED,
+                        PowertrainSubsystem.MAX_AUTON_ACCELERATION);
 
         profileHandler = new MotionProfileControllerHandler(profile,
                 robotControllers.getMotionProfileDrivePIDController_Left(),
@@ -56,9 +56,9 @@ public class DriveDistanceProfileCommand extends BaseCommand {
     public DriveDistanceProfileCommand(RobotConfig robotConfig,
             RobotControllers robotControllers, double distance,
             double maxVelocity, double maxAcceleration) {
-        MotionProfiler profiler = new MotionProfiler();
-        MotionProfile profile = profiler.generateDriveDistanceMotionProfile(
-                distance, maxVelocity, maxAcceleration);
+        MotionProfile profile =
+                MotionProfiler.generateDriveDistanceMotionProfile(distance,
+                        maxVelocity, maxAcceleration);
 
         profileHandler = new MotionProfileControllerHandler(profile,
                 robotControllers.getMotionProfileDrivePIDController_Left(),
@@ -82,9 +82,9 @@ public class DriveDistanceProfileCommand extends BaseCommand {
     public DriveDistanceProfileCommand(RobotConfig robotConfig,
             RobotControllers robotControllers, double distance,
             double maxVelocity, double maxAcceleration, int dTime) {
-        MotionProfiler profiler = new MotionProfiler();
-        MotionProfile profile = profiler.generateDriveDistanceMotionProfile(
-                distance, maxVelocity, maxAcceleration, dTime);
+        MotionProfile profile =
+                MotionProfiler.generateDriveDistanceMotionProfile(distance,
+                        maxVelocity, maxAcceleration, dTime);
 
         profileHandler = new MotionProfileControllerHandler(profile,
                 robotControllers.getMotionProfileDrivePIDController_Left(),
