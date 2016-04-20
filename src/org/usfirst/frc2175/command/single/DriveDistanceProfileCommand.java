@@ -3,9 +3,9 @@ package org.usfirst.frc2175.command.single;
 import org.usfirst.frc2175.command.BaseCommand;
 import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
+import org.usfirst.frc2175.pid.motionprofiles.MotionProfile;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfileControllerHandler;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler;
-import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler.MotionProfile;
 
 /**
  * Command to drive a specific distance using a generated motion profile. The

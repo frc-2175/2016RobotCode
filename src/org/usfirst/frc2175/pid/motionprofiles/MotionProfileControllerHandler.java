@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc2175.pid.PIDControllerComplete;
-import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler.MotionProfile;
 
 public class MotionProfileControllerHandler {
 
