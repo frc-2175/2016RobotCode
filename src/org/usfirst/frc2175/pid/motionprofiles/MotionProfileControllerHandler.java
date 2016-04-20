@@ -11,6 +11,8 @@ public class MotionProfileControllerHandler {
     private Timer setpointSetterTimer;
     private MotionProfile profile;
     private PIDControllerComplete[] controllers;
+    private boolean hasProfileStarted = false;
+    private boolean isProfileFinished = false;
 
     public MotionProfileControllerHandler(MotionProfile profile,
             PIDControllerComplete... controllers) {
@@ -33,6 +35,7 @@ public class MotionProfileControllerHandler {
         setpointSetterTimer = new Timer();
         setpointSetterTimer.schedule(controllerTask, 0, profile.getDTime());
         enableControllers();
+        hasProfileStarted = true;
     }
 
     public void disable() {
@@ -50,6 +53,14 @@ public class MotionProfileControllerHandler {
         for (PIDControllerComplete controller : controllers) {
             controller.disable();
         }
+    }
+
+    public boolean hasStarted() {
+        return hasProfileStarted;
+    }
+
+    public boolean isFinished() {
+        return isProfileFinished;
     }
 
     public class ControllerHandlerTimerTask extends TimerTask {
@@ -70,6 +81,7 @@ public class MotionProfileControllerHandler {
                 currentTime = currentTime + dTime;
                 if (currentTime >= dTime * profile.getProfileRunTime()) {
                     isFinished = true;
+                    isProfileFinished = true;
                 }
             }
         }
