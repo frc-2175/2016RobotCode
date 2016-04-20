@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class CommandSchedulerLoop extends ControlLoop {
     @Override
     protected long getPeriod() {
-        return 20;
+        return 10;
     }
 
     @Override
