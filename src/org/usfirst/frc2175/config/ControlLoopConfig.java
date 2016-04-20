@@ -30,6 +30,10 @@ public class ControlLoopConfig extends BaseConfig {
     private double driveInchesPID_maxRange;
     private double driveInchesPID_minRange;
 
+    private double motionProfileDrivePID_kProportional;
+    private double motionProfileDrivePID_kIntegral;
+    private double motionProfileDrivePID_kDerivative;
+
     @Override
     protected String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -96,6 +100,14 @@ public class ControlLoopConfig extends BaseConfig {
 
         driveInchesPID_minRange = getDoublePropertyValue(
                 "powertrain.driveInchesPID.range.min", properties);
+
+        // Motion profiler
+        motionProfileDrivePID_kProportional = getDoublePropertyValue(
+                "powertrain.profileDrivePID.kProportional", properties);
+        motionProfileDrivePID_kIntegral = getDoublePropertyValue(
+                "powertrain.profileDrivePID.kIntegral", properties);
+        motionProfileDrivePID_kDerivative = getDoublePropertyValue(
+                "powertrain.profileDrivePID.kDerivative", properties);
     }
 
     public double getVisionTurnPID_kProportional() {
@@ -172,6 +184,18 @@ public class ControlLoopConfig extends BaseConfig {
 
     public double getDriveInchesPID_minRange() {
         return driveInchesPID_minRange;
+    }
+
+    public double getMotionProfileDrivePID_kProportional() {
+        return motionProfileDrivePID_kProportional;
+    }
+
+    public double getMotionProfileDrivePID_kIntegral() {
+        return motionProfileDrivePID_kIntegral;
+    }
+
+    public double getMotionProfileDrivePID_kDerivative() {
+        return motionProfileDrivePID_kDerivative;
     }
 
 }

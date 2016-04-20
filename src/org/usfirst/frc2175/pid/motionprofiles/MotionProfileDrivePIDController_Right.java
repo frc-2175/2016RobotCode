@@ -18,7 +18,15 @@ public class MotionProfileDrivePIDController_Right
         ControlLoopConfig controlLoopConfig =
                 robotConfig.getControlLoopConfig();
 
-        // TODO add all of the stuff to set PID constants
+        // We want full output range on the motors
+        setOutputRange(-1, 1);
+
+        // PID constants from config
+        double p = controlLoopConfig.getMotionProfileDrivePID_kProportional();
+        double i = controlLoopConfig.getMotionProfileDrivePID_kIntegral();
+        double d = controlLoopConfig.getMotionProfileDrivePID_kDerivative();
+
+        setPID(p, i, d);
 
         setPIDSourceType(PIDSourceType.kRate);
 
