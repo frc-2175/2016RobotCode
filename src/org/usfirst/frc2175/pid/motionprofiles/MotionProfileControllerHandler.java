@@ -32,10 +32,24 @@ public class MotionProfileControllerHandler {
                 new ControllerHandlerTimerTask(profile);
         setpointSetterTimer = new Timer();
         setpointSetterTimer.schedule(controllerTask, 0, profile.getDTime());
+        enableControllers();
     }
 
     public void disable() {
         setpointSetterTimer.cancel();
+        disableControllers();
+    }
+
+    private void enableControllers() {
+        for (PIDControllerComplete controller : controllers) {
+            controller.enable();
+        }
+    }
+
+    private void disableControllers() {
+        for (PIDControllerComplete controller : controllers) {
+            controller.disable();
+        }
     }
 
     public class ControllerHandlerTimerTask extends TimerTask {
