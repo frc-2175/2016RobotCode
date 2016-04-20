@@ -21,7 +21,7 @@ public class MotionProfileControllerHandler {
 
     private void updateControllerSetpoints(int time) {
         for (PIDControllerComplete controller : controllers) {
-            double setpoint = profile.getPointAtTime(time).getVelocity();
+            double setpoint = profile.getMotionProfilePointAtTime(time).getVelocity();
             controller.setSetpoint(setpoint);
         }
     }

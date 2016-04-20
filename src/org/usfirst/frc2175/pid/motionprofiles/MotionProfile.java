@@ -3,6 +3,13 @@ package org.usfirst.frc2175.pid.motionprofiles;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A MotionProfile is a set of distinct MotionProfilePoints, and the methods
+ * used to access and modify them.
+ *
+ * @author Max Haland
+ *
+ */
 public class MotionProfile {
     private List<MotionProfilePoint> profileAsList =
             new ArrayList<MotionProfilePoint>();
@@ -20,7 +27,7 @@ public class MotionProfile {
      *            for the profile
      * @return The Point at the specified time value
      */
-    public MotionProfilePoint getPointAtTime(int time) {
+    public MotionProfilePoint getMotionProfilePointAtTime(int time) {
         MotionProfilePoint point;
         // Check to make sure the point is a multiple of dTime, throw an
         // exception otherwise
@@ -32,8 +39,23 @@ public class MotionProfile {
         return point;
     }
 
+    /**
+     * Adds a MotionProfilePoint to the profile. Points should be ordered in
+     * chronological order, and must have timestamps that are multiples of
+     * dTime.
+     *
+     * @param point
+     *            Point to add. The point time must be a multiple of dTime
+     */
     public void addMotionProfilePoint(MotionProfilePoint point) {
-        profileAsList.add(point);
+        // Check to make sure the point's time signature is a multiple of dTime,
+        // throw an exception otherwise
+        if (point.getTime() % dTime != 0) {
+            throw new IllegalArgumentException(
+                    "Time signature must be a multiple of dTime!");
+        } else {
+            profileAsList.add(point);
+        }
     }
 
     public List<MotionProfilePoint> getProfileAsList() {
