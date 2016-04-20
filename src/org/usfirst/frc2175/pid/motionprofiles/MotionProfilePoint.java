@@ -10,7 +10,7 @@ package org.usfirst.frc2175.pid.motionprofiles;
  *
  */
 public class MotionProfilePoint {
-    // Components in the point
+    // Components in the point. Add to these as you need.
     private int time;
     private double velocity;
 

@@ -15,7 +15,7 @@ public class MotionProfile {
             new ArrayList<MotionProfilePoint>();
     // Default time between points in ms. This should be longer than the PID
     // loop cycle time.
-    private static final int DEFAULT_D_TIME = 50;
+    public static final int DEFAULT_D_TIME = 50;
 
     // Time between points in the profile
     private final int dTime;
