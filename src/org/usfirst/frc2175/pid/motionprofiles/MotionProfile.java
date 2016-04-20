@@ -13,10 +13,27 @@ import java.util.List;
 public class MotionProfile {
     private List<MotionProfilePoint> profileAsList =
             new ArrayList<MotionProfilePoint>();
-    private int dTime;
+    // Default time between points in ms
+    private static final int DEFAULT_D_TIME = 20;
 
+    // Time between points in the profile
+    private final int dTime;
+
+    /**
+     * Constructor for a MotionProfile with a specific time between points.
+     *
+     * @param dTime
+     *            Time between points in the profile
+     */
     public MotionProfile(int dTime) {
         this.dTime = dTime;
+    }
+
+    /**
+     * Constructor for a MotionProfile with the default time between points.
+     */
+    public MotionProfile() {
+        this(DEFAULT_D_TIME);
     }
 
     /**
