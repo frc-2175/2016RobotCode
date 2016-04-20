@@ -13,11 +13,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class PowertrainSubsystem extends BaseSubsystem {
-    // This is in m/s
-    public static final double MAX_LOW_GEAR_SPEED = 8;
-    // This is in m/s/s
+    // This is in in/s
+    // TODO measure this
+    public static final double MAX_LOW_GEAR_SPEED = 36;
+    // This is in in/s/s
     // TODO Figure out a number that makes sense
-    public static final double MAX_AUTON_ACCELERATION = 2;
+    public static final double MAX_AUTON_ACCELERATION = 20;
 
     private PowertrainConfig powertrainConfig;
 
