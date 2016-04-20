@@ -6,6 +6,7 @@ import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfile;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfileControllerHandler;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler;
+import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
 /**
  * Command to drive a specific distance using a generated motion profile. The
@@ -19,9 +20,55 @@ public class DriveDistanceProfileCommand extends BaseCommand {
     private MotionProfileControllerHandler profileHandler;
 
     /**
+     * Constructor to generate a profile based on a distance, with default
+     * maximum velocity, maximum acceleration, time interval between each step.
+     * The profile is generated, then fed to a profile handler.
+     *
+     * @param distance
+     *            Total distance to drive
+     *
+     */
+    public DriveDistanceProfileCommand(RobotConfig robotConfig,
+            RobotControllers robotControllers, double distance) {
+        MotionProfiler profiler = new MotionProfiler();
+        MotionProfile profile = profiler.generateDriveDistanceMotionProfile(
+                distance, PowertrainSubsystem.MAX_LOW_GEAR_SPEED,
+                PowertrainSubsystem.MAX_AUTON_ACCELERATION);
+
+        profileHandler = new MotionProfileControllerHandler(profile,
+                robotControllers.getMotionProfileDrivePIDController_Left(),
+                robotControllers.getMotionProfileDrivePIDController_Right());
+    }
+
+    /**
      * Constructor to generate a profile based on a distance, maximum velocity,
-     * maximum acceleration, and time interval between each step. The profile is
-     * generated, then fed to a profile handler.
+     * maximum acceleration, and default time interval between each step. The
+     * profile is generated, then fed to a profile handler.
+     *
+     * @param distance
+     *            Total distance to drive
+     * @param maxVelocity
+     *            Maximum velocity allowed
+     * @param maxAcceleration
+     *            Maximum acceleration allowed
+     *
+     */
+    public DriveDistanceProfileCommand(RobotConfig robotConfig,
+            RobotControllers robotControllers, double distance,
+            double maxVelocity, double maxAcceleration) {
+        MotionProfiler profiler = new MotionProfiler();
+        MotionProfile profile = profiler.generateDriveDistanceMotionProfile(
+                distance, maxVelocity, maxAcceleration);
+
+        profileHandler = new MotionProfileControllerHandler(profile,
+                robotControllers.getMotionProfileDrivePIDController_Left(),
+                robotControllers.getMotionProfileDrivePIDController_Right());
+    }
+
+    /**
+     * Constructor to generate a profile based on a distance, maximum velocity,
+     * maximum acceleration, and specified time interval between each step. The
+     * profile is generated, then fed to a profile handler.
      *
      * @param distance
      *            Total distance to drive
