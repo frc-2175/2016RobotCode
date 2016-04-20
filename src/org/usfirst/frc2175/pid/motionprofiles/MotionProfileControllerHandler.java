@@ -34,7 +34,7 @@ public class MotionProfileControllerHandler {
         setpointSetterTimer.schedule(controllerTask, 0, profile.getDTime());
     }
 
-    private class ControllerHandlerTimerTask extends TimerTask {
+    public class ControllerHandlerTimerTask extends TimerTask {
         private boolean hasStarted = false;
         private boolean isFinished = false;
         private int currentTime = 0;
@@ -61,7 +61,7 @@ public class MotionProfileControllerHandler {
             updateControllerSetpoints(currentTime);
             indexTime();
             if (isFinished) {
-                super.cancel();
+                cancel();
             }
         }
 
