@@ -20,6 +20,23 @@ public class DriveDistanceProfileCommand extends BaseCommand {
     private MotionProfileControllerHandler profileHandler;
 
     /**
+     * Constructor to run a profile imported from a csv located at
+     * "/home/lvuser/profiles"
+     *
+     * @param csvName
+     *            Name of CSV file to import
+     */
+    public DriveDistanceProfileCommand(RobotConfig robotConfig,
+            RobotControllers robotControllers, String csvName) {
+        MotionProfile profile =
+                MotionProfiler.parseMotionProfileFromCSV(csvName);
+
+        profileHandler = new MotionProfileControllerHandler(profile,
+                robotControllers.getMotionProfileDrivePIDController_Left(),
+                robotControllers.getMotionProfileDrivePIDController_Right());
+    }
+
+    /**
      * Constructor to generate a profile based on a distance, with default
      * maximum velocity, maximum acceleration, time interval between each step.
      * The profile is generated, then fed to a profile handler.

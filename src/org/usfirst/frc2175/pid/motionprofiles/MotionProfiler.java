@@ -3,8 +3,6 @@ package org.usfirst.frc2175.pid.motionprofiles;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.opencsv.CSVReader;
 
@@ -19,10 +17,9 @@ import com.opencsv.CSVReader;
  *
  */
 public class MotionProfiler {
-    private final Logger log = Logger.getLogger(getClass().getName());
 
     private static final String PROFILE_CSV_ROBOT_LOCATION =
-            "/home/lvuser/profile";
+            "/home/lvuser/profiles";
 
     /**
      * Generates a trapezoidal velocity motion profile with a specific dTime.
@@ -120,7 +117,7 @@ public class MotionProfiler {
         return profile;
     }
 
-    public MotionProfile parseMotionProfileFromCSV(String name) {
+    public static MotionProfile parseMotionProfileFromCSV(String name) {
         String fileLocation = PROFILE_CSV_ROBOT_LOCATION + name;
         MotionProfile profile = new MotionProfile();
         CSVReader reader;
@@ -136,13 +133,10 @@ public class MotionProfiler {
                         new MotionProfilePoint(time, velocity));
             }
         } catch (FileNotFoundException e) {
-            log.log(Level.SEVERE, "Profile CSV not found!", e);
             e.printStackTrace();
         } catch (NumberFormatException e) {
-            log.log(Level.SEVERE, "Error parsing CSV", e);
             e.printStackTrace();
         } catch (IOException e) {
-            log.log(Level.SEVERE, "Error parsing CSV", e);
             e.printStackTrace();
         }
         return profile;
