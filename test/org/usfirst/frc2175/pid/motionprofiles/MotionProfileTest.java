@@ -31,7 +31,7 @@ public class MotionProfileTest extends TestBase {
     }
 
     @Test
-    public void testAddMotionProfilePoint() {
+    public void testAddMotionProfilePoint_LegalPoints() {
         MotionProfile sut = new MotionProfile(50);
         sut.addMotionProfilePoint(new MotionProfilePoint(0, 0));
         sut.addMotionProfilePoint(new MotionProfilePoint(50, 0));
@@ -40,7 +40,7 @@ public class MotionProfileTest extends TestBase {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddMotionProfilePoint_IllegalTimestamp() {
+    public void testAddMotionProfilePoint_NonDTimeMultipleTimestamp() {
         MotionProfile sut = new MotionProfile(50);
         sut.addMotionProfilePoint(new MotionProfilePoint(40, 0));
     }
