@@ -18,8 +18,12 @@ import com.opencsv.CSVReader;
  */
 public class MotionProfiler {
 
-    private static final String PROFILE_CSV_ROBOT_LOCATION =
-            "/home/lvuser/profiles";
+    public static final String PROFILE_CSV_ROBOT_LOCATION =
+            "/home/lvuser/profiles/";
+    public static final String PROFILE_CSV_TEST_LOCATION =
+            "src/properties/tests/";
+
+    public static String profileLocationToUse = PROFILE_CSV_ROBOT_LOCATION;
 
     /**
      * Generates a trapezoidal velocity motion profile with a specific dTime.
@@ -119,7 +123,7 @@ public class MotionProfiler {
 
     public static MotionProfile parseMotionProfileFromCSV(String name,
             int dTime) {
-        String fileLocation = PROFILE_CSV_ROBOT_LOCATION + name;
+        String fileLocation = profileLocationToUse + name;
         MotionProfile profile = new MotionProfile(dTime);
         CSVReader reader;
         try {
@@ -141,5 +145,9 @@ public class MotionProfiler {
             e.printStackTrace();
         }
         return profile;
+    }
+
+    public void setProfileLocationToUse(String profileLocation) {
+        this.profileLocationToUse = profileLocation;
     }
 }

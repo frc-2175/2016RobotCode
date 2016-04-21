@@ -53,7 +53,11 @@ public class MotionProfile {
             throw new IllegalArgumentException(
                     "Time signature must be a multiple of dTime!");
         }
-        point = profileAsList.get(time / dTime);
+        if (time == 0) {
+            point = profileAsList.get(0);
+        } else {
+            point = profileAsList.get(time / dTime);
+        }
         return point;
     }
 
