@@ -23,7 +23,7 @@ public class MotionProfiler {
     public static final String PROFILE_CSV_TEST_LOCATION =
             "src/properties/tests/";
 
-    public static String profileLocationToUse = PROFILE_CSV_ROBOT_LOCATION;
+    private static String profileLocationToUse = PROFILE_CSV_ROBOT_LOCATION;
 
     /**
      * Generates a trapezoidal velocity motion profile with a specific dTime.
@@ -121,6 +121,19 @@ public class MotionProfiler {
         return profile;
     }
 
+    /**
+     * Imports a motion profile from a CSV file. The CSV must be structured with
+     * each row as "time, velocity" where time is a multiple of dTime. The first
+     * entry should be "0,0", with the time value increasing by dTime each row.
+     * Motion profile CSVs can be generated in several ways, including several
+     * spreadsheets available on Chief Delphi.
+     *
+     * @param name
+     *            Name of the CSV file ("*.csv")
+     * @param dTime
+     *            Time per step in the CSV file
+     * @return A {@link MotionProfile} from the imported CSV file
+     */
     public static MotionProfile parseMotionProfileFromCSV(String name,
             int dTime) {
         String fileLocation = profileLocationToUse + name;
@@ -147,7 +160,13 @@ public class MotionProfiler {
         return profile;
     }
 
-    public void setProfileLocationToUse(String profileLocation) {
-        this.profileLocationToUse = profileLocation;
+    /**
+     * Sets the profile location to use. This should only be used for testing.
+     *
+     * @param profileLocation
+     *            Location to use
+     */
+    public static void setProfileLocationToUse(String profileLocation) {
+        profileLocationToUse = profileLocation;
     }
 }

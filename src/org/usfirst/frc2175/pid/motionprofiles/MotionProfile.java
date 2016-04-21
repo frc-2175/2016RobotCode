@@ -24,9 +24,13 @@ public class MotionProfile {
      * Constructor for a MotionProfile with a specific time between points.
      *
      * @param dTime
-     *            Time between points in the profile
+     *            Time between points in the profile. This must be a positive
+     *            value.
      */
     public MotionProfile(int dTime) {
+        if (dTime <= 0) {
+            throw new IllegalArgumentException("dTime must be positive");
+        }
         this.dTime = dTime;
     }
 
@@ -49,12 +53,16 @@ public class MotionProfile {
         MotionProfilePoint point;
         // Check to make sure the point is a multiple of dTime, throw an
         // exception otherwise
-        if (time % dTime != 0) {
+        if (time % dTime != 0 || time < 0) {
             throw new IllegalArgumentException(
-                    "Time signature must be a multiple of dTime!");
+                    "Time signature must be a nonnegative multiple of dTime!");
         }
         if (time == 0) {
             point = profileAsList.get(0);
+        } else if (time / dTime > profileAsList.size()
+                - 1 /* We subtract 1 to account for the zero point */) {
+            throw new IllegalArgumentException(
+                    "Time signature represents a later point than the profile contains!");
         } else {
             point = profileAsList.get(time / dTime);
         }
@@ -70,12 +78,18 @@ public class MotionProfile {
      *            Point to add. The point time must be a multiple of dTime
      */
     public void addMotionProfilePoint(MotionProfilePoint point) {
-        // Check to make sure the point's time signature is a multiple of dTime,
-        // throw an exception otherwise
-        if (point.getTime() % dTime != 0) {
+        // Check to make sure the point's time signature is a multiple of dTime
+        // that is not already used, throw an exception otherwise
+        if (point.getTime() % dTime != 0 || point.getTime() < 0) {
             throw new IllegalArgumentException(
-                    "Time signature must be a multiple of dTime!");
+                    "Time signature must be a nonnegative multiple of dTime!");
         } else {
+            for (MotionProfilePoint somePoint : profileAsList) {
+                if (point.getTime() == somePoint.getTime()) {
+                    throw new IllegalArgumentException(
+                            "May not add duplicate point!");
+                }
+            }
             profileAsList.add(point);
         }
     }
