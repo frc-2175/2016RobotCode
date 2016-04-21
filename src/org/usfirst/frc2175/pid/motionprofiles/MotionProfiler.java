@@ -117,9 +117,10 @@ public class MotionProfiler {
         return profile;
     }
 
-    public static MotionProfile parseMotionProfileFromCSV(String name) {
+    public static MotionProfile parseMotionProfileFromCSV(String name,
+            int dTime) {
         String fileLocation = PROFILE_CSV_ROBOT_LOCATION + name;
-        MotionProfile profile = new MotionProfile();
+        MotionProfile profile = new MotionProfile(dTime);
         CSVReader reader;
         try {
             reader = new CSVReader(new FileReader(fileLocation));

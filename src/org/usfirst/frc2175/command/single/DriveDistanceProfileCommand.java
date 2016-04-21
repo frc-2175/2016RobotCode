@@ -27,9 +27,9 @@ public class DriveDistanceProfileCommand extends BaseCommand {
      *            Name of CSV file to import
      */
     public DriveDistanceProfileCommand(RobotConfig robotConfig,
-            RobotControllers robotControllers, String csvName) {
+            RobotControllers robotControllers, String csvName, int dTime) {
         MotionProfile profile =
-                MotionProfiler.parseMotionProfileFromCSV(csvName);
+                MotionProfiler.parseMotionProfileFromCSV(csvName, dTime);
 
         profileHandler = new MotionProfileControllerHandler(profile,
                 robotControllers.getMotionProfileDrivePIDController_Left(),
