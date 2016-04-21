@@ -107,10 +107,6 @@ public class MotionProfile {
         }
     }
 
-    public List<MotionProfilePoint> getProfileAsList() {
-        return profileAsList;
-    }
-
     public int getDTime() {
         return dTime;
     }
