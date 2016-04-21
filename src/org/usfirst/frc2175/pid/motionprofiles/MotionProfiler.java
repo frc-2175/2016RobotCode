@@ -1,5 +1,13 @@
 package org.usfirst.frc2175.pid.motionprofiles;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.opencsv.CSVReader;
+
 /**
  * The class MotionProfiler serves as a collection of methods to generate and
  * make {@link #MotionProfile MotionProfiles}. There are many different ways to
@@ -11,6 +19,10 @@ package org.usfirst.frc2175.pid.motionprofiles;
  *
  */
 public class MotionProfiler {
+    private final Logger log = Logger.getLogger(getClass().getName());
+
+    private static final String PROFILE_CSV_ROBOT_LOCATION =
+            "/home/lvuser/profile";
 
     /**
      * Generates a trapezoidal velocity motion profile with a specific dTime.
@@ -104,6 +116,34 @@ public class MotionProfiler {
             }
             // Add the point to the profile
             profile.addMotionProfilePoint(point);
+        }
+        return profile;
+    }
+
+    public MotionProfile parseMotionProfileFromCSV(String name) {
+        String fileLocation = PROFILE_CSV_ROBOT_LOCATION + name;
+        MotionProfile profile = new MotionProfile();
+        CSVReader reader;
+        try {
+            reader = new CSVReader(new FileReader(fileLocation));
+
+            String[] nextLine;
+            while ((nextLine = reader.readNext()) != null) {
+                // nextLine[] is an array of values from the line
+                int time = Integer.parseInt(nextLine[0]);
+                double velocity = Double.parseDouble(nextLine[1]);
+                profile.addMotionProfilePoint(
+                        new MotionProfilePoint(time, velocity));
+            }
+        } catch (FileNotFoundException e) {
+            log.log(Level.SEVERE, "Profile CSV not found!", e);
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            log.log(Level.SEVERE, "Error parsing CSV", e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Error parsing CSV", e);
+            e.printStackTrace();
         }
         return profile;
     }
