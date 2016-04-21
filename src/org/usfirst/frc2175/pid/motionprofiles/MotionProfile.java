@@ -78,11 +78,24 @@ public class MotionProfile {
      *            Point to add. The point time must be a multiple of dTime
      */
     public void addMotionProfilePoint(MotionProfilePoint point) {
-        // Check to make sure the point's time signature is a multiple of dTime
-        // that is not already used, throw an exception otherwise
-        if (point.getTime() % dTime != 0 || point.getTime() < 0) {
+        // Check to make sure the point's time signature is the next multiple of
+        // dTime. The filtering process goes:
+        // 1. If point.getTime() == 0 and there is no zero point already, add
+        // the point
+        // 2. If point.getTime() is not a multiple of dTime, throw an exception.
+        // 3. If point.getTime() does not equal the most recent point's time
+        // stamp plus dTime, throw an exception
+        // 4. If there is already a point with the same timestamp, throw an
+        // exception
+        if (point.getTime() == 0 && profileAsList.size() == 0) {
+            profileAsList.add(point);
+        } else if (point.getTime() % dTime != 0 || point.getTime() < 0) {
             throw new IllegalArgumentException(
                     "Time signature must be a nonnegative multiple of dTime!");
+        } else if (point.getTime() != profileAsList
+                .get(point.getTime() / dTime - 1).getTime() + dTime) {
+            throw new IllegalArgumentException(
+                    "Skipping points in the profile is not allowed!");
         } else {
             for (MotionProfilePoint somePoint : profileAsList) {
                 if (point.getTime() == somePoint.getTime()) {
