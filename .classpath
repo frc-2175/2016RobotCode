@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/jmockit.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/navx_frc.jar" sourcepath="lib-src/navx_frc-src.zip"/>
+	<classpathentry kind="lib" path="lib/opencsv-3.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
