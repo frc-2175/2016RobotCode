@@ -6,8 +6,13 @@ import org.usfirst.frc2175.TestBase;
 public class MotionProfileTest extends TestBase {
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructWithIllegalDTime() {
+    public void testConstructWithIllegalDTime_Zero() {
         MotionProfile sut = new MotionProfile(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructWithIllegalDTime_Negative() {
+        MotionProfile sut = new MotionProfile(-50);
     }
 
     @Test(expected = IllegalArgumentException.class)
