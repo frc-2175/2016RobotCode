@@ -39,7 +39,7 @@ public class MotionProfileDrivePIDController_Right
 
     @Override
     public void pidWrite(double output) {
-        powertrainSubsystem.getRightDriveSideTalonGroup().set(output);
+        powertrainSubsystem.getRightDriveSideTalonGroup().set(-output);
     }
 
 }
