@@ -5,6 +5,8 @@ import org.usfirst.frc2175.config.RobotConfig;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfile;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfileControllerHandler;
+import org.usfirst.frc2175.pid.motionprofiles.MotionProfileDrivePIDController_Left;
+import org.usfirst.frc2175.pid.motionprofiles.MotionProfileDrivePIDController_Right;
 import org.usfirst.frc2175.pid.motionprofiles.MotionProfiler;
 import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 
@@ -19,6 +21,9 @@ import org.usfirst.frc2175.subsystem.powertrain.PowertrainSubsystem;
 public class DriveDistanceProfileCommand extends BaseCommand {
     private MotionProfileControllerHandler profileHandler;
 
+    private MotionProfileDrivePIDController_Left leftController;
+    private MotionProfileDrivePIDController_Right rightController;
+
     /**
      * Constructor to run a profile imported from a csv located at
      * "/home/lvuser/profiles"
@@ -30,6 +35,11 @@ public class DriveDistanceProfileCommand extends BaseCommand {
             RobotControllers robotControllers, String csvName, int dTime) {
         MotionProfile profile =
                 MotionProfiler.parseMotionProfileFromCSV(csvName, dTime);
+
+        this.leftController =
+                robotControllers.getMotionProfileDrivePIDController_Left();
+        this.rightController =
+                robotControllers.getMotionProfileDrivePIDController_Right();
 
         profileHandler = new MotionProfileControllerHandler(profile,
                 robotControllers.getMotionProfileDrivePIDController_Left(),
@@ -118,6 +128,9 @@ public class DriveDistanceProfileCommand extends BaseCommand {
     protected void execute() {
         // PID controllers handle themselves, so we don't need to do anything
         // here.
+        System.out.println("Left controller setpoint: "
+                + leftController.getSetpoint() + ", right controller setpoint: "
+                + rightController.getSetpoint());
     }
 
     @Override

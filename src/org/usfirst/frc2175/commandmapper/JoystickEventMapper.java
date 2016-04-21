@@ -7,6 +7,7 @@ import org.usfirst.frc2175.command.group.RunIntakeInGroup;
 import org.usfirst.frc2175.command.group.RunIntakeOutGroup;
 import org.usfirst.frc2175.command.single.ArcadeDriveWithJoysticksCommand;
 import org.usfirst.frc2175.command.single.CycleDesiredShotCommand;
+import org.usfirst.frc2175.command.single.DriveDistanceProfileCommand;
 import org.usfirst.frc2175.command.single.ExtendLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RetractLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
@@ -14,7 +15,6 @@ import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearLowCommand;
 import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.ToggleLightCommand;
-import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
 import org.usfirst.frc2175.config.IntakeConfig;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -65,8 +65,8 @@ public class JoystickEventMapper {
                 new RunIntakeOutGroup(robotSubsystems, intakeConfig));
 
         JoystickButton faceGoalAndShoot = gamepadConfig.getFaceGoalAndShoot();
-        faceGoalAndShoot.whenPressed(new TurnToFaceGoalWithGyroCommand(
-                robotSubsystems, robotControllers, visionProcessing));
+        faceGoalAndShoot.whenPressed(new DriveDistanceProfileCommand(
+                robotConfig, robotControllers, "drive100Inches.csv", 50));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();

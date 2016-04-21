@@ -86,7 +86,6 @@ public class VisionProcessing {
             previousCenterXValue = value;
         }
 
-        log.info("Largest center X value=" + value);
         return value;
     }
 
