@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A MotionProfile is a set of distinct {@link #MotionProfilePoint
+ * A MotionProfile is a set of distinct {@link MotionProfilePoint
  * MotionProfilePoints}, and the methods used to access and modify the set. The
  * points represent "snapshots" in the motion of a body, and the collection
  * represents the overall movement. Each point is a constant length of time from
