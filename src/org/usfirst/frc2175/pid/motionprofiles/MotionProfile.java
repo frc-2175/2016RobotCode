@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A MotionProfile is a set of distinct MotionProfilePoints, and the methods
- * used to access and modify them.
+ * A MotionProfile is a set of distinct {@link #MotionProfilePoint
+ * MotionProfilePoints}, and the methods used to access and modify the set. The
+ * points represent "snapshots" in the motion of a body, and the collection
+ * represents the overall movement. Each point is a constant length of time from
+ * the next one, represented by {@link #dTime}.
  *
  * @author Max Haland
  *
@@ -17,7 +20,11 @@ public class MotionProfile {
     // loop cycle time.
     public static final int DEFAULT_D_TIME = 50;
 
-    // Time between points in the profile
+    /**
+     * The time between each point in the profile. Each
+     * {@link MotionProfilePoint} in the profile must be separated by exactly
+     * this amount of time.
+     */
     private final int dTime;
 
     /**
