@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CrossChevalBlock extends CommandGroup {
     public CrossChevalBlock(RobotSubsystems robotSubsystems,
-            RobotControllers robotControllers, boolean withCaution) {
+            RobotControllers robotControllers, boolean stayingOnCheval) {
         addSequential(new DriveUpToOuterworksBlock(robotSubsystems,
                 robotControllers));
         addSequential(
                 new DriveInchesCommand(robotSubsystems, robotControllers, 12));
         addSequential(new LowerBootCommand(robotSubsystems));
-        if (withCaution) {
+        if (stayingOnCheval) {
             addSequential(new DriveInchesCommand(robotSubsystems,
                     robotControllers, 85));
         } else {
