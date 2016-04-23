@@ -29,11 +29,10 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
                 robotControllers, 20));
         // Drive a bit more (may not be necessary)
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 24));
+                new DriveInchesCommand(robotSubsystems, robotControllers, 12));
         // Lower intake
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
-                liftIntakeSpeed));
-
+                liftIntakeSpeed), .8);
         addSequential(new EmptyCommand(), .4);
 
         // Spin Wheels In
@@ -42,14 +41,12 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         addSequential(new EmptyCommand(), .4);
         // Aim at goal
         addSequential(new TurnToFaceGoalWithGyroCommand(robotSubsystems,
-                robotControllers, visionProcessing), 1.5);
+                robotControllers, visionProcessing));
         addSequential(new EmptyCommand(), .4);
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
-        // Turn back
-        addSequential(
-                new TurnToHeadingCommand(robotSubsystems, robotControllers, 20),
-                1.5);
+        addSequential(new EmptyCommand(), .4);
+
         // Back up
         addSequential(
                 new DriveInchesCommand(robotSubsystems, robotControllers, -24),
@@ -61,7 +58,5 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         // Back up
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers, false));
-
     }
-
 }
