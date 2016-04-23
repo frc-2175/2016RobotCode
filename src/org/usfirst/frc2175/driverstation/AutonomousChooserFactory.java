@@ -54,46 +54,58 @@ public class AutonomousChooserFactory {
     protected void addCrossAutons(SendableChooser autonChooser,
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
-        autonChooser.addObject("Cross simple defense",
+        autonChooser.addObject("Cross simple defense (untested)",
                 new CrossStaticDefenseBlock(robotSubsystems, robotControllers,
                         true));
-        autonChooser.addObject("Cross simple defense and shoot forward",
-                new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense and shoot slight left",
+        autonChooser
+                .addObject("Cross simple defense and shoot forward (untested)",
+                        new CrossStaticDefenseAndShootForwardAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing));
+        autonChooser.addObject(
+                "Cross simple defense and shoot slight left (untested)",
                 new CrossStaticDefenseAndShootSlightLeftAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense and shoot slight right",
+        autonChooser.addObject(
+                "Cross simple defense and shoot slight right (untested)",
                 new CrossStaticDefenseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
         // autonChooser.addObject("Cross cheval de frise",
         // new CrossChevalDeFriseAutonomous(robotSubsystems,
         // robotControllers));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot forward",
-                new CrossChevalDeFriseAndShootForwardAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot slight left",
+        autonChooser
+                .addObject("Cross ChevalDeFrise and shoot forward (untested)",
+                        new CrossChevalDeFriseAndShootForwardAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing));
+        autonChooser.addObject(
+                "Cross ChevalDeFrise and shoot slight left (untested)",
                 new CrossChevalDeFriseAndShootSlightLeftAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross ChevalDeFrise and shoot slight right",
+        autonChooser.addObject(
+                "Cross ChevalDeFrise and shoot slight right (untested)",
                 new CrossChevalDeFriseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
         // autonChooser.addObject("Cross portcullis",
         // new CrossPortcullisAutonomous(robotSubsystems,
         // robotControllers));
-        autonChooser.addObject("Cross portcullis and shoot forward",
+        autonChooser.addObject("Cross portcullis and shoot forward (untested)",
                 new CrossPortcullisAndShootForwardAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
-        autonChooser.addObject("Cross portcullis and shoot slight left",
-                new CrossPortcullisAndShootSlightLeftAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
-        autonChooser.addObject("Cross portcullis and shoot slight right",
-                new CrossPortcullisAndShootSlightRightAutonomous(
-                        robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject("Cross simple defense - no encoders",
+        autonChooser
+                .addObject("Cross portcullis and shoot slight left (untested)",
+                        new CrossPortcullisAndShootSlightLeftAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing));
+        autonChooser
+                .addObject("Cross portcullis and shoot slight right (untested)",
+                        new CrossPortcullisAndShootSlightRightAutonomous(
+                                robotSubsystems, robotControllers,
+                                visionProcessing));
+        autonChooser.addObject("Cross simple defense - no encoders (untested)",
                 new CrossStaticDefenseNoEncoderAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Weaken shoot low bar",
+        autonChooser.addObject("Weaken shoot low bar (untested)",
                 new WeakenShootLowBarAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
     }
@@ -102,13 +114,13 @@ public class AutonomousChooserFactory {
     protected void addCrossTwiceAutons(SendableChooser autonChooser,
             RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        autonChooser.addObject("Cross twice simple defense",
+        autonChooser.addObject("Cross twice simple defense (untested)",
                 new CrossTwiceStaticDefenseAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Cross twice cheval de frise",
+        autonChooser.addObject("Cross twice cheval de frise (untested)",
                 new CrossTwiceChevalDeFriseAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Cross twice portcullis",
+        autonChooser.addObject("Cross twice portcullis (untested)",
                 new CrossTwicePortcullisAutonomous(robotSubsystems,
                         robotControllers));
         // autonChooser.addObject("Damage shoot low bar",
