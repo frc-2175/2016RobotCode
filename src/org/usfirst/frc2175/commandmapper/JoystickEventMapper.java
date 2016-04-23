@@ -66,7 +66,7 @@ public class JoystickEventMapper {
 
         JoystickButton faceGoalAndShoot = gamepadConfig.getFaceGoalAndShoot();
         faceGoalAndShoot.whenPressed(new DriveDistanceProfileCommand(
-                robotConfig, robotControllers, "drive100Inches.csv", 50));
+                robotConfig, robotControllers, 100));
 
         JoystickButton upshift =
                 robotConfig.getJoysticksConfig().getUpshiftButton();
