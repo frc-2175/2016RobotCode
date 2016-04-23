@@ -25,6 +25,7 @@ public class CrossStaticDefenseAndShootSlightLeftAutonomous
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers, true));
         // Turn
+        // TODO Make sure angle is correct
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, -20));
         // Drive a bit more (may not be necessary)

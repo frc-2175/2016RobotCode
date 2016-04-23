@@ -1,7 +1,6 @@
 package org.usfirst.frc2175.command.autonomous;
 
 import org.usfirst.frc2175.command.autonomous.block.CrossPortcullisBlock;
-import org.usfirst.frc2175.command.autonomous.block.DriveUpToOuterworksBlock;
 import org.usfirst.frc2175.command.autonomous.block.TurnToCenterOfGoalBlock;
 import org.usfirst.frc2175.command.single.ExtendCatapultCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -14,9 +13,6 @@ public class CrossPortcullisAndShootForwardAutonomous extends CommandGroup {
     public CrossPortcullisAndShootForwardAutonomous(
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
-        // drive up to outerworks
-        addSequential(new DriveUpToOuterworksBlock(robotSubsystems,
-                robotControllers));
         // crosses portcullis
         addSequential(new CrossPortcullisBlock(robotSubsystems,
                 robotControllers, false));
