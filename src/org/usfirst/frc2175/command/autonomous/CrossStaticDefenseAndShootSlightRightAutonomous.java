@@ -24,6 +24,9 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         // Drive forwards
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers, true));
+        // Drive to side goal
+        addSequential(
+                new DriveInchesCommand(robotSubsystems, robotControllers, 30));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 20));
