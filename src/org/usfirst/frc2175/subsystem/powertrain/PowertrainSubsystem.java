@@ -78,8 +78,7 @@ public class PowertrainSubsystem extends BaseSubsystem {
     public void winchWithPTO(double speed) {
         // If shifted to climb, set motors, else do nothing
         if (isClimberEngaged()) {
-            leftDriveSideTalonGroup.set(speed);
-            rightDriveSideTalonGroup.set(speed);
+            robotDrive.arcadeDrive(-speed, 0);
         }
     }
 
