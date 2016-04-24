@@ -3,6 +3,7 @@ package org.usfirst.frc2175.driverstation;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossChevalDeFriseAndShootSlightRightAutonomous;
+import org.usfirst.frc2175.command.autonomous.CrossLowbarAndShootAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootForwardAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossPortcullisAndShootSlightRightAutonomous;
@@ -15,7 +16,6 @@ import org.usfirst.frc2175.command.autonomous.CrossTwicePortcullisAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossTwiceStaticDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
-import org.usfirst.frc2175.command.autonomous.WeakenShootLowBarAutonomous;
 import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
@@ -54,20 +54,16 @@ public class AutonomousChooserFactory {
     protected void addCrossAutons(SendableChooser autonChooser,
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
-        autonChooser.addObject("Cross simple defense (untested)",
+        autonChooser.addObject("Cross simple defense",
                 new CrossStaticDefenseBlock(robotSubsystems, robotControllers,
                         true));
-        autonChooser
-                .addObject("Cross simple defense and shoot forward (untested)",
-                        new CrossStaticDefenseAndShootForwardAutonomous(
-                                robotSubsystems, robotControllers,
-                                visionProcessing));
-        autonChooser.addObject(
-                "Cross simple defense and shoot slight left (untested)",
+        autonChooser.addObject("Cross simple defense and shoot forward",
+                new CrossStaticDefenseAndShootForwardAutonomous(robotSubsystems,
+                        robotControllers, visionProcessing));
+        autonChooser.addObject("Cross simple defense and shoot slight left",
                 new CrossStaticDefenseAndShootSlightLeftAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
-        autonChooser.addObject(
-                "Cross simple defense and shoot slight right (untested)",
+        autonChooser.addObject("Cross simple defense and shoot slight right",
                 new CrossStaticDefenseAndShootSlightRightAutonomous(
                         robotSubsystems, robotControllers, visionProcessing));
         // autonChooser.addObject("Cross cheval de frise",
@@ -105,8 +101,8 @@ public class AutonomousChooserFactory {
         autonChooser.addObject("Cross simple defense - no encoders (untested)",
                 new CrossStaticDefenseNoEncoderAutonomous(robotSubsystems,
                         robotControllers));
-        autonChooser.addObject("Weaken shoot low bar (untested)",
-                new WeakenShootLowBarAutonomous(robotSubsystems,
+        autonChooser.addObject("Cross lowbar and shoot",
+                new CrossLowbarAndShootAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
     }
 
