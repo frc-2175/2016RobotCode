@@ -5,7 +5,6 @@ import org.usfirst.frc2175.command.autonomous.block.CrossStaticDefenseBlock;
 import org.usfirst.frc2175.command.autonomous.block.PutBallInCorrectPlacement;
 import org.usfirst.frc2175.command.autonomous.block.TurnToCenterOfGoalBlock;
 import org.usfirst.frc2175.command.group.CatapultShootGroup;
-import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
 import org.usfirst.frc2175.subsystem.RobotSubsystems;
@@ -17,27 +16,29 @@ public class CrossStaticDefenseAndShootForwardAutonomous extends CommandGroup {
     public CrossStaticDefenseAndShootForwardAutonomous(
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
-        double liftIntakeSpeed = -.5;
-        int times = 5;
+        int times = 3;
+
+        final SaveGyroHeading saveGyroAngleCommand =
+                new SaveGyroHeading(robotSubsystems, robotControllers);
 
         // Drive forwards
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers, true));
+        addSequential(saveGyroAngleCommand, .05);
+        addSequential(new EmptyCommand(), .2);
         // open up pathway for catapult to shoot
         addSequential(new PutBallInCorrectPlacement(robotSubsystems,
                 robotControllers));
-        // let things settle
-        addSequential(new EmptyCommand(), .4);
         // Aim at goal
         addSequential(new TurnToCenterOfGoalBlock(robotSubsystems,
                 robotControllers, visionProcessing, times));
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
-        addSequential(new EmptyCommand(), 2);
-        addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
-                -liftIntakeSpeed), .8);
-        addSequential(
-                new TurnToHeadingCommand(robotSubsystems, robotControllers, 0));
+        addSequential(new EmptyCommand(), 1);
+
+        addSequential(new TurnToHeadingCommand(robotSubsystems,
+                robotControllers, saveGyroAngleCommand));
+        addSequential(new EmptyCommand(), .3);
         addSequential(new CrossStaticDefenseBlock(robotSubsystems,
                 robotControllers, false));
     }

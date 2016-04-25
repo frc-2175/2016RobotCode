@@ -1,6 +1,8 @@
 package org.usfirst.frc2175.command.autonomous;
 
+import org.usfirst.frc2175.command.EmptyCommand;
 import org.usfirst.frc2175.command.single.DriveInchesCommand;
+import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunRollerbarIntakeAtSpeedCommand;
 import org.usfirst.frc2175.command.single.TurnToHeadingCommand;
 import org.usfirst.frc2175.pid.RobotControllers;
@@ -15,24 +17,23 @@ public class TwoBallStaticShootSlightRightAutonomous extends CommandGroup {
             VisionProcessing visionProcessing) {
         double liftIntakeSpeed = robotSubsystems.getRobotConfig()
                 .getIntakeConfig().getLiftIntakeSpeed();
-        addSequential(new CrossStaticDefenseAndShootSlightRightAutonomous(
+        addSequential(new CrossStaticDefenseAndShootForwardAutonomous(
                 robotSubsystems, robotControllers, visionProcessing));
-        addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, 0, false));
-        addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
-                -128));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
         // TODO Add command to turn to ball
         addParallel(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
-                liftIntakeSpeed));
+                -liftIntakeSpeed), 1.75);
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, -30));
+                new DriveInchesCommand(robotSubsystems, robotControllers, -18));
+        addSequential(new EmptyCommand(), .3);
+        addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
+                liftIntakeSpeed), .25);
         addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 30));
+                new DriveInchesCommand(robotSubsystems, robotControllers, 18));
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
-        addSequential(new CrossStaticDefenseAndShootSlightRightAutonomous(
+        addSequential(new CrossStaticDefenseAndShootForwardAutonomous(
                 robotSubsystems, robotControllers, visionProcessing));
     }
 }
