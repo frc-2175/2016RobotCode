@@ -37,6 +37,7 @@ public class DriveInchesPIDController extends PIDControllerComplete {
 
     @Override
     public void pidWrite(double output) {
+        double sign = output / Math.abs(output);
         powertrainSubsystem.arcadeDrive(output, 0);
     }
 

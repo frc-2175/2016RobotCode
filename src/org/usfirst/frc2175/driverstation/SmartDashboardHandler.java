@@ -23,6 +23,11 @@ public class SmartDashboardHandler {
         autonChooser = new AutonomousChooserFactory().make(robotSubsystems,
                 robotControllers, visionProcessing);
 
+        addAutonChooserToSmartDashboard();
+    }
+
+    public void addAutonChooserToSmartDashboard() {
+        log.info("Adding auton chooser to SmartDashboard");
         SmartDashboard.putData("Autonomous Routine", autonChooser);
     }
 
