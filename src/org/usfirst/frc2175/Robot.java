@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.RunRollerbarIntakeAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -85,8 +86,10 @@ public class Robot extends IterativeRobot {
                 robotSubsystems.getCatapultShooterSubsystem();
         catapultShooterSubsystem.setShotType(ShotType.BATTER);
         configureDistanceSensor();
-        photonCannonSubsystem.updateLight();
+        photonCannonSubsystem.turnLightOn();
         // configureCamera();
+        SmartDashboard.putData("Roll Intake In Command",
+                new RunRollerbarIntakeAtSpeedCommand(robotSubsystems, 1));
     }
 
     protected void configureDistanceSensor() {
