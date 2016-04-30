@@ -89,7 +89,7 @@ public class VisionProcessing {
         return value;
     }
 
-    private double getGoalDistanceFromCenterInPixels() {
+    public double getGoalDistanceFromCenterInPixels() {
         final double distance;
 
         double centerX = getLargestContourCenterX();

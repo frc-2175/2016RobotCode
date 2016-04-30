@@ -202,13 +202,21 @@ public class Robot extends IterativeRobot {
                 powertrainSubsystem.getGyroAngle());
         SmartDashboard.putNumber("Contour CenterX",
                 visionProcessing.getLargestContourCenterX());
-        SmartDashboard.putNumber("Aim Angle Offset",
-                visionProcessing.getGoalDistanceFromCenterInDegrees());
+        SmartDashboard.putNumber("Aim Angle Offset", Math
+                .abs(visionProcessing.getGoalDistanceFromCenterInDegrees()));
         SmartDashboard.putNumber("Mean Encoder",
                 powertrainSubsystem.getMeanEncoderDistance());
         SmartDashboard.putNumber("Left Encoder",
                 powertrainSubsystem.getLeftEncoderDistance());
         SmartDashboard.putNumber("Right Encoder",
                 powertrainSubsystem.getRightEncoderDistance());
+        if (Math.abs(visionProcessing
+                .getGoalDistanceFromCenterInPixels()) < robotConfig
+                        .getControlLoopConfig()
+                        .getVisionTurnPID_absTolerance()) {
+            SmartDashboard.putBoolean("Aim On Target", true);
+        } else {
+            SmartDashboard.putBoolean("Aim On Target", false);
+        }
     }
 }
