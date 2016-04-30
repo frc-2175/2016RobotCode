@@ -31,8 +31,6 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 20));
         // Drive a bit more (may not be necessary)
-        addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, 12));
         // Lower intake
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 liftIntakeSpeed), .8);
@@ -51,9 +49,6 @@ public class CrossStaticDefenseAndShootSlightRightAutonomous
         addSequential(new EmptyCommand(), .4);
 
         // Back up
-        addSequential(
-                new DriveInchesCommand(robotSubsystems, robotControllers, -24),
-                1.5);
         // Turn normal to defenses again
         addSequential(
                 new TurnToHeadingCommand(robotSubsystems, robotControllers, 0),
