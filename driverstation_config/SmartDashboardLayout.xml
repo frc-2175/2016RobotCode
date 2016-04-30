@@ -1,5 +1,18 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="345" y="851"/>
+		<width>98</width>
+		<height>77</height>
+	</static-widget>
+	<widget field="Aim On Target" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="367" y="599"/>
+		<width>196</width>
+		<height>98</height>
+	</widget>
+	<widget field="Roll Intake In Command" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="819"/>
+	</widget>
 	<widget field="Outerwork Type" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
 		<location x="776" y="584"/>
 	</widget>
@@ -10,7 +23,8 @@
 		<location x="609" y="590"/>
 	</widget>
 	<widget field="Aim Angle Offset" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="4" y="796"/>
+		<location x="380" y="724"/>
+		<height>40</height>
 	</widget>
 	<widget field="Left Encoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="642" y="744"/>
