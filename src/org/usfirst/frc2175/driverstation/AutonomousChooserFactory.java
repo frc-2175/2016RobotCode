@@ -2,10 +2,11 @@ package org.usfirst.frc2175.driverstation;
 
 import java.util.logging.Logger;
 
-import org.usfirst.frc2175.command.autonomous.CrossLowbarAndShootAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootForwardAutonomous;
+import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootHardRightAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightLeftAutonomous;
 import org.usfirst.frc2175.command.autonomous.CrossStaticDefenseAndShootSlightRightAutonomous;
+import org.usfirst.frc2175.command.autonomous.CrossTwiceStaticDefenseAutonomous;
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.autonomous.TestAllFeaturesAutonomous;
 import org.usfirst.frc2175.command.autonomous.TwoBallStaticShootForwardAutonomous;
@@ -103,8 +104,8 @@ public class AutonomousChooserFactory {
         // new CrossStaticDefenseNoEncoderAutonomous(robotSubsystems,
         // robotControllers));
         autonChooser.addObject("Cross lowbar and shoot",
-                new CrossLowbarAndShootAutonomous(robotSubsystems,
-                        robotControllers, visionProcessing));
+                new CrossStaticDefenseAndShootHardRightAutonomous(
+                        robotSubsystems, robotControllers, visionProcessing));
         autonChooser.addObject("Two Ball Static Straight Forwards",
                 new TwoBallStaticShootForwardAutonomous(robotSubsystems,
                         robotControllers, visionProcessing));
@@ -120,9 +121,9 @@ public class AutonomousChooserFactory {
     protected void addCrossTwiceAutons(SendableChooser autonChooser,
             RobotSubsystems robotSubsystems,
             RobotControllers robotControllers) {
-        // autonChooser.addObject("Cross twice simple defense (untested)",
-        // new CrossTwiceStaticDefenseAutonomous(robotSubsystems,
-        // robotControllers));
+        autonChooser.addObject("Cross twice simple defense",
+                new CrossTwiceStaticDefenseAutonomous(robotSubsystems,
+                        robotControllers));
         // autonChooser.addObject("Damage shoot low bar",
         // new DamageShootLowBarAutonomous(robotSubsystems,
         // robotControllers));

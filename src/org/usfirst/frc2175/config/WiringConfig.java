@@ -11,7 +11,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -168,8 +167,6 @@ public class WiringConfig extends BaseConfig {
             fancyGyro = new AHRS(SPI.Port.kMXP);
         } catch (RuntimeException ex) {
             log.log(Level.SEVERE, "Error instantiating navX-MXP over SPI:", ex);
-            DriverStation.reportError("Error instantiating navX-MXP over SPI:  "
-                    + ex.getMessage(), true);
         }
     }
 

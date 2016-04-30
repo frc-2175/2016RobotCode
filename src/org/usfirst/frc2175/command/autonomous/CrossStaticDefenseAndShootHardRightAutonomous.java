@@ -14,9 +14,9 @@ import org.usfirst.frc2175.subsystem.vision.VisionProcessing;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CrossStaticDefenseAndShootSlightLeftAutonomous
+public class CrossStaticDefenseAndShootHardRightAutonomous
         extends CommandGroup {
-    public CrossStaticDefenseAndShootSlightLeftAutonomous(
+    public CrossStaticDefenseAndShootHardRightAutonomous(
             RobotSubsystems robotSubsystems, RobotControllers robotControllers,
             VisionProcessing visionProcessing) {
         double liftIntakeSpeed = -.5;
@@ -29,8 +29,12 @@ public class CrossStaticDefenseAndShootSlightLeftAutonomous
                 new DriveInchesCommand(robotSubsystems, robotControllers, 30));
         // Turn
         addSequential(new TurnToHeadingCommand(robotSubsystems,
-                robotControllers, -20));
+                robotControllers, 20));
         // Drive a bit more (may not be necessary)
+        addSequential(
+                new DriveInchesCommand(robotSubsystems, robotControllers, 12));
+        addSequential(new TurnToHeadingCommand(robotSubsystems,
+                robotControllers, 45));
         // Lower intake
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 liftIntakeSpeed), .8);
@@ -47,14 +51,6 @@ public class CrossStaticDefenseAndShootSlightLeftAutonomous
         // Shoot!
         addSequential(new CatapultShootGroup(robotSubsystems));
         addSequential(new EmptyCommand(), .4);
-        // Turn back
-        // Back up
-        // Turn normal to defenses again
-        addSequential(
-                new TurnToHeadingCommand(robotSubsystems, robotControllers, 0),
-                1.5);
-        // Back up
-        addSequential(new CrossStaticDefenseBlock(robotSubsystems,
-                robotControllers, false));
+
     }
 }

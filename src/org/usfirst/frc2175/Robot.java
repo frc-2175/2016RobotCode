@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.usfirst.frc2175.command.autonomous.DoNothingAutonomous;
 import org.usfirst.frc2175.command.single.RetractCatapultCommand;
+import org.usfirst.frc2175.command.single.RunRollerbarIntakeAtSpeedCommand;
 import org.usfirst.frc2175.command.single.ShiftToClimbGearNeutralCommand;
 import org.usfirst.frc2175.commandmapper.JoystickEventMapper;
 import org.usfirst.frc2175.config.RobotConfig;
@@ -85,8 +86,10 @@ public class Robot extends IterativeRobot {
                 robotSubsystems.getCatapultShooterSubsystem();
         catapultShooterSubsystem.setShotType(ShotType.BATTER);
         configureDistanceSensor();
-        photonCannonSubsystem.updateLight();
+        photonCannonSubsystem.turnLightOn();
         // configureCamera();
+        SmartDashboard.putData("Roll Intake In Command",
+                new RunRollerbarIntakeAtSpeedCommand(robotSubsystems, 1));
     }
 
     protected void configureDistanceSensor() {
@@ -199,13 +202,21 @@ public class Robot extends IterativeRobot {
                 powertrainSubsystem.getGyroAngle());
         SmartDashboard.putNumber("Contour CenterX",
                 visionProcessing.getLargestContourCenterX());
-        SmartDashboard.putNumber("Aim Angle Offset",
-                visionProcessing.getGoalDistanceFromCenterInDegrees());
+        SmartDashboard.putNumber("Aim Angle Offset", Math
+                .abs(visionProcessing.getGoalDistanceFromCenterInDegrees()));
         SmartDashboard.putNumber("Mean Encoder",
                 powertrainSubsystem.getMeanEncoderDistance());
         SmartDashboard.putNumber("Left Encoder",
                 powertrainSubsystem.getLeftEncoderDistance());
         SmartDashboard.putNumber("Right Encoder",
                 powertrainSubsystem.getRightEncoderDistance());
+        if (Math.abs(visionProcessing
+                .getGoalDistanceFromCenterInPixels()) < robotConfig
+                        .getControlLoopConfig()
+                        .getVisionTurnPID_absTolerance()) {
+            SmartDashboard.putBoolean("Aim On Target", true);
+        } else {
+            SmartDashboard.putBoolean("Aim On Target", false);
+        }
     }
 }
