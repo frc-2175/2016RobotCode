@@ -19,21 +19,30 @@ public class TwoBallStaticShootForwardAutonomous extends CommandGroup {
         RobotConfig robotConfig = robotSubsystems.getRobotConfig();
         double liftIntakeSpeed =
                 robotConfig.getIntakeConfig().getLiftIntakeSpeed();
+        // Block to cross defense and shoot and drive back
         addSequential(new CrossStaticDefenseAndShootForwardAutonomous(
                 robotSubsystems, robotControllers, visionProcessing));
+        // Re-align to drive straight
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
+        // Running wheels as driving backwards
         addParallel(new RunRollerbarIntakeAtSpeedCommand(robotSubsystems,
                 -liftIntakeSpeed), 2);
+        // Driving backwards
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 -10.5));
+        // Allows ball to settle
         addSequential(new EmptyCommand(), .1);
+        // Close intake
         addSequential(new RunIntakeLiftAtSpeedCommand(robotSubsystems,
                 liftIntakeSpeed), .25);
+        // Drive towards the defense
         addSequential(new DriveInchesCommand(robotSubsystems, robotControllers,
                 10.5));
+        // Re-align the defense
         addSequential(new TurnToHeadingCommand(robotSubsystems,
                 robotControllers, 0, false));
+        // Cross defense and shoot
         addSequential(new CrossStaticDefenseAndShootForwardAutonomous(
                 robotSubsystems, robotControllers, visionProcessing));
     }
