@@ -36,16 +36,32 @@ public class GamepadConfigTest extends TestBase {
     }
 
     @Test
-    public void testGamepadConfig_UniquePropertiesSequence_Competition() {
-        String propertyPrefix = "button[.].*";
+    public void testWeaponGamepadConfig_UniquePropertiesSequence_Competition() {
+        String propertyPrefix = "weapon.button[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
     }
 
     @Test
-    public void testGamepadConfig_UniquePropertiesSequence_Practice() {
-        String propertyPrefix = "button[.].*";
+    public void testWeaponGamepadConfig_UniquePropertiesSequence_Practice() {
+        String propertyPrefix = "weapon.button[.].*";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testDriverGamepadConfig_UniquePropertiesSequence_Competition() {
+        String propertyPrefix = "driver.button[.].*";
+        String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_COMPETITION;
+
+        commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
+    }
+
+    @Test
+    public void testDriverGamepadConfig_UniquePropertiesSequence_Practice() {
+        String propertyPrefix = "driver.button[.].*";
         String propertyFileDirectory = PROPERTY_FILE_DIR_SRC_PRACTICE;
 
         commonTestUniqueProperties(propertyFileDirectory, propertyPrefix);
