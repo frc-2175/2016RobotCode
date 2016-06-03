@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class DriverStation {
     private final Logger log = Logger.getLogger(getClass().getName());
-
-    private Joystick leftStick;
-    private Joystick rightStick;
-    private Joystick gamepad;
+    //
+    // private Joystick leftStick;
+    // private Joystick rightStick;
+    private Joystick driverGamepad;
 
     private DeadbandCalculator deadbandCalculator;
     private double deadbandSize;
@@ -26,9 +26,9 @@ public class DriverStation {
 
         JoysticksConfig joysticksConfig = robotConfig.getJoysticksConfig();
 
-        leftStick = robotConfig.getJoysticksConfig().getLeftStick();
-        rightStick = robotConfig.getJoysticksConfig().getRightStick();
-        gamepad = robotConfig.getGamepadConfig().getGamepad();
+        // leftStick = robotConfig.getJoysticksConfig().getLeftStick();
+        // rightStick = robotConfig.getJoysticksConfig().getRightStick();
+        driverGamepad = robotConfig.getGamepadConfig().getDriverGamepad();
 
         this.deadbandCalculator = deadbandCalculator;
         deadbandSize = joysticksConfig.getDeadbandSize();
@@ -36,28 +36,56 @@ public class DriverStation {
     }
 
     public double getMoveValue() {
-        double input = -leftStick.getY();
+        double input = -driverGamepad.getRawAxis(2);
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getTurnValue() {
-        double input = rightStick.getX();
+        double input = driverGamepad.getRawAxis(4);
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
+    // public double getMoveValue() {
+    // double input = -driverGamepad.getY(Hand.kLeft);
+    // double deadbandedOutput =
+    // deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+    // return deadbandedOutput;
+    // }
+    //
+    // public double getTurnValue() {
+    // double input = driverGamepad.getX(Hand.kRight);
+    // double deadbandedOutput =
+    // deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+    // return deadbandedOutput;
+    // }
+
+    // public double getMoveValue() {
+    // double input = -leftStick.getY();
+    // double deadbandedOutput =
+    // deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+    // return deadbandedOutput;
+    // }
+    //
+    // public double getTurnValue() {
+    // double input = rightStick.getX();
+    // double deadbandedOutput =
+    // deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+    // return deadbandedOutput;
+    // }
+    //
     public double getLeftValue() {
-        double input = -leftStick.getY();
+        double input = -driverGamepad.getRawAxis(1);
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;
     }
 
     public double getRightValue() {
-        double input = -rightStick.getY();
+        double input = -driverGamepad.getRawAxis(4);
         double deadbandedOutput =
                 deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
         return deadbandedOutput;

@@ -107,5 +107,9 @@ public class JoystickEventMapper {
                 robotConfig.getJoysticksConfig().getStealControl();
         stealControl.whenPressed(new ArcadeDriveWithJoysticksCommand(
                 driverStation, robotSubsystems));
+
+        JoystickButton shiftHigh =
+                robotConfig.getGamepadConfig().getShiftHigh();
+        shiftHigh.whileHeld(new ShiftToHighGearCommand(robotSubsystems));
     }
 }

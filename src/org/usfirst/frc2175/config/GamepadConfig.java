@@ -15,8 +15,10 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class GamepadConfig extends BaseConfig {
     private static final String PROPERTY_FILE_NAME = "gamepad.properties";
 
-    private Joystick gamepad;
+    private Joystick weaponGamepad;
+    private Joystick driverGamepad;
 
+    // weaponGamepad buttons
     private JoystickButton extendCatapult;
     private JoystickButton extendPuncher;
     private JoystickButton cycleShot;
@@ -29,6 +31,10 @@ public class GamepadConfig extends BaseConfig {
     private JoystickButton lowerIntake;
     private JoystickButton raiseIntake;
 
+    // driverGamepad buttons
+
+    private JoystickButton shiftHigh;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -36,30 +42,47 @@ public class GamepadConfig extends BaseConfig {
 
     @Override
     protected void configure(Properties properties) {
-        gamepad = new Joystick(getIntPropertyValue("gamepad.port", properties));
+        configureWeaponGamepad(properties);
+        configureDriverGamepad(properties);
+    }
 
-        extendCatapult = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.extend", properties));
-        extendPuncher = new JoystickButton(gamepad,
-                getIntPropertyValue("button.puncher.extend", properties));
-        runIntakeInAndRetractLowGoalSolenoid = new JoystickButton(gamepad,
-                getIntPropertyValue("button.intake.in", properties));
-        runIntakeOutAndExtendLowGoalSolenoid = new JoystickButton(gamepad,
-                getIntPropertyValue("button.intake.out", properties));
-        faceGoalAndShoot = new JoystickButton(gamepad,
-                getIntPropertyValue("button.action.test", properties));
-        lowerBoot = new JoystickButton(gamepad,
-                getIntPropertyValue("button.boot.lower", properties));
-        raiseBoot = new JoystickButton(gamepad,
-                getIntPropertyValue("button.boot.raise", properties));
-        raiseIntake = new JoystickButton(gamepad,
-                getIntPropertyValue("button.intake.raise", properties));
-        lowerIntake = new JoystickButton(gamepad,
-                getIntPropertyValue("button.intake.lower", properties));
-        toggleLight = new JoystickButton(gamepad,
-                getIntPropertyValue("button.light.toggle", properties));
-        cycleShot = new JoystickButton(gamepad,
-                getIntPropertyValue("button.catapult.cycleShot", properties));
+    protected void configureWeaponGamepad(Properties properties) {
+        weaponGamepad = new Joystick(
+                getIntPropertyValue("weaponGamepad.port", properties));
+
+        extendCatapult = new JoystickButton(weaponGamepad, getIntPropertyValue(
+                "weapon.button.catapult.extend", properties));
+        extendPuncher = new JoystickButton(weaponGamepad, getIntPropertyValue(
+                "weapon.button.puncher.extend", properties));
+        runIntakeInAndRetractLowGoalSolenoid = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.intake.in", properties));
+        runIntakeOutAndExtendLowGoalSolenoid = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.intake.out", properties));
+        faceGoalAndShoot = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.action.test", properties));
+        lowerBoot = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.boot.lower", properties));
+        raiseBoot = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.boot.raise", properties));
+        raiseIntake = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.intake.raise", properties));
+        lowerIntake = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.intake.lower", properties));
+        toggleLight = new JoystickButton(weaponGamepad,
+                getIntPropertyValue("weapon.button.light.toggle", properties));
+        cycleShot = new JoystickButton(weaponGamepad, getIntPropertyValue(
+                "weapon.button.catapult.cycleShot", properties));
+    }
+
+    protected void configureDriverGamepad(Properties properties) {
+        driverGamepad = new Joystick(
+                getIntPropertyValue("driverGamepad.port", properties));
+        shiftHigh = new JoystickButton(driverGamepad,
+                getIntPropertyValue("driver.button.shift.high", properties));
+    }
+
+    public JoystickButton getShiftHigh() {
+        return shiftHigh;
     }
 
     public JoystickButton getToggleLight() {
@@ -110,8 +133,12 @@ public class GamepadConfig extends BaseConfig {
         return raiseBoot;
     }
 
-    public Joystick getGamepad() {
-        return gamepad;
+    public Joystick getWeaponGamepad() {
+        return weaponGamepad;
+    }
+
+    public Joystick getDriverGamepad() {
+        return driverGamepad;
     }
 
 }
