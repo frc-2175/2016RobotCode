@@ -38,6 +38,28 @@ public class DeadbandCalculator {
         return output;
     }
 
+    public double calcDeabandedOutputWithNoobMode(double input,
+            double deadbandSize, double noobRamp) {
+        double output;
+
+        if (isAboveThreshold(input, deadbandSize)) {
+            double slope = calcLinearOutputSlope(deadbandSize);
+            output = calcLinearOutput(input, slope);
+        } else {
+            output = 0;
+        }
+
+        output = calcNoobModeRamp(output, noobRamp);
+
+        return output;
+
+    }
+
+    public double calcNoobModeRamp(double input, double noobRamp) {
+        double output = input * noobRamp;
+        return output;
+    }
+
     /**
      * Determine whether some value is above a given threshold.
      *
@@ -53,7 +75,7 @@ public class DeadbandCalculator {
 
     /**
      * Calculates the slope of the linear portion of the output.
-     * 
+     *
      * @param deadbandSize
      * @return
      */
@@ -66,7 +88,7 @@ public class DeadbandCalculator {
     /**
      * Uses the point-slope form of a line to calculate the adjusted joystick
      * output.
-     * 
+     *
      * @param input
      *            The joystick input to process.
      * @param slope

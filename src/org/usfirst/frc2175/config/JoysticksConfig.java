@@ -24,6 +24,8 @@ public class JoysticksConfig extends BaseConfig {
 
     private double deadbandValue;
 
+    private int noobRampAxis;
+
     @Override
     public String getPropertyFileName() {
         return PROPERTY_FILE_NAME;
@@ -44,6 +46,8 @@ public class JoysticksConfig extends BaseConfig {
         int stealControlButton =
                 getIntPropertyValue("stealcontrol.button", properties);
         stealControl = new JoystickButton(rightStick, stealControlButton);
+
+        noobRampAxis = getIntPropertyValue("noobRamp.axis", properties);
     }
 
     public JoystickButton getStealControl() {
@@ -60,5 +64,9 @@ public class JoysticksConfig extends BaseConfig {
 
     public double getDeadbandSize() {
         return deadbandValue;
+    }
+
+    public int getNoobRampAxis() {
+        return noobRampAxis;
     }
 }

@@ -19,6 +19,7 @@ public class DriverStation {
 
     private DeadbandCalculator deadbandCalculator;
     private double deadbandSize;
+    private int noobRampAxis;
 
     public DriverStation(RobotConfig robotConfig,
             DeadbandCalculator deadbandCalculator) {
@@ -32,20 +33,23 @@ public class DriverStation {
 
         this.deadbandCalculator = deadbandCalculator;
         deadbandSize = joysticksConfig.getDeadbandSize();
+        noobRampAxis = joysticksConfig.getNoobRampAxis();
 
     }
 
     public double getMoveValue() {
         double input = -leftStick.getY();
         double deadbandedOutput =
-                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+                deadbandCalculator.calcDeabandedOutputWithNoobMode(input,
+                        deadbandSize, rightStick.getRawAxis(noobRampAxis));
         return deadbandedOutput;
     }
 
     public double getTurnValue() {
         double input = rightStick.getX();
         double deadbandedOutput =
-                deadbandCalculator.calcDeadbandedOutput(input, deadbandSize);
+                deadbandCalculator.calcDeabandedOutputWithNoobMode(input,
+                        deadbandSize, rightStick.getRawAxis(noobRampAxis));
         return deadbandedOutput;
     }
 
