@@ -39,17 +39,17 @@ public class DriverStation {
 
     public double getMoveValue() {
         double input = -leftStick.getY();
-        double deadbandedOutput =
-                deadbandCalculator.calcDeabandedOutputWithNoobMode(input,
-                        deadbandSize, rightStick.getRawAxis(noobRampAxis));
+        double deadbandedOutput = deadbandCalculator
+                .calcDeabandedOutputWithNoobMode(input, deadbandSize,
+                        (rightStick.getRawAxis(noobRampAxis) + 1) / 2);
         return deadbandedOutput;
     }
 
     public double getTurnValue() {
         double input = rightStick.getX();
-        double deadbandedOutput =
-                deadbandCalculator.calcDeabandedOutputWithNoobMode(input,
-                        deadbandSize, rightStick.getRawAxis(noobRampAxis));
+        double deadbandedOutput = deadbandCalculator
+                .calcDeabandedOutputWithNoobMode(input, deadbandSize,
+                        (rightStick.getRawAxis(noobRampAxis) + 1) / 2);
         return deadbandedOutput;
     }
 
