@@ -18,8 +18,7 @@ public class JoysticksConfig extends BaseConfig {
     private Joystick leftStick;
     private Joystick rightStick;
 
-    private JoystickButton upshift;
-    private JoystickButton climbshift;
+    // Disable shifting into high gear and PTO for noob mode
 
     private JoystickButton stealControl;
 
@@ -42,13 +41,6 @@ public class JoysticksConfig extends BaseConfig {
 
         deadbandValue = getDoublePropertyValue("deadband.value", properties);
 
-        int upshiftButton = getIntPropertyValue("upshift.button", properties);
-        upshift = new JoystickButton(leftStick, upshiftButton);
-
-        int climbshiftButton =
-                getIntPropertyValue("climbshift.button", properties);
-        climbshift = new JoystickButton(rightStick, climbshiftButton);
-
         int stealControlButton =
                 getIntPropertyValue("stealcontrol.button", properties);
         stealControl = new JoystickButton(rightStick, stealControlButton);
@@ -56,10 +48,6 @@ public class JoysticksConfig extends BaseConfig {
 
     public JoystickButton getStealControl() {
         return stealControl;
-    }
-
-    public JoystickButton getClimbshiftButton() {
-        return climbshift;
     }
 
     public Joystick getLeftStick() {
@@ -72,9 +60,5 @@ public class JoysticksConfig extends BaseConfig {
 
     public double getDeadbandSize() {
         return deadbandValue;
-    }
-
-    public JoystickButton getUpshiftButton() {
-        return upshift;
     }
 }
