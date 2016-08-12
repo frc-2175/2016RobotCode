@@ -11,6 +11,7 @@ import org.usfirst.frc2175.command.single.ExtendLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RetractLowGoalSolenoidCommand;
 import org.usfirst.frc2175.command.single.RunBootAtSpeedCommand;
 import org.usfirst.frc2175.command.single.RunIntakeLiftAtSpeedCommand;
+import org.usfirst.frc2175.command.single.ShiftToHighGearCommand;
 import org.usfirst.frc2175.command.single.ToggleLightCommand;
 import org.usfirst.frc2175.command.single.TurnToFaceGoalWithGyroCommand;
 import org.usfirst.frc2175.config.GamepadConfig;
@@ -96,5 +97,16 @@ public class JoystickEventMapper {
                 robotConfig.getJoysticksConfig().getStealControl();
         stealControl.whenPressed(new ArcadeDriveWithJoysticksCommand(
                 driverStation, robotSubsystems));
+
+        JoystickButton upShiftButton =
+                robotConfig.getJoysticksConfig().getUpShiftButton();
+        upShiftButton
+                .toggleWhenPressed(new ShiftToHighGearCommand(robotSubsystems));
+
+        // JoystickButton downShiftButton =
+        // robotConfig.getJoysticksConfig().getDownShiftButton();
+        // downShiftButton.whenPressed(new
+        // ShiftToLowGearCommand(robotSubsystems));
+
     }
 }

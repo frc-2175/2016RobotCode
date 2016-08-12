@@ -19,6 +19,9 @@ public class JoysticksConfig extends BaseConfig {
     private Joystick rightStick;
 
     // Disable shifting into high gear and PTO for noob mode
+    private JoystickButton upShiftButton;
+
+    private JoystickButton downShiftButton;
 
     private JoystickButton stealControl;
 
@@ -48,6 +51,10 @@ public class JoysticksConfig extends BaseConfig {
         stealControl = new JoystickButton(rightStick, stealControlButton);
 
         noobRampAxis = getIntPropertyValue("noobRamp.axis", properties);
+
+        int upShiftButton = getIntPropertyValue("up.shift.button", properties);
+        this.upShiftButton = new JoystickButton(leftStick, upShiftButton);
+
     }
 
     public JoystickButton getStealControl() {
@@ -68,5 +75,13 @@ public class JoysticksConfig extends BaseConfig {
 
     public int getNoobRampAxis() {
         return noobRampAxis;
+    }
+
+    public JoystickButton getUpShiftButton() {
+        return upShiftButton;
+    }
+
+    public JoystickButton getDownShiftButton() {
+        return downShiftButton;
     }
 }
