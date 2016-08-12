@@ -103,10 +103,5 @@ public class JoystickEventMapper {
         upShiftButton
                 .toggleWhenPressed(new ShiftToHighGearCommand(robotSubsystems));
 
-        // JoystickButton downShiftButton =
-        // robotConfig.getJoysticksConfig().getDownShiftButton();
-        // downShiftButton.whenPressed(new
-        // ShiftToLowGearCommand(robotSubsystems));
-
     }
 }
